@@ -1,0 +1,749 @@
+/**
+ * elFinder Theme Template
+ * @author tzd
+ */
+/* Reset */
+/* reset.css */
+/* Comment out/delete the reset rules where appropriate */
+/* container */
+.elfinder,
+.elfinder .elfinder-toolbar,
+.elfinder .elfinder-buttonset,
+.elfinder .elfinder-button,
+.elfinder .elfinder-toolbar-button-separator,
+.elfinder .elfinder-toolbar input,
+.elfinder .elfinder-navbar,
+.elfinder .elfinder-navbar *,
+.elfinder .elfinder-cwd,
+.elfinder .elfinder-cwd table tr td.ui-state-active,
+.elfinder .elfinder-cwd table tr td.ui-state-hover,
+.elfinder .elfinder-cwd table tr td.ui-state-selected,
+.elfinder .elfinder-cwd table thead tr,
+.elfinder .elfinder-cwd table tbody tr,
+.elfinder .elfinder-cwd-file .ui-state-hover,
+.elfinder .elfinder-cwd-file .elfinder-cwd-icon-directory,
+.elfinder .elfinder-cwd-file .elfinder-cwd-filename,
+.elfinder .elfinder-cwd-file .elfinder-cwd-filename.ui-state-hover,
+.elfinder .ui-state-default,
+.elfinder .ui-state-active,
+.elfinder .ui-state-hover,
+.elfinder .ui-selected,
+.elfinder .ui-widget,
+.elfinder .ui-widget-header,
+.elfinder .ui-widget-content,
+.elfinder-button-icon,
+.elfinder-navbar-icon,
+.elfinder-cwd-icon-directory,
+.elfinder .ui-icon,
+.elfinder .elfinder-statusbar,
+.elfinder .elfinder-statusbar *,
+.elfinder-contextmenu,
+.elfinder-contextmenu-sub,
+.elfinder-contextmenu-item,
+.elfinder-contextmenu-separator,
+.elfinder-contextmenu .ui-state-hover {
+  background: none;
+  border: none;
+}
+/* Variables */
+/* Main features of the whole UI */
+/* main.css */
+/* Container div for elFinder */
+.elfinder,
+.elfinder .elfinder-dialog,
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu {
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 0;
+}
+/* Override styles in child elements of elFinder div */
+/* Use for consistently setting text sizes and overriding general jQuery UI styles */
+.elfinder * {
+  color: #212121;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+/* Resizer */
+/* Used if elFinder is resizable and on dialogs */
+.elfinder .ui-icon-gripsmall-diagonal-se,
+.elfinder-dialog .ui-icon-gripsmall-diagonal-se {
+  /* */
+
+}
+.elfinder-cwd-wrapper-empty .elfinder-cwd:after {
+  font-size: 20px;
+  opacity: 1;
+  color: #727272;
+  font-weight: 500;
+}
+/* Icons */
+/* icons.css */
+/* These are shown thoughought the UI, not just in the list/thumbnail view */
+/* General icon settings (in main view panel) */
+.elfinder-cwd-icon {
+  /* */
+
+}
+/* If you are using CSS sprites for your icons, set the background position
+   in each of the below styles */
+/* Directory */
+.elfinder-cwd-icon-directory {
+  background-color: transparent;
+  background-image: url('../images/16px/directory.png') !important;
+  background-position: center center;
+  height: 16px;
+  width: 16px;
+}
+/* Empty file */
+.elfinder-cwd-icon-x-empty,
+.elfinder-cwd-icon-inode {
+  /* */
+
+}
+/* (Rich) Text */
+.elfinder-cwd-icon-text,
+.elfinder-cwd-icon-rtf,
+.elfinder-cwd-icon-rtfd {
+  /* */
+
+}
+/* PDF */
+.elfinder-cwd-icon-pdf {
+  /* */
+
+}
+/* Microsoft Word */
+.elfinder-cwd-icon-vnd-ms-word {
+  /* */
+
+}
+/* Microsoft PowerPoint */
+.elfinder-cwd-icon-vnd-ms-powerpoint {
+  /* */
+
+}
+/* Microsoft Excel */
+.elfinder-cwd-icon-ms-excel,
+.elfinder-cwd-icon-vnd-ms-excel,
+.elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12 {
+  /* */
+
+}
+/* Audio */
+.elfinder-cwd-icon-audio {
+  /* */
+
+}
+/* Video */
+.elfinder-cwd-icon-video,
+.elfinder-cwd-icon-flash-video {
+  /* */
+
+}
+/* Archives */
+.elfinder-cwd-icon-zip,
+.elfinder-cwd-icon-x-zip,
+.elfinder-cwd-icon-x-xz,
+.elfinder-cwd-icon-x-7z-compressed,
+.elfinder-cwd-icon-x-gzip,
+.elfinder-cwd-icon-x-tar,
+.elfinder-cwd-icon-x-bzip,
+.elfinder-cwd-icon-x-bzip2,
+.elfinder-cwd-icon-x-rar {
+  /* */
+
+}
+/* Code/Scripts */
+.elfinder-cwd-icon-javascript,
+.elfinder-cwd-icon-x-javascript,
+.elfinder-cwd-icon-x-perl,
+.elfinder-cwd-icon-x-python,
+.elfinder-cwd-icon-x-ruby,
+.elfinder-cwd-icon-x-sh,
+.elfinder-cwd-icon-x-shellscript,
+.elfinder-cwd-icon-x-c,
+.elfinder-cwd-icon-x-csrc,
+.elfinder-cwd-icon-x-chdr,
+.elfinder-cwd-icon-x-c--,
+.elfinder-cwd-icon-x-c--src,
+.elfinder-cwd-icon-x-c--hdr,
+.elfinder-cwd-icon-x-java,
+.elfinder-cwd-icon-x-java-source,
+.elfinder-cwd-icon-x-php,
+.elfinder-cwd-icon-xml {
+  /* */
+
+}
+/* Toolbar (top panel) */
+/* toolbar.css */
+/* Main toolbar wrapper */
+.elfinder .elfinder-toolbar {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Buttonset wrapper */
+.elfinder .elfinder-toolbar .elfinder-buttonset {
+  border-radius: 0 !important;
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset + .elfinder-buttonset {
+  padding-left: 8px;
+  border-left: 1px solid #e0e0e0;
+}
+/* Buttons */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button {
+  border: none !important;
+  transition: background 0.3s, border 0.3s;
+  border-radius: 2px !important;
+  width: 18px;
+  height: 18px;
+}
+/* Hovered buttons */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button:hover {
+  background: #e5e5e5;
+}
+/* Disabled buttons */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button.ui-state-disabled {
+  /* */
+
+}
+/* Buttonset separator */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-toolbar-button-separator {
+  /* */
+
+}
+/* Button icons */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon {
+  /* */
+
+}
+/* Searchbar */
+.elfinder-toolbar .elfinder-button-search {
+  /* */
+
+}
+.elfinder .elfinder-button-search input {
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: none;
+  border-radius: 0;
+  height: 24px;
+}
+/* Searchbar icons (search and close) */
+.elfinder-toolbar .elfinder-button-search .ui-icon {
+  width: 18px;
+  height: 18px;
+  background-repeat: no-repeat;
+}
+.elfinder-toolbar .elfinder-button-search .ui-icon-search {
+  background-image: url('../images/16px/search.png');
+}
+.elfinder-toolbar .elfinder-button-search .ui-icon-close {
+  background-image: url('../images/16px/close.png');
+}
+/* Commands */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon {
+  background-color: transparent;
+  background-position: center center;
+  height: 18px;
+  width: 18px;
+}
+/* Back */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-back {
+  background-image: url('../images/16px/back.png');
+}
+/* Forward */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-forward {
+  background-image: url('../images/16px/forward.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-reload {
+  background-image: url('../images/16px/reload.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-netmount {
+  background-image: url('../images/16px/netmount.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-home {
+  background-image: url('../images/16px/home.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-up {
+  background-image: url('../images/16px/up.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-mkdir {
+  background-image: url('../images/16px/directory.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-mkfile {
+  background-image: url('../images/16px/file.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-upload {
+  background-image: url('../images/16px/upload.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-open {
+  background-image: url('../images/16px/open.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-download {
+  background-image: url('../images/16px/download.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-getfile {
+  background-image: url('../images/16px/getfile.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-info {
+  background-image: url('../images/16px/info.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-quicklook {
+  background-image: url('../images/16px/preview.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-copy {
+  background-image: url('../images/16px/copy.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-cut {
+  background-image: url('../images/16px/cut.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-paste {
+  background-image: url('../images/16px/paste.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-view {
+  background-image: url('../images/16px/view.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-view-list {
+  background-image: url('../images/16px/view-list.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-help {
+  background-image: url('../images/16px/help.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-duplicate {
+  background-image: url('../images/16px/duplicate.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-rm {
+  background-image: url('../images/16px/rm.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-edit {
+  background-image: url('../images/16px/edit.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-rename {
+  background-image: url('../images/16px/rename.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-archive {
+  background-image: url('../images/16px/archive.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-resize {
+  background-image: url('../images/16px/resize.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-extract {
+  background-image: url('../images/16px/extract.png');
+}
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-icon-sort {
+  background-image: url('../images/16px/sort.png');
+}
+/* Menus (e.g. for sorting) */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu {
+  /* */
+
+}
+/* Menu items */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu-item {
+  /* */
+
+}
+/* Selected items */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu-item-selected {
+  /* */
+
+}
+/* Hovered items */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu-item.ui-state-hover {
+  /* */
+
+}
+/* Menu item sorting ascending icon */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu-item-selected.elfinder-menu-item-sort-asc .elfinder-menu-item-sort-dir {
+  /* */
+
+}
+/* Menu item sorting descending icon */
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu-item-selected.elfinder-menu-item-sort-desc .elfinder-menu-item-sort-dir {
+  /* */
+
+}
+/* Navbar (left panel) */
+/* navbar.css */
+/* Main wrapper for navbar */
+.elfinder .elfinder-navbar {
+  border-right: 1px solid #e5e5e5;
+}
+/* Directories */
+.elfinder .elfinder-navbar .elfinder-navbar-dir {
+  color: #212121;
+  border-radius: 0;
+  padding: 4px 12px 4px 36px;
+}
+/* Hovered directory  */
+.elfinder .elfinder-navbar .elfinder-navbar-dir:hover {
+  background: #e3f2fd;
+}
+/* Current/active directory (cwd) */
+.elfinder .elfinder-navbar .elfinder-navbar-dir.ui-state-active {
+  background: #bbdefb;
+}
+/* Howvered cwd */
+.elfinder .elfinder-navbar .elfinder-navbar-dir.ui-state-active:hover {
+  /* */
+
+}
+/* Icons */
+/* Arrow */
+.elfinder .elfinder-navbar .elfinder-navbar-arrow {
+  /* */
+
+}
+/* Expanded directory arrow */
+.elfinder .elfinder-navbar-expanded .elfinder-navbar-arrow {
+  /* */
+
+}
+/* All icons (directories) */
+.elfinder .elfinder-navbar .elfinder-navbar-icon {
+  background-color: transparent;
+  background-image: url('../images/16px/directory.png') !important;
+  background-position: center -1px;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+}
+/* Root/volume */
+.elfinder .elfinder-navbar-root > .elfinder-navbar-icon {
+  /* */
+
+}
+/* Root/volume expanded */
+.elfinder .elfinder-navbar-root.elfinder-navbar-expanded > .elfinder-navbar-icon {
+  background-image: url('../images/16px/directory_expanded.png') !important;
+}
+/* Resizable handle */
+.elfinder .elfinder-navbar .ui-resizable-handle.ui-resizable-e {
+  /* */
+
+}
+/* Views (List and Thumbnail) */
+/* view-list.css */
+/* Wrapper for list view */
+.elfinder .elfinder-cwd-wrapper-list {
+  /* */
+
+}
+/* List view table */
+.elfinder .elfinder-cwd-wrapper-list table {
+  /* */
+
+}
+/* Column headings */
+.elfinder .elfinder-cwd-wrapper-list table thead tr td {
+  color: #43536a;
+}
+.elfinder .elfinder-cwd-wrapper-list table thead tr td:not(:last-child) {
+  border-right: 1px solid #e5e5e5;
+}
+/* Hovered column heading */
+.elfinder .elfinder-cwd-wrapper-list table thead tr td.ui-state-hover,
+.elfinder .elfinder-cwd-wrapper-list table thead tr td:hover {
+  background: #d0dded;
+}
+/* Actively sorted column heading */
+.elfinder .elfinder-cwd-wrapper-list table thead tr td.ui-state-active {
+  border-right: 1px solid #e5e5e5;
+}
+/* Table heading icons (mainly the sorter) */
+.elfinder .elfinder-cwd-wrapper-list table tr td .ui-icon {
+  /* */
+
+}
+/* Table heading sorter up */
+.elfinder .elfinder-cwd-wrapper-list table tr.ui-state-default td .ui-icon-triangle-1-n:before {
+  /* */
+
+}
+/* Table heading sorter down */
+.elfinder .elfinder-cwd-wrapper-list table tr.ui-state-default td .ui-icon-triangle-1-s:before {
+  /* */
+
+}
+/* Files */
+/* File */
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file td {
+  border: 1px solid transparent;
+}
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file td:not(:first-child) {
+  color: #9d9d9d;
+}
+/* Filename */
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file .elfinder-cwd-filename {
+  /* */
+
+}
+/* Hovered file */
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file:hover,
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-state-hover,
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-state-hover:hover {
+  /* fix for 2.1 */
+
+  background: #e5f3ff;
+  border-color: #e5f3ff;
+}
+/* Selected file */
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-selected {
+  background: #cce8ff;
+}
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-selected td {
+  border-top: 1px solid #99d1ff;
+  border-bottom: 1px solid #99d1ff;
+}
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-selected td:first-child {
+  border-left: 1px solid #99d1ff;
+}
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file.ui-selected td:last-child {
+  border-right: 1px solid #99d1ff;
+}
+/* Icons */
+.elfinder .elfinder-cwd-wrapper-list .elfinder-cwd-file .elfinder-cwd-icon {
+  /* */
+
+}
+/* view-thumbnail.css */
+/* Wrapper for thumbnail view */
+/* File wrapper */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file {
+  width: 80px;
+  height: 80px;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+/* Hovered file */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-state-hover {
+  background: #e5f3ff;
+}
+/* Selected file */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected {
+  background: #cce8ff;
+  border: 1px solid #99d1ff;
+}
+/* File icon */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-icon-directory,
+.elfinder .elfinder-dialog .elfinder-cwd-icon-directory {
+  background-color: transparent;
+  background-image: url('../images/48px/directory.png') !important;
+  background-position: center center;
+  height: 48px;
+  width: 48px;
+}
+/* File name */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-filename {
+  color: #000 !important;
+}
+/* Context menu */
+/* contextmenu.css */
+/* **Note** that the context menu is NOT inside the main elfinder div */
+/* Context menu wrapper */
+.elfinder-contextmenu,
+.elfinder-contextmenu-sub,
+.elfinder-button-menu {
+  font-size: 15px;
+  background: #ffffff !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 0;
+  padding: 3px 3px 0 3px;
+  z-index: 10;
+  min-width: 120px;
+}
+/* Menu item */
+.elfinder-contextmenu .elfinder-contextmenu-item,
+.elfinder-button-menu .elfinder-button-menu-item {
+  margin: 0 0 4px 0;
+  padding: 4px 16px;
+}
+/* Hovered menu item */
+.elfinder-contextmenu .elfinder-contextmenu-item:hover,
+.elfinder-button-menu .elfinder-button-menu-item:hover {
+  background: #f5f5f5;
+  color: #212121;
+}
+/* Item icon */
+.elfinder-contextmenu .elfinder-contextmenu-item .elfinder-contextmenu-icon {
+  /* */
+
+}
+.elfinder-contextmenu .elfinder-contextmenu-item span {
+  font-size: 14px;
+}
+/* Separator */
+.elfinder-contextmenu .elfinder-contextmenu-separator {
+  height: 1px;
+  margin: 1px;
+}
+.elfinder-contextmenu .elfinder-button-icon-open + span {
+  font-weight: bold;
+}
+/* (Modal) Dialogs */
+/* dialog.css */
+/* Dialog wrapper */
+.elfinder .elfinder-dialog {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.elfinder .elfinder-dialog-notify .ui-dialog-titlebar {
+  display: none !important;
+}
+/* Dialog title */
+.elfinder .elfinder-dialog .ui-dialog-titlebar {
+  padding: 16px 16px 8px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+  font: 500 18px / 28px "Roboto", sans-serif;
+}
+/* Close button */
+.elfinder .elfinder-dialog .ui-dialog-titlebar-close {
+  background: url('../images/close.png');
+  right: 8px;
+  top: 8px;
+  border-radius: 0;
+  margin: 0;
+  height: 24px;
+  width: 24px;
+  opacity: 0.6;
+}
+.elfinder .elfinder-dialog .ui-dialog-titlebar-close:hover {
+  background: url('../images/close.png');
+  opacity: 1;
+}
+/* Dialog content */
+.elfinder .elfinder-dialog .ui-dialog-content {
+  padding: 8px 16px 8px 54px;
+  font-size: 13px;
+}
+.elfinder .elfinder-dialog .ui-dialog-content .elfinder-info-tb {
+  font-size: 13px;
+}
+/* Tabs */
+/* Tabs wrapper */
+.elfinder .elfinder-dialog .ui-tabs-nav {
+  margin: 0 0 16px;
+}
+.elfinder .elfinder-dialog .ui-tabs-nav li {
+  border-bottom: 2px solid transparent;
+}
+.elfinder .elfinder-dialog .ui-tabs-nav li a {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+.elfinder .elfinder-dialog .ui-tabs-nav li.ui-state-active {
+  border-bottom-color: #0d47a1;
+}
+/* Normal tab */
+.elfinder .elfinder-dialog .ui-tabs-nav .ui-state-default {
+  /* */
+
+}
+/* Current tab */
+.elfinder .elfinder-dialog .ui-tabs-nav .ui-tabs-selected {
+  /* */
+
+}
+/* Active tab */
+.elfinder .elfinder-dialog .ui-tabs-nav li:active {
+  /* */
+
+}
+/* Icons */
+/* Dialog icon (e.g. for error messages) */
+.elfinder .elfinder-dialog .elfinder-dialog-icon {
+  /* */
+
+}
+/* Error icon */
+.elfinder .elfinder-dialog .elfinder-dialog-icon-error {
+  /* */
+
+}
+/* Confirmation icon */
+.elfinder .elfinder-dialog .elfinder-dialog-icon-confirm {
+  /* */
+
+}
+/* Footer */
+.elfinder .elfinder-dialog .ui-dialog-buttonpane {
+  /* */
+
+}
+/* Buttonset (wrapper) */
+.elfinder .elfinder-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  /* */
+
+}
+/* Button */
+.elfinder .elfinder-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button {
+  /* */
+
+}
+/* Styling specific types of dialogs */
+/* Error */
+.elfinder .elfinder-dialog-error {
+  /* */
+
+}
+/* Confirm */
+.elfinder .elfinder-dialog-confirm {
+  /* */
+
+}
+/* File editing */
+.elfinder .elfinder-dialog .elfinder-file-edit {
+  /* */
+
+}
+/* File information */
+/* Title */
+.elfinder .elfinder-dialog .elfinder-info-title {
+  /* */
+
+}
+/* Table */
+.elfinder .elfinder-dialog .elfinder-info-tb {
+  /* */
+
+}
+/* File upload (including dropbox) */
+.elfinder .elfinder-dialog .elfinder-upload-dropbox,
+.elfinder .elfinder-dialog .elfinder-upload-dialog-or {
+  /* */
+
+}
+/* Status Bar */
+/* statusbar.css */
+/* Statusbar wrapper */
+.elfinder .elfinder-statusbar {
+  /* */
+
+}
+/* File size */
+.elfinder .elfinder-statusbar .elfinder-stat-size {
+  /* */
+
+}
+/* Current path (breadcrumb trail) */
+.elfinder .elfinder-statusbar .elfinder-path {
+  /* */
+
+}
+/* Breadcrumb in current path */
+.elfinder .elfinder-statusbar .elfinder-path a {
+  /* */
+
+}
+/* Name of selected file(s) */
+.elfinder .elfinder-statusbar .elfinder-stat-selected {
+  /* */
+
+}
+/* Size of current file(s) */
+.elfinder .elfinder-statusbar .elfinder-stat-size {
+  /* */
+
+}

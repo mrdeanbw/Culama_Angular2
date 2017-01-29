@@ -1,0 +1,140 @@
+#file_drop_target {
+    width: 100%;
+    padding: 12px 0;
+    border: 4px dashed #ccc;
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+    &.drag_over {
+        border: 4px dashed #96C4EA;
+        color: #96C4EA;
+    }
+}
+
+#upload_progress {
+    padding: 4px 0;
+    .error {
+        color: #a00;
+    }
+    > div {
+        padding: 3px 0;
+    }
+}
+
+.progress_track {
+    display: inline-block;
+    width: 200px;
+    height: 10px;
+    border: 1px solid #333;
+    margin: 0 4px 0 10px;
+}
+
+.progress {
+    background-color: #82CFFA;
+    height: 10px;
+}
+
+.no_write {
+    #mkdir,
+    #file_drop_target {
+        display: none
+    }
+}
+
+#folder_actions {
+    width: 50%;
+    float: right;
+}
+.sort_hide {
+    display: none;
+}
+.is_dir{
+    .size {
+        color: transparent;
+        font-size: 0;
+        &:before {
+            content: "--";
+            font-size: 14px;
+            color: #333;
+        }
+    }
+    .download {
+        display: none !important;
+    }
+
+}
+
+#fm_table {
+    .actions {
+        width: 1%;
+        white-space: nowrap;
+        text-align: center;
+    }
+}
+
+#fm_list {
+    td {
+        vertical-align: middle;
+        padding: 8px 8px;
+        min-height: 32px;
+        &.uk-text-small {
+            color: @text_secondary_color;
+        }
+    }
+    a {
+        position: relative;
+        padding-left: 36px;
+        display: inline-block;
+        color: @text_primary_color;
+        line-height: 32px;
+        &:before {
+            position: absolute;
+            left: 0;
+            top: -2px;
+            display: block;
+            font-size: 24px;
+            color: @text_secondary_color;
+            font-family: "Material Icons";
+        }
+    }
+    .name {
+        &:before {
+            content: '\e24d';
+            color: @md-color-blue-500;
+        }
+    }
+    .is_dir .name {
+        &:before {
+            content: '\e2c7';
+            color: @text_secondary_color;
+        }
+    }
+    .delete,
+    .download {
+        padding-left: 0;
+        width: 24px;
+        height: 24px;
+        margin: 0 4px;
+        &:before {
+            top: -2px;
+            font-size: 24px;
+        }
+    }
+    .delete {
+        &:before {
+            content: '\e872';
+        }
+        color: @danger_color;
+    }
+    .download {
+        &:before {
+            content: '\e2c4';
+        }
+    }
+    .empty {
+        padding: 40px 0;
+        text-align: center;
+        color: @text_secondary_color;
+        font-style: italic;
+    }
+}

@@ -1,0 +1,38 @@
+[
+    {
+        "value": "Buttons: FAB",
+        "title": "components: fab",
+        "url": "restricted.components.buttons_fab",
+        "text": "Lorem ipsum dolor sit amet, consectetur ..."
+    },
+    {
+        "value": "Grid",
+        "title": "components: grid",
+        "url": "restricted.components.grid",
+        "text": "Ut enim ad minim veniam, quis nostrud ..."
+    },
+    {
+        "value": "Sortable",
+        "title": "components: sortable",
+        "url": "restricted.components.sortable",
+        "text": "Duis aute irure dolor in reprehenderit ..."
+    },
+    {
+        "value": "Calendar",
+        "title": "plugins: calendar",
+        "url": "restricted.plugins.calendar",
+        "text": "Excepteur sint occaecat cupidatat non ..."
+    },
+    {
+        "value": "Charts",
+        "title": "plugins: charts",
+        "url": "restricted.plugins.charts",
+        "text": "Excepteur sint occaecat cupidatat non ..."
+    },
+    {
+        "value": "Tree",
+        "title": "plugins: tree",
+        "url": "restricted.plugins.tree",
+        "text": "Excepteur sint occaecat cupidatat non ..."
+    }
+]

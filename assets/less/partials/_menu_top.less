@@ -1,0 +1,69 @@
+/* top menu */
+#menu_top {
+    .reset_list();
+    position: relative;
+    > li {
+        float: left;
+        position: relative;
+        > a {
+            height: @top_bar_height;
+            line-height: @top_bar_height;
+            display: block;
+            color: @text_primary_color;
+            padding: 0 16px;
+            min-width: 60px;
+            text-align: center;
+            position: relative;
+            @media @screen_medium_max {
+                padding: 0 8px;
+            }
+            &:hover {
+                background: @background_color_default;
+            }
+            .material-icons {
+                font-size: 24px;
+                vertical-align: -8px;
+            }
+            > span {
+                margin-left: 8px;
+                vertical-align: -2px;
+            }
+        }
+        &[data-uk-dropdown] {
+            > a {
+                padding-right: 32px;
+                &:after {
+                    position: absolute;
+                    right: 4px;
+                    top: 2px;
+                    content: '\e313';
+                    display: block;
+                    width: 24px;
+                    height: 24px;
+                    font-size: 18px;
+                    font-family: "Material Icons";
+                    color: @text_secondary_color;
+                }
+            }
+        }
+        &.uk-open > a {
+            background: @background_color_default;
+        }
+        .uk-dropdown {
+            margin-top: 1px;
+            top: 100% !important;
+        }
+        @media (max-height: 767px) {
+            .uk-dropdown {
+                max-height: 200px !important;
+                overflow-y: auto !important;
+            }
+        }
+        @media (min-height: 768px) {
+            [class*='uk-dropdown-width'] {
+                max-height: 640px;
+                overflow-y: auto;
+            }
+        }
+    }
+}

@@ -1,0 +1,122 @@
+<div id="top_bar">
+    <div class="md-top-bar">
+        <div class="uk-width-large-8-10 uk-container-center">
+            <div class="uk-slidenav-position" data-uk-slider="{infinite: false}">
+                <div class="uk-slider-container">
+                    <ul class="uk-slider uk-grid-width-small-1-6 top_bar_nav" id="notes_grid_filter">
+                        <li class="uk-active" data-uk-filter="">
+                            <a href="#">All</a>
+                        </li>
+                        <li data-uk-filter="label-1">
+                            <a href="#"><span class="uk-badge uk-badge-default">Label 1</span></a>
+                        </li>
+                        <li data-uk-filter="label-2">
+                            <a href="#"><span class="uk-badge uk-badge-warning">Label 2</span></a>
+                        </li>
+                        <li data-uk-filter="label-3">
+                            <a href="#"><span class="uk-badge uk-badge-danger">Label 3</span></a>
+                        </li>
+                        <li data-uk-filter="label-4">
+                            <a href="#"><span class="uk-badge uk-badge-success">Label 4</span></a>
+                        </li>
+                        <li data-uk-filter="label-5">
+                            <a href="#"><span class="uk-badge uk-badge-primary">Label 5</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="uk-slidenav uk-slidenav-previous" data-uk-slider-item="previous"></a>
+                <a href="#" class="uk-slidenav uk-slidenav-next" data-uk-slider-item="next"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid">
+            <div class="uk-width-medium-3-5 uk-width-large-2-5 uk-container-center">
+                <div class="md-card {{ note_form.color }}" ng-click="showNoteForm($event)" id="note_form">
+                    <div class="md-card-content">
+                        <span class="note_form_text" ng-if="!noteFormActive">Add note</span>
+                        <form action="" ng-if="noteFormActive">
+                            <div class="uk-form-row">
+                                <label>Title</label>
+                                <input type="text" class="md-input" id="note_f_title" md-input ng-model="note_form.title"/>
+                            </div>
+                            <div class="uk-form-row">
+                                <label>Note content</label>
+                                <textarea type="text" class="md-input" placeholder="" id="note_f_content" md-input textarea-autosize ng-model="note_form.content"></textarea>
+                            </div>
+                            <div class="uk-form-row uk-hidden" id="notes_checklist">
+                                <label>Checklist (sortable)</label>
+                                <ul class="uk-list uk-list-hover uk-sortable-single" data-uk-sortable>
+                                    <li class="uk-margin-small-top uk-clearfix" ng-repeat="checkbox in note_form.checklist">
+                                        <a href="#" class="uk-float-right remove_checklist_item" ng-click="removeCheckbox($event)"><i class="material-icons">&#xE5CD;</i></a>
+                                        <div class="uk-nbfc">
+                                            <input type="checkbox" id="checkbox_{{ checkbox.id }}" name="checkboxes" icheck ng-model="checkbox.checked" />
+                                            <label for="checkbox_{{ checkbox.id }}" class="inline-label">{{ checkbox.title }}</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="uk-input-group">
+                                    <input type="text" class="md-input" id="checklist_item" placeholder="add item" ng-model="note_form.checklist_item_title" ng-keyup="checkboxAddKey($event)"/>
+                                    <span class="uk-input-group-addon">
+                                        <a href="#" id="checkbox_add" ng-click="checkboxAddClick($event)"><i class="material-icons md-24">&#xE145;</i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="uk-form-row" id="notes_labels"></div>
+                            <div class="uk-form-row uk-clearfix">
+                                <div class="uk-float-left">
+                                    <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                                        <a href="#"><i class="material-icons md-24">&#xE3B7;</i></a>
+                                        <div class="uk-dropdown uk-dropdown-blank" ng-bind-html="noteColorPicker | trust"></div>
+                                    </div><!--
+                                    --><div class="uk-button-dropdown uk-margin-left" data-uk-dropdown="{mode:'click'}">
+                                    <a href="#"><i class="material-icons md-24">&#xE892;</i></a>
+                                    <div class="uk-dropdown uk-dropdown-blank" id="dropdown_labels">
+                                        <div class="uk-margin-small-top" ng-repeat="label in notes_labels">
+                                            <input type="checkbox" id="checkbox_{{ label.text_safe }}" name="labels" data-label="{{ label.text }}" data-style="{{label.type}}" icheck ng-model="label.checked" />
+                                            <label for="checkbox_{{ label.text_safe }}" class="inline-label"><span class="uk-badge uk-badge-{{label.type}}">{{ label.text }}</span></label>
+                                        </div>
+                                    </div>
+                                </div><!--
+                                --><a href="#" class="uk-margin-left" data-uk-toggle="{target:'#notes_checklist'}"><i class="material-icons md-24">&#xE065;</i></a>
+                                </div>
+                                <div class="uk-float-right">
+                                    <a href="#" class="md-btn" ng-click="clearForm($event)">Clear</a>
+                                    <a href="#" class="md-btn md-btn-primary" ng-click="noteAdd($event)">Add Note</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-grid-width-small-1-2 uk-grid-width-medium-1-4 uk-container-center uk-margin-large-top" data-uk-grid="{gutter: 20, controls: '#notes_grid_filter'}" id="notes_grid">
+            <div ng-repeat="note in notes track by $index " data-uk-filter="{{ note.filterBy }}" ng-if="!note.hidden">
+                <div class="md-card {{note.color}}">
+                    <div class="uk-position-absolute uk-position-top-right uk-margin-small-right uk-margin-small-top">
+                        <a href="#" class="note_action_remove" ng-click="closeNote($event,$index)"><i class="md-icon material-icons">&#xE5CD;</i></a>
+                    </div>
+                    <div class="md-card-content">
+                        <h2 class="heading_b uk-margin-large-right">{{ note.title }}</h2>
+                        <p ng-bind-html="note.content"></p>
+                        <ul class="uk-list" ng-if="note.checklist">
+                            <li class="uk-margin-small-top" ng-repeat="checkbox in note.checklist">
+                                <input type="checkbox" id="checkbox_{{$parent.$index}}_{{$index}}" icheck ng-model="checkbox.checked"/>
+                                <label for="checkbox_{{$parent.$index}}_{{$index}}" class="inline-label">{{ checkbox.title }}</label>
+                            </li>
+                        </ul>
+                        <div class="uk-margin-medium-top" ng-if="note.labels">
+                            <span class="uk-badge uk-badge-{{ label.type }} uk-margin-small-right" ng-repeat="label in note.labels">{{ label.text }}</span>
+                        </div>
+                        <span class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small">{{ note.time | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,114 @@
+#tabs_search_content {
+    > li {
+        padding: 24px;
+        &.full_height {
+            padding: 0;
+            height: 100%;
+        }
+    }
+}
+
+.map_search_wrapper {
+    position: relative;
+    padding-left: 320px;
+    @media @screen_medium_max {
+        padding-left: 0;
+    }
+    .map_search_list {
+        &_wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 320px;
+            padding: 16px 0;
+            background: @white;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: auto;
+            .md-box-shadow-medium-right();
+            transition: all 280ms @md_easing;
+            transform: translate3d(0, 0, 0);
+            @media @screen_medium_max {
+                width: 240px;
+            }
+            .md-list {
+                li {
+                    padding: 8px 16px;
+                    border-bottom-color: @border_color_light;
+                }
+            }
+        }
+    }
+}
+.map_search_list_active.map_search_wrapper{
+    padding: 0;
+    .map_search_list {
+        &_wrapper {
+            transform: translate3d(-340px,0,0);
+        }
+    }
+}
+
+#map_search_list_toggle {
+    position: absolute;
+    left: 320px;
+    bottom: 50%;
+    margin-bottom: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0 8px 8px 0;
+    background: @white;
+    display: block;
+    z-index: 1;
+    text-align: center;
+    padding-top: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 280ms @md_easing;
+    .md-box-shadow-right();
+    @media @screen_medium_max {
+        left: 240px;
+    }
+    .map_search_list_active & {
+        left: 0;
+    }
+}
+
+.search_list {
+    .reset_list();
+    &_heading {
+        .md_font(400,18px,22px);
+        margin: 0 0 2px;
+    }
+    &_link {
+        color: @accent_color;
+        display: block;
+        margin-bottom: 2px;
+    }
+    p {
+        margin: 0;
+        font-size: 13px;
+    }
+    li {
+        padding: 24px 0;
+        .clearfix;
+        + li {
+            border-top: 1px solid @border_color_light;
+        }
+    }
+    &_thumb {
+        width: 100px;
+        height: 100px;
+        margin-right: 16px;
+        float: left;
+        @media @screen_medium_max {
+            float: none !important;
+            width: auto;
+            margin: 0 0 16px !important;
+        }
+    }
+    &_content {
+        overflow: hidden;
+    }
+}

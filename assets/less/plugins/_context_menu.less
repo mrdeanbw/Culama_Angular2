@@ -1,0 +1,32 @@
+.context-menu-list {
+    border: none;
+    border-radius: 2px;
+    .boxShadowHelper(2);
+    .context-menu-item {
+        padding: 5px 32px;
+        font-size: 14px;
+        color: @text_primary_color;
+    }
+    .context-menu-hover {
+        background: @background_color_default;
+        color: @text_primary_color;
+    }
+    .context-menu-material {
+        > .material-icons {
+            position: absolute;
+            left: 7px;
+            top: 5px;
+            font-size: 18px;
+        }
+    }
+    .context-menu-separator {
+        margin: 8px 0;
+        padding: 0;
+    }
+    .context-menu-disabled {
+        &,
+        > .material-icons {
+            color: #bbb;
+        }
+    }
+}

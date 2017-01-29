@@ -1,0 +1,68 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid">
+            <div class="uk-width-medium-2-3">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        Click on user to start chat.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<aside id="sidebar_secondary" sidebar-secondary>
+    <div class="sidebar_secondary_wrapper uk-margin-remove">
+        <ul class="md-list md-list-addon list-chatboxes" id="chatboxes">
+            <li ng-repeat="user in chat_users" ng-click="startChat($event,user.id)">
+                <div class="md-list-addon-element">
+                    <span class="element-status element-status-warning" ng-if="user.status == 'busy'"></span>
+                    <span class="element-status element-status-success" ng-if="user.status == 'online'"></span>
+                    <span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
+                    <img class="md-user-image md-list-addon-avatar" ng-src="{{ user.avatar }}" alt=""/>
+                </div>
+                <div class="md-list-content">
+                    <span class="md-list-heading">{{user.name}}</span>
+                    <span class="uk-text-small uk-text-muted uk-text-truncate">{{ user.info }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div id="chatbox_wrapper">
+    <div class="chatbox" ng-repeat="chatbox in chat_users" ng-if="chatbox.active" ng-click="makeActive($event)" data-id="{{chatbox.id}}">
+        <div class="chatbox_header">
+            <span class="header_name">
+                {{ chatbox.name }}
+            </span>
+            <div class="header_actions">
+                <div class="actions_dropdown" data-uk-dropdown="{pos:'bottom-right',mode:'click'}">
+                    <a href="javascript:void(0)"><i class="material-icons">&#xE8B9;</i></a>
+                    <div class="uk-dropdown uk-dropdown-small">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li><a href="#">Show full conversation</a></li>
+                            <li><a href="#">Block messages</a></li>
+                            <li><a href="#">Report</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="chatbox_close" ng-click="closeChatbox($event,chatbox.id)"><i class="material-icons">&#xE14C;</i></a>
+            </div>
+        </div>
+        <div class="chatbox_content">
+            <div class="chatbox_message" ng-repeat="conversation in chatbox.conversation" ng-class="{'own': conversation.own}">
+                <a href="#" class="chatbox_avatar" ng-if="!conversation.own">
+                    <img ng-src="{{ chatbox.avatar }}" />
+                </a>
+                <ul class="chatbox_message_content">
+                    <li ng-repeat="message in conversation.messages"><span title="{{ message.time | date: 'dd/MM/yyyy (HH:mm)' }}" data-uk-tooltip="{pos:'right'}">{{ message.text }}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="chatbox_footer">
+            <input type="text" placeholder="Write message..." class="message_input" ng-keyup="sendMessage($event,chatbox.id)" ng-model="chatbox.inptMessage">
+        </div>
+    </div>
+</div>

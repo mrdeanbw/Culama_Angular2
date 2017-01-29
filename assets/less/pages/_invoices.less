@@ -1,0 +1,39 @@
+.invoice {
+    &_header {
+        height: 72px;
+        padding: 20px;
+        box-sizing: border-box;
+        margin: -16px -16px 24px;
+        > img {
+            max-height: 100%;
+            width: auto;
+        }
+    }
+    &_header_active {
+        &.md-card-toolbar {
+            border-bottom: none
+        }
+    }
+    &_footer {
+        border-top: 1px solid @border_color;
+        margin-top: 40px;
+        height: 64px;
+        padding: 8px;
+        font-size: 13px;
+        text-align: center;
+        box-sizing: border-box;
+        line-height: 20px;
+        > span {
+            font-weight: 700;
+            font-size: 24px;
+            vertical-align: -4px;
+            padding: 0 8px;
+        }
+    }
+    &_content {
+        position: relative;
+        address p + p {
+            margin-top: 0;
+        }
+    }
+}

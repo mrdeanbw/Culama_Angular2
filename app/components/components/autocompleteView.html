@@ -1,0 +1,42 @@
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">Autocomplete</h3>
+
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-1-2">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <h3 class="heading_a uk-margin-bottom">Default</h3>
+                        <div class="uk-autocomplete uk-form uk-position-relative" data-uk-autocomplete="{source:'data/search_data.json'}">
+                            <input type="text" class="md-input" placeholder="Min 3 char">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-2">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <h3 class="heading_a uk-margin-bottom">Custom template</h3>
+                        <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" data-uk-autocomplete="{source:'data/search_data.json'}">
+                            <input type="text" class="md-input" placeholder="Min 3 char">
+                            <script type="text/autocomplete">
+                                    <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
+                                        {{~items}}
+                                        <li data-value="{{ $item.value }}">
+                                            <a href="{{ $item.url }}" class="item">
+                                                {{ $item.value }}<br>
+                                                <span class="uk-text-muted uk-text-small">{{{ $item.text }}}</span>
+                                            </a>
+                                        </li>
+                                        {{/items}}
+                                    </ul>
+                                </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
