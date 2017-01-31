@@ -33,16 +33,58 @@ altairApp
             // -- LOGIN PAGE --
                 .state("login", {
                     url: "/login",
-                    templateUrl: 'app/components/pages/loginView.html',
+                    templateUrl: 'app/views/loginView.html',
                     controller: 'loginCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_uikit',
                                 'lazy_iCheck',
-                                'app/components/pages/loginController.js'
+                                'lazy_selectizeJS',
+                                'app/controllers/loginController.js'
                             ]);
                         }]
+                    },
+                    data: {
+                        pageTitle: 'Login'
+                    }
+                })
+
+                 // -- My Profile PAGE --
+                .state("restricted.myprofile", {
+                    url: "/myprofile",
+                    templateUrl: 'app/views/account/myProfile.html',
+                    controller: 'myProfileCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_uikit',
+                                'lazy_iCheck',
+                                'app/controllers/myProfileController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'MyProfile'
+                    }
+                })
+
+                  // -- My Account PAGE --
+                .state("restricted.myaccount", {
+                    url: "/myaccount",
+                    templateUrl: 'app/views/account/myAccountInfo.html',
+                    controller: 'accountCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_uikit',
+                                'lazy_iCheck',
+                                'app/controllers/accountController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'MyAccount'
                     }
                 })
             // -- RESTRICTED --
