@@ -14,7 +14,7 @@ altairApp
                 restrict: 'A',
                 link: function() {
                     var listener = function(event, toState) {
-                        var default_title = 'Culama';
+                        var default_title = 'Altair Admin';
                         $timeout(function() {
                             $rootScope.page_title = (toState.data && toState.data.pageTitle)
                                 ? default_title + ' - ' + toState.data.pageTitle : default_title;
