@@ -312,7 +312,7 @@ altairApp
                         width = width ? width : 48,
                         height = height ? height : 48;
 
-                    var preloader_content = style == 'regular'
+                    var preloader_content = (style == 'regular')
                         ? '<img src="assets/img/spinners/spinner' + image_density + '.gif" alt="" width="32" height="32">'
                         : '<div class="md-preloader"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="'+height+'" width="'+width+'" viewbox="0 0 75 75"><circle cx="37.5" cy="37.5" r="33.5" stroke-width="8"/></svg></div>';
 
@@ -355,7 +355,7 @@ altairApp
                 restrict: 'A',
                 link: function() {
                     var listener = function(event, toState) {
-                        var default_title = 'Altair Admin';
+                        var default_title = 'Culama';
                         $timeout(function() {
                             $rootScope.page_title = (toState.data && toState.data.pageTitle)
                                 ? default_title + ' - ' + toState.data.pageTitle : default_title;
@@ -824,7 +824,7 @@ altairApp
                             hidePrimarySidebar();
                         }
                         // secondary sidebar
-                        if( !$rootScope.secondarySidebarActive && $rootScope.secondarySidebarActive && $event.keyCode == 27) {
+                        if( !$rootScope.secondarySidebarPersistent && $rootScope.secondarySidebarActive && $event.keyCode == 27) {
                             hideSecondarySidebar();
                         }
                         // main search form

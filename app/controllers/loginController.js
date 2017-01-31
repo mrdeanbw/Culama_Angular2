@@ -4,7 +4,20 @@ angular
         '$scope',
         '$rootScope',
         'utils',
-        function ($scope,$rootScope,utils) {
+        function ($scope, $rootScope, utils) {
+
+            $scope.selectize_a_options = ["English", "Chinese", "Russian", "French"];
+
+            $scope.selectize_a = "English";
+
+            $scope.selectize_a_config = {
+                plugins: {
+                    'tooltip': ''
+                },
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select...'
+            };
 
             $scope.registerFormActive = false;
 
@@ -15,7 +28,7 @@ angular
                 $login_password_reset = $('#login_password_reset');
 
             // show login form (hide other forms)
-            var login_form_show = function() {
+            var login_form_show = function () {
                 $login_form
                     .show()
                     .siblings()
@@ -23,7 +36,7 @@ angular
             };
 
             // show register form (hide other forms)
-            var register_form_show = function() {
+            var register_form_show = function () {
                 $register_form
                     .show()
                     .siblings()
@@ -31,7 +44,7 @@ angular
             };
 
             // show login help (hide other forms)
-            var login_help_show = function() {
+            var login_help_show = function () {
                 $login_help
                     .show()
                     .siblings()
@@ -39,33 +52,33 @@ angular
             };
 
             // show password reset form (hide other forms)
-            var password_reset_show = function() {
+            var password_reset_show = function () {
                 $login_password_reset
                     .show()
                     .siblings()
                     .hide();
             };
 
-            $scope.loginHelp = function($event) {
+            $scope.loginHelp = function ($event) {
                 $event.preventDefault();
-                utils.card_show_hide($login_card,undefined,login_help_show,undefined);
+                utils.card_show_hide($login_card, undefined, login_help_show, undefined);
             };
 
-            $scope.backToLogin = function($event) {
+            $scope.backToLogin = function ($event) {
                 $event.preventDefault();
                 $scope.registerFormActive = false;
-                utils.card_show_hide($login_card,undefined,login_form_show,undefined);
+                utils.card_show_hide($login_card, undefined, login_form_show, undefined);
             };
 
-            $scope.registerForm = function($event) {
+            $scope.registerForm = function ($event) {
                 $event.preventDefault();
                 $scope.registerFormActive = true;
-                utils.card_show_hide($login_card,undefined,register_form_show,undefined);
+                utils.card_show_hide($login_card, undefined, register_form_show, undefined);
             };
 
-            $scope.passwordReset = function($event) {
+            $scope.passwordReset = function ($event) {
                 $event.preventDefault();
-                utils.card_show_hide($login_card,undefined,password_reset_show,undefined);
+                utils.card_show_hide($login_card, undefined, password_reset_show, undefined);
             };
 
         }
