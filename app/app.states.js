@@ -10,12 +10,12 @@ altairApp
                 .otherwise('/');
 
             $stateProvider
-            // -- ERROR PAGES --
+                 // -- ERROR PAGES --
                 .state("error", {
                     url: "/error",
                     templateUrl: 'app/views/error.html',
                     resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_uikit'
                             ]);
@@ -30,13 +30,13 @@ altairApp
                     url: "/500",
                     templateUrl: 'app/components/pages/error_500View.html'
                 })
-            // -- LOGIN PAGE --
+                 // -- LOGIN PAGE --
                 .state("login", {
                     url: "/login",
                     templateUrl: 'app/views/loginView.html',
                     controller: 'loginCtrl',
                     resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_uikit',
                                 'lazy_iCheck',
@@ -49,8 +49,7 @@ altairApp
                         pageTitle: 'Login'
                     }
                 })
-
-                 // -- My Profile PAGE --
+                 // -- My PROFILE PAGE --
                 .state("restricted.myprofile", {
                     url: "/myprofile",
                     templateUrl: 'app/views/account/myProfile.html',
@@ -68,8 +67,7 @@ altairApp
                         pageTitle: 'MyProfile'
                     }
                 })
-
-                  // -- My Account PAGE --
+                 // -- My ACCOUNT PAGE --
                 .state("restricted.myaccount", {
                     url: "/myaccount",
                     templateUrl: 'app/views/account/myAccountInfo.html',
@@ -87,13 +85,13 @@ altairApp
                         pageTitle: 'MyAccount'
                     }
                 })
-            // -- RESTRICTED --
+                 // -- RESTRICTED --
                 .state("restricted", {
                     abstract: true,
                     url: "",
                     templateUrl: 'app/views/restricted.html',
                     resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_uikit',
                                 'lazy_selectizeJS',
@@ -106,13 +104,13 @@ altairApp
                         }]
                     }
                 })
-            // -- DASHBOARD --
+                 // -- DASHBOARD --
                 .state("restricted.dashboard", {
                     url: "/",
-                    templateUrl: 'app/components/dashboard/dashboardView.html',
-                    controller: 'dashboardCtrl',
+                    templateUrl: 'app/views/dashboard/adminDashboardView.html',
+                    controller: 'adminDashBoardCtrl',
                     resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 // ocLazyLoad config (app/app.js)
                                 'lazy_countUp',
@@ -123,21 +121,9 @@ altairApp
                                 'lazy_weathericons',
                                 'lazy_clndr',
                                 'lazy_google_maps',
-                                'app/components/dashboard/dashboardController.js'
-                            ], {serie: true} );
-                        }],
-                        sale_chart_data: function($http){
-                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        user_data: function($http){
-                            return $http({ method: 'GET', url: 'data/user_data.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
+                                'app/controllers/administratorDashboadController.js'
+                            ], { serie: true });
+                        }]
                     },
                     data: {
                         pageTitle: 'Dashboard'
@@ -146,6 +132,53 @@ altairApp
                         label: 'Home'
                     }
                 })
-             
+                 // --COMPANY DASHBOARD --
+                .state("restricted.companydashboard", {
+                    url: "/company_dashboard",
+                    templateUrl: 'app/views/dashboard/compnayDashboardView.html',
+                    controller: 'companyDashBoardCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                // ocLazyLoad config (app/app.js)
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_weathericons',
+                                'lazy_clndr',
+                                'lazy_google_maps',
+                                'app/controllers/companyDashboardController.js'
+                            ], { serie: true });
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Company Dashboard'
+                    }
+                })
+                 // --  COMPANY USERS PAGE --        
+                .state("restricted.companyusers", {
+                     url: "/companyusers",
+                     templateUrl: 'app/views/account/companyUsers.html',
+                     controller: 'companyusersCtrl',
+                     resolve: {
+                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                             return $ocLazyLoad.load([
+                                 'app/controllers/companyUsersController.js'
+                             ], { serie: true });
+                         }],
+                         contact_list: function ($http) {
+                             return $http({ method: 'GET', url: 'data/contact_list.json' })
+                                 .then(function (data) {
+                                     return data.data;
+                                 });
+                         }
+                     },
+                     data: {
+                         pageTitle: 'Company Users'
+                     }
+                 })
+
         }
     ]);
