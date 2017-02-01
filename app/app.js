@@ -52,6 +52,7 @@ altairApp
 
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+            $rootScope.primarySidebarActive = false;
 
             $rootScope.$on('$stateChangeSuccess', function () {
 
@@ -104,7 +105,7 @@ altairApp
                 // secondary sidebar
                 $rootScope.sidebar_secondary = false;
                 $rootScope.secondarySidebarHiddenLarge = false;
-
+                
                 if($($window).width() < 1220 ) {
                     // hide primary sidebar
                     $rootScope.primarySidebarActive = false;
