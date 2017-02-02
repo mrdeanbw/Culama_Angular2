@@ -15,17 +15,21 @@
 .margin0 { margin: 0 !important; }
 .edit-p { position: absolute; bottom: 10px; right: 10px; background: #299a29; padding: 5px; border-radius: 7px; }
 
-.dashoard-manage, .dashoard-billing { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
+.dashoard-manage { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
+ .dashoard-billing { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
 
 
-.dashoard-manage > h3, .dashoard-billing > h3 { color: #b1afaf !important; border-top: 3px solid #1976d2; padding: 10px 15px 0 15px; }
-.billing-count { width: 30px; height: 30px; display: inline-block; color: #1976d2; font-size: 25px; line-height: 25px; text-align: center; }
-.content-billing { margin-bottom: 2px !important; margin-top: 10px !important; }
-.billing-label { font-size: 17px; margin-top: 2px; display: inline-block; margin-left: 15px; vertical-align: top; font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: 500; }
+.dashoard-manage > h3, .dashoard-billing > h3 { color: #2b2a2a !important; border-top: 3px solid #1976d2; padding: 10px 15px 0 15px; }
+.billing-count { width: 18px; color: #1976d2; font-size: 14px; line-height: 25px; text-align: center; display:inline-block; }
+.content-billing { margin-bottom: 0px !important; margin-top: 00px !important; }
+.billing-label { font-size: 14px; margin-top: 2px; display: inline-block; margin-left: 15px; font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: 500; }
 .content { padding: 0 15px 15px 15px; }
-.manage-label { font-size: 17px; font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: 500; margin-bottom: 2px !important; margin-top: 2px !important; }
+.manage-label { font-size: 14px; font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: 500; margin-bottom: 2px !important; margin-top: 2px !important; display:block; }
 .user-profile-view { min-height: 450px; }
 .md-header-card { padding:15px;}
+.view-control { position:absolute; right:0; top:0; }
+.view-control i { font-size:32px; }
+.view-control i.active { color:#000; }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 

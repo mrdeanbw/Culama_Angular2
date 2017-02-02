@@ -159,26 +159,28 @@ altairApp
                 })
                  // --  COMPANY USERS PAGE --        
                 .state("restricted.companyusers", {
-                     url: "/companyusers",
-                     templateUrl: 'app/views/account/companyUsers.html',
-                     controller: 'companyusersCtrl',
-                     resolve: {
-                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                             return $ocLazyLoad.load([
+                    url: "/companyusers",
+                    templateUrl: 'app/views/account/companyUsers.html',
+                    controller: 'companyusersCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                 'bower_components/angular-resource/angular-resource.min.js',
+                                 'lazy_datatables',
                                  'app/controllers/companyUsersController.js'
-                             ], { serie: true });
-                         }],
-                         contact_list: function ($http) {
-                             return $http({ method: 'GET', url: 'data/contact_list.json' })
-                                 .then(function (data) {
-                                     return data.data;
-                                 });
-                         }
-                     },
-                     data: {
-                         pageTitle: 'Company Users'
-                     }
-                 })
+                            ], { serie: true });
+                        }],
+                        contact_list: function ($http) {
+                            return $http({ method: 'GET', url: 'data/contact_list.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Company Users'
+                    }
+                })
 
         }
     ]);
