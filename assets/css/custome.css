@@ -1,6 +1,15 @@
 ﻿.login_page_wrapper { width: 640px !important; clear: both; }
 .mb-20 { margin-bottom: 20px; }
 .mb-50 { margin-bottom: 50px; }
+
+.mt-20 { margin-top:20px; }
+
+.pt-20 { padding-top:20px; }
+.pt-30 { padding-top:30px; }
+.pt-50 { padding-top:50px; }
+
+.pl-50 { padding-left:50px; }
+
 .align-right { text-align: right; }
 .select-language-login { max-width: 100px; display: inline-block; width: 100px; float: right; }
 
@@ -16,7 +25,7 @@
 .edit-p { position: absolute; bottom: 10px; right: 10px; background: #299a29; padding: 5px; border-radius: 7px; }
 
 .dashoard-manage { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
- .dashoard-billing { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
+.dashoard-billing { width: 24%; min-height: 140px; margin-right: 21px; display: inline-block; background: #fff; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); border: none; vertical-align: top; margin-top: 25px; }
 
 
 .dashoard-manage > h3, .dashoard-billing > h3 { color: #2b2a2a !important; border-top: 3px solid #1976d2; padding: 10px 15px 0 15px; }
@@ -31,19 +40,36 @@
 .view-control i { font-size:32px; }
 .view-control i.active { color:#000; }
 
+.inr-box { color: #2b2a2a !important;
+    border-top: 3px solid #1976d2;
+    padding: 10px 15px; min-height:120px; margin-bottom:20px!important; }
+.big-text {
+    font-size: 80px;
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+.big-text-container { display: inline-block; vertical-align: top; padding-top: 20px; width:68%; }
+.big-text-container p { margin-bottom:0px; margin-top:0; }
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-
-
     .dashoard-manage { width: 48.5%; min-height: 140px; margin-right: 20px; }
     .dashoard-billing { width: 48.5%; min-height: 140px; margin-right: 0; }
     .manage-label, .billing-label { font-size: 15px; }
 }
 
 @media only screen and (max-width: 767px) {
-
-
     .sepratore::before { display: none; }
-
     .dashoard-manage, .dashoard-billing { width: 100%; height: auto; margin-right: 0; }
     .manage-label, .billing-label { font-size: 15px; }
+    .pl-50 { padding-left:0px; } 
+    .inr-box { min-height:unset; }
+}
+
+@media only screen and (max-width: 479px) {
+    .big-text { font-size:36px; line-height:36px; }
+    .big-text-container { padding-top:0; }
+    .inr-box { padding-left:0; }
+    .big-text-container h3 { margin-bottom:0; }
+    .big-text-container .pt-20 { padding-top:0; }
 }

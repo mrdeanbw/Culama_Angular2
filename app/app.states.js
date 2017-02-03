@@ -157,6 +157,56 @@ altairApp
                         pageTitle: 'Company Dashboard'
                     }
                 })
+                  // --CUSTOMER ADMIN DASHBOARD --
+                .state("restricted.customeradmindashboard", {
+                    url: "/customer_admin_dashboard",
+                    templateUrl: 'app/views/dashboard/customerAdminDashboardView.html',
+                    controller: 'customerAdminDashBoardCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                // ocLazyLoad config (app/app.js)
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_weathericons',
+                                'lazy_clndr',
+                                'lazy_google_maps',
+                                'app/controllers/customerAdminDashboardController.js'
+                            ], { serie: true });
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Customer Admin Dashboard'
+                    }
+                })
+                  // --USER DASHBOARD --
+                .state("restricted.userdashboard", {
+                    url: "/user_dashboard",
+                    templateUrl: 'app/views/dashboard/userDashboardView.html',
+                    controller: 'userDashBoardCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                // ocLazyLoad config (app/app.js)
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_weathericons',
+                                'lazy_clndr',
+                                'lazy_google_maps',
+                                'app/controllers/userDashboardController.js'
+                            ], { serie: true });
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Customer Admin Dashboard'
+                    }
+                })
                  // --  COMPANY USERS PAGE --        
                 .state("restricted.companyusers", {
                     url: "/companyusers",
@@ -179,6 +229,46 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Company Users'
+                    }
+                })
+
+               // --  MANAGE USERS PAGE --        
+                .state("restricted.manageusers", {
+                    url: "/manageusers",
+                    templateUrl: 'app/views/account/manageUsers.html',
+                    controller: 'manageusersCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                 'bower_components/angular-resource/angular-resource.min.js',
+                                 'lazy_datatables',
+                                 'app/controllers/manageUsersController.js'
+                            ], { serie: true });
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Manage Users'
+                    }
+                })
+
+             // --  Create USERS PAGE --        
+                .state("restricted.createusers", {
+                    url: "/create_users",
+                    templateUrl: 'app/views/account/createUserView.html',
+                    controller: 'manageusersCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                 'bower_components/angular-resource/angular-resource.min.js',
+                                 'lazy_datatables',
+                                 'lazy_uikit',
+                                 'lazy_iCheck',
+                                 'app/controllers/manageUsersController.js'
+                            ], { serie: true });
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Create Users'
                     }
                 })
 

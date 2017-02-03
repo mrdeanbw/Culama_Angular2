@@ -1,0 +1,56 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-position-relative">
+            <h3 class="heading_b uk-margin-bottom">Manage Users</h3>
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content" ng-controller="manageusersCtrl as showCase">
+                    <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Name</th>
+                                <th colspan="6"></th>
+                            </tr>
+                            <tr>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="row in showCase.dt_data">
+                                <td><a>{{row[0]}}</a></td>
+                                <td>{{row[1]}}</td>
+                                <td>{{row[2]}}</td>
+                                <td>{{row[3]}}</td>
+                                <td>{{row[4]}}</td>
+                                <td>{{row[5]}}</td>
+                                <td><a class="material-icons" href="#">&#xE872;</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent" ui-sref="restricted.createusers">
+        <i class="material-icons">&#xE145;</i>
+    </a>
+</div>
