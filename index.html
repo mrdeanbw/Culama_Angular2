@@ -58,6 +58,11 @@
 
 </head>
 <body ng-class="{
+        'sidebar_main_active': primarySidebarActive && !miniSidebarActive && !topMenuActive && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_main_open': primarySidebarOpen && !miniSidebarActive && !slimSidebarActive && !topMenuActive && largeScreen && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_mini': miniSidebarActive && largeScreen && !topMenuActive && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_slim sidebar_slim_inactive': slimSidebarActive && largeScreen && !topMenuActive && (!$state.is('login') && !$state.includes('error')),
+    'sidebar_main_hiding': primarySidebarHiding,
     'sidebar_secondary_active': secondarySidebarActive && (!$state.is('login') && !$state.includes('error')),
     'top_bar_active': toBarActive && (!$state.is('login') && !$state.includes('error')),
     'page_heading_active': pageHeadingActive && (!$state.is('login') && !$state.includes('error')),
