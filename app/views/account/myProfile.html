@@ -11,20 +11,20 @@
                     <a class="material-icons edit-p">&#xE254;</a>
                 </div>
                 <div class="user-details">
-                    <h3>John Doe</h3>
-                    <p class="margin0">Floor Supervisor</p>
-                    <p class="margin0">Company XXXXX</p>
+                    <h3>{{ vm.fullName }}</h3>
+                    <p class="margin0">{{ vm.title }}</p>
+                    <p class="margin0">{{ vm.companyname }}</p>
                 </div>
             </div>
             <div class="uk-form-row">
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
                         <label for="login_firstname">First Name</label>
-                        <input class="md-input" type="text" id="login_firstname" ng-model="login_firstname" md-input />
+                        <input class="md-input" type="text" id="login_firstname" ng-model="vm.login_firstname" md-input />
                     </div>
                     <div class="uk-width-medium-1-2">
                         <label for="login_lastname">Last Name</label>
-                        <input class="md-input" type="text" id="login_lastname" ng-model="login_lastname" md-input />
+                        <input class="md-input" type="text" id="login_lastname" ng-model="vm.login_lastname" md-input />
                     </div>
                 </div>
             </div>
@@ -33,15 +33,15 @@
                     <div class="uk-width-medium-1-2">
                         <div>Company</div>
                         <div class="uk-form-row">
-                            <label>Company XXXXX</label>
-                            <input type="text" class="md-input" disabled ng-model="form.input_c" md-input />
+                            <!--<label>Company XXXXX</label>-->
+                            <input type="text" class="md-input" disabled ng-model="vm.companyname" md-input />
                         </div>
                     </div>
                     <div class="uk-width-medium-1-2">
                         <div>Title</div>
                         <div class="uk-form-row">
-                            <label>Floor Supervisor</label>
-                            <input type="text" class="md-input" disabled ng-model="form.input_c" md-input />
+                            <!--<label>Floor Supervisor</label>-->
+                            <input type="text" class="md-input" disabled ng-model="vm.title" md-input />
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
                         <label for="login_lastname">Phone Number</label>
-                        <input class="md-input" type="text" id="login_lastname" ng-model="login_lastname" md-input />
+                        <input class="md-input" type="text" id="login_phoneno" ng-model="vm.phone" md-input />
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
                         <label>Main Language</label>
-                        <input type="text" config="selectize_a_config" options="selectize_a_options" ng-model="selectize_a" name="selectize_a" selectize />
+                        <input type="text" config="vm.selectize_a_config" options="vm.selectize_a_options" ng-model="vm.selectize_a" name="selectize_a" selectize />
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
                         <label>Other Language</label>
-                        <input type="text" config="selectize_b_config" options="selectize_b_options" ng-model="selectize_b" name="selectize_b" selectize />
+                        <input type="text" config="vm.selectize_b_config" options="vm.selectize_b_options" ng-model="vm.selectize_b" name="selectize_b" selectize />
                     </div>
                 </div>
             </div>

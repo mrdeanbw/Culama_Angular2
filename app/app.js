@@ -53,6 +53,8 @@ altairApp
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             $rootScope.primarySidebarActive = false;
+            $rootScope.isloggedin = false;
+            $rootScope.LoggedUser = [];
 
             $rootScope.$on('$stateChangeSuccess', function () {
 

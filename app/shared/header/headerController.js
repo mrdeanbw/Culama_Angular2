@@ -3,9 +3,10 @@ angular
     .controller('main_headerCtrl', [
         '$timeout',
         '$scope',
+        '$rootScope',
         '$window',
         '$state',
-        function ($timeout,$scope,$window,$state) {
+        function ($timeout, $scope, $rootScope, $window, $state) {
 
             $scope.user_data = {
                 name: "Lue Feest",
@@ -72,20 +73,26 @@ angular
             $scope.alerts_length = $scope.user_data.alerts.length;
             $scope.messages_length = $scope.user_data.messages.length;
 
+            $scope.logout = function () {
+                $rootScope.$emit("logout", {});
+            }
 
-            $('#menu_top').children('[data-uk-dropdown]').on('show.uk.dropdown', function(){
-                $timeout(function() {
+
+            $('#menu_top').children('[data-uk-dropdown]').on('show.uk.dropdown', function () {
+                $timeout(function () {
                     $($window).resize();
-                },280)
+                }, 280)
             });
 
             // autocomplete
-            $('.header_main_search_form').on('click','#autocomplete_results .item', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                $state.go($this.attr('href'));
-                $('.header_main_search_input').val('');
-            })
+            $('.header_main_search_form').on('click',
+                '#autocomplete_results .item',
+                function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    $state.go($this.attr('href'));
+                    $('.header_main_search_input').val('');
+                });
 
         }
     ])
