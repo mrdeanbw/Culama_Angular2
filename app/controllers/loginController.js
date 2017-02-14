@@ -22,9 +22,20 @@ var altairApp;
             };
             scope.vm.registerFormActive = false;
             scope.vm.isloginfail = false;
+            var $formValidate = $('#myLoginForm');
+            $formValidate.parsley()
+                .on('form:validated', function () {
+                scope.$apply();
+            })
+                .on('field:validated', function (parsleyField) {
+                if ($(parsleyField.$element).hasClass('md-input')) {
+                    scope.$apply();
+                }
+            });
         }
         LoginController.prototype.login = function () {
             var _this = this;
+            this.$rootScope.$emit("toggleLoader", true);
             this.lservice.login(this.loginuser).then(function (result) {
                 if (result.data.Username != null) {
                     if (typeof (Storage) !== "undefined") {
@@ -33,6 +44,7 @@ var altairApp;
                     window.location.href = "/";
                 }
                 else {
+                    _this.$rootScope.$emit("toggleLoader", false);
                     _this.scope.vm.isloginfail = true;
                 }
             });

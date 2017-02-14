@@ -9,7 +9,9 @@ angular
         'variables',
          function ($rootScope, $scope, $interval, $timeout, sale_chart_data, user_data, variables) {
 
-
+             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
+                 window.location.href = "#/user_dashboard";
+             }
              // statistics
              $scope.dynamicStats = [
                  {

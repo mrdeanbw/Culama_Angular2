@@ -49,6 +49,7 @@ altairApp
                                     'lazy_uikit',
                                     'lazy_iCheck',
                                     'lazy_selectizeJS',
+                                     'lazy_parsleyjs',
                                     'app/services/loginservice.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
@@ -73,7 +74,11 @@ altairApp
                                 return $ocLazyLoad.load([
                                     'lazy_uikit',
                                     'lazy_iCheck',
+                                    'lazy_parsleyjs',
                                     'app/services/loginservice.js',
+                                    'app/services/CommonService.js',
+                                    'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
                                     'app/controllers/myProfileController.js'
@@ -95,9 +100,13 @@ altairApp
                         deps: [
                             '$ocLazyLoad', function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
-                                    'lazy_uikit',
+                                      'lazy_uikit',
                                     'lazy_iCheck',
+                                    'lazy_parsleyjs',
                                     'app/services/loginservice.js',
+                                    'app/services/CommonService.js',
+                                    'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
                                     'app/controllers/myProfileController.js'

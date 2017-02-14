@@ -1,35 +1,45 @@
 ﻿<div id="page_content">
     <div id="page_content_inner">
-        <div class="md-card user_content uk-width-large-3  -10 ">
-            <div class="uk-form-row">
-                <div class="profile">
-                    <h4>Profile</h4>
+        <form id="form_validation" name="form_validation" class="uk-form-stacked">
+            <div class="md-card user_content uk-width-large-3  -10 ">
+                <div class="uk-form-row">
+                    <div class="profile">
+                        <h4>Profile</h4>
+                    </div>
+                    <div class="user-pic-placeholder">
+                        <img src="../../../assets/img/others/user-pic.jpg" />
+                        <a class="material-icons edit-p">&#xE254;</a>
+                    </div>
+                    <div class="user-details">
+                        <h3>{{ vm.userDetail.FullIdentityName }}</h3>
+                        <p class="margin0">{{ vm.userDetail.Title }}</p>
+                        <p class="margin0">{{ vm.userDetail.Customer.CustomerName }}</p>
+                    </div>
                 </div>
-                <div class="user-pic-placeholder">
-                    <img src="../../../assets/img/others/user-pic.jpg" />
-                    <a class="material-icons edit-p">&#xE254;</a>
+                <div class="uk-form-row">
+                    <label for="login_username">Username</label>
+                    <input class="md-input" type="text" id="login_username" ng-model="vm.userDetail.UserName" required md-input />
                 </div>
-                <div class="user-details">
-                    <h3>{{ vm.fullName }}</h3>
-                    <p class="margin0">{{ vm.title }}</p>
-                    <p class="margin0">{{ vm.companyname }}</p>
+                <div class="uk-form-row">
+                    <label for="login_username">Password</label>
+                    <input class="md-input" type="text" id="login_password" ng-model="login_password" required md-input />
                 </div>
-            </div>
-            <div class="uk-form-row">
-                <label for="login_username">Username</label>
-                <input class="md-input" type="text" id="login_username" ng-model="vm.username" md-input />
-            </div>
-            <div class="uk-form-row">
-                <label for="login_username">Password</label>
-                <input class="md-input" type="text" id="login_password" ng-model="login_password" md-input />
-            </div>
-            <div class="uk-form-row">
-                <label for="login_username">Confirm Password</label>
-                <input class="md-input" type="text" id="login_cnfpassword" ng-model="login_cnfpassword" md-input />
-            </div>
+                <div class="uk-form-row">
+                    <label for="login_username">Confirm Password</label>
+                    <input class="md-input" type="text" id="login_cnfpassword" ng-model="login_cnfpassword" required md-input />
+                </div>
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <button type="submit" ng-click="vm.saveInfo()" ng-disabled="form_validation.$invalid" class="md-btn md-btn-primary md-btn-wave-light" id="saveButton">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 

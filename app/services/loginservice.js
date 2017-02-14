@@ -16,6 +16,13 @@ var altairApp;
         LoginService.prototype.getUserDetailsbyId = function (id) {
             return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetail/' + id, {});
         };
+        LoginService.prototype.getUserDetailsbyPhone = function (phone) {
+            return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetailByPhone/' + phone, {});
+        };
+        LoginService.prototype.saveUserDetail = function (user) {
+            var params = JSON.stringify(user);
+            return this.$http.post('http://127.0.0.1:62028/Web/Security/SaveUser', params, {});
+        };
         return LoginService;
     }());
     LoginService.$inject = ["$http"];

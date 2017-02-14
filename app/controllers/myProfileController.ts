@@ -4,38 +4,59 @@
 module altairApp {
     class MyProfileController {
         lservice: any;
-        static $inject = ["$scope", "$rootScope", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public loginService: LoginService) {
-            
+        cservice: any;
+        public userDetail: UserDetail = new UserDetail();
+        static $inject = ["$scope", "$rootScope", "loginService", "commonService"];
+        constructor(public scope: any, public $rootScope: any, public loginService: LoginService, public commonService: CommonService) {
+
             scope.vm = this;
 
-            scope.vm.selectize_a_options = ["English", "Chinese", "Russian", "French"];
+            scope.vm.selectize_a_options = [];
 
-            scope.vm.selectize_a = "English";
+            scope.vm.IsPhoneUnique = true;
+            scope.vm.IsPhoneUniqueProcess = false;
 
             scope.vm.selectize_a_config = {
                 plugins: {
                     'tooltip': ''
                 },
-                create: false,
+                create: true,
                 maxItems: 1,
-                placeholder: 'Select...'
+                placeholder: 'Select...',
+                valueField: 'Id',
+                labelField: 'Description'
             };
 
-            scope.vm.selectize_b_options = ["English", "Chinese", "Russian", "French"];
+            scope.vm.selectize_b_options = [];
 
-            scope.vm.selectize_b = "Russian";
 
             scope.vm.selectize_b_config = {
                 plugins: {
                     'tooltip': ''
                 },
-                create: false,
+                create: true,
                 maxItems: 1,
-                placeholder: 'Select...'
+                placeholder: 'Select...',
+                valueField: 'Id',
+                labelField: 'Description'
             };
 
+            var $formValidate = $('#form_validation');
+
+            
+            $formValidate.parsley()
+                .on('form:validated', function () {
+                    scope.$apply();
+                })
+                .on('field:validated', function (parsleyField) {
+                    if ($(parsleyField.$element).hasClass('md-input')) {
+                        scope.$apply();
+                    }
+                });
+
             this.lservice = loginService;
+            this.cservice = commonService;
+            this.getLanguages();
             this.getUser(this.$rootScope.LoggedUser.UserId);
 
 
@@ -43,16 +64,61 @@ module altairApp {
         }
 
         getUser(id) {
-            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-                this.scope.vm.fullName = result.data.FullIdentityName.toString();
-                this.scope.vm.login_firstname = result.data.FullIdentityName.toString().split(" ")[0];
-                this.scope.vm.login_lastname = result.data.FullIdentityName.toString().split(" ")[1];
-                this.scope.vm.companyname = result.data.Customer.CustomerName;
-                this.scope.vm.title = "Sr.Web Developer";
-                this.scope.vm.phone = result.data.Phone.toString();
-                this.scope.vm.username = result.data.UserName;
+            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+                this.userDetail = result.data;
             });
         }
+
+        getLanguages() {
+            this.cservice.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                this.scope.vm.selectize_a_options = result.data;
+                this.scope.vm.selectize_b_options = result.data;
+            });
+        }
+
+        checkPhoneUnique() {
+            var $formValidate = $('#form_validation');
+            this.scope.vm.IsPhoneUniqueProcess = true;
+            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+                this.scope.vm.IsPhoneUniqueProcess = false;
+                if (result.data != "") {
+                    if (result.data.UserId !== this.userDetail.UserId) {
+                        this.scope.vm.IsPhoneUnique = false;
+                        document.getElementById("login_phoneno").valid = false;
+
+                    } else {
+                        this.scope.vm.IsPhoneUnique = true;
+                        document.getElementById("login_phoneno").valid = true;
+                    }
+                    
+                } else {
+                    this.scope.vm.IsPhoneUnique = true;
+                    document.getElementById("login_phoneno").valid = true;
+                }
+            });
+        }
+
+        saveInfo() {
+            debugger;
+            if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
+                this.$rootScope.$emit("toggleLoader", true);
+                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+
+                    if (result.data != "") {
+                        this.userDetail = result.data;
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Your information is updated successfully", status: "success" });
+                    } else {
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Something went wrong. Please try again.", status: "danger" });
+                    }
+                    this.$rootScope.$emit("toggleLoader", false);
+                });    
+            }
+            
+        }
+
+
 
 
     }

@@ -22,11 +22,39 @@ angular
                 $scope.logout();
             });
 
+            $rootScope.$on("successnotify", function (events, args) {
+                $scope.showNotification(args.msg, args.status);
+            });
+
+            $rootScope.$on("toggleLoader", function (events, args) {
+                $scope.toggleLoader(args);
+            });
+
+            $scope.showNotification = function (message,status) {
+                $scope.notifymsg = message;
+                $scope.notfifystatus = status;
+                setTimeout(function() {
+                    $("#successnotifybtn").click();
+                }, 500);
+                
+            };
+
             $scope.logout = function () {
                 localStorage.removeItem("loggeduser");
                 $rootScope.isloggedin = false;
                 $rootScope.LoggedUser = null;
                 window.location.href = "#/login";
+            };
+
+            $scope.toggleLoader = function (status) {
+                if (status) {
+                    $rootScope.pageLoading = true;
+                    $rootScope.pageLoaded = false;
+                } else {
+                    $rootScope.pageLoading = false;
+                    $rootScope.pageLoaded = true;
+                }
+
             };
 
         }

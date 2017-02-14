@@ -22,10 +22,23 @@ module altairApp {
 
             scope.vm.registerFormActive = false;
             scope.vm.isloginfail = false;
-            
+
+            var $formValidate = $('#myLoginForm');
+
+            $formValidate.parsley()
+                .on('form:validated', function () {
+                    scope.$apply();
+                })
+                .on('field:validated', function (parsleyField) {
+                    if ($(parsleyField.$element).hasClass('md-input')) {
+                        scope.$apply();
+                    }
+                });
+
         }
 
         login() {
+            this.$rootScope.$emit("toggleLoader", true);
             this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<User>) => {
                 if (result.data.Username != null) {
 
@@ -34,6 +47,7 @@ module altairApp {
                     }
                     window.location.href = "/";
                 } else {
+                    this.$rootScope.$emit("toggleLoader", false);
                     this.scope.vm.isloginfail = true;
                 }
                 

@@ -60,44 +60,50 @@ angular
                 }
             };
 
-            // menu entries
-            $scope.sections = [
-                {
-                    id: 0,
-                    title: 'Dashboard',
-                    icon: '&#xE871;',
-                    submenu: [
-                        {
-                            title: 'Admin Dashboard',
-                            link: 'restricted.dashboard'
-                        },
-                        {
-                            title: 'Customer Dashboard',
-                            link: 'restricted.customeradmindashboard'
-                        },
-                        {
-                            title: 'User Dashboard',
-                            link: 'restricted.userdashboard'
-                        }
-                    ]
-                },
-                {
-                    id: 1,
-                    title: 'Users',
-                    icon: '&#xE87C;',
-                    submenu: [
-                        {
-                            title: 'Manage Users',
-                            link: 'restricted.manageusers'
-                        },
-                        {
-                            title: 'Company Users',
-                            link: 'restricted.companyusers'
-                        }
-                    ]
-                }
-            ]
-
-
+            
+            if ($rootScope.LoggedUser.UserGroupId === 1) {
+                // Administrator menu entries
+                $scope.sections = [
+                   {
+                       id: 0,
+                       title: 'Dashboard',
+                       icon: '&#xE871;',
+                       link: 'restricted.dashboard'
+                   },
+                   {
+                       id: 1,
+                       title: 'Manage Users',
+                       icon: '&#xE87C;',
+                       link: 'restricted.manageusers'
+                   }
+                ];
+            } else if ($rootScope.LoggedUser.UserGroupId === 2) {
+                // CustomerAdmin menu entries
+                $scope.sections = [
+                         {
+                             id: 0,
+                             title: 'Dashboard',
+                             icon: '&#xE871;',
+                             link: 'restricted.customeradmindashboard'
+                         },
+                         {
+                             id: 1,
+                             title: 'Users',
+                             icon: '&#xE87C;',
+                             link: 'restricted.companyusers'
+                         }
+                ];
+            }
+            else if ($rootScope.LoggedUser.UserGroupId === 3) {
+                // User menu entries
+                $scope.sections = [
+                     {
+                         id: 0,
+                         title: 'Dashboard',
+                         icon: '&#xE871;',
+                         link: 'restricted.userdashboard'
+                     }
+                ];
+            }
         }
     ]);

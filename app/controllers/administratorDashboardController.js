@@ -6,6 +6,14 @@ var AdministratorDashboardController = (function () {
         this.$rootScope = $rootScope;
         this.$interval = $interval;
         this.$timeout = $timeout;
+        if ($rootScope.LoggedUser.UserGroupId !== 1) {
+            if ($rootScope.LoggedUser.UserGroupId === 2) {
+                window.location.href = "#/customer_admin_dashboard";
+            }
+            else if ($rootScope.LoggedUser.UserGroupId === 3) {
+                window.location.href = "#/user_dashboard";
+            }
+        }
         scope.vm = this;
         // statistics
         scope.vm.dynamicStats = [

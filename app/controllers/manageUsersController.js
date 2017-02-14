@@ -2,8 +2,12 @@
 angular
     .module('altairApp')
   .controller('manageusersCtrl',
-        function ($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function ($compile, $scope,$rootScope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
+
+            if ($rootScope.LoggedUser.UserGroupId !== 1) {
+                window.location.href = "#/error";
+            }
 
             vm.selectize_c_options = ["Admin", "Customer Admin", "User"];
 
