@@ -10,15 +10,23 @@ var altairApp;
             this.loginuser = new altairApp.LoginUser();
             scope.vm = this;
             this.lservice = loginService;
-            scope.vm.selectize_a_options = ["English", "Chinese", "Russian", "French"];
-            scope.vm.selectize_a = "English";
+            scope.vm.selectize_a_options = [
+                { id: 1, title: 'English', value: 'EN' },
+                { id: 2, title: 'Hindi', value: 'HI' }
+            ];
             scope.vm.selectize_a_config = {
                 plugins: {
                     'tooltip': ''
                 },
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select...'
+                placeholder: 'Select...',
+                valueField: 'value',
+                labelField: 'title',
+                onChange: function (value) {
+                    // Nothing happens when typing into input
+                    this.changeLanguage();
+                }
             };
             scope.vm.registerFormActive = false;
             scope.vm.isloginfail = false;
@@ -48,6 +56,9 @@ var altairApp;
                     _this.scope.vm.isloginfail = true;
                 }
             });
+        };
+        LoginController.prototype.changeLanguage = function () {
+            this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);
         };
         return LoginController;
     }());

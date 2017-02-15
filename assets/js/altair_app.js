@@ -2148,6 +2148,25 @@ altairApp
             }
         }
     ])
+// add width/height properities to Image
+    .directive('mdLanguage', [
+        '$rootScope',
+         '$timeout',
+        'utils',
+        function ($rootScope, $timeout, utils) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+                    elem.on('load', function () {
+                        debugger;
+                        var innerText = $rootScope.$emit("getTranslation",
+                            { elementId: $(elem).attr("id"), targetPage: $(elem).parents("div.main_page").attr("id") });
+                        $(elem).text(innerText);
+                    });
+                }
+            };
+        }
+    ])
 ;
 altairApp
     .filter('multiSelectFilter', function () {

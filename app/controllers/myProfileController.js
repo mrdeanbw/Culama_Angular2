@@ -86,7 +86,6 @@ var altairApp;
         };
         MyProfileController.prototype.saveInfo = function () {
             var _this = this;
-            debugger;
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
                 this.lservice.saveUserDetail(this.userDetail).then(function (result) {

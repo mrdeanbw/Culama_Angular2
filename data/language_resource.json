@@ -1,0 +1,50 @@
+﻿{
+  "loginpage": [
+    {
+      "id": "lbl_username",
+      "EN": "Username or Phone Number",
+      "HI": "उपयोगकर्ता नाम या फोन नंबर"
+    },
+    {
+      "id": "lbl_password",
+      "EN": "Password",
+      "HI": "पासवर्ड"
+    },
+    {
+      "id": "lbl_lefthead",
+      "EN": "Login using your username or phone number and the given password",
+      "HI": "अपने उपयोगकर्ता नाम या फोन नंबर और पासवर्ड का उपयोग लॉगिन दिया"
+    },
+    {
+      "id": "lbl_righthead",
+      "EN": "Login by scanning this code in our mobile app",
+      "HI": "हमारे मोबाइल एप्लिकेशन में इस कोड को स्कैन करके लॉगिन"
+    },
+    {
+      "id": "loginButton",
+      "EN": "LOGIN",
+      "HI": "लॉग इन करें"
+    },
+    {
+      "id": "login_help_show",
+      "EN": "I Forgot",
+      "HI": "मैं भूल गया"
+    },
+    {
+      "id": "lbl-error",
+      "EN": "Your username and password is incorrect.",
+      "HI": "आपका उपयोक्तानाम और पासवर्ड गलत है।"
+    },
+    {
+      "id": "login_input_username",
+      "EN": "Please insert username",
+      "HI": "उपयोगकर्ता नाम डालें"
+    },
+    {
+      "id": "login_input_password",
+      "EN": "Please insert password",
+      "HI": "पासवर्ड डालें"
+    }
+
+  ]
+}

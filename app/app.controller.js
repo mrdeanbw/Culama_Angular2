@@ -6,10 +6,10 @@
 angular
     .module('altairApp')
     .controller('mainCtrl', ['$rootScope',
-        '$scope',
-        function($rootScope, $scope) {
+        '$scope', 'commonService',
+        function ($rootScope, $scope, commonService) {
 
-            var result =  localStorage.getItem("loggeduser");
+            var result = localStorage.getItem("loggeduser");
             $rootScope.LoggedUser = JSON.parse(result);
             if ($rootScope.LoggedUser != null && $rootScope.LoggedUser != undefined) {
                 $rootScope.isloggedin = true;
@@ -26,17 +26,23 @@ angular
                 $scope.showNotification(args.msg, args.status);
             });
 
+            $rootScope.$on("changeLanguage", function (events, args) {
+                $scope.setLanguage(args);
+                window.location.reload();
+            });
+
+
             $rootScope.$on("toggleLoader", function (events, args) {
                 $scope.toggleLoader(args);
             });
 
-            $scope.showNotification = function (message,status) {
+            $scope.showNotification = function (message, status) {
                 $scope.notifymsg = message;
                 $scope.notfifystatus = status;
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#successnotifybtn").click();
                 }, 500);
-                
+
             };
 
             $scope.logout = function () {
@@ -56,6 +62,10 @@ angular
                 }
 
             };
+
+            $scope.setLanguage = function(lan) {
+                commonService.setLanguage(lan);
+            }
 
         }
     ]);

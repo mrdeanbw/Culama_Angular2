@@ -5,9 +5,9 @@ module altairApp {
     class MyProfileController {
         lservice: any;
         cservice: any;
-        public userDetail: UserDetail = new UserDetail();
+        public userDetail: altairApp.UserDetail = new altairApp.UserDetail();
         static $inject = ["$scope", "$rootScope", "loginService", "commonService"];
-        constructor(public scope: any, public $rootScope: any, public loginService: LoginService, public commonService: CommonService) {
+        constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService, public commonService: altairApp.CommonService) {
 
             scope.vm = this;
 
@@ -64,7 +64,7 @@ module altairApp {
         }
 
         getUser(id) {
-            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.userDetail = result.data;
             });
         }
@@ -79,7 +79,7 @@ module altairApp {
         checkPhoneUnique() {
             var $formValidate = $('#form_validation');
             this.scope.vm.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.scope.vm.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
                     if (result.data.UserId !== this.userDetail.UserId) {
@@ -99,10 +99,9 @@ module altairApp {
         }
 
         saveInfo() {
-            debugger;
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<UserDetail>) => {
+                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
 
                     if (result.data != "") {
                         this.userDetail = result.data;
@@ -117,9 +116,6 @@ module altairApp {
             }
             
         }
-
-
-
 
     }
 

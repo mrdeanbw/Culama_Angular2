@@ -3,13 +3,15 @@
 module altairApp {
     class LoginController {
         lservice: any;
-        public loginuser: LoginUser = new LoginUser();
-        static $inject = ["$scope", "$rootScope","loginService"];
-        constructor(public scope: any,public $rootScope: any,public loginService: LoginService) {
+        public loginuser: altairApp.LoginUser = new altairApp.LoginUser();
+        static $inject = ["$scope", "$rootScope", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService) {
             scope.vm = this;
             this.lservice = loginService;
-            scope.vm.selectize_a_options = ["English", "Chinese", "Russian", "French"];
-            scope.vm.selectize_a = "English";
+            scope.vm.selectize_a_options = [
+                { id: 1, title: 'English', value: 'EN' },
+                { id: 2, title: 'Hindi', value: 'HI' }
+            ];
 
             scope.vm.selectize_a_config = {
                 plugins: {
@@ -17,7 +19,13 @@ module altairApp {
                 },
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select...'
+                placeholder: 'Select...',
+                valueField: 'value',
+                labelField: 'title',
+                onChange: function (value) {
+                    // Nothing happens when typing into input
+                    this.changeLanguage();
+                }
             };
 
             scope.vm.registerFormActive = false;
@@ -39,7 +47,7 @@ module altairApp {
 
         login() {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<User>) => {
+            this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.User>) => {
                 if (result.data.Username != null) {
 
                     if (typeof (Storage) !== "undefined") {
@@ -50,11 +58,15 @@ module altairApp {
                     this.$rootScope.$emit("toggleLoader", false);
                     this.scope.vm.isloginfail = true;
                 }
-                
+
             });
         }
 
-       
+        changeLanguage() {
+            this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a );
+        }
+
+
     }
 
     angular.module("altairApp")
