@@ -27,16 +27,10 @@ angular
             });
 
             // language switcher
-            $scope.langSwitcherModel = 'gb';
+            $scope.langSwitcherModel = localStorage.getItem("localelanguage");
             var langData = $scope.langSwitcherOptions = [
-                { id: 1, title: 'English', value: 'gb' },
-                { id: 2, title: 'French', value: 'fr' },
-                { id: 3, title: 'Chinese', value: 'cn' },
-                { id: 4, title: 'Dutch', value: 'nl' },
-                { id: 5, title: 'Italian', value: 'it' },
-                { id: 6, title: 'Spanish', value: 'es' },
-                { id: 7, title: 'German', value: 'de' },
-                { id: 8, title: 'Polish', value: 'pl' }
+                { id: 1, title: 'English', value: 'US' },
+                { id: 2, title: 'Hindi', value: 'IN' }
             ];
             $scope.langSwitcherConfig = {
                 maxItems: 1,
@@ -57,6 +51,9 @@ angular
                 create: false,
                 onInitialize: function (selectize) {
                     $('#lang_switcher').next().children('.selectize-input').find('input').attr('readonly', true);
+                },
+                onChange: function (value) {
+                    $rootScope.$emit("changeLanguage", value);
                 }
             };
 

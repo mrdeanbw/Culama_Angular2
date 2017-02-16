@@ -2,49 +2,175 @@
   "loginpage": [
     {
       "id": "lbl_username",
-      "EN": "Username or Phone Number",
-      "HI": "उपयोगकर्ता नाम या फोन नंबर"
+      "US": "Username or Phone Number",
+      "IN": "उपयोगकर्ता नाम या फोन नंबर"
     },
     {
       "id": "lbl_password",
-      "EN": "Password",
-      "HI": "पासवर्ड"
+      "US": "Password",
+      "IN": "पासवर्ड"
     },
     {
       "id": "lbl_lefthead",
-      "EN": "Login using your username or phone number and the given password",
-      "HI": "अपने उपयोगकर्ता नाम या फोन नंबर और पासवर्ड का उपयोग लॉगिन दिया"
+      "US": "Login using your username or phone number and the given password",
+      "IN": "अपने उपयोगकर्ता नाम या फोन नंबर और पासवर्ड का उपयोग लॉगिन दिया"
     },
     {
       "id": "lbl_righthead",
-      "EN": "Login by scanning this code in our mobile app",
-      "HI": "हमारे मोबाइल एप्लिकेशन में इस कोड को स्कैन करके लॉगिन"
+      "US": "Login by scanning this code in our mobile app",
+      "IN": "हमारे मोबाइल एप्लिकेशन में इस कोड को स्कैन करके लॉगिन"
     },
     {
       "id": "loginButton",
-      "EN": "LOGIN",
-      "HI": "लॉग इन करें"
+      "US": "LOGIN",
+      "IN": "लॉग इन करें"
     },
     {
       "id": "login_help_show",
-      "EN": "I Forgot",
-      "HI": "मैं भूल गया"
+      "US": "I Forgot",
+      "IN": "मैं भूल गया"
     },
     {
       "id": "lbl-error",
-      "EN": "Your username and password is incorrect.",
-      "HI": "आपका उपयोक्तानाम और पासवर्ड गलत है।"
+      "US": "Your username and password is incorrect.",
+      "IN": "आपका उपयोक्तानाम और पासवर्ड गलत है।"
     },
     {
       "id": "login_input_username",
-      "EN": "Please insert username",
-      "HI": "उपयोगकर्ता नाम डालें"
+      "US": "Please insert username",
+      "IN": "उपयोगकर्ता नाम डालें"
     },
     {
       "id": "login_input_password",
-      "EN": "Please insert password",
-      "HI": "पासवर्ड डालें"
+      "US": "Please insert password",
+      "IN": "पासवर्ड डालें"
     }
 
+  ],
+  "mainheader": [
+    {
+      "id": "header_myprofile_a",
+      "US": "My Profile",
+      "IN": "मेरी प्रोफाइल"
+    },
+    {
+      "id": "header_myaccount_a",
+      "US": "Account",
+      "IN": "खाता"
+    },
+    {
+      "id": "header_logout_a",
+      "US": "Logout",
+      "IN": "लोग आउट"
+    }
+  ],
+  "myprofilepage": [
+    {
+      "id": "myprofile_h4_1",
+      "US": "Profile",
+      "IN": "प्रोफाइल"
+    },
+    {
+      "id": "lbl_myprofile_firstname",
+      "US": "First Name",
+      "IN": "पहला नाम"
+    },
+    {
+      "id": "lbl_myprofile_lastname",
+      "US": "Last Name",
+      "IN": "अंतिम नाम"
+    },
+    {
+      "id": "lbl_myprofile_compnayname",
+      "US": "Company",
+      "IN": "संगठन"
+    },
+    {
+      "id": "lbl_myprofile_title",
+      "US": "Title",
+      "IN": "ख़िताब"
+    },
+    {
+      "id": "lbl_myprofile_phone",
+      "US": "Phone Number",
+      "IN": "फोन नंबर"
+    },
+    {
+      "id": "lbl_myprofile_phoneunquieerror",
+      "US": "This phone number is already assigned.",
+      "IN": "यह फोन नंबर पहले से ही सौंपा है।"
+    },
+    {
+      "id": "lbl_myprofile_mainlan",
+      "US": "Main Language",
+      "IN": "मुख्य भाषा"
+    },
+    {
+      "id": "lbl_myprofile_otherlan",
+      "US": "Other Language",
+      "IN": "दूसरी भाषा"
+    },
+    {
+      "id": "btn_myprofile_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "myprofile_input_firstname",
+      "US": "Please insert firstname",
+      "IN": "पहला नाम डालें"
+    },
+    {
+      "id": "myprofile_input_lastname",
+      "US": "Please insert lastname",
+      "IN": "अंतिम नाम डालें"
+    },
+    {
+      "id": "myprofile_input_phoneno",
+      "US": "Please insert phoneno",
+      "IN": "कोई फोन डालें"
+    }
+  ],
+  "myaccountpage": [
+    {
+      "id": "myaccount_h4_1",
+      "US": "Profile",
+      "IN": "प्रोफाइल"
+    },
+    {
+      "id": "lbl_myaccount_username",
+      "US": "Username",
+      "IN": "उपयोगकर्ता नाम"
+    },
+    {
+      "id": "myaccount_input_username",
+      "US": "Please insert username",
+      "IN": "उपयोगकर्ता नाम डालें"
+    },
+    {
+      "id": "lbl_myaccount_password",
+      "US": "Password",
+      "IN": "पासवर्ड"
+    },
+    {
+      "id": "myaccount_input_password",
+      "US": "Please insert password",
+      "IN": "पासवर्ड डालें"
+    },
+    {
+      "id": "lbl_myaccount_confirmpassword",
+      "US": "Confirm Password",
+      "IN": "पासवर्ड की पुष्टि कीजिये"
+    },
+    {
+      "id": "myaccount_input_cpassword",
+      "US": "Please insert confirm password",
+      "IN": "पासवर्ड की पुष्टि डालें"
+    },
+    {
+     "id": "btn_myaccount_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    }
   ]
 }

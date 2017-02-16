@@ -11,9 +11,11 @@ var altairApp;
             scope.vm = this;
             this.lservice = loginService;
             scope.vm.selectize_a_options = [
-                { id: 1, title: 'English', value: 'EN' },
-                { id: 2, title: 'Hindi', value: 'HI' }
+                { id: 1, title: 'English', value: 'US' },
+                { id: 2, title: 'Hindi', value: 'IN' }
             ];
+            //scope.vm.initSelect = 0;
+            scope.vm.selectize_a = localStorage.getItem("localelanguage");
             scope.vm.selectize_a_config = {
                 plugins: {
                     'tooltip': ''
@@ -23,6 +25,9 @@ var altairApp;
                 placeholder: 'Select...',
                 valueField: 'value',
                 labelField: 'title',
+                onInitialize: function (selectize) {
+                    // receives the selectize object as an argument
+                },
                 onChange: function (value) {
                     // Nothing happens when typing into input
                     this.changeLanguage();
@@ -59,6 +64,10 @@ var altairApp;
         };
         LoginController.prototype.changeLanguage = function () {
             this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);
+            //if (this.scope.vm.initSelect > 0) {
+            //    alert("gi");
+            //    this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);    
+            //}
         };
         return LoginController;
     }());

@@ -8,6 +8,9 @@ angular
     .controller('mainCtrl', ['$rootScope',
         '$scope', 'commonService',
         function ($rootScope, $scope, commonService) {
+            if (localStorage.getItem("localelanguage") == undefined || localStorage.getItem("localelanguage") === "") {
+                localStorage.setItem("localelanguage", "US");
+            }
 
             var result = localStorage.getItem("loggeduser");
             $rootScope.LoggedUser = JSON.parse(result);
@@ -27,8 +30,12 @@ angular
             });
 
             $rootScope.$on("changeLanguage", function (events, args) {
-                $scope.setLanguage(args);
-                window.location.reload();
+                if (args !== "") {
+                    if (localStorage.getItem("localelanguage") !== args) {
+                        $scope.setLanguage(args);
+                        window.location.reload();
+                    }
+                }
             });
 
 
