@@ -14,7 +14,7 @@
 
                         <div class="user-details">
                             <h3>{{ vm.userDetail.FullIdentityName }}</h3>
-                            <p class="margin0">{{ vm.userDetail.Title }}</p>
+                            <p class="margin0">{{ vm.title }}</p>
                             <p class="margin0">{{ vm.userDetail.Customer.CustomerName }}</p>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <div class="uk-width-medium-1-2">
                                 <div id="lbl_myprofile_title" md-language>Title</div>
                                 <div class="uk-form-row">
-                                    <input type="text" class="md-input" disabled ng-model="vm.userDetail.Title" md-input />
+                                    <input type="text" class="md-input" disabled ng-model="vm.title" md-input />
                                 </div>
                             </div>
                         </div>
@@ -50,10 +50,10 @@
                         <div class="uk-width-large-2-4 uk-width-medium-1-2">
                             <div class="uk-input-group">
                                 <div class="md-input-wrapper">
-                                    <label id="lbl_myprofile_phone"  for="login_lastname" md-language>Phone Number</label>
+                                    <label id="lbl_myprofile_phone" for="login_lastname" md-language>Phone Number</label>
                                     <input class="md-input" type="text" id="myprofile_input_phoneno" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !vm.IsPhoneUnique}" name="login_phoneno" required ng-model="vm.userDetail.Phone" ng-change="vm.checkPhoneUnique()" data-parsley-type="digits" md-input />
                                     <div class="parsley-errors-list filled" ng-show="!vm.IsPhoneUnique">
-                                        <span class="parsley-required" id="lbl_myprofile_phoneunquieerror" md-language >This phone number is already assigned.</span>
+                                        <span class="parsley-required" id="lbl_myprofile_phoneunquieerror" md-language>This phone number is already assigned.</span>
                                     </div>
                                 </div>
 

@@ -26,7 +26,7 @@ altairApp
         }
     ])
     // set localization language 
-    .directive('mdLanguage', [
+     .directive('mdLanguage', [
         '$rootScope',
          '$timeout',
         'commonService',
@@ -34,7 +34,7 @@ altairApp
             return {
                 restrict: 'A',
                 link: function (scope, elem, attrs) {
-                      var currentLanguage = localStorage.getItem("localelanguage");
+                    var currentLanguage = localStorage.getItem("localelanguage");
                     if ($rootScope.lanresourceobj != undefined) {
                         var targetobj = $rootScope.lanresourceobj[$(elem).parents("div.main_page").attr("id")];
                         var findobj;
@@ -53,7 +53,7 @@ altairApp
                         }
                     } else {
                         commonService.getTranslation($(elem).attr("id"), $(elem).parents("div.main_page").attr("id")).then(function (result) {
-                          
+
                             $rootScope.lanresourceobj = result.data;
                             var targetobj = $rootScope.lanresourceobj[$(elem).parents("div.main_page").attr("id")];
                             var findobj;
@@ -72,11 +72,11 @@ altairApp
                             }
                         });
                     }
-                    
+
                 }
             };
         }
-    ])
+     ])
     // add width/height properities to Image
     .directive('addImageProp', [
         '$timeout',

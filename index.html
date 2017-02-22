@@ -79,11 +79,11 @@
 }" ng-controller="mainCtrl">
     <div id="page_preloader" ng-hide="hidePreloader"><img src="assets/img/page_preloader.gif" alt="" /></div>
 
-<div ui-view id="main_view" ng-class="{'uk-height-1-1': page_full_height }"></div>
-    
+    <div ui-view id="main_view" ng-class="{'uk-height-1-1': page_full_height }"></div>
+
     <button id="successnotifybtn" class="md-btn" ng-show="false" message="<a href='#' class='notify-action'>Clear</a> {{ notifymsg }}" status="{{ notfifystatus }}" position="bottom-center" uk-notification></button>
 
-<!-- google web fonts -->
+    <!-- google web fonts -->
     <script>
         WebFontConfig = {
             google: {

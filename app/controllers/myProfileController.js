@@ -10,7 +10,9 @@ var altairApp;
             this.commonService = commonService;
             this.userDetail = new altairApp.UserDetail();
             scope.vm = this;
+            scope.vm.title = "";
             scope.vm.selectize_a_options = [];
+            scope.vm.CurrentLanguage = localStorage.getItem("localelanguage");
             scope.vm.IsPhoneUnique = true;
             scope.vm.IsPhoneUniqueProcess = false;
             scope.vm.selectize_a_config = {
@@ -53,6 +55,20 @@ var altairApp;
             var _this = this;
             this.lservice.getUserDetailsbyId(id.toString()).then(function (result) {
                 _this.userDetail = result.data;
+                var CurrentScope = _this.scope.vm;
+                if (_this.userDetail != undefined) {
+                    if (_this.userDetail.TitleTranslation != undefined) {
+                        _this.scope.vm.title = _this.userDetail.TitleTranslation.DefaultValue;
+                        var Entries = _this.userDetail.TitleTranslation.Entries;
+                        if (Entries.length > 0) {
+                            $.each(Entries, function (index) {
+                                if (this.Language.LookupCode === CurrentScope.CurrentLanguage) {
+                                    CurrentScope.title = this.Value;
+                                }
+                            });
+                        }
+                    }
+                }
             });
         };
         MyProfileController.prototype.getLanguages = function () {

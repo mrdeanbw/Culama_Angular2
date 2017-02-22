@@ -1,21 +1,19 @@
-/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
+﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var ManageUsersController = (function () {
-    function ManageUsersController(scope, $rootScope, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService) {
-        this.scope = scope;
-        this.$rootScope = $rootScope;
-        this.$compile = $compile;
-        this.$timeout = $timeout;
-        this.$resource = $resource;
-        this.DTOptionsBuilder = DTOptionsBuilder;
-        this.DTColumnDefBuilder = DTColumnDefBuilder;
-        this.commonService = commonService;
+class ManageUsersController {
+    cservice: any;
+    static $inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService"];
+    constructor(public scope: any, public $rootScope: any, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: altairApp.CommonService ) {
+
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
         scope.vm = this;
+
         scope.vm.selectize_c_options = ["Admin", "Customer Admin", "User"];
+
         scope.vm.selectize_c = "Admin";
+
         scope.vm.selectize_c_config = {
             plugins: {
                 'tooltip': ''
@@ -24,7 +22,10 @@ var ManageUsersController = (function () {
             maxItems: 1,
             placeholder: 'Select...'
         };
+
+
         scope.vm.selectize_a_options = [];
+
         scope.vm.selectize_a_config = {
             plugins: {
                 'tooltip': ''
@@ -35,7 +36,9 @@ var ManageUsersController = (function () {
             valueField: 'Id',
             labelField: 'Description'
         };
+
         scope.vm.selectize_b_options = [];
+
         scope.vm.selectize_b_config = {
             plugins: {
                 'tooltip': ''
@@ -46,15 +49,16 @@ var ManageUsersController = (function () {
             valueField: 'Id',
             labelField: 'Description'
         };
+
         scope.vm.dt_data = [];
         scope.vm.dtOptions = DTOptionsBuilder
             .newOptions()
             .withDisplayLength(10)
             .withOption('initComplete', function () {
-            $timeout(function () {
-                $compile($('.dt-uikit .md-input'))(scope);
+                $timeout(function() {
+                    $compile($('.dt-uikit .md-input'))(scope);
+                });
             });
-        });
         scope.vm.dtColumnDefs = [
             DTColumnDefBuilder.newColumnDef(0),
             DTColumnDefBuilder.newColumnDef(1),
@@ -67,20 +71,20 @@ var ManageUsersController = (function () {
             .query()
             .$promise
             .then(function (dt_data) {
-            scope.vm.dt_data = dt_data;
-        });
+                scope.vm.dt_data = dt_data;
+            });
         this.cservice = commonService;
         this.getLanguages();
+       
     }
-    ManageUsersController.prototype.getLanguages = function () {
-        var _this = this;
-        this.cservice.getLanguages().then(function (result) {
-            _this.scope.vm.selectize_a_options = result.data;
-            _this.scope.vm.selectize_b_options = result.data;
+
+    getLanguages() {
+        this.cservice.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.scope.vm.selectize_a_options = result.data;
+            this.scope.vm.selectize_b_options = result.data;
         });
-    };
-    return ManageUsersController;
-}());
-ManageUsersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService"];
+    }
+}
+
 angular.module("altairApp")
     .controller("manageUsersController", ManageUsersController);

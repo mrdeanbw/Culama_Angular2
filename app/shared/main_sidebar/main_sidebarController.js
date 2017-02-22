@@ -3,9 +3,8 @@ angular
     .controller('main_sidebarCtrl', [
         '$timeout',
         '$scope',
-        '$rootScope',
-        function ($timeout, $scope, $rootScope) {
-
+        '$rootScope', '$controller',
+        function ($timeout, $scope, $rootScope, $controller) {
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 $timeout(function () {
                     if (!$rootScope.miniSidebarActive) {

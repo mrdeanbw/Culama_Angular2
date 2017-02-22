@@ -70,7 +70,7 @@ angular
 
             };
 
-            $scope.setLanguage = function(lan) {
+            $scope.setLanguage = function (lan) {
                 commonService.setLanguage(lan);
             }
 

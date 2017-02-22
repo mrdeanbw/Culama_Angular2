@@ -294,7 +294,7 @@ altairApp
                 {
                     url: "/manageusers",
                     templateUrl: 'app/views/account/manageUsers.html',
-                    controller: 'manageusersCtrl',
+                    controller: 'manageUsersController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function($ocLazyLoad) {
@@ -317,7 +317,7 @@ altairApp
                 {
                     url: "/create_users",
                     templateUrl: 'app/views/account/createUserView.html',
-                    controller: 'manageusersCtrl',
+                    controller: 'manageUsersController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function($ocLazyLoad) {

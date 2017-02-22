@@ -1,11 +1,32 @@
 ﻿module altairApp {
+
+    export class Language {
+        public Id: number;
+        public Abbreviation: string;
+        public Description: string;
+        public LookupCode: string;
+    }
+
+    export class TranslationEntry {
+        public Id: number;
+        public Value: string;
+        public Language: Language;
+    }
+
+    export class Translation {
+        public Id: number;
+        public DefaultValue: string;
+        public Entries: any;
+    }
+
     export class UserDetail {
         public UserId: number;
         public FullIdentityName: string;
         public FirstName: string;
         public LastName: string;
-        public Customer: Customer;
-        public Title: string;
+        public Customer: altairApp.Customer;
+        public TitleTranslationId: number;
+        public TitleTranslation: Translation;
         public Phone: string;
         public UserName: string;
         public IsActive: boolean;  

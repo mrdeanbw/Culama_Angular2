@@ -68,12 +68,12 @@ module altairApp {
         }
 
         changeLanguage() {
-            this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);    
+            this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);
             //if (this.scope.vm.initSelect > 0) {
             //    alert("gi");
             //    this.$rootScope.$emit("changeLanguage", this.scope.vm.selectize_a);    
             //}
-            
+
         }
 
 
@@ -81,5 +81,7 @@ module altairApp {
 
     angular.module("altairApp")
         .controller("loginController", LoginController);
+
+  
 }
 

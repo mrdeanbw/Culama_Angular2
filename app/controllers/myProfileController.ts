@@ -10,8 +10,10 @@ module altairApp {
         constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService, public commonService: altairApp.CommonService) {
 
             scope.vm = this;
-
+            scope.vm.title = "";
             scope.vm.selectize_a_options = [];
+
+            scope.vm.CurrentLanguage = localStorage.getItem("localelanguage");
 
             scope.vm.IsPhoneUnique = true;
             scope.vm.IsPhoneUniqueProcess = false;
@@ -66,8 +68,24 @@ module altairApp {
         getUser(id) {
             this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.userDetail = result.data;
+                var CurrentScope = this.scope.vm;
+                if (this.userDetail != undefined) {
+                    if (this.userDetail.TitleTranslation != undefined) {
+                        this.scope.vm.title = this.userDetail.TitleTranslation.DefaultValue;
+                        var Entries = this.userDetail.TitleTranslation.Entries;
+                        if (Entries.length > 0) {
+                            $.each(Entries,
+                                function (index) {
+                                    if (this.Language.LookupCode === CurrentScope.CurrentLanguage) {
+                                        CurrentScope.title = this.Value;
+                                    }
+                                });
+                        }
+                    }
+                }
             });
         }
+
 
         getLanguages() {
             this.cservice.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
@@ -116,9 +134,10 @@ module altairApp {
             }
             
         }
-
+       
     }
 
     angular.module("altairApp")
         .controller("myProfileController", MyProfileController);
+
 }
