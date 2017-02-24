@@ -265,14 +265,15 @@ altairApp
                 {
                     url: "/companyusers",
                     templateUrl: 'app/views/account/companyUsers.html',
-                    controller: 'companyusersCtrl',
+                    controller: 'companyUsersController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
-                                        'app/controllers/companyUsersController.js'
+                                         'app/services/companyService.js',
+                                        'app/controllers/companyUsers.js'
                                     ],
                                     { serie: true });
                             }

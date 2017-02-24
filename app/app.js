@@ -18,6 +18,10 @@ altairApp.constant('variables', {
     bez_easing_swiftOut: $.bez([ 0.4,0,0.2,1 ])
 });
 
+altairApp.constant('appConfig', {
+    domain: 'http://127.0.0.1:62028'
+});
+
 altairApp.config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',

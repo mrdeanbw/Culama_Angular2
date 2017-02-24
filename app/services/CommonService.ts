@@ -5,19 +5,23 @@ module altairApp {
 
     export class CommonService {
 
-        static $inject = ["$http"];
-        constructor(private $http: ng.IHttpService) {
+        static $inject = ["$http", "appConfig"];
+        constructor(private $http: ng.IHttpService, public appConfig: any) {
 
         }
 
 
         getLanguages(): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
-            return this.$http.get('http://127.0.0.1:62028/Web/GetLanguages');
+            return this.$http.get(this.appConfig.domain + '/Web/GetLanguages');
         }
 
         setLanguage(language) {
             localStorage.setItem("localelanguage", language);
 
+        }
+
+        getLanguage() {
+            return localStorage.getItem("localelanguage");
         }
 
         getTranslation(elemid, targetPage): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {

@@ -6,26 +6,27 @@ var altairApp;
     //    check(address: string): ng.IPromise<ng.IHttpPromiseCallbackArg<BreachedAccount[]>>;
     //}
     var LoginService = (function () {
-        function LoginService($http) {
+        function LoginService($http, appConfig) {
             this.$http = $http;
+            this.appConfig = appConfig;
         }
         LoginService.prototype.login = function (loginuser) {
             var params = JSON.stringify(loginuser);
-            return this.$http.put('http://127.0.0.1:62028/Web/Security/CheckUser', params, {});
+            return this.$http.put(this.appConfig.domain + '/Web/Security/CheckUser', params, {});
         };
         LoginService.prototype.getUserDetailsbyId = function (id) {
-            return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetail/' + id, {});
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetail/' + id, {});
         };
         LoginService.prototype.getUserDetailsbyPhone = function (phone) {
-            return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetailByPhone/' + phone, {});
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetailByPhone/' + phone, {});
         };
         LoginService.prototype.saveUserDetail = function (user) {
             var params = JSON.stringify(user);
-            return this.$http.post('http://127.0.0.1:62028/Web/Security/SaveUser', params, {});
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveUser', params, {});
         };
         return LoginService;
     }());
-    LoginService.$inject = ["$http"];
+    LoginService.$inject = ["$http", "appConfig"];
     altairApp.LoginService = LoginService;
     angular
         .module("altairApp")

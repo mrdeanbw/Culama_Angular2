@@ -8,35 +8,35 @@ module altairApp {
 
     export class LoginService {
 
-        static $inject = ["$http"];
-        constructor(private $http: ng.IHttpService) {
+        static $inject = ["$http", "appConfig"];
+        constructor(private $http: ng.IHttpService, public appConfig: any) {
 
         }
 
 
-        login(loginuser: LoginUser): ng.IPromise<ng.IHttpPromiseCallbackArg<User>> {
+        login(loginuser: altairApp.LoginUser): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.User>> {
             var params = JSON.stringify(loginuser);
-            return this.$http.put('http://127.0.0.1:62028/Web/Security/CheckUser', params, {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/CheckUser', params, {
             });
         }
 
-        getUserDetailsbyId(id:string): ng.IPromise<ng.IHttpPromiseCallbackArg<UserDetail>> {
-            return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetail/' + id, {
+        getUserDetailsbyId(id: string): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetail/' + id, {
             });
         }
 
-        getUserDetailsbyPhone(phone: string): ng.IPromise<ng.IHttpPromiseCallbackArg<UserDetail>> {
-            return this.$http.get('http://127.0.0.1:62028/Web/Security/GetUserDetailByPhone/' + phone, {
+        getUserDetailsbyPhone(phone: string): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetailByPhone/' + phone, {
             });
         }
 
 
-        saveUserDetail(user: UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<UserDetail>> {
+        saveUserDetail(user: altairApp.UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
             var params = JSON.stringify(user);
-            return this.$http.post('http://127.0.0.1:62028/Web/Security/SaveUser', params, {
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveUser', params, {
             });
         }
-        
+
 
     }
 

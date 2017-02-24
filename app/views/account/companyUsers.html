@@ -1,126 +1,129 @@
 ﻿<div id="page_content">
     <div id="page_content_inner">
-        <div class="uk-position-relative">
-            <h3 class="heading_b uk-margin-bottom">Compnay X - Users</h3>
-            <div class="view-control">
-                <a data-uk-tooltip title="Card View" ng-click="changeView('card')"><i class="material-icons " ng-class="{'active':cardview === true}">view_module</i></a>
-                <a data-uk-tooltip title="List View" ng-click="changeView('list')"><i class="material-icons" ng-class="{'active':cardview === false}">view_list</i></a>                
+        <div id="companyUserpage" class="main_page">
+            <div class="uk-position-relative">
+                <h3 class="heading_b uk-margin-bottom">{{ CompnayName }} - <span id="cuser_span_1" md-language>Users</span></h3>
+                <div class="view-control">
+                    <a data-uk-tooltip title="Card View" ng-click="changeView('card');"><i class="material-icons " ng-class="{'active':cardview === true}">view_module</i></a>
+                    <a data-uk-tooltip title="List View" ng-click="changeView('list');"><i class="material-icons" ng-class="{'active':cardview === false}">view_list</i></a>
+                </div>
             </div>
-        </div>
-        <div id="Cardview" class="card-view" ng-show="cardview">
-            <div class="md-card uk-margin-medium-bottom">
-                <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin>
-                        <div class="uk-width-medium-1-2">
-                            <div class="uk-vertical-align">
-                                <div class="uk-vertical-align-middle">
-                                    <ul id="contact_list_filter" class="uk-subnav uk-subnav-pill uk-margin-remove">
-                                        <li class="uk-active" data-uk-filter=""><a href="#">All</a></li>
-                                        <li ng-repeat="company in contact_list_companies" data-uk-filter="{{company}}">
-                                            <a href="#">{{company}}</a>
-                                        </li>
-                                    </ul>
+            <div id="Cardview" class="card-view" ng-show="cardview">
+                <div class="md-card uk-margin-medium-bottom">
+                    <div class="md-card-content">
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-2">
+                                <div class="uk-vertical-align">
+                                    <div class="uk-vertical-align-middle">
+                                        <ul id="contact_list_filter" class="uk-subnav uk-subnav-pill uk-margin-remove">
+                                            <li class="uk-active" data-uk-filter=""><a href="#">All</a></li>
+                                            <li ng-repeat="role in userroles" data-uk-filter="{{role}}">
+                                                <a href="#">{{role}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_cuser_finduser" for="contact_list_search" md-language>Find user</label>
+                                <input class="md-input" type="text" id="contact_list_search" ng-model="q.FullIdentityName" md-input />
+                            </div>
                         </div>
-                        <div class="uk-width-medium-1-2">
-                            <label for="contact_list_search">Find user</label>
-                            <input class="md-input" type="text" id="contact_list_search" ng-model="q.name" md-input />
+                    </div>
+                </div>
+
+                <div class="uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4 uk-grid-width-xlarge-1-5 hierarchical_show" id="contact_list" hierarchical-show>
+                    <div ng-repeat="user in contact_list | filter: q" data-uk-filter="{{user.UserGroupName}}" on-last-repeat>
+                        <div class="md-card md-card-hover">
+                            <div class="md-card-head" ng-class="{ 'md-bg-cyan-600' : user.UserGroupId == 2}">
+                                <div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-right'}">
+                                    <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.UserGroupId == 2}">&#xE5D4;</i>
+                                    <div class="uk-dropdown uk-dropdown-small">
+                                        <ul class="uk-nav">
+                                            <li><a href="#" id="a_cuser_editlink" md-language>Edit</a></li>
+                                            <li><a href="#" id="a_cuser_removelink" md-language>Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="uk-text-center">
+                                    <img class="md-card-head-avatar" src="assets\/img\/avatars\/avatar_02.png" alt="" />
+                                </div>
+                                <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.UserGroupId == 2}">
+                                    {{user.FullIdentityName}}
+                                    <span class="uk-text-truncate">{{user.Customer.CustomerName}}</span>
+                                </h3>
+                            </div>
+                            <div class="md-card-content">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_username" md-language>UserName</span>
+                                            <span class="uk-text-small uk-text-muted">{{user.UserName}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_phone" md-language>Phone</span>
+                                            <span class="uk-text-small uk-text-muted">{{user.Phone}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_isactive" md-language>IsActive</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.IsActive}}</span>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4 uk-grid-width-xlarge-1-5 hierarchical_show" id="contact_list" hierarchical-show>
-                <div ng-repeat="user in contact_list | filter: q" data-uk-filter="{{user.company}}" on-last-repeat>
-                    <div class="md-card md-card-hover">
-                        <div class="md-card-head" ng-class="{'md-bg-cyan-600' : user.featured}">
-                            <div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-right'}">
-                                <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.featured}">&#xE5D4;</i>
-                                <div class="uk-dropdown uk-dropdown-small">
-                                    <ul class="uk-nav">
-                                        <li><a href="#">Edit</a></li>
-                                        <li><a href="#">Remove</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="uk-text-center">
-                                <img class="md-card-head-avatar" ng-src="{{user.avatar}}" alt="" />
-                            </div>
-                            <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
-                                {{user.name}}
-                                <span class="uk-text-truncate">{{user.company}}</span>
-                            </h3>
-                        </div>
-                        <div class="md-card-content">
-                            <ul class="md-list">
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Info</span>
-                                        <span class="uk-text-small uk-text-muted">{{user.info}}</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Email</span>
-                                        <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.email}}</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Phone</span>
-                                        <span class="uk-text-small uk-text-muted">{{user.phone}}</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+            <div id="Listview" class="list-view" ng-show="!cardview">
+                <div class="md-card uk-margin-medium-bottom">
+                    <div class="md-card-content">
+                        <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" id="th_cuser_uname" md-language>Name</th>
+                                    <th colspan="5"></th>
+                                </tr>
+                                <tr>
+                                    <th id="th_cuser_cname" md-language>Company Name</th>
+                                    <th id="th_cuser_role" md-language>Role</th>
+                                    <th id="th_cuser_username" md-language>Username</th>
+                                    <th id="th_cuser_phone" md-language>Phone</th>
+                                    <th id="th_cuser_isactive" md-language>IsActive</th>
+                                </tr>
+                            </thead>
+                            <!--<tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Extn.</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </tfoot>-->
+                            <tbody>
+                                <tr ng-repeat="user in contact_list">
+                                    <td>{{ user.FullIdentityName }}</td>
+                                    <td>{{user.Customer.CustomerName}}</td>
+                                    <td>{{user.UserGroupName}}</td>
+                                    <td>{{user.UserName}}</td>
+                                    <td>{{user.Phone}}</td>
+                                    <td>{{user.IsActive}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="Listview" class="list-view" ng-show="!cardview">
-            <div class="md-card uk-margin-medium-bottom">
-                <div class="md-card-content" ng-controller="dt_default as showCase">
-                    <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Name</th>
-                                <th colspan="5"></th>
-                            </tr>
-                            <tr>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr ng-repeat="row in showCase.dt_data">
-                                <td>{{row[0]}}</td>
-                                <td>{{row[1]}}</td>
-                                <td>{{row[2]}}</td>
-                                <td>{{row[3]}}</td>
-                                <td>{{row[4]}}</td>
-                                <td>{{row[5]}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
-
     </div>
 </div>
 

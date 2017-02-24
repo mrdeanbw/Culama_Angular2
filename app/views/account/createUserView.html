@@ -1,70 +1,72 @@
 ﻿<div id="page_content">
     <div id="page_content_inner">
-        <h2>Create User</h2>
-        <div class="md-card user_content uk-width-large-5-10 " ng-controller="manageUsersController as showCase">
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">
-                        <label for="login_firstname">First Name</label>
-                        <input class="md-input" type="text" id="login_firstname" ng-model="showCase.login_firstname" md-input />
-                    </div>
-                    <div class="uk-width-medium-1-2">
-                        <label for="login_lastname">Last Name</label>
-                        <input class="md-input" type="text" id="login_lastname" ng-model="showCase.login_lastname" md-input />
-                    </div>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">                        
-                        <div class="uk-form-row">
-                            <label>Company</label>
-                            <input type="text" class="md-input" ng-model="showCase.form.input_c" md-input />
+        <div id="admincreateuserpage" class="main_page">
+            <h2 id="user_h2_1" md-language>Create User</h2>
+            <div class="md-card user_content uk-width-large-5-10 " ng-controller="manageUsersController as showCase">
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_firstname" for="user_firstname" md-language>First Name</label>
+                            <input class="md-input" type="text" id="user_firstname" ng-model="showCase.login_firstname" md-input />
                         </div>
-                    </div>
-                    <div class="uk-width-medium-1-2">
-                        <div class="uk-form-row">
-                            <label>Title</label>
-                            <input type="text" class="md-input" ng-model="showCase.form.input_c" md-input />
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_lastname" for="user_lastname" md-language>Last Name</label>
+                            <input class="md-input" type="text" id="user_lastname" ng-model="showCase.login_lastname" md-input />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">
-                        <label for="login_lastname">Phone Number</label>
-                        <input class="md-input" type="text" id="login_lastname" ng-model="showCase.login_lastname" md-input />
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <div class="uk-form-row">
+                                <label id="lbl_user_compnayname" md-language>Company</label>
+                                <input type="text" class="md-input" ng-model="showCase.form.input_c" md-input />
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-2">
+                            <div class="uk-form-row">
+                                <label id="lbl_user_title" md-language>Title</label>
+                                <input type="text" class="md-input" ng-model="showCase.form.input_c" md-input />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">
-                        <label>User Role</label>
-                        <input type="text" config="showCase.selectize_c_config" options="showCase.selectize_c_options" ng-model="showCase.selectize_c" name="selectize_c" selectize />
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
+                            <input class="md-input" type="text" id="user_input_phoneno" ng-model="showCase.login_lastname" md-input />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">
-                        <label>Main Language</label>
-                        <input type="text" config="showCase.selectize_a_config" options="showCase.selectize_a_options" ng-model="showCase.selectize_a" name="selectize_a" selectize />
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_userrole" md-language>User Role</label>
+                            <input type="text" config="showCase.selectize_c_config" options="showCase.selectize_c_options" ng-model="showCase.selectize_c" name="selectize_c" selectize />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-grid">
-                    <div class="uk-width-medium-1-2">
-                        <label>Other Language</label>
-                        <input type="text" config="showCase.selectize_b_config" options="showCase.selectize_b_options" ng-model="showCase.selectize_b" name="selectize_b" selectize />
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_mainlan" md-language>Main Language</label>
+                            <input type="text" config="showCase.selectize_a_config" options="showCase.selectize_a_options" ng-model="showCase.selectize_a" name="selectize_a" selectize />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="uk-width-medium-1-1 mt-20">
-                <a class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>            
-                <a class="md-btn md-btn-primary md-btn-wave-light" ui-sref="restricted.manageusers">Cancel</a>
+                <div class="uk-form-row">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                            <label id="lbl_user_otherlan" md-language>Other Language</label>
+                            <input type="text" config="showCase.selectize_b_config" options="showCase.selectize_b_options" ng-model="showCase.selectize_b" name="selectize_b" selectize />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-medium-1-1 mt-20">
+                    <a id="btn_user_savebtn" md-language  class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>
+                    <a id="btn_user_cancelbtn" md-language  class="md-btn md-btn-danger md-btn-wave-light" ui-sref="restricted.manageusers">Cancel</a>
+                </div>
             </div>
         </div>
     </div>

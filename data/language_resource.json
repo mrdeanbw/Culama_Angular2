@@ -168,9 +168,153 @@
       "IN": "पासवर्ड की पुष्टि डालें"
     },
     {
-     "id": "btn_myaccount_savebtn",
+      "id": "btn_myaccount_savebtn",
       "US": "Save",
       "IN": "परिवर्तनों को सुरक्षित करें"
+    }
+  ],
+  "admincreateuserpage": [
+    {
+      "id": "user_h2_1",
+      "US": "Create User",
+      "IN": "उपयोगकर्ता बनाइये"
+    },
+    {
+      "id": "lbl_user_firstname",
+      "US": "First Name",
+      "IN": "पहला नाम"
+    },
+    {
+      "id": "lbl_user_lastname",
+      "US": "Last Name",
+      "IN": "अंतिम नाम"
+    },
+    {
+      "id": "lbl_user_compnayname",
+      "US": "Company",
+      "IN": "संगठन"
+    },
+    {
+      "id": "lbl_user_title",
+      "US": "Title",
+      "IN": "ख़िताब"
+    },
+    {
+      "id": "lbl_user_phone",
+      "US": "Phone Number",
+      "IN": "फोन नंबर"
+    },
+    {
+      "id": "lbl_user_userrole",
+      "US": "User Role",
+      "IN": "उपयोगकर्ता भूमिका"
+    },
+    {
+      "id": "lbl_myprofile_phoneunquieerror",
+      "US": "This phone number is already assigned.",
+      "IN": "यह फोन नंबर पहले से ही सौंपा है।"
+    },
+    {
+      "id": "lbl_user_mainlan",
+      "US": "Main Language",
+      "IN": "मुख्य भाषा"
+    },
+    {
+      "id": "lbl_user_otherlan",
+      "US": "Other Language",
+      "IN": "दूसरी भाषा"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    },
+    {
+      "id": "myprofile_input_firstname",
+      "US": "Please insert firstname",
+      "IN": "पहला नाम डालें"
+    },
+    {
+      "id": "myprofile_input_lastname",
+      "US": "Please insert lastname",
+      "IN": "अंतिम नाम डालें"
+    },
+    {
+      "id": "myprofile_input_phoneno",
+      "US": "Please insert phoneno",
+      "IN": "कोई फोन डालें"
+    }
+  ],
+  "companyUserpage": [
+    {
+      "id": "cuser_span_1",
+      "US": "Users",
+      "IN": "उपयोगकर्ता"
+    },
+    {
+      "id": "lbl_cuser_finduser",
+      "US": "Find user",
+      "IN": "उपयोगकर्ता खोजें"
+    },
+    {
+      "id": "a_cuser_editlink",
+      "US": "Edit",
+      "IN": "संपादित करें"
+    },
+    {
+      "id": "a_cuser_removelink",
+      "US": "Remove",
+      "IN": "हटाना"
+    },
+    {
+      "id": "span_cuser_username",
+      "US": "UserName",
+      "IN": "उपयोगकर्ता नाम"
+    },
+    {
+      "id": "span_cuser_phone",
+      "US": "Phone",
+      "IN": "फोन नंबर"
+    },
+    {
+      "id": "span_cuser_isactive",
+      "US": "IsActive",
+      "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_cuser_uname",
+      "US": "Name",
+      "IN": "नाम"
+    },
+    {
+      "id": "th_cuser_cname",
+      "US": "Company Name",
+      "IN": "कंपनी का नाम"
+    },
+    {
+      "id": "th_cuser_role",
+      "US": "Role",
+      "IN": "भूमिका"
+    },
+    {
+      "id": "th_cuser_username",
+      "US": "Username",
+      "IN": "उपयोगकर्ता नाम"
+    },
+    {
+      "id": "th_cuser_phone",
+      "US": "Phone",
+      "IN": "फोन नंबर"
+    },
+    {
+      "id": "th_cuser_isactive",
+      "US": "IsActive",
+      "IN": "सक्रिय है"
     }
   ]
 }

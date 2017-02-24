@@ -12,7 +12,7 @@ var altairApp;
             scope.vm = this;
             scope.vm.title = "";
             scope.vm.selectize_a_options = [];
-            scope.vm.CurrentLanguage = localStorage.getItem("localelanguage");
+            scope.vm.CurrentLanguage = $rootScope.CurrentLocaleLanguage;
             scope.vm.IsPhoneUnique = true;
             scope.vm.IsPhoneUniqueProcess = false;
             scope.vm.selectize_a_config = {

@@ -22,6 +22,7 @@
     export class UserDetail {
         public UserId: number;
         public FullIdentityName: string;
+        public Name: string;
         public FirstName: string;
         public LastName: string;
         public Customer: altairApp.Customer;
@@ -32,6 +33,8 @@
         public IsActive: boolean;  
         public LanguageId: number;
         public PreferredLanguageId: number;
+        public UserGroupId: number;
+        public UserGroupName: string;
 
     }
 

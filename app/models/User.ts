@@ -4,6 +4,8 @@
         public FullName: string;
         public UserGroup: string;
         public UserGroupId: number;
+        public CustomerId: number;
+        public CustomerName: string;
         public Username: string;
         public Valid: boolean;
 

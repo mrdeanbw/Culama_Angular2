@@ -20,11 +20,11 @@
                 <li ui-sref-active="current_section" ng-repeat="section in sections" ng-switch="section.link.length > 0" ng-class="{'submenu_trigger': (section.submenu.length > 0) && !miniSidebarActive, 'sidebar_submenu': (section.submenu.length > 0) && miniSidebarActive}" on-last-repeat>
                     <a ng-switch-when="true" ui-sref="{{section.link}}" ng-class="{'menu_tooltip' : miniSidebarActive}">
                         <span class="menu_icon"><i class="material-icons" ng-bind-html="section.icon"></i></span>
-                        <span class="menu_title">{{section.title}}</span>
+                        <span class="menu_title">{{section | lantitlefilter:langSwitcherModel }}</span>
                     </a>
                     <a ng-switch-when="false" href="#" ng-click="submenuToggle($event)">
                         <span class="menu_icon"><i class="material-icons" ng-bind-html="section.icon"></i></span>
-                        <span class="menu_title">{{section.title}}</span>
+                        <span class="menu_title">{{section | lantitlefilter:langSwitcherModel}}</span>
                     </a>
                     <ul ng-if="section.submenu">
                         <li ng-if="section.submenu_title" class="submenu-title">{{section.submenu_title}}</li>

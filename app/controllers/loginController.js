@@ -15,7 +15,7 @@ var altairApp;
                 { id: 2, title: 'Hindi', value: 'IN' }
             ];
             //scope.vm.initSelect = 0;
-            scope.vm.selectize_a = localStorage.getItem("localelanguage");
+            scope.vm.selectize_a = $rootScope.CurrentLocaleLanguage;
             scope.vm.selectize_a_config = {
                 plugins: {
                     'tooltip': ''
@@ -50,6 +50,7 @@ var altairApp;
             var _this = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.lservice.login(this.loginuser).then(function (result) {
+                debugger;
                 if (result.data.Username != null) {
                     if (typeof (Storage) !== "undefined") {
                         localStorage.setItem("loggeduser", JSON.stringify(result.data));

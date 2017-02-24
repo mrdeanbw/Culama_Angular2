@@ -34,7 +34,7 @@ altairApp
             return {
                 restrict: 'A',
                 link: function (scope, elem, attrs) {
-                    var currentLanguage = localStorage.getItem("localelanguage");
+                    var currentLanguage = $rootScope.CurrentLocaleLanguage;
                     if ($rootScope.lanresourceobj != undefined) {
                         var targetobj = $rootScope.lanresourceobj[$(elem).parents("div.main_page").attr("id")];
                         var findobj;
