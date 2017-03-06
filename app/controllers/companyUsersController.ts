@@ -1,20 +1,12 @@
-/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
+﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
-    var CompanyUsersController = (function () {
-        function CompanyUsersController(scope, $rootScope, companyService, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, loginService) {
-            this.scope = scope;
-            this.$rootScope = $rootScope;
-            this.companyService = companyService;
-            this.$compile = $compile;
-            this.$timeout = $timeout;
-            this.$resource = $resource;
-            this.DTOptionsBuilder = DTOptionsBuilder;
-            this.DTColumnDefBuilder = DTColumnDefBuilder;
-            this.commonService = commonService;
-            this.loginService = loginService;
-            this.newuser = new altairApp.UserDetail();
+module altairApp {
+    class CompanyUsersController {
+        cservice: any;
+        lservice: any;
+        public newuser: altairApp.UserDetail = new altairApp.UserDetail();
+        static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public companyService: altairApp.CompanyService, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: altairApp.CommonService, public loginService: altairApp.LoginService) {
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.cardview = true;
@@ -25,7 +17,9 @@ var altairApp;
             this.scope.IsPhoneUniqueProcess = false;
             this.scope.IsUsernameUnique = true;
             this.scope.IsUsernameUniqueProcess = false;
+
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId.toString());
+
             this.scope.selectize_c_options = [
                 {
                     "Id": "1",
@@ -38,9 +32,10 @@ var altairApp;
                 {
                     "Id": "3",
                     "UserGroupName": "Users"
-                }
-            ];
+                }];
+
             this.newuser.UserGroupId = 1;
+
             this.scope.selectize_c_config = {
                 plugins: {
                     'tooltip': ''
@@ -51,7 +46,10 @@ var altairApp;
                 valueField: 'Id',
                 labelField: 'UserGroupName'
             };
+
+
             this.scope.selectize_a_options = [];
+
             this.scope.selectize_a_config = {
                 plugins: {
                     'tooltip': ''
@@ -62,7 +60,9 @@ var altairApp;
                 valueField: 'Id',
                 labelField: 'Description'
             };
+
             this.scope.selectize_b_options = [];
+
             this.scope.selectize_b_config = {
                 plugins: {
                     'tooltip': ''
@@ -73,7 +73,10 @@ var altairApp;
                 valueField: 'Id',
                 labelField: 'Description'
             };
+
             this.scope.userroles = ['Compnay Admin', 'Users'];
+
+
             scope.$on('onLastRepeat', function (scope1, element, attrs) {
                 scope.$apply(function () {
                     UIkit.grid($('#contact_list'), {
@@ -81,15 +84,17 @@ var altairApp;
                         gutter: 20
                     });
                 });
-            });
+            })
+
+
             scope.dtOptions = DTOptionsBuilder
                 .newOptions()
                 .withDisplayLength(10)
                 .withOption('initComplete', function () {
-                $timeout(function () {
-                    $compile($('.dt-uikit .md-input'))(scope);
+                    $timeout(function () {
+                        $compile($('.dt-uikit .md-input'))(scope);
+                    })
                 });
-            });
             scope.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0),
                 DTColumnDefBuilder.newColumnDef(1),
@@ -98,93 +103,100 @@ var altairApp;
                 DTColumnDefBuilder.newColumnDef(4),
                 DTColumnDefBuilder.newColumnDef(5)
             ];
+
             var $formValidate = $('#createUserForm');
             if ($formValidate.length != 0) {
                 $formValidate.parsley()
                     .on('form:validated', function () {
-                    scope.$apply();
-                })
-                    .on('field:validated', function (parsleyField) {
-                    if ($(parsleyField.$element).hasClass('md-input')) {
                         scope.$apply();
-                    }
-                });
+                    })
+                    .on('field:validated', function (parsleyField) {
+                        if ($(parsleyField.$element).hasClass('md-input')) {
+                            scope.$apply();
+                        }
+                    });
             }
+
             this.getLanguages();
+
             scope.changeView = function (view) {
                 if (view != "card") {
                     scope.cardview = false;
-                }
-                else {
+                } else {
                     scope.cardview = true;
                 }
+
             };
         }
-        CompanyUsersController.prototype.getLanguages = function () {
-            var _this = this;
-            this.commonService.getLanguages().then(function (result) {
-                _this.scope.selectize_a_options = result.data;
-                _this.scope.selectize_b_options = result.data;
+
+        getLanguages() {
+            this.commonService.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                this.scope.selectize_a_options = result.data;
+                this.scope.selectize_b_options = result.data;
             });
-        };
-        CompanyUsersController.prototype.getCompanyUsers = function (companyid) {
-            var _this = this;
+        }
+
+        getCompanyUsers(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.getUsersByCompanyId(companyid).then(function (result) {
-                _this.scope.contact_list = result.data;
-                _this.$rootScope.$emit("toggleLoader", false);
+            this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                this.scope.contact_list = result.data;
+                this.$rootScope.$emit("toggleLoader", false);
+
             });
-        };
-        CompanyUsersController.prototype.CreateUser = function () {
-            var _this = this;
+        }
+
+        CreateUser() {
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                this.cservice.createUser(this.newuser).then(function (result) {
+                this.cservice.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                     if (result.data) {
-                        _this.$rootScope.$emit("successnotify", { msg: "Your user is created successfully", status: "success" });
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Your user is created successfully", status: "success" });
+                    } else {
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
-                    else {
-                        _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
-                    }
-                    _this.$rootScope.$emit("toggleLoader", false);
-                    _this.newuser = new altairApp.UserDetail();
+                    this.$rootScope.$emit("toggleLoader", false);
+                    this.newuser = new altairApp.UserDetail();
                     window.location.href = "/#/companyusers";
+
                 });
             }
-        };
-        CompanyUsersController.prototype.checkPhoneUnique = function () {
-            var _this = this;
+        }
+
+        checkPhoneUnique() {
             this.scope.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
-                _this.scope.IsPhoneUniqueProcess = false;
+            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
-                    _this.scope.IsPhoneUnique = false;
+                    this.scope.IsPhoneUnique = false;
                     document.getElementById("user_input_phoneno").valid = false;
-                }
-                else {
-                    _this.scope.IsPhoneUnique = true;
+                } else {
+                    this.scope.IsPhoneUnique = true;
                     document.getElementById("user_input_phoneno").valid = true;
                 }
             });
-        };
-        CompanyUsersController.prototype.checkUserNameUnique = function () {
-            var _this = this;
+        }
+
+        checkUserNameUnique() {
             this.scope.IsUsernameUniqueProcess = true;
-            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
-                _this.scope.IsUsernameUniqueProcess = false;
+            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
-                    _this.scope.IsUsernameUnique = false;
+                    this.scope.IsUsernameUnique = false;
                     document.getElementById("user_input_username").valid = false;
-                }
-                else {
-                    _this.scope.IsUsernameUnique = true;
+                } else {
+                    this.scope.IsUsernameUnique = true;
                     document.getElementById("user_input_username").valid = true;
                 }
             });
-        };
-        return CompanyUsersController;
-    }());
-    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
+        }
+
+    }
+
     angular.module("altairApp")
         .controller("companyUsersController", CompanyUsersController);
-})(altairApp || (altairApp = {}));
+
+
+}
+

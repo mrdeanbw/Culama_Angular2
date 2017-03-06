@@ -8,7 +8,6 @@ angular
     .controller('mainCtrl', ['$rootScope',
         '$scope', 'commonService',
         function ($rootScope, $scope, commonService) {
-
             $rootScope.CurrentLocaleLanguage = commonService.getLanguage();
             if ($rootScope.CurrentLocaleLanguage == undefined || $rootScope.CurrentLocaleLanguage === "") {
                 localStorage.setItem("localelanguage", "US");

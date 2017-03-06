@@ -50,7 +50,6 @@ var altairApp;
             var _this = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.lservice.login(this.loginuser).then(function (result) {
-                debugger;
                 if (result.data.Username != null) {
                     if (typeof (Storage) !== "undefined") {
                         localStorage.setItem("loggeduser", JSON.stringify(result.data));

@@ -30,6 +30,11 @@ module altairApp {
             });
         }
 
+        getUserDetailsbyUsername(username: string): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetailByUserName/' + username, {
+            });
+        }
+
 
         saveUserDetail(user: altairApp.UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
             var params = JSON.stringify(user);

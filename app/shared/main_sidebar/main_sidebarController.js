@@ -34,7 +34,7 @@
                         }
                     })
                 });
-
+            
             // language switcher
             $scope.langSwitcherModel = $rootScope.CurrentLocaleLanguage.toLowerCase();
             var langData = $scope.langSwitcherOptions = [
@@ -72,7 +72,7 @@
                 }
             };
 
-
+            
             if ($rootScope.LoggedUser.UserGroupId === 1) {
                 // Administrator menu entries
                 $scope.sections = [

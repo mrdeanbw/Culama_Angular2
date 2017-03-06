@@ -7,19 +7,18 @@
                     <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th rowspan="2">Name</th>
+                                <th rowspan="2" id="th_cuser_uname" md-language>Name</th>
                                 <th colspan="6"></th>
                             </tr>
                             <tr>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Action</th>
+                                <th id="th_cuser_cname" md-language>Company Name</th>
+                                <th id="th_cuser_role" md-language>Role</th>
+                                <th id="th_cuser_username" md-language>Username</th>
+                                <th id="th_cuser_phone" md-language>Phone</th>
+                                <th id="th_cuser_isactive" md-language>IsActive</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <!--<tfoot>
                             <tr>
                                 <th>Name</th>
                                 <th>Position</th>
@@ -29,16 +28,15 @@
                                 <th>Salary</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot>-->
                         <tbody>
-                            <tr ng-repeat="row in showCase.dt_data">
-                                <td><a>{{row[0]}}</a></td>
-                                <td>{{row[1]}}</td>
-                                <td>{{row[2]}}</td>
-                                <td>{{row[3]}}</td>
-                                <td>{{row[4]}}</td>
-                                <td>{{row[5]}}</td>
-                                <td><a class="material-icons" href="#">&#xE872;</a></td>
+                            <tr ng-repeat="user in showCase.dt_data">
+                                <td>{{ user.FullIdentityName }}</td>
+                                <td>{{user.Customer.CustomerName}}</td>
+                                <td>{{user.UserGroupName}}</td>
+                                <td>{{user.UserName}}</td>
+                                <td>{{user.Phone}}</td>
+                                <td>{{user.IsActive}}</td>
                             </tr>
                         </tbody>
                     </table>

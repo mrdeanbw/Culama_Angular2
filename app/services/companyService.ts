@@ -11,7 +11,18 @@ module altairApp {
 
 
         getUsersByCompanyId(companyid: number): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
-            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsersByCompanyId/' + companyid, {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers?companyid=' + companyid, {
+            });
+        }
+
+        getUsers(): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers', {
+            });
+        }
+
+        createUser(user: altairApp.UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
+            var params = JSON.stringify(user);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {
             });
         }
 

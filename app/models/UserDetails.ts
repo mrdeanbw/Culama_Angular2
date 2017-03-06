@@ -25,6 +25,7 @@
         public Name: string;
         public FirstName: string;
         public LastName: string;
+        public CustomerId: number;
         public Customer: altairApp.Customer;
         public TitleTranslationId: number;
         public TitleTranslation: Translation;

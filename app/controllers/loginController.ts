@@ -53,7 +53,6 @@ module altairApp {
         login() {
             this.$rootScope.$emit("toggleLoader", true);
             this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.User>) => {
-                debugger;
                 if (result.data.Username != null) {
 
                     if (typeof (Storage) !== "undefined") {

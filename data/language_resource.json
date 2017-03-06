@@ -181,13 +181,13 @@
     },
     {
       "id": "lbl_user_firstname",
-      "US": "First Name",
-      "IN": "पहला नाम"
+      "US": "First Name<span class='req'>*</span>",
+      "IN": "पहला नाम<span class='req'>*</span>"
     },
     {
       "id": "lbl_user_lastname",
-      "US": "Last Name",
-      "IN": "अंतिम नाम"
+      "US": "Last Name<span class='req'>*</span>",
+      "IN": "अंतिम नाम<span class='req'>*</span>"
     },
     {
       "id": "lbl_user_compnayname",
@@ -201,18 +201,28 @@
     },
     {
       "id": "lbl_user_phone",
-      "US": "Phone Number",
-      "IN": "फोन नंबर"
+      "US": "Phone Number<span class='req'>*</span>",
+      "IN": "फोन नंबर<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_username",
+      "US": "Username<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता नाम<span class='req'>*</span>"
     },
     {
       "id": "lbl_user_userrole",
-      "US": "User Role",
-      "IN": "उपयोगकर्ता भूमिका"
+      "US": "User Role<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता भूमिका<span class='req'>*</span>"
     },
     {
-      "id": "lbl_myprofile_phoneunquieerror",
+      "id": "lbl_user_phoneunquieerror",
       "US": "This phone number is already assigned.",
       "IN": "यह फोन नंबर पहले से ही सौंपा है।"
+    },
+    {
+      "id": "lbl_user_usernameunquieerror",
+      "US": "This username is already assigned.",
+      "IN": "यह उपयोगकर्ता नाम पहले से ही सौंपा है।"
     },
     {
       "id": "lbl_user_mainlan",
@@ -235,19 +245,116 @@
       "IN": "रद्द करना"
     },
     {
-      "id": "myprofile_input_firstname",
+      "id": "user_input_firstname",
       "US": "Please insert firstname",
       "IN": "पहला नाम डालें"
     },
     {
-      "id": "myprofile_input_lastname",
+      "id": "user_input_lastname",
       "US": "Please insert lastname",
       "IN": "अंतिम नाम डालें"
     },
     {
-      "id": "myprofile_input_phoneno",
+      "id": "user_input_phoneno",
       "US": "Please insert phoneno",
       "IN": "कोई फोन डालें"
+    },
+    {
+      "id": "user_input_username",
+      "US": "Please insert username",
+      "IN": "उपयोगकर्ता नाम डालें"
+    }
+  ],
+  "companycreateuserpage": [
+    {
+      "id": "user_h2_1",
+      "US": "Create User",
+      "IN": "उपयोगकर्ता बनाइये"
+    },
+    {
+      "id": "lbl_user_firstname",
+      "US": "First Name<span class='req'>*</span>",
+      "IN": "पहला नाम<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_lastname",
+      "US": "Last Name<span class='req'>*</span>",
+      "IN": "अंतिम नाम<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_compnayname",
+      "US": "Company",
+      "IN": "संगठन"
+    },
+    {
+      "id": "lbl_user_title",
+      "US": "Title",
+      "IN": "ख़िताब"
+    },
+    {
+      "id": "lbl_user_phone",
+      "US": "Phone Number<span class='req'>*</span>",
+      "IN": "फोन नंबर<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_username",
+      "US": "Username<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता नाम<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_userrole",
+      "US": "User Role<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता भूमिका<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_user_phoneunquieerror",
+      "US": "This phone number is already assigned.",
+      "IN": "यह फोन नंबर पहले से ही सौंपा है।"
+    },
+    {
+      "id": "lbl_user_usernameunquieerror",
+      "US": "This username is already assigned.",
+      "IN": "यह उपयोगकर्ता नाम पहले से ही सौंपा है।"
+    },
+    {
+      "id": "lbl_user_mainlan",
+      "US": "Main Language",
+      "IN": "मुख्य भाषा"
+    },
+    {
+      "id": "lbl_user_otherlan",
+      "US": "Other Language",
+      "IN": "दूसरी भाषा"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    },
+    {
+      "id": "user_input_firstname",
+      "US": "Please insert firstname",
+      "IN": "पहला नाम डालें"
+    },
+    {
+      "id": "user_input_lastname",
+      "US": "Please insert lastname",
+      "IN": "अंतिम नाम डालें"
+    },
+    {
+      "id": "user_input_phoneno",
+      "US": "Please insert phoneno",
+      "IN": "कोई फोन डालें"
+    },
+    {
+      "id": "user_input_username",
+      "US": "Please insert username",
+      "IN": "उपयोगकर्ता नाम डालें"
     }
   ],
   "companyUserpage": [
@@ -273,7 +380,7 @@
     },
     {
       "id": "span_cuser_username",
-      "US": "UserName",
+      "US": "Username",
       "IN": "उपयोगकर्ता नाम"
     },
     {
@@ -283,7 +390,7 @@
     },
     {
       "id": "span_cuser_isactive",
-      "US": "IsActive",
+      "US": "Active",
       "IN": "सक्रिय है"
     },
     {

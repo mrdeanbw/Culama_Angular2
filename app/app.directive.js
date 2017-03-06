@@ -47,7 +47,7 @@ altairApp
                             if ($(elem).is("input")) {
                                 $(elem).attr("data-parsley-required-message", findobj[currentLanguage]);
                             } else {
-                                $(elem).text(findobj[currentLanguage]);
+                                $(elem).html(findobj[currentLanguage]);
                             }
 
                         }
@@ -66,7 +66,7 @@ altairApp
                                 if ($(elem).is("input")) {
                                     $(elem).attr("data-parsley-required-message", findobj[currentLanguage]);
                                 } else {
-                                    $(elem).text(findobj[currentLanguage]);
+                                    $(elem).html(findobj[currentLanguage]);
                                 }
 
                             }

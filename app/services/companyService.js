@@ -8,7 +8,14 @@ var altairApp;
             this.appConfig = appConfig;
         }
         CompanyService.prototype.getUsersByCompanyId = function (companyid) {
-            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsersByCompanyId/' + companyid, {});
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers?companyid=' + companyid, {});
+        };
+        CompanyService.prototype.getUsers = function () {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers', {});
+        };
+        CompanyService.prototype.createUser = function (user) {
+            var params = JSON.stringify(user);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {});
         };
         return CompanyService;
     }());

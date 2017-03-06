@@ -17,7 +17,7 @@ altairApp
                     templateUrl: 'app/views/error.html',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'lazy_uikit'
                                 ]);
@@ -44,7 +44,7 @@ altairApp
                     controllerAs: 'vm',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'lazy_uikit',
                                     'lazy_iCheck',
@@ -70,7 +70,7 @@ altairApp
                     controller: 'myProfileController',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'lazy_uikit',
                                     'lazy_iCheck',
@@ -98,7 +98,7 @@ altairApp
                     controller: 'myProfileController',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                       'lazy_uikit',
                                     'lazy_iCheck',
@@ -126,7 +126,7 @@ altairApp
                     templateUrl: 'app/views/restricted.html',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'lazy_uikit',
                                     'lazy_selectizeJS',
@@ -149,7 +149,7 @@ altairApp
                     controllerAs: 'vm',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         // ocLazyLoad config (app/app.js)
                                         'lazy_countUp',
@@ -161,7 +161,7 @@ altairApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/controllers/administratorDashboardController.js'
-                                    ],
+                                ],
                                     { serie: true });
                             }
                         ]
@@ -181,7 +181,7 @@ altairApp
                     controller: 'companyDashBoardCtrl',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         // ocLazyLoad config (app/app.js)
                                         'lazy_countUp',
@@ -193,7 +193,7 @@ altairApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/controllers/companyDashboardController.js'
-                                    ],
+                                ],
                                     { serie: true });
                             }
                         ]
@@ -210,7 +210,7 @@ altairApp
                     controller: 'customerAdminDashBoardCtrl',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         // ocLazyLoad config (app/app.js)
                                         'lazy_countUp',
@@ -222,7 +222,7 @@ altairApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/controllers/customerAdminDashboardController.js'
-                                    ],
+                                ],
                                     { serie: true });
                             }
                         ]
@@ -239,7 +239,7 @@ altairApp
                     controller: 'userDashBoardCtrl',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         // ocLazyLoad config (app/app.js)
                                         'lazy_countUp',
@@ -251,7 +251,7 @@ altairApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/controllers/userDashboardController.js'
-                                    ],
+                                ],
                                     { serie: true });
                             }
                         ]
@@ -268,19 +268,25 @@ altairApp
                     controller: 'companyUsersController',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
-                                        'bower_components/angular-resource/angular-resource.min.js',
+                                       'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
-                                         'app/services/companyService.js',
-                                        'app/controllers/companyUsers.js'
-                                    ],
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/companyUsersController.js'
+                                ],
                                     { serie: true });
                             }
                         ],
-                        contact_list: function($http) {
+                        contact_list: function ($http) {
                             return $http({ method: 'GET', url: 'data/contact_list.json' })
-                                .then(function(data) {
+                                .then(function (data) {
                                     return data.data;
                                 });
                         }
@@ -298,12 +304,17 @@ altairApp
                     controller: 'manageUsersController',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                          'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
+                                    'app/services/loginservice.js',
+                                         'app/services/companyService.js',
                                         'app/controllers/manageUsersController.js'
-                                    ],
+                                ],
                                     { serie: true });
                             }
                         ]
@@ -313,7 +324,7 @@ altairApp
                     }
                 })
 
-                // --  Create USERS PAGE --        
+                // --  CREATE ADMIN USERS PAGE --        
                 .state("restricted.createusers",
                 {
                     url: "/create_users",
@@ -321,14 +332,49 @@ altairApp
                     controller: 'manageUsersController',
                     resolve: {
                         deps: [
-                            '$ocLazyLoad', function($ocLazyLoad) {
+                            '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
+                                        'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
+                                          'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
+                                    'app/services/loginservice.js',
+                                         'app/services/companyService.js',
                                         'app/controllers/manageUsersController.js'
-                                    ],
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Create Users'
+                    }
+                })
+
+                   // --  CREATE COMPANY USERS PAGE --        
+                .state("restricted.createcompanyusers",
+                {
+                    url: "/create_companyusers",
+                    templateUrl: 'app/views/account/createCompanyUsersView.html',
+                    controller: 'companyUsersController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/companyUsersController.js'
+                                ],
                                     { serie: true });
                             }
                         ]
