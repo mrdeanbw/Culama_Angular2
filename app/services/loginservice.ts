@@ -42,6 +42,11 @@ module altairApp {
             });
         }
 
+        deleteUser(id: string): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteUser/' + id, {
+            });
+        }
+
 
     }
 

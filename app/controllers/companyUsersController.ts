@@ -5,6 +5,7 @@ module altairApp {
         cservice: any;
         lservice: any;
         public newuser: altairApp.UserDetail = new altairApp.UserDetail();
+        public edituser: altairApp.UserDetail = new altairApp.UserDetail();
         static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         constructor(public scope: any, public $rootScope: any, public companyService: altairApp.CompanyService, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: altairApp.CommonService, public loginService: altairApp.LoginService) {
             this.cservice = companyService;
@@ -17,6 +18,14 @@ module altairApp {
             this.scope.IsPhoneUniqueProcess = false;
             this.scope.IsUsernameUnique = true;
             this.scope.IsUsernameUniqueProcess = false;
+
+            this.scope.IsEditMode = false;
+
+            this.scope.edituserid = this.getParameterByName("id");
+
+            if (this.scope.edituserid != "" && this.scope.edituserid != null && this.scope.edituserid != undefined) {
+                this.scope.IsEditMode = true;
+            }
 
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId.toString());
 
@@ -33,6 +42,7 @@ module altairApp {
                     "Id": "3",
                     "UserGroupName": "Users"
                 }];
+
 
             this.newuser.UserGroupId = 1;
 
@@ -127,6 +137,12 @@ module altairApp {
                 }
 
             };
+            var cobj = this;
+            scope.deleteUser = function (id) {
+                UIkit.modal.confirm('Are you sure want to delete?', function () {
+                    cobj.DeleteCompanyUser(id);
+                });
+            }
         }
 
         getLanguages() {
@@ -141,6 +157,16 @@ module altairApp {
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 this.scope.contact_list = result.data;
                 this.$rootScope.$emit("toggleLoader", false);
+                if (this.scope.IsEditMode) {
+                    var euid = this.scope.edituserid;
+                    var findobj;
+                    $.each(this.scope.contact_list, function (index) {
+                        if (this.UserId.toString() === euid) {
+                            findobj = this;
+                        }
+                    });
+                    this.edituser = findobj;
+                }
 
             });
         }
@@ -164,32 +190,136 @@ module altairApp {
             }
         }
 
-        checkPhoneUnique() {
-            this.scope.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
-                this.scope.IsPhoneUniqueProcess = false;
-                if (result.data != "") {
-                    this.scope.IsPhoneUnique = false;
-                    document.getElementById("user_input_phoneno").valid = false;
+        EditUser() {
+            if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
+                this.$rootScope.$emit("toggleLoader", true);
+                this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    this.$rootScope.$emit("toggleLoader", false);
+                    if (result.data != "") {
+                        this.edituser = result.data;
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Your information is updated successfully", status: "success" });
+                        window.location.href = "/#/companyusers";
+                    } else {
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Something went wrong. Please try again.", status: "danger" });
+                    }
+                });
+            }
+        }
+
+        DeleteCompanyUser(id) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.lservice.deleteUser(id).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+                this.$rootScope.$emit("toggleLoader", false);
+                if (result.data) {
+                    var userlist = this.scope.contact_list;
+                    $.each(userlist, function (index) {
+                        if (this.UserId === id) {
+                            userlist.splice(index, 1);
+                            return false;
+                        }
+                    });
+                    this.scope.contact_list = userlist;
+
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your user is deleted successfully", status: "success" });
                 } else {
-                    this.scope.IsPhoneUnique = true;
-                    document.getElementById("user_input_phoneno").valid = true;
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
             });
         }
 
+       
+
+        checkPhoneUnique() {
+            this.scope.IsPhoneUniqueProcess = true;
+            if (this.scope.IsEditMode) {
+                this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    this.scope.IsPhoneUniqueProcess = false;
+                    if (result.data != "") {
+                        if (result.data.UserId !== this.edituser.UserId) {
+                            this.scope.IsPhoneUnique = false;
+                            document.getElementById("user_input_phoneno").valid = false;
+
+                        } else {
+                            this.scope.IsPhoneUnique = true;
+                            document.getElementById("user_input_phoneno").valid = true;
+                        }
+
+                    } else {
+                        this.scope.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+                });
+            } else {
+                this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    this.scope.IsPhoneUniqueProcess = false;
+                    if (result.data != "") {
+                        this.scope.IsPhoneUnique = false;
+                        document.getElementById("user_input_phoneno").valid = false;
+                    } else {
+                        this.scope.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+                });
+            }
+
+        }
+
         checkUserNameUnique() {
             this.scope.IsUsernameUniqueProcess = true;
-            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
-                this.scope.IsUsernameUniqueProcess = false;
-                if (result.data != "") {
-                    this.scope.IsUsernameUnique = false;
-                    document.getElementById("user_input_username").valid = false;
-                } else {
-                    this.scope.IsUsernameUnique = true;
-                    document.getElementById("user_input_username").valid = true;
-                }
-            });
+
+            if (this.scope.IsEditMode) {
+
+                this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    this.scope.IsUsernameUniqueProcess = false;
+                    if (result.data != "") {
+
+                        if (result.data.UserId !== this.edituser.UserId) {
+                            this.scope.IsUsernameUnique = false;
+                            document.getElementById("user_input_username").valid = false;
+
+                        } else {
+                            this.scope.IsUsernameUnique = true;
+                            document.getElementById("user_input_username").valid = true;
+                        }
+
+                    } else {
+                        this.scope.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+                });
+
+            } else {
+
+                this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    this.scope.IsUsernameUniqueProcess = false;
+                    if (result.data != "") {
+                        this.scope.IsUsernameUnique = false;
+                        document.getElementById("user_input_username").valid = false;
+                    } else {
+                        this.scope.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+                });
+
+            }
+
+
+        }
+
+        getParameterByName(name) {
+
+            var url = window.location.href;
+
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
     }

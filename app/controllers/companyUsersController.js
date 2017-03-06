@@ -15,6 +15,7 @@ var altairApp;
             this.commonService = commonService;
             this.loginService = loginService;
             this.newuser = new altairApp.UserDetail();
+            this.edituser = new altairApp.UserDetail();
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.cardview = true;
@@ -25,6 +26,11 @@ var altairApp;
             this.scope.IsPhoneUniqueProcess = false;
             this.scope.IsUsernameUnique = true;
             this.scope.IsUsernameUniqueProcess = false;
+            this.scope.IsEditMode = false;
+            this.scope.edituserid = this.getParameterByName("id");
+            if (this.scope.edituserid != "" && this.scope.edituserid != null && this.scope.edituserid != undefined) {
+                this.scope.IsEditMode = true;
+            }
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId.toString());
             this.scope.selectize_c_options = [
                 {
@@ -119,6 +125,12 @@ var altairApp;
                     scope.cardview = true;
                 }
             };
+            var cobj = this;
+            scope.deleteUser = function (id) {
+                UIkit.modal.confirm('Are you sure want to delete?', function () {
+                    cobj.DeleteCompanyUser(id);
+                });
+            };
         }
         CompanyUsersController.prototype.getLanguages = function () {
             var _this = this;
@@ -133,6 +145,16 @@ var altairApp;
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
                 _this.scope.contact_list = result.data;
                 _this.$rootScope.$emit("toggleLoader", false);
+                if (_this.scope.IsEditMode) {
+                    var euid = _this.scope.edituserid;
+                    var findobj;
+                    $.each(_this.scope.contact_list, function (index) {
+                        if (this.UserId.toString() === euid) {
+                            findobj = this;
+                        }
+                    });
+                    _this.edituser = findobj;
+                }
             });
         };
         CompanyUsersController.prototype.CreateUser = function () {
@@ -152,35 +174,125 @@ var altairApp;
                 });
             }
         };
+        CompanyUsersController.prototype.EditUser = function () {
+            var _this = this;
+            if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
+                this.$rootScope.$emit("toggleLoader", true);
+                this.lservice.saveUserDetail(this.edituser).then(function (result) {
+                    _this.$rootScope.$emit("toggleLoader", false);
+                    if (result.data != "") {
+                        _this.edituser = result.data;
+                        _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+                        window.location.href = "/#/companyusers";
+                    }
+                    else {
+                        _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                    }
+                });
+            }
+        };
+        CompanyUsersController.prototype.DeleteCompanyUser = function (id) {
+            var _this = this;
+            this.$rootScope.$emit("toggleLoader", true);
+            this.lservice.deleteUser(id).then(function (result) {
+                _this.$rootScope.$emit("toggleLoader", false);
+                if (result.data) {
+                    var userlist = _this.scope.contact_list;
+                    $.each(userlist, function (index) {
+                        if (this.UserId === id) {
+                            userlist.splice(index, 1);
+                            return false;
+                        }
+                    });
+                    _this.scope.contact_list = userlist;
+                    _this.$rootScope.$emit("successnotify", { msg: "Your user is deleted successfully", status: "success" });
+                }
+                else {
+                    _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+            });
+        };
         CompanyUsersController.prototype.checkPhoneUnique = function () {
             var _this = this;
             this.scope.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
-                _this.scope.IsPhoneUniqueProcess = false;
-                if (result.data != "") {
-                    _this.scope.IsPhoneUnique = false;
-                    document.getElementById("user_input_phoneno").valid = false;
-                }
-                else {
-                    _this.scope.IsPhoneUnique = true;
-                    document.getElementById("user_input_phoneno").valid = true;
-                }
-            });
+            if (this.scope.IsEditMode) {
+                this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then(function (result) {
+                    _this.scope.IsPhoneUniqueProcess = false;
+                    if (result.data != "") {
+                        if (result.data.UserId !== _this.edituser.UserId) {
+                            _this.scope.IsPhoneUnique = false;
+                            document.getElementById("user_input_phoneno").valid = false;
+                        }
+                        else {
+                            _this.scope.IsPhoneUnique = true;
+                            document.getElementById("user_input_phoneno").valid = true;
+                        }
+                    }
+                    else {
+                        _this.scope.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+                });
+            }
+            else {
+                this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
+                    _this.scope.IsPhoneUniqueProcess = false;
+                    if (result.data != "") {
+                        _this.scope.IsPhoneUnique = false;
+                        document.getElementById("user_input_phoneno").valid = false;
+                    }
+                    else {
+                        _this.scope.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+                });
+            }
         };
         CompanyUsersController.prototype.checkUserNameUnique = function () {
             var _this = this;
             this.scope.IsUsernameUniqueProcess = true;
-            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
-                _this.scope.IsUsernameUniqueProcess = false;
-                if (result.data != "") {
-                    _this.scope.IsUsernameUnique = false;
-                    document.getElementById("user_input_username").valid = false;
-                }
-                else {
-                    _this.scope.IsUsernameUnique = true;
-                    document.getElementById("user_input_username").valid = true;
-                }
-            });
+            if (this.scope.IsEditMode) {
+                this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then(function (result) {
+                    _this.scope.IsUsernameUniqueProcess = false;
+                    if (result.data != "") {
+                        if (result.data.UserId !== _this.edituser.UserId) {
+                            _this.scope.IsUsernameUnique = false;
+                            document.getElementById("user_input_username").valid = false;
+                        }
+                        else {
+                            _this.scope.IsUsernameUnique = true;
+                            document.getElementById("user_input_username").valid = true;
+                        }
+                    }
+                    else {
+                        _this.scope.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+                });
+            }
+            else {
+                this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
+                    _this.scope.IsUsernameUniqueProcess = false;
+                    if (result.data != "") {
+                        _this.scope.IsUsernameUnique = false;
+                        document.getElementById("user_input_username").valid = false;
+                    }
+                    else {
+                        _this.scope.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+                });
+            }
+        };
+        CompanyUsersController.prototype.getParameterByName = function (name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+            if (!results)
+                return null;
+            if (!results[2])
+                return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
         return CompanyUsersController;
     }());

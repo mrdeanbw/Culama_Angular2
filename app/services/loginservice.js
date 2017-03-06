@@ -27,6 +27,9 @@ var altairApp;
             var params = JSON.stringify(user);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveUser', params, {});
         };
+        LoginService.prototype.deleteUser = function (id) {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteUser/' + id, {});
+        };
         return LoginService;
     }());
     LoginService.$inject = ["$http", "appConfig"];
