@@ -324,6 +324,94 @@ altairApp
                     }
                 })
 
+                // --  MANAGE COMPANIES PAGE --        
+                .state("restricted.managecompanies",
+                {
+                    url: "/managecompanies",
+                    templateUrl: 'app/views/company/manageCompaniesView.html',
+                    controller: 'manageCustomersController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                          'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
+                                    'app/services/loginservice.js',
+                                         'app/services/companyService.js',
+                                        'app/controllers/manageCustomersController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Manage Companies'
+                    }
+                })
+
+                 // --  CREATE COMPANY PAGE --        
+                .state("restricted.createcompany",
+                {
+                    url: "/create_company",
+                    templateUrl: 'app/views/company/createCompanyView.html',
+                    controller: 'manageCustomersController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/manageCustomersController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Create Company'
+                    }
+                })
+
+                // --  EDIT COMPANY PAGE --        
+                .state("restricted.editcompany",
+                {
+                    url: "/edit_company",
+                    templateUrl: 'app/views/company/editCompanyView.html',
+                    controller: 'manageCustomersController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/manageCustomersController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Edit Company'
+                    }
+                })
+
                 // --  CREATE ADMIN USERS PAGE --        
                 .state("restricted.createusers",
                 {

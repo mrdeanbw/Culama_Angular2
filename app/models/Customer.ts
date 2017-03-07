@@ -6,7 +6,8 @@
         public Prefix: string;
         public UserPrefix: string;
         public IsActive: boolean;
-
+        public URL: string;
+        public Users: any;
 
     }
 }

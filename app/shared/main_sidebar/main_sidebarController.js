@@ -82,13 +82,6 @@
                         title_in: 'डैशबोर्ड',
                         icon: '&#xE871;',
                         link: 'restricted.dashboard'
-                    },
-                    {
-                        id: 1,
-                        title_us: 'Manage Users',
-                        title_in: 'उपयोगकर्ताओं को प्रबंधित करें',
-                        icon: '&#xE87C;',
-                        link: 'restricted.manageusers'
                     }
                 ];
             } else if ($rootScope.LoggedUser.UserGroupId === 2) {

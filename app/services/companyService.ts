@@ -20,9 +20,31 @@ module altairApp {
             });
         }
 
+        getCompanies(): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetCompanies', {
+            });
+        }
+
         createUser(user: altairApp.UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
             var params = JSON.stringify(user);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {
+            });
+        }
+
+        createCompany(customer: altairApp.Customer): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            var params = JSON.stringify(customer);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {
+            });
+        }
+
+        saveCompanyDetail(customer: altairApp.Customer): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.Customer>> {
+            var params = JSON.stringify(customer);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveCompany', params, {
+            });
+        }
+
+        deleteCompany(id: string): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteCustomer/' + id, {
             });
         }
 

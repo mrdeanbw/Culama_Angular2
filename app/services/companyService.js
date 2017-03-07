@@ -13,9 +13,23 @@ var altairApp;
         CompanyService.prototype.getUsers = function () {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers', {});
         };
+        CompanyService.prototype.getCompanies = function () {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetCompanies', {});
+        };
         CompanyService.prototype.createUser = function (user) {
             var params = JSON.stringify(user);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {});
+        };
+        CompanyService.prototype.createCompany = function (customer) {
+            var params = JSON.stringify(customer);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {});
+        };
+        CompanyService.prototype.saveCompanyDetail = function (customer) {
+            var params = JSON.stringify(customer);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveCompany', params, {});
+        };
+        CompanyService.prototype.deleteCompany = function (id) {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteCustomer/' + id, {});
         };
         return CompanyService;
     }());
