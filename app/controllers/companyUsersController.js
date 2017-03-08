@@ -116,6 +116,18 @@ var altairApp;
                     }
                 });
             }
+            $formValidate = $('#editUserForm');
+            if ($formValidate.length != 0) {
+                $formValidate.parsley()
+                    .on('form:validated', function () {
+                    scope.$apply();
+                })
+                    .on('field:validated', function (parsleyField) {
+                    if ($(parsleyField.$element).hasClass('md-input')) {
+                        scope.$apply();
+                    }
+                });
+            }
             this.getLanguages();
             scope.changeView = function (view) {
                 if (view != "card") {

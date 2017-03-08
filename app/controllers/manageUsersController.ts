@@ -4,12 +4,14 @@ class ManageUsersController {
     lservice: any;
     cservice: any;
     public newuser: altairApp.UserDetail = new altairApp.UserDetail();
+    public edituser: altairApp.UserDetail = new altairApp.UserDetail();
     static $inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     constructor(public scope: any, public $rootScope: any, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: altairApp.CommonService, public companyService: altairApp.CompanyService, public loginService: altairApp.LoginService) {
 
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
+        debugger;
         scope.vm = this;
         scope.vm.dt_data = [];
         scope.vm.CompnayName = $rootScope.LoggedUser.CustomerName;
@@ -18,7 +20,20 @@ class ManageUsersController {
         scope.vm.IsPhoneUniqueProcess = false;
         scope.vm.IsUsernameUnique = true;
         scope.vm.IsUsernameUniqueProcess = false;
+
+        this.scope.vm.IsEditMode = false;
+
+        this.scope.vm.edituserid = this.getParameterByName("id");
+
+        if (this.scope.vm.edituserid != "" && this.scope.vm.edituserid != null && this.scope.vm.edituserid != undefined) {
+            this.scope.vm.IsEditMode = true;
+        }
+
+
+
+
         this.getUsers();
+
 
         scope.vm.selectize_c_options = [
             {
@@ -74,6 +89,19 @@ class ManageUsersController {
             labelField: 'Description'
         };
 
+        scope.vm.companies = [];
+
+        scope.vm.selectize_z_config = {
+            plugins: {
+                'tooltip': ''
+            },
+            create: false,
+            maxItems: 1,
+            placeholder: 'Select...',
+            valueField: 'Id',
+            labelField: 'CustomerName'
+        };
+
 
         scope.vm.dtOptions = DTOptionsBuilder
             .newOptions()
@@ -106,10 +134,24 @@ class ManageUsersController {
                 });
         }
 
+        $formValidate = $('#editUserForm');
+        if ($formValidate.length != 0) {
+            $formValidate.parsley()
+                .on('form:validated', function () {
+                    scope.$apply();
+                })
+                .on('field:validated', function (parsleyField) {
+                    if ($(parsleyField.$element).hasClass('md-input')) {
+                        scope.$apply();
+                    }
+                });
+        }
+
+
         this.lservice = loginService;
         this.cservice = commonService;
         this.getLanguages();
-
+        this.getCompanies();
     }
 
     getLanguages() {
@@ -123,6 +165,24 @@ class ManageUsersController {
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsers().then((result: ng.IHttpPromiseCallbackArg<any>) => {
             this.scope.vm.dt_data = result.data;
+            this.$rootScope.$emit("toggleLoader", false);
+            if (this.scope.vm.IsEditMode) {
+                var euid = this.scope.vm.edituserid;
+                var findobj;
+                $.each(this.scope.vm.dt_data, function (index) {
+                    if (this.UserId.toString() === euid) {
+                        findobj = this;
+                    }
+                });
+                this.edituser = findobj;
+            }
+        });
+    }
+
+    getCompanies() {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.getCompanies().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.scope.vm.companies = result.data;
             this.$rootScope.$emit("toggleLoader", false);
         });
     }
@@ -146,32 +206,105 @@ class ManageUsersController {
         }
     }
 
+    EditUser() {
+        if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.$rootScope.$emit("toggleLoader", false);
+                if (result.data != "") {
+                    this.edituser = result.data;
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your information is updated successfully", status: "success" });
+                    window.location.href = "/#/manageusers";
+                } else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+            });
+        }
+    }
+
     checkPhoneUnique() {
         this.scope.vm.IsPhoneUniqueProcess = true;
-        this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
-            this.scope.vm.IsPhoneUniqueProcess = false;
-            if (result.data != "") {
-                this.scope.vm.IsPhoneUnique = false;
-                document.getElementById("user_input_phoneno").valid = false;
-            } else {
-                this.scope.vm.IsPhoneUnique = true;
-                document.getElementById("user_input_phoneno").valid = true;
-            }
-        });
+        if (this.scope.vm.IsEditMode) {
+            this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.vm.IsPhoneUniqueProcess = false;
+                if (result.data != "") {
+                    if (result.data.UserId !== this.edituser.UserId) {
+                        this.scope.vm.IsPhoneUnique = false;
+                        document.getElementById("user_input_phoneno").valid = false;
+
+                    } else {
+                        this.scope.vm.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+
+                } else {
+                    this.scope.vm.IsPhoneUnique = true;
+                    document.getElementById("user_input_phoneno").valid = true;
+                }
+            });
+        } else {
+            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.vm.IsPhoneUniqueProcess = false;
+                if (result.data != "") {
+                    this.scope.vm.IsPhoneUnique = false;
+                    document.getElementById("user_input_phoneno").valid = false;
+                } else {
+                    this.scope.vm.IsPhoneUnique = true;
+                    document.getElementById("user_input_phoneno").valid = true;
+                }
+            });
+        }
     }
 
     checkUserNameUnique() {
         this.scope.vm.IsUsernameUniqueProcess = true;
-        this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
-            this.scope.vm.IsUsernameUniqueProcess = false;
-            if (result.data != "") {
-                this.scope.vm.IsUsernameUnique = false;
-                document.getElementById("user_input_username").valid = false;
-            } else {
-                this.scope.vm.IsUsernameUnique = true;
-                document.getElementById("user_input_username").valid = true;
-            }
-        });
+        if (this.scope.vm.IsEditMode) {
+
+            this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.vm.IsUsernameUniqueProcess = false;
+                if (result.data != "") {
+
+                    if (result.data.UserId !== this.edituser.UserId) {
+                        this.scope.vm.IsUsernameUnique = false;
+                        document.getElementById("user_input_username").valid = false;
+
+                    } else {
+                        this.scope.vm.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+
+                } else {
+                    this.scope.vm.IsUsernameUnique = true;
+                    document.getElementById("user_input_username").valid = true;
+                }
+            });
+
+        } else {
+            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.scope.vm.IsUsernameUniqueProcess = false;
+                if (result.data != "") {
+                    this.scope.vm.IsUsernameUnique = false;
+                    document.getElementById("user_input_username").valid = false;
+                } else {
+                    this.scope.vm.IsUsernameUnique = true;
+                    document.getElementById("user_input_username").valid = true;
+                }
+            });
+        }
+    }
+
+    getParameterByName(name) {
+
+        var url = window.location.href;
+
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 }
 

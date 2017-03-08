@@ -1,45 +1,41 @@
 ﻿<div id="page_content">
     <div id="page_content_inner">
-        <div class="uk-position-relative">
-            <h3 class="heading_b uk-margin-bottom">Manage Users</h3>
-            <div class="md-card uk-margin-medium-bottom">
-                <div class="md-card-content" ng-controller="manageUsersController as showCase">
-                    <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" id="th_cuser_uname" md-language>Name</th>
-                                <th colspan="6"></th>
-                            </tr>
-                            <tr>
-                                <th id="th_cuser_cname" md-language>Company Name</th>
-                                <th id="th_cuser_role" md-language>Role</th>
-                                <th id="th_cuser_username" md-language>Username</th>
-                                <th id="th_cuser_phone" md-language>Phone</th>
-                                <th id="th_cuser_isactive" md-language>IsActive</th>
-                            </tr>
-                        </thead>
-                        <!--<tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>-->
-                        <tbody>
-                            <tr ng-repeat="user in showCase.dt_data">
-                                <td>{{ user.FullIdentityName }}</td>
-                                <td>{{user.Customer.CustomerName}}</td>
-                                <td>{{user.UserGroupName}}</td>
-                                <td>{{user.UserName}}</td>
-                                <td>{{user.Phone}}</td>
-                                <td>{{user.IsActive}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div id="adminmanageuserpage" class="main_page">
+            <div class="uk-position-relative">
+                <h3 id="manageuser_h3_1"  class="heading_b uk-margin-bottom" md-language>Manage Users</h3>
+                <div class="md-card uk-margin-medium-bottom">
+                    <div class="md-card-content" ng-controller="manageUsersController as showCase">
+                        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" id="th_cuser_uname" md-language>Name</th>
+                                    <th colspan="6"></th>
+                                </tr>
+                                <tr>
+                                    <th id="th_cuser_cname" md-language>Company Name</th>
+                                    <th id="th_cuser_role" md-language>Role</th>
+                                    <th id="th_cuser_username" md-language>Username</th>
+                                    <th id="th_cuser_phone" md-language>Phone</th>
+                                    <th id="th_cuser_isactive" md-language>IsActive</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in showCase.dt_data">
+                                    <td>{{ user.FullIdentityName }}</td>
+                                    <td>{{user.Customer.CustomerName}}</td>
+                                    <td>{{user.UserGroupName}}</td>
+                                    <td>{{user.UserName}}</td>
+                                    <td>{{user.Phone}}</td>
+                                    <td>{{user.IsActive}}</td>
+                                    <td>
+                                        <a href="/#/edit_users?id={{ user.UserId }}"><i class="material-icons">mode_edit</i></a>
+                                        <a ng-click="deleteUser(user.UserId);"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

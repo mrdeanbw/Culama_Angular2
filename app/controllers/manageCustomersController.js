@@ -107,7 +107,7 @@ var ManageCustomersController = (function () {
                     }
                 });
                 _this.editcompany = findobj;
-                _this.scope.vm.editcompanyUsers = findobj.Users;
+                _this.getCompanyUsers(_this.editcompany.Id);
             }
         });
     };
@@ -164,6 +164,14 @@ var ManageCustomersController = (function () {
             else {
                 _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
             }
+        });
+    };
+    ManageCustomersController.prototype.getCompanyUsers = function (companyid) {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.getUsersByCompanyId(companyid).then(function (result) {
+            _this.scope.vm.editcompanyUsers = result.data;
+            _this.$rootScope.$emit("toggleLoader", false);
         });
     };
     ManageCustomersController.prototype.getParameterByName = function (name) {

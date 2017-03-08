@@ -13,9 +13,11 @@ var ManageUsersController = (function () {
         this.companyService = companyService;
         this.loginService = loginService;
         this.newuser = new altairApp.UserDetail();
+        this.edituser = new altairApp.UserDetail();
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
+        debugger;
         scope.vm = this;
         scope.vm.dt_data = [];
         scope.vm.CompnayName = $rootScope.LoggedUser.CustomerName;
@@ -24,6 +26,11 @@ var ManageUsersController = (function () {
         scope.vm.IsPhoneUniqueProcess = false;
         scope.vm.IsUsernameUnique = true;
         scope.vm.IsUsernameUniqueProcess = false;
+        this.scope.vm.IsEditMode = false;
+        this.scope.vm.edituserid = this.getParameterByName("id");
+        if (this.scope.vm.edituserid != "" && this.scope.vm.edituserid != null && this.scope.vm.edituserid != undefined) {
+            this.scope.vm.IsEditMode = true;
+        }
         this.getUsers();
         scope.vm.selectize_c_options = [
             {
@@ -72,6 +79,17 @@ var ManageUsersController = (function () {
             valueField: 'Id',
             labelField: 'Description'
         };
+        scope.vm.companies = [];
+        scope.vm.selectize_z_config = {
+            plugins: {
+                'tooltip': ''
+            },
+            create: false,
+            maxItems: 1,
+            placeholder: 'Select...',
+            valueField: 'Id',
+            labelField: 'CustomerName'
+        };
         scope.vm.dtOptions = DTOptionsBuilder
             .newOptions()
             .withDisplayLength(10)
@@ -100,9 +118,22 @@ var ManageUsersController = (function () {
                 }
             });
         }
+        $formValidate = $('#editUserForm');
+        if ($formValidate.length != 0) {
+            $formValidate.parsley()
+                .on('form:validated', function () {
+                scope.$apply();
+            })
+                .on('field:validated', function (parsleyField) {
+                if ($(parsleyField.$element).hasClass('md-input')) {
+                    scope.$apply();
+                }
+            });
+        }
         this.lservice = loginService;
         this.cservice = commonService;
         this.getLanguages();
+        this.getCompanies();
     }
     ManageUsersController.prototype.getLanguages = function () {
         var _this = this;
@@ -116,6 +147,24 @@ var ManageUsersController = (function () {
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsers().then(function (result) {
             _this.scope.vm.dt_data = result.data;
+            _this.$rootScope.$emit("toggleLoader", false);
+            if (_this.scope.vm.IsEditMode) {
+                var euid = _this.scope.vm.edituserid;
+                var findobj;
+                $.each(_this.scope.vm.dt_data, function (index) {
+                    if (this.UserId.toString() === euid) {
+                        findobj = this;
+                    }
+                });
+                _this.edituser = findobj;
+            }
+        });
+    };
+    ManageUsersController.prototype.getCompanies = function () {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.getCompanies().then(function (result) {
+            _this.scope.vm.companies = result.data;
             _this.$rootScope.$emit("toggleLoader", false);
         });
     };
@@ -136,35 +185,104 @@ var ManageUsersController = (function () {
             });
         }
     };
+    ManageUsersController.prototype.EditUser = function () {
+        var _this = this;
+        if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.lservice.saveUserDetail(this.edituser).then(function (result) {
+                _this.$rootScope.$emit("toggleLoader", false);
+                if (result.data != "") {
+                    _this.edituser = result.data;
+                    _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+                    window.location.href = "/#/manageusers";
+                }
+                else {
+                    _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+            });
+        }
+    };
     ManageUsersController.prototype.checkPhoneUnique = function () {
         var _this = this;
         this.scope.vm.IsPhoneUniqueProcess = true;
-        this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
-            _this.scope.vm.IsPhoneUniqueProcess = false;
-            if (result.data != "") {
-                _this.scope.vm.IsPhoneUnique = false;
-                document.getElementById("user_input_phoneno").valid = false;
-            }
-            else {
-                _this.scope.vm.IsPhoneUnique = true;
-                document.getElementById("user_input_phoneno").valid = true;
-            }
-        });
+        if (this.scope.vm.IsEditMode) {
+            this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then(function (result) {
+                _this.scope.vm.IsPhoneUniqueProcess = false;
+                if (result.data != "") {
+                    if (result.data.UserId !== _this.edituser.UserId) {
+                        _this.scope.vm.IsPhoneUnique = false;
+                        document.getElementById("user_input_phoneno").valid = false;
+                    }
+                    else {
+                        _this.scope.vm.IsPhoneUnique = true;
+                        document.getElementById("user_input_phoneno").valid = true;
+                    }
+                }
+                else {
+                    _this.scope.vm.IsPhoneUnique = true;
+                    document.getElementById("user_input_phoneno").valid = true;
+                }
+            });
+        }
+        else {
+            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
+                _this.scope.vm.IsPhoneUniqueProcess = false;
+                if (result.data != "") {
+                    _this.scope.vm.IsPhoneUnique = false;
+                    document.getElementById("user_input_phoneno").valid = false;
+                }
+                else {
+                    _this.scope.vm.IsPhoneUnique = true;
+                    document.getElementById("user_input_phoneno").valid = true;
+                }
+            });
+        }
     };
     ManageUsersController.prototype.checkUserNameUnique = function () {
         var _this = this;
         this.scope.vm.IsUsernameUniqueProcess = true;
-        this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
-            _this.scope.vm.IsUsernameUniqueProcess = false;
-            if (result.data != "") {
-                _this.scope.vm.IsUsernameUnique = false;
-                document.getElementById("user_input_username").valid = false;
-            }
-            else {
-                _this.scope.vm.IsUsernameUnique = true;
-                document.getElementById("user_input_username").valid = true;
-            }
-        });
+        if (this.scope.vm.IsEditMode) {
+            this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then(function (result) {
+                _this.scope.vm.IsUsernameUniqueProcess = false;
+                if (result.data != "") {
+                    if (result.data.UserId !== _this.edituser.UserId) {
+                        _this.scope.vm.IsUsernameUnique = false;
+                        document.getElementById("user_input_username").valid = false;
+                    }
+                    else {
+                        _this.scope.vm.IsUsernameUnique = true;
+                        document.getElementById("user_input_username").valid = true;
+                    }
+                }
+                else {
+                    _this.scope.vm.IsUsernameUnique = true;
+                    document.getElementById("user_input_username").valid = true;
+                }
+            });
+        }
+        else {
+            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
+                _this.scope.vm.IsUsernameUniqueProcess = false;
+                if (result.data != "") {
+                    _this.scope.vm.IsUsernameUnique = false;
+                    document.getElementById("user_input_username").valid = false;
+                }
+                else {
+                    _this.scope.vm.IsUsernameUnique = true;
+                    document.getElementById("user_input_username").valid = true;
+                }
+            });
+        }
+    };
+    ManageUsersController.prototype.getParameterByName = function (name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+        if (!results)
+            return null;
+        if (!results[2])
+            return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     };
     return ManageUsersController;
 }());

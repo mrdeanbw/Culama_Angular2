@@ -442,6 +442,36 @@ altairApp
                     }
                 })
 
+                  // --  ADMIN EDIT USERS PAGE --        
+                .state("restricted.editusers",
+                {
+                    url: "/edit_users",
+                    templateUrl: 'app/views/account/editUserView.html',
+                    controller: 'manageUsersController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                          'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
+                                    'app/services/loginservice.js',
+                                         'app/services/companyService.js',
+                                        'app/controllers/manageUsersController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Edit Users'
+                    }
+                })
+
                    // --  CREATE COMPANY USERS PAGE --        
                 .state("restricted.createcompanyusers",
                 {

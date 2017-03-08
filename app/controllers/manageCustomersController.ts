@@ -110,7 +110,7 @@ class ManageCustomersController {
                     }
                 });
                 this.editcompany = findobj;
-                this.scope.vm.editcompanyUsers = findobj.Users;
+                this.getCompanyUsers(this.editcompany.Id);
             }
         });
     }
@@ -172,6 +172,14 @@ class ManageCustomersController {
                 this.$rootScope.$emit("successnotify",
                     { msg: "Something went wrong. Please try again.", status: "danger" });
             }
+        });
+    }
+
+    getCompanyUsers(companyid) {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.scope.vm.editcompanyUsers = result.data;
+            this.$rootScope.$emit("toggleLoader", false);
         });
     }
 
