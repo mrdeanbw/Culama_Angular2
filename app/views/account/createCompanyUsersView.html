@@ -22,7 +22,7 @@
                             <div class="uk-width-medium-1-2">
                                 <div class="uk-form-row">
                                     <label id="lbl_user_compnayname" md-language>Company</label>
-                                    <input type="text" class="md-input" ng-model="user.scope.CompnayName" md-input />
+                                    <input type="text" class="md-input" disabled ng-model="user.scope.CompnayName" md-input />
                                     <input type="hidden" id="hd_field_companyid" class="md-input" ng-model="user.newuser.CustomerId" />
                                 </div>
                             </div>
@@ -37,8 +37,6 @@
                     <div class="uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-2">
-                                <!--<label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
-                                <input class="md-input" type="text" id="user_input_phoneno" required md-language ng-model="user.newuser.Phone" md-input />-->
                                 <div class="uk-input-group">
                                     <div class="md-input-wrapper">
                                         <label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
@@ -55,9 +53,8 @@
                                 </div>
                             </div>
                             <div class="uk-width-medium-1-2">
-                                <!--<label id="lbl_user_username" for="user_input_username" md-language>Username</label>
-                                <input class="md-input" type="text" id="user_input_username" required md-language ng-model="user.newuser.UserName" md-input />-->
                                 <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">{{ user.scope.companyPrefix + " -" }}</span>
                                     <div class="md-input-wrapper">
                                         <label id="lbl_user_username" for="user_input_username" md-language>Username</label>
                                         <input class="md-input" type="text" id="user_input_username" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !user.IsUsernameUnique}" name="user_input_username" required ng-model="user.newuser.UserName" ng-change="user.checkUserNameUnique()" md-input />

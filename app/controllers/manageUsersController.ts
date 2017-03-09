@@ -11,7 +11,6 @@ class ManageUsersController {
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
-        debugger;
         scope.vm = this;
         scope.vm.dt_data = [];
         scope.vm.CompnayName = $rootScope.LoggedUser.CustomerName;
@@ -99,7 +98,14 @@ class ManageUsersController {
             maxItems: 1,
             placeholder: 'Select...',
             valueField: 'Id',
-            labelField: 'CustomerName'
+            labelField: 'CustomerName',
+            onChange: function (value) {
+                $.each(scope.vm.companies, function (index) {
+                    if (this.Id == value) {
+                        scope.vm.companyPrefix = this.Prefix;
+                    }
+                });
+            }
         };
 
 
@@ -175,6 +181,7 @@ class ManageUsersController {
                     }
                 });
                 this.edituser = findobj;
+                this.edituser.UserName = this.edituser.UserName.toString().replace(this.edituser.Customer.Prefix + "-", ""); 
             }
         });
     }
@@ -190,6 +197,7 @@ class ManageUsersController {
     CreateUser() {
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && createUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            this.newuser.UserName = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
             this.companyService.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 if (result.data) {
                     this.$rootScope.$emit("successnotify",
@@ -209,6 +217,7 @@ class ManageUsersController {
     EditUser() {
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
             this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
@@ -261,8 +270,8 @@ class ManageUsersController {
     checkUserNameUnique() {
         this.scope.vm.IsUsernameUniqueProcess = true;
         if (this.scope.vm.IsEditMode) {
-
-            this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            var uname = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
+            this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
 
@@ -282,7 +291,8 @@ class ManageUsersController {
             });
 
         } else {
-            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            var uname = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
+            this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
                     this.scope.vm.IsUsernameUnique = false;

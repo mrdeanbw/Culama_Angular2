@@ -17,7 +17,6 @@ var ManageUsersController = (function () {
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
-        debugger;
         scope.vm = this;
         scope.vm.dt_data = [];
         scope.vm.CompnayName = $rootScope.LoggedUser.CustomerName;
@@ -88,7 +87,14 @@ var ManageUsersController = (function () {
             maxItems: 1,
             placeholder: 'Select...',
             valueField: 'Id',
-            labelField: 'CustomerName'
+            labelField: 'CustomerName',
+            onChange: function (value) {
+                $.each(scope.vm.companies, function (index) {
+                    if (this.Id == value) {
+                        scope.vm.companyPrefix = this.Prefix;
+                    }
+                });
+            }
         };
         scope.vm.dtOptions = DTOptionsBuilder
             .newOptions()
@@ -157,6 +163,7 @@ var ManageUsersController = (function () {
                     }
                 });
                 _this.edituser = findobj;
+                _this.edituser.UserName = _this.edituser.UserName.toString().replace(_this.edituser.Customer.Prefix + "-", "");
             }
         });
     };
@@ -172,6 +179,7 @@ var ManageUsersController = (function () {
         var _this = this;
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && createUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            this.newuser.UserName = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
             this.companyService.createUser(this.newuser).then(function (result) {
                 if (result.data) {
                     _this.$rootScope.$emit("successnotify", { msg: "Your user is created successfully", status: "success" });
@@ -189,6 +197,7 @@ var ManageUsersController = (function () {
         var _this = this;
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
             this.lservice.saveUserDetail(this.edituser).then(function (result) {
                 _this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
@@ -242,7 +251,8 @@ var ManageUsersController = (function () {
         var _this = this;
         this.scope.vm.IsUsernameUniqueProcess = true;
         if (this.scope.vm.IsEditMode) {
-            this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then(function (result) {
+            var uname = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
+            this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
                 _this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
                     if (result.data.UserId !== _this.edituser.UserId) {
@@ -261,7 +271,8 @@ var ManageUsersController = (function () {
             });
         }
         else {
-            this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
+            var uname = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
+            this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
                 _this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
                     _this.scope.vm.IsUsernameUnique = false;

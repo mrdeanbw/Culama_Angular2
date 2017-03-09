@@ -6,6 +6,8 @@
         public UserGroupId: number;
         public CustomerId: number;
         public CustomerName: string;
+        public CustomerPrefix: string;
+        public CustomerUserPrefix: string;
         public Username: string;
         public Valid: boolean;
 

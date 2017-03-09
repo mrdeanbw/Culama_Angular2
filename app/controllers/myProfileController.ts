@@ -6,10 +6,15 @@ module altairApp {
         lservice: any;
         cservice: any;
         public userDetail: altairApp.UserDetail = new altairApp.UserDetail();
+        public userAccount: altairApp.LoginUser = new altairApp.LoginUser();
         static $inject = ["$scope", "$rootScope", "loginService", "commonService"];
         constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService, public commonService: altairApp.CommonService) {
 
             scope.vm = this;
+            scope.vm.title = "";
+            scope.vm.newpassword = "";
+            scope.vm.confirmpassword = "";
+            scope.vm.IsPasswordMatch = true;
             scope.vm.title = "";
             scope.vm.selectize_a_options = [];
 
@@ -116,6 +121,10 @@ module altairApp {
             });
         }
 
+        checkPasswordMatch() {
+            this.scope.vm.IsPasswordMatch = (this.scope.vm.newpassword == this.scope.vm.confirmpassword);
+        }
+
         saveInfo() {
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
@@ -133,6 +142,25 @@ module altairApp {
                 });    
             }
             
+        }
+
+        saveAccountInfo() {
+            if (this.scope.vm.IsPasswordMatch && form_validation.checkValidity()) {
+                this.$rootScope.$emit("toggleLoader", true);
+                this.userAccount.username = this.scope.vm.userDetail.UserName;
+                this.userAccount.password = this.scope.vm.newpassword;
+                this.lservice.changePassword(this.userAccount).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+                    this.$rootScope.$emit("toggleLoader", false);
+                    if (result.data) {
+                        this.$rootScope.$emit("logout", {});
+                    } else {
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Something went wrong. Please try again.", status: "danger" });
+                    }
+                    
+                });
+            }
+
         }
        
     }

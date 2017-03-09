@@ -54,6 +54,7 @@
                             </div>
                             <div class="uk-width-medium-1-2">
                                 <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">{{ user.scope.companyPrefix }}</span>
                                     <div class="md-input-wrapper">
                                         <label id="lbl_user_username" for="user_input_username" md-language>Username</label>
                                         <input class="md-input" type="text" id="user_input_username" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !user.IsUsernameUnique}" name="user_input_username" required ng-model="user.edituser.UserName" ng-change="user.checkUserNameUnique()" md-input />

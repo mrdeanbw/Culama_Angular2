@@ -9,7 +9,12 @@ var altairApp;
             this.loginService = loginService;
             this.commonService = commonService;
             this.userDetail = new altairApp.UserDetail();
+            this.userAccount = new altairApp.LoginUser();
             scope.vm = this;
+            scope.vm.title = "";
+            scope.vm.newpassword = "";
+            scope.vm.confirmpassword = "";
+            scope.vm.IsPasswordMatch = true;
             scope.vm.title = "";
             scope.vm.selectize_a_options = [];
             scope.vm.CurrentLanguage = $rootScope.CurrentLocaleLanguage;
@@ -100,6 +105,9 @@ var altairApp;
                 }
             });
         };
+        MyProfileController.prototype.checkPasswordMatch = function () {
+            this.scope.vm.IsPasswordMatch = (this.scope.vm.newpassword == this.scope.vm.confirmpassword);
+        };
         MyProfileController.prototype.saveInfo = function () {
             var _this = this;
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
@@ -113,6 +121,23 @@ var altairApp;
                         _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     _this.$rootScope.$emit("toggleLoader", false);
+                });
+            }
+        };
+        MyProfileController.prototype.saveAccountInfo = function () {
+            var _this = this;
+            if (this.scope.vm.IsPasswordMatch && form_validation.checkValidity()) {
+                this.$rootScope.$emit("toggleLoader", true);
+                this.userAccount.username = this.scope.vm.userDetail.UserName;
+                this.userAccount.password = this.scope.vm.newpassword;
+                this.lservice.changePassword(this.userAccount).then(function (result) {
+                    _this.$rootScope.$emit("toggleLoader", false);
+                    if (result.data) {
+                        _this.$rootScope.$emit("logout", {});
+                    }
+                    else {
+                        _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                    }
                 });
             }
         };

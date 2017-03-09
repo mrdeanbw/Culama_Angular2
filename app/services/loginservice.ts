@@ -20,6 +20,13 @@ module altairApp {
             });
         }
 
+
+        changePassword(loginuser: altairApp.LoginUser): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            var params = JSON.stringify(loginuser);
+            return this.$http.put(this.appConfig.domain + '/Web/Security/ChangeUserPassword', params, {
+            });
+        }
+
         getUserDetailsbyId(id: string): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetail/' + id, {
             });

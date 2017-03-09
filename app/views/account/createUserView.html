@@ -36,8 +36,6 @@
                     <div class="uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-2">
-                                <!--<label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
-                                <input class="md-input" type="text" id="user_input_phoneno" required md-language ng-model="user.newuser.Phone" md-input />-->
                                 <div class="uk-input-group">
                                     <div class="md-input-wrapper">
                                         <label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
@@ -54,9 +52,8 @@
                                 </div>
                             </div>
                             <div class="uk-width-medium-1-2">
-                                <!--<label id="lbl_user_username" for="user_input_username" md-language>Username</label>
-                                <input class="md-input" type="text" id="user_input_username" required md-language ng-model="user.newuser.UserName" md-input />-->
                                 <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">{{ user.companyPrefix }}</span>
                                     <div class="md-input-wrapper">
                                         <label id="lbl_user_username" for="user_input_username" md-language>Username</label>
                                         <input class="md-input" type="text" id="user_input_username" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !user.IsUsernameUnique}" name="user_input_username" required ng-model="user.newuser.UserName" ng-change="user.checkUserNameUnique()"  md-input />

@@ -20,7 +20,7 @@ var altairApp;
             this.lservice = loginService;
             this.scope.cardview = true;
             this.scope.CompnayName = $rootScope.LoggedUser.CustomerName;
-            //scope.CompnayName = $rootScope.LoggedUser.CustomerName;
+            this.scope.companyPrefix = $rootScope.LoggedUser.CustomerPrefix;
             this.newuser.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.scope.IsPhoneUnique = true;
             this.scope.IsPhoneUniqueProcess = false;
@@ -166,6 +166,7 @@ var altairApp;
                         }
                     });
                     _this.edituser = findobj;
+                    _this.edituser.UserName = _this.edituser.UserName.toString().replace(_this.edituser.Customer.Prefix + "-", "");
                 }
             });
         };
@@ -173,6 +174,7 @@ var altairApp;
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
                 this.cservice.createUser(this.newuser).then(function (result) {
                     if (result.data) {
                         _this.$rootScope.$emit("successnotify", { msg: "Your user is created successfully", status: "success" });
@@ -190,6 +192,7 @@ var altairApp;
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
                 this.lservice.saveUserDetail(this.edituser).then(function (result) {
                     _this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
@@ -264,7 +267,8 @@ var altairApp;
             var _this = this;
             this.scope.IsUsernameUniqueProcess = true;
             if (this.scope.IsEditMode) {
-                this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then(function (result) {
+                var uname = this.scope.companyPrefix + "-" + this.edituser.UserName;
+                this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
                     _this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
                         if (result.data.UserId !== _this.edituser.UserId) {
@@ -283,7 +287,8 @@ var altairApp;
                 });
             }
             else {
-                this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then(function (result) {
+                var uname = this.scope.companyPrefix + "-" + this.newuser.UserName;
+                this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
                     _this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
                         _this.scope.IsUsernameUnique = false;

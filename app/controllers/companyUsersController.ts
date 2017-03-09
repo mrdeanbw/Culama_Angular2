@@ -12,7 +12,7 @@ module altairApp {
             this.lservice = loginService;
             this.scope.cardview = true;
             this.scope.CompnayName = $rootScope.LoggedUser.CustomerName;
-            //scope.CompnayName = $rootScope.LoggedUser.CustomerName;
+            this.scope.companyPrefix = $rootScope.LoggedUser.CustomerPrefix;
             this.newuser.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.scope.IsPhoneUnique = true;
             this.scope.IsPhoneUniqueProcess = false;
@@ -180,6 +180,7 @@ module altairApp {
                         }
                     });
                     this.edituser = findobj;
+                    this.edituser.UserName = this.edituser.UserName.toString().replace(this.edituser.Customer.Prefix + "-", ""); 
                 }
 
             });
@@ -188,6 +189,7 @@ module altairApp {
         CreateUser() {
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
                 this.cservice.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                     if (result.data) {
                         this.$rootScope.$emit("successnotify",
@@ -207,6 +209,7 @@ module altairApp {
         EditUser() {
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
                 this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
@@ -286,8 +289,8 @@ module altairApp {
             this.scope.IsUsernameUniqueProcess = true;
 
             if (this.scope.IsEditMode) {
-
-                this.lservice.getUserDetailsbyUsername(this.edituser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                var uname = this.scope.companyPrefix + "-" + this.edituser.UserName;
+                this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                     this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
 
@@ -307,8 +310,8 @@ module altairApp {
                 });
 
             } else {
-
-                this.lservice.getUserDetailsbyUsername(this.newuser.UserName).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                var uname = this.scope.companyPrefix + "-" + this.newuser.UserName;
+                this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                     this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
                         this.scope.IsUsernameUnique = false;

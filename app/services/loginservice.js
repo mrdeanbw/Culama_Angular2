@@ -14,6 +14,10 @@ var altairApp;
             var params = JSON.stringify(loginuser);
             return this.$http.put(this.appConfig.domain + '/Web/Security/CheckUser', params, {});
         };
+        LoginService.prototype.changePassword = function (loginuser) {
+            var params = JSON.stringify(loginuser);
+            return this.$http.put(this.appConfig.domain + '/Web/Security/ChangeUserPassword', params, {});
+        };
         LoginService.prototype.getUserDetailsbyId = function (id) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetail/' + id, {});
         };
