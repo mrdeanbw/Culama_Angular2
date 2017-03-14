@@ -16,6 +16,9 @@ var altairApp;
         CompanyService.prototype.getCompanies = function () {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetCompanies', {});
         };
+        CompanyService.prototype.getCompanyById = function (id) {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetCustomerDetails/' + id, {});
+        };
         CompanyService.prototype.createUser = function (user) {
             var params = JSON.stringify(user);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {});

@@ -1,0 +1,35 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="companyMessageSettingPage" class="main_page">
+            <div class="uk-position-relative">
+                <h3 class="heading_b uk-margin-bottom">{{ CompnayName }} - <span id="cuser_span_1" md-language>Message Setting</span></h3>
+            </div>
+            <form id="msgsettingform" name="msgsettingform" class="uk-form-stacked">
+                <div class="md-card user_content uk-width-large-3  -10 ">
+                    <div class="uk-form-row">
+                        <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="Customer.IsAllowMsgAllToEveryone" icheck ng-change="saveCompany()" />
+                        <label id="lbl_allowmsgtoall_checkbox" for="allowmsgtoall_checkbox" md-language> Allow all users to send messages to everyone</label>
+                    </div>
+                    <div class="uk-form-row">
+                        <span>Check user to allow send messages to everyone</span>
+                        <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+                            <div class="uk-width-large-1-3 uk-width-medium-1-2">
+                                <ul class="md-list md-list-addon">
+                                    <li ng-repeat="user in CompanyUsers">
+                                        <div class="md-list-addon-element">
+                                            <input id="{{ user.UserId }}" class="user-check" type="checkbox" icheck ng-model="user.IsAllowMsgToEveryone" ng-change="saveCompanyUser(user)" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">{{ user.FullIdentityName }}</span>
+                                            <span class="uk-text-small uk-text-muted">{{user.Phone}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+

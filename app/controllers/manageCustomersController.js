@@ -145,6 +145,46 @@ var ManageCustomersController = (function () {
             });
         }
     };
+    ManageCustomersController.prototype.saveCompany = function () {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.saveCompanyDetail(this.editcompany).then(function (result) {
+            _this.$rootScope.$emit("toggleLoader", false);
+            if (result.data != "") {
+                _this.editcompany = result.data;
+                var cmobj = _this;
+                var ccheck = _this.editcompany.IsAllowMsgAllToEveryone;
+                $.each(_this.scope.vm.editcompanyUsers, function () {
+                    var u = this;
+                    u.IsAllowMsgToEveryone = ccheck;
+                    cmobj.saveCompanyUser(u);
+                });
+                _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+            }
+            else {
+                _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+            }
+        });
+    };
+    ManageCustomersController.prototype.saveCompanyUser = function (user) {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.lservice.saveUserDetail(user).then(function (result) {
+            _this.$rootScope.$emit("toggleLoader", false);
+            if (result.data != "") {
+                $.each(_this.scope.vm.editcompanyUsers, function (index) {
+                    var u = this;
+                    if (u.UserId == user.UserId) {
+                        u = result.data;
+                    }
+                });
+                _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+            }
+            else {
+                _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+            }
+        });
+    };
     ManageCustomersController.prototype.DeleteCompany = function (id) {
         var _this = this;
         this.$rootScope.$emit("toggleLoader", true);

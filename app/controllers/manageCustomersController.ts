@@ -93,6 +93,9 @@ class ManageCustomersController {
             });
         }
 
+
+       
+
         this.getCompanies();
 
     }
@@ -150,6 +153,53 @@ class ManageCustomersController {
                 }
             });
         }
+    }
+
+    saveCompany() {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+            this.$rootScope.$emit("toggleLoader", false);
+            if (result.data != "") {
+                this.editcompany = result.data;
+
+                var cmobj = this;
+                var ccheck = this.editcompany.IsAllowMsgAllToEveryone;
+                $.each(this.scope.vm.editcompanyUsers, function () {
+                    var u = this;
+                    u.IsAllowMsgToEveryone = ccheck;
+                    cmobj.saveCompanyUser(u);
+                });
+
+                this.$rootScope.$emit("successnotify",
+                    { msg: "Your information is updated successfully", status: "success" });
+            } else {
+                this.$rootScope.$emit("successnotify",
+                    { msg: "Something went wrong. Please try again.", status: "danger" });
+            }
+
+        });
+    }
+
+    saveCompanyUser(user) {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.$rootScope.$emit("toggleLoader", false);
+            if (result.data != "") {
+
+                $.each(this.scope.vm.editcompanyUsers, function (index) {
+                    var u = this;
+                    if (u.UserId == user.UserId) {
+                        u = result.data;
+                    }
+                })
+
+                this.$rootScope.$emit("successnotify",
+                    { msg: "Your information is updated successfully", status: "success" });
+            } else {
+                this.$rootScope.$emit("successnotify",
+                    { msg: "Something went wrong. Please try again.", status: "danger" });
+            }
+        });
     }
 
     DeleteCompany(id) {

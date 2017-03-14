@@ -2,7 +2,7 @@
     .module('altairApp')
        .filter("lantitlefilter",
         function () {
-            return function (x,input) {
+            return function (x, input) {
                 return x["title_" + input];
             };
         })
@@ -34,7 +34,7 @@
                         }
                     })
                 });
-            
+
             // language switcher
             $scope.langSwitcherModel = $rootScope.CurrentLocaleLanguage.toLowerCase();
             var langData = $scope.langSwitcherOptions = [
@@ -72,7 +72,7 @@
                 }
             };
 
-            
+
             if ($rootScope.LoggedUser.UserGroupId === 1) {
                 // Administrator menu entries
                 $scope.sections = [
@@ -100,6 +100,19 @@
                         title_in: 'उपयोगकर्ता',
                         icon: '&#xE87C;',
                         link: 'restricted.companyusers'
+                    },
+                    {
+                        id: 2,
+                        title_us: 'Setting',
+                        title_in: 'सेटिंग',
+                        icon: '&#xE241;',
+                        submenu: [
+                             {
+                                 title_us: 'Message Setting',
+                                 title_in: 'संदेश सेटिंग',
+                                 link: 'restricted.companymessagesetting'
+                             }
+                        ]
                     }
                 ];
             } else if ($rootScope.LoggedUser.UserGroupId === 3) {

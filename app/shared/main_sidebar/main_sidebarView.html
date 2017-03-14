@@ -27,7 +27,7 @@
                         <span class="menu_title">{{section | lantitlefilter:langSwitcherModel}}</span>
                     </a>
                     <ul ng-if="section.submenu">
-                        <li ng-if="section.submenu_title" class="submenu-title">{{section.submenu_title}}</li>
+                        <li ng-if="section.submenu_title" class="submenu-title">{{section.submenu_title }}</li>
                         <li ng-repeat-start="item in section.submenu" ng-if="item.group" class="menu_subtitle">{{item.group}}</li>
                         <li ng-repeat-end ng-class="{ act_item: $state.includes(item.link), 'submenu_trigger': (item.submenu.length > 0) && !miniSidebarActive, 'sidebar_submenu': (item.submenu.length > 0) && miniSidebarActive }" ng-include="'submenuTree'"></li>
                     </ul>
@@ -36,12 +36,12 @@
         </div>
     </aside>
     <script type="text/ng-template" id="submenuTree">
-        <a ng-if="item.link" ui-sref="{{item.link}}">{{item.title}}</a>
-        <a ng-if="!item.link" href="#" ng-click="submenuToggle($event)">{{item.title}}</a>
+        <a ng-if="item.link" ui-sref="{{item.link}}">{{item | lantitlefilter:langSwitcherModel}}</a>
+        <a ng-if="!item.link" href="#" ng-click="submenuToggle($event)">{{item | lantitlefilter:langSwitcherModel}}</a>
         <ul ng-if="item.submenu">
             <li ng-repeat="item in item.submenu" ng-include="'submenuTree'" ng-class="{ act_item: $state.includes(item.link), 'submenu_trigger': (item.submenu.length > 0) && !miniSidebarActive, 'sidebar_submenu': (item.submenu.length > 0) && miniSidebarActive }">
-                <a ng-if="item.link" ui-sref="{{item.link}}">{{item.title}}</a>
-                <a ng-if="!item.link" href="#" ng-click="submenuToggle($event)">{{item.title}}</a>
+                <a ng-if="item.link" ui-sref="{{item.link}}">{{item | lantitlefilter:langSwitcherModel }}</a>
+                <a ng-if="!item.link" href="#" ng-click="submenuToggle($event)">{{item | lantitlefilter:langSwitcherModel}}</a>
             </li>
         </ul>
     </script>

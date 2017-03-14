@@ -531,7 +531,37 @@ altairApp
                     data: {
                         pageTitle: 'Edit Users'
                     }
-                });
+                })
+
+            // --  COMPANY MESSAGE SETTING PAGE --        
+            .state("restricted.companymessagesetting",
+            {
+                url: "/company_manage_setting",
+                templateUrl: 'app/views/setting/messageSettingView.html',
+                controller: 'companyMessageSettingController',
+                resolve: {
+                    deps: [
+                        '$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                   'bower_components/angular-resource/angular-resource.min.js',
+                                    'lazy_datatables',
+                                    'lazy_parsleyjs',
+                                    'lazy_uikit',
+                                    'lazy_iCheck',
+                                    'app/models/Customer.js',
+                                    'app/models/UserDetails.js',
+                                    'app/services/loginservice.js',
+                                    'app/services/companyService.js',
+                                    'app/controllers/companyMessageSettingController.js'
+                            ],
+                                { serie: true });
+                        }
+                    ]
+                },
+                data: {
+                    pageTitle: 'Message Setting'
+                }
+            });
 
         }
     ]);

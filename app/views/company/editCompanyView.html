@@ -9,6 +9,7 @@
                         <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim2', animation:'slide-horizontal'}">
                             <li class="uk-active"><a href="#">Details</a></li>
                             <li><a href="#">Users</a></li>
+                            <li><a href="#">Message Setting</a></li>
                         </ul>
                         <ul id="tabs_anim2" class="uk-switcher uk-margin">
                             <li>
@@ -90,7 +91,32 @@
                                     </tbody>
                                 </table>
                             </li>
-                            
+                            <li>
+                                <div class="md-card-content">
+                                    <div class="uk-form-row">
+                                        <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="user.editcompany.IsAllowMsgAllToEveryone" icheck ng-change="user.saveCompany()" />
+                                        <label id="lbl_allowmsgtoall_checkbox" for="allowmsgtoall_checkbox" md-language> Allow all users to send messages to everyone</label>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <span>Check user to allow send messages to everyone</span>
+                                        <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+                                            <div class="uk-width-large uk-width-medium-1-2">
+                                                <ul class="md-list md-list-addon">
+                                                    <li ng-repeat="u in user.editcompanyUsers">
+                                                        <div class="md-list-addon-element">
+                                                            <input id="{{ u.UserId }}" class="user-check" type="checkbox" icheck ng-model="u.IsAllowMsgToEveryone" ng-change="user.saveCompanyUser(u)" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{ u.FullIdentityName }}</span>
+                                                            <span class="uk-text-small uk-text-muted">{{u.Phone}}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

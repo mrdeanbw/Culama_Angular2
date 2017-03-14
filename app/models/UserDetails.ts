@@ -37,6 +37,7 @@
         public PreferredLanguageId: number;
         public UserGroupId: number;
         public UserGroupName: string;
+        public IsAllowMsgToEveryone: boolean;  
 
     }
 
