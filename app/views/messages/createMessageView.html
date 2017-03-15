@@ -1,0 +1,61 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="usercreatemessagepage" class="main_page">
+            <h2 id="user_h2_1" md-language>Create Message</h2>
+
+            <div class="md-card user_content uk-width-large-5-10 " ng-controller="userMessagesController as msg">
+                <form name="createMessageForm" ng-submit="msg.CreateMessage()" id="createMessageForm">
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_message_title" for="message_input_title" md-language>Title</label>
+                                <input class="md-input" type="text" id="message_input_title" required md-language ng-model="msg.newmessage.Title" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_message_description" for="message_input_description" md-language>Description<span class="req">*</span></label>
+                                <textarea class="md-input" id="message_input_description" required md-language ng-model="msg.newmessage.Description" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_message_users" for="message_input_users" md-language>Participants<span class="req">*</span></label>
+                                <selectize id="message_input_users" config="selectize_users_config" options="selectize_users_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <input class="user-check" type="checkbox" id="message_checkbox_isnoreply" required md-language ng-model="msg.newmessage.IsNoReply" icheck />
+                                <label id="lbl_message_isnoreply" for="message_checkbox_isnoreply" md-language>NoReply Group</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <input class="user-check" type="checkbox" id="message_checkbox_isactive" required md-language ng-model="msg.newmessage.IsActive" icheck />
+                                <label id="lbl_message_isactive" for="message_checkbox_isactive" md-language>Active</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-medium-1-1 mt-20">
+                        <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                            Save
+                        </button>
+                        <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ui-sref="restricted.usermessages">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

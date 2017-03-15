@@ -533,33 +533,79 @@ altairApp
                     }
                 })
 
-            // --  COMPANY MESSAGE SETTING PAGE --        
-            .state("restricted.companymessagesetting",
+                // --  COMPANY MESSAGE SETTING PAGE --        
+                .state("restricted.companymessagesetting",
+                {
+                    url: "/company_manage_setting",
+                    templateUrl: 'app/views/setting/messageSettingView.html',
+                    controller: 'companyMessageSettingController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                       'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/companyMessageSettingController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Message Setting'
+                    }
+                })
+
+                 // --  USER MESSAGE PAGE --        
+                .state("restricted.usermessages",
+                {
+                    url: "/user_messages",
+                    templateUrl: 'app/views/messages/messagesView.html',
+                    controller: 'userMessagesController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                        'app/services/companyService.js',
+                                         'app/services/messagesService.js',
+                                        'app/controllers/userMessagesController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'User Messages'
+                    }
+                })
+
+            // --  USER CREATE MESSAGE PAGE --        
+            .state("restricted.usercreatemessage",
             {
-                url: "/company_manage_setting",
-                templateUrl: 'app/views/setting/messageSettingView.html',
-                controller: 'companyMessageSettingController',
+                url: "/user_messages",
+                templateUrl: 'app/views/messages/createMessageView.html',
+                controller: 'userMessagesController',
                 resolve: {
                     deps: [
                         '$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                   'bower_components/angular-resource/angular-resource.min.js',
-                                    'lazy_datatables',
-                                    'lazy_parsleyjs',
-                                    'lazy_uikit',
-                                    'lazy_iCheck',
-                                    'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/services/loginservice.js',
                                     'app/services/companyService.js',
-                                    'app/controllers/companyMessageSettingController.js'
+                                     'app/services/messagesService.js',
+                                    'app/controllers/userMessagesController.js'
                             ],
                                 { serie: true });
                         }
                     ]
                 },
                 data: {
-                    pageTitle: 'Message Setting'
+                    pageTitle: 'Create Messages'
                 }
             });
 
