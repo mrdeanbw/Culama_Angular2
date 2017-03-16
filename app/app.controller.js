@@ -12,7 +12,6 @@ angular
             if ($rootScope.CurrentLocaleLanguage == undefined || $rootScope.CurrentLocaleLanguage === "") {
                 localStorage.setItem("localelanguage", "US");
             }
-           
             var result = localStorage.getItem("loggeduser");
             $rootScope.LoggedUser = JSON.parse(result);
             if ($rootScope.LoggedUser != null && $rootScope.LoggedUser != undefined) {

@@ -589,7 +589,7 @@ altairApp
             // --  USER CREATE MESSAGE PAGE --        
             .state("restricted.usercreatemessage",
             {
-                url: "/user_messages",
+                url: "/create_user_messages",
                 templateUrl: 'app/views/messages/createMessageView.html',
                 controller: 'userMessagesController',
                 resolve: {

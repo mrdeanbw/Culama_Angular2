@@ -1,4 +1,33 @@
-﻿<div id="page_content">
+﻿<style>
+    .md-card .md-list > li > .md-list-content, .md-card .md-list > li > .md-list-content .md-list-heading {
+        overflow: visible !important;
+    }
+
+    .md-card .uk-dropdown .uk-nav {
+        margin: 0 !important;
+    }
+
+    .user-message-section div , .user-message-section a {
+        display: inline-block;
+        font-size: 13px;
+        color: #9c9c9c;
+    }
+
+    .arrow {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        vertical-align: middle !important;
+    }
+
+    .user-text {
+        font-size: 13px !important;
+    color: #444 !important;
+    margin-top: 4px;
+    }
+</style>
+
+
+<div id="page_content">
     <div id="page_content_inner">
         <div id="usermessagespage" class="main_page">
             <h2 id="user_h2_1" md-language>Messages</h2>
@@ -6,13 +35,13 @@
             <div class="md-card user_content uk-width-large-5-10 ">
                 <div class="uk-width-large uk-width-medium-1-2">
                     <ul class="md-list md-list-addon">
-                        <li ng-repeat="m in Messages">
+                        <li ng-repeat="m in Messages" on-last-repeat>
                             <div class="md-list-addon-element">
                                 <img class="md-user-image md-list-addon-avatar" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" add-image-prop />
                             </div>
                             <div class="md-list-content">
-                                <span class="md-list-heading">{{ m.Title }}</span>
-                                <span class="uk-text-small uk-text-muted">{{m.Description}}</span>
+                                <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m)"></span></span>
+                                <span class="uk-text-small uk-text-muted user-text">{{m.Description}}</span>
                             </div>
                         </li>
                     </ul>

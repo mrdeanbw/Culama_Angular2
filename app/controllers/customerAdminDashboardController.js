@@ -7,12 +7,14 @@ angular
         '$interval',
         '$timeout',
         'variables',
-         function ($rootScope, $scope,$rootScope, $interval, $timeout, sale_chart_data, user_data, variables) {
+         function ($rootScope, $scope, $interval, $timeout, sale_chart_data, user_data, variables) {
 
-
-             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
-                 window.location.href = "#/user_dashboard";
+             if ($rootScope.LoggedUser.UserGroupId != undefined) {
+                 if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
+                     window.location.href = "#/user_dashboard";
+                 }
              }
+             
           
          }
     ]);

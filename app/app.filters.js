@@ -62,7 +62,8 @@ altairApp
         };
     })
     .filter("trust", ['$sce', function($sce) {
-        return function(htmlCode){
+        return function (htmlCode) {
+            debugger;
             return $sce.trustAsHtml(htmlCode);
         }
     }])

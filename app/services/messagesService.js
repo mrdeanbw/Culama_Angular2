@@ -10,6 +10,10 @@ var altairApp;
         MessagesService.prototype.getMessageThreadsByUserId = function (userid) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetMessageThreadsByUserId/' + userid, {});
         };
+        MessagesService.prototype.createMessageThread = function (msgObj) {
+            var params = JSON.stringify(msgObj);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateMessageThread', params, {});
+        };
         return MessagesService;
     }());
     MessagesService.$inject = ["$http", "appConfig"];
