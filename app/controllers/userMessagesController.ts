@@ -39,7 +39,6 @@ class UserMessagesController {
             if (m.MessageThreadUsers.length > 3) {
                 var html = "";
                 $.each(m.MessageThreadUsers, function () {
-                    debugger;
                     if (this.UserId != loggedUid) {
                         html += "<li style='color: #444;'>" + this.User.FullIdentityName +"</li>"
                     }
@@ -57,6 +56,42 @@ class UserMessagesController {
                 });
             });
         })
+
+        //this.scope.selectedMessageThread
+
+        this.scope.chat_messages = [
+            {
+                "user_id": 0,
+                "content": [
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, eum?",
+                    "Lorem ipsum dolor sit amet."
+                ],
+                "date": "13:38"
+            },
+            {
+                "user_id": 1,
+                "content": [
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem delectus distinctio dolor earum est hic id impedit ipsum minima mollitia natus nulla perspiciatis quae quasi, quis recusandae, saepe, sunt totam."
+                ],
+                "date": "13:34"
+            },
+            {
+                "user_id": 0,
+                "content": [
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ea mollitia pariatur porro quae sed sequi sint tenetur ut veritatis."
+                ],
+                "date": "23 JUN 1:10AM"
+            },
+            {
+                "user_id": 1,
+                "content": [
+                    "Lorem ipsum dolor sit amet, consectetur.",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                ],
+                "date": "FRIDAY 13:34"
+            }
+        ];
+       
     }
 
     getMessageThreadByUserId(id) {
