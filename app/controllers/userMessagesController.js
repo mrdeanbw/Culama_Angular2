@@ -1,14 +1,15 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var UserMessagesController = (function () {
-    function UserMessagesController(scope, $rootScope, $sce, companyService, messageService) {
+    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService) {
         this.scope = scope;
         this.$rootScope = $rootScope;
         this.$sce = $sce;
+        this.$filter = $filter;
         this.companyService = companyService;
         this.messageService = messageService;
         this.scope.Messages = [];
-        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId);
+        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
         this.scope.selectize_users_options = [];
@@ -56,47 +57,24 @@ var UserMessagesController = (function () {
                 });
             });
         });
-        //this.scope.messages
-        this.scope.chat_messages = [
-            {
-                "user_id": 0,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, eum?",
-                    "Lorem ipsum dolor sit amet."
-                ],
-                "date": "13:38"
-            },
-            {
-                "user_id": 1,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem delectus distinctio dolor earum est hic id impedit ipsum minima mollitia natus nulla perspiciatis quae quasi, quis recusandae, saepe, sunt totam."
-                ],
-                "date": "13:34"
-            },
-            {
-                "user_id": 0,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ea mollitia pariatur porro quae sed sequi sint tenetur ut veritatis."
-                ],
-                "date": "23 JUN 1:10AM"
-            },
-            {
-                "user_id": 1,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur.",
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-                ],
-                "date": "FRIDAY 13:34"
-            }
-        ];
+        var umg = this;
+        this.scope.scopeLoadMessages = function (id) {
+            umg.loadMessages(id, true);
+        };
+        this.scope.scopeSendMessage = function () {
+            umg.sendMessage();
+        };
     }
-    UserMessagesController.prototype.getMessageThreadByUserId = function (id) {
+    UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
         var _this = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.messageService.getMessageThreadsByUserId(id).then(function (result) {
             _this.scope.Messages = result.data;
             if (result.data.length > 0) {
                 _this.scope.IsHasMessages = true;
+                if (isLoadMessage) {
+                    _this.loadMessages(_this.scope.Messages[0].Id, true);
+                }
             }
             _this.$rootScope.$emit("toggleLoader", false);
         });
@@ -114,6 +92,36 @@ var UserMessagesController = (function () {
             _this.scope.selectize_users_options = result.data;
             _this.$rootScope.$emit("toggleLoader", false);
         });
+    };
+    UserMessagesController.prototype.loadMessages = function (messageId, IsRefreshAll) {
+        if (IsRefreshAll) {
+            this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+        }
+        var msg;
+        $.each(this.scope.Messages, function () {
+            if (this.Id == messageId) {
+                msg = this;
+            }
+        });
+        this.scope.SelectedMessageThread = msg;
+        if (msg != undefined) {
+            $.each(msg.MessageThreadDetails, function () {
+                if (typeof this.CreatedOn === 'string') {
+                    this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
+                }
+            });
+            var md = this.$filter('orderBy')(msg.MessageThreadDetails, 'CreatedOn');
+            var chatObjs = [];
+            var ft = this.$filter;
+            $.each(md, function () {
+                var chatobj = new Object();
+                chatobj.user_id = this.UserId;
+                chatobj.date = ft('date')(this.CreatedOn, "dd MMM HH:mm");
+                chatobj.content = [this.TextContent];
+                chatObjs.push(chatobj);
+            });
+            this.scope.chat_messages = chatObjs;
+        }
     };
     UserMessagesController.prototype.CreateMessage = function () {
         var _this = this;
@@ -145,8 +153,36 @@ var UserMessagesController = (function () {
             });
         }
     };
+    UserMessagesController.prototype.sendMessage = function () {
+        var _this = this;
+        if (this.scope.SendMessageContent.toString().trim() != "") {
+            var msgu = new Object();
+            msgu.MessageId = this.scope.SelectedMessageThread.Id;
+            msgu.UserId = this.$rootScope.LoggedUser.UserId;
+            msgu.TextContent = this.scope.SendMessageContent.toString().trim();
+            msgu.IsActive = true;
+            this.$rootScope.$emit("toggleLoader", true);
+            this.messageService.sendMessageThread(msgu).then(function (result) {
+                if (result.data != null) {
+                    var mlist = _this.scope.Messages;
+                    $.each(mlist, function (index) {
+                        if (this.Id === result.data.Id) {
+                            mlist[index] = result.data;
+                        }
+                    });
+                    _this.scope.Messages = mlist;
+                    _this.loadMessages(result.data.Id, false);
+                }
+                else {
+                    _this.$rootScope.$emit("successnotify", { msg: "Message can't sent. Please try again.", status: "danger" });
+                }
+                _this.scope.SendMessageContent = "";
+                _this.$rootScope.$emit("toggleLoader", false);
+            });
+        }
+    };
     return UserMessagesController;
 }());
-UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "companyService", "messagesService"];
+UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
 angular.module("altairApp")
     .controller("userMessagesController", UserMessagesController);

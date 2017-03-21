@@ -14,6 +14,10 @@ var altairApp;
             var params = JSON.stringify(msgObj);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateMessageThread', params, {});
         };
+        MessagesService.prototype.sendMessageThread = function (msgObj) {
+            var params = JSON.stringify(msgObj);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SendMessage', params, {});
+        };
         return MessagesService;
     }());
     MessagesService.$inject = ["$http", "appConfig"];

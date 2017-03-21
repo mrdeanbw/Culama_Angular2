@@ -20,6 +20,12 @@ module altairApp {
             });
         }
 
+        sendMessageThread(msgObj: any): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            var params = JSON.stringify(msgObj);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SendMessage', params, {
+            });
+        }
+
     }
 
     angular

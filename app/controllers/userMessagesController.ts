@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 class UserMessagesController {
-    static $inject = ["$scope", "$rootScope","$sce", "companyService", "messagesService"];
-    constructor(public scope: any, public $rootScope: any, public $sce: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService) {
+    static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
+    constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService) {
         this.scope.Messages = [];
-        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId);
+        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
 
         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
@@ -40,10 +40,10 @@ class UserMessagesController {
                 var html = "";
                 $.each(m.MessageThreadUsers, function () {
                     if (this.UserId != loggedUid) {
-                        html += "<li style='color: #444;'>" + this.User.FullIdentityName +"</li>"
+                        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
                     }
                 });
-                return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' data-uk-dropdown>You and &nbsp;<a>" + (m.MessageThreadUsers.length-1) +" more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html +"</ul></div></div></div>");
+                return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' data-uk-dropdown>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
             } else {
                 return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
             }
@@ -56,51 +56,28 @@ class UserMessagesController {
                 });
             });
         })
+        var umg = this;
+        this.scope.scopeLoadMessages = function (id) {
+            umg.loadMessages(id, true);
+        }
 
-        //this.scope.selectedMessageThread
+        this.scope.scopeSendMessage = function () {
+            umg.sendMessage();
+        }
 
-        this.scope.chat_messages = [
-            {
-                "user_id": 0,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, eum?",
-                    "Lorem ipsum dolor sit amet."
-                ],
-                "date": "13:38"
-            },
-            {
-                "user_id": 1,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem delectus distinctio dolor earum est hic id impedit ipsum minima mollitia natus nulla perspiciatis quae quasi, quis recusandae, saepe, sunt totam."
-                ],
-                "date": "13:34"
-            },
-            {
-                "user_id": 0,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ea mollitia pariatur porro quae sed sequi sint tenetur ut veritatis."
-                ],
-                "date": "23 JUN 1:10AM"
-            },
-            {
-                "user_id": 1,
-                "content": [
-                    "Lorem ipsum dolor sit amet, consectetur.",
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-                ],
-                "date": "FRIDAY 13:34"
-            }
-        ];
-       
     }
 
-    getMessageThreadByUserId(id) {
+    getMessageThreadByUserId(id, isLoadMessage) {
         this.$rootScope.$emit("toggleLoader", true);
         this.messageService.getMessageThreadsByUserId(id).then((result: ng.IHttpPromiseCallbackArg<any>) => {
             this.scope.Messages = result.data;
-            
+
             if (result.data.length > 0) {
                 this.scope.IsHasMessages = true;
+                if (isLoadMessage) {
+                    this.loadMessages(this.scope.Messages[0].Id, true);
+                }
+
             }
             this.$rootScope.$emit("toggleLoader", false);
 
@@ -120,6 +97,42 @@ class UserMessagesController {
             this.scope.selectize_users_options = result.data;
             this.$rootScope.$emit("toggleLoader", false);
         });
+    }
+
+    loadMessages(messageId, IsRefreshAll) {
+
+        if (IsRefreshAll) {
+            this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+        }
+
+
+        var msg;
+        $.each(this.scope.Messages, function () {
+            if (this.Id == messageId) {
+                msg = this;
+            }
+        });
+
+        this.scope.SelectedMessageThread = msg;
+        if (msg != undefined) {
+            $.each(msg.MessageThreadDetails, function () {
+                if (typeof this.CreatedOn === 'string') {
+                    this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
+                }
+            });
+            var md = this.$filter('orderBy')(msg.MessageThreadDetails, 'CreatedOn');
+            var chatObjs = [];
+            var ft = this.$filter;
+            $.each(md, function () {
+                var chatobj = new Object();
+                chatobj.user_id = this.UserId;
+                chatobj.date = ft('date')(this.CreatedOn, "dd MMM HH:mm");
+                chatobj.content = [this.TextContent];
+                chatObjs.push(chatobj);
+            });
+
+            this.scope.chat_messages = chatObjs;
+        }
     }
 
     CreateMessage() {
@@ -152,6 +165,35 @@ class UserMessagesController {
                 this.$rootScope.$emit("toggleLoader", false);
                 window.location.href = "/#/user_messages";
 
+            });
+        }
+    }
+
+    sendMessage() {
+        if (this.scope.SendMessageContent.toString().trim() != "") {
+            var msgu = new Object();
+            msgu.MessageId = this.scope.SelectedMessageThread.Id;
+            msgu.UserId = this.$rootScope.LoggedUser.UserId;
+            msgu.TextContent = this.scope.SendMessageContent.toString().trim();
+            msgu.IsActive = true;
+
+            this.$rootScope.$emit("toggleLoader", true);
+            this.messageService.sendMessageThread(msgu).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                if (result.data != null) {
+                    var mlist = this.scope.Messages;
+                    $.each(mlist, function (index) {
+                        if (this.Id === result.data.Id) {
+                            mlist[index] = result.data;
+                        }
+                    });
+                    this.scope.Messages = mlist;
+                    this.loadMessages(result.data.Id, false);
+                } else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Message can't sent. Please try again.", status: "danger" });
+                }
+                this.scope.SendMessageContent = "";
+                this.$rootScope.$emit("toggleLoader", false);
             });
         }
     }
