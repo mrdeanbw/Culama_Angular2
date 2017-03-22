@@ -35,6 +35,7 @@ var UserMessagesController = (function () {
                 }
             }
         };
+        this.scope.LoggedUserId = this.$rootScope.LoggedUser.UserId;
         var loggedUid = this.$rootScope.LoggedUser.UserId;
         this.scope.showMessageUsers = function (m) {
             if (m.MessageThreadUsers.length > 3) {
@@ -51,11 +52,21 @@ var UserMessagesController = (function () {
             }
         };
         this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
-            scope.$apply(function () {
-                UIkit.dropdown($('.uk-button-dropdown'), {
-                    mode: 'hover'
+            if ($(element).attr("id") == "chat_div") {
+                //setTimeout(function () {
+                //    var pchartobj = $('#chat_div').parents("div.scroll-content");
+                //    $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
+                //}, 500);
+                var pchartobj = $('#chat_div').parents("div.scroll-content");
+                $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
+            }
+            else {
+                scope.$apply(function () {
+                    UIkit.dropdown($('.uk-button-dropdown'), {
+                        mode: 'hover'
+                    });
                 });
-            });
+            }
         });
         var umg = this;
         this.scope.scopeLoadMessages = function (id) {
@@ -183,6 +194,7 @@ var UserMessagesController = (function () {
     };
     return UserMessagesController;
 }());
+// loggedUid: any;
 UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
 angular.module("altairApp")
     .controller("userMessagesController", UserMessagesController);

@@ -294,7 +294,7 @@
                             <div class="md-card-content padding-reset">
                                 <div class="chat_box_wrapper">
                                     <div class="chat_box touchscroll chat_box_colors_a" id="chat" custom-scrollbar>
-                                        <div class="chat_message_wrapper" ng-repeat="block in chat_messages" ng-class="{'chat_message_right': $odd }" on-last-repeat>
+                                        <div id="chat_div" class="chat_message_wrapper" ng-repeat="block in chat_messages" ng-class="{'chat_message_right': (block.user_id == LoggedUserId) }" on-last-repeat>
                                             <div class="chat_user_avatar">
                                                 <img class="md-user-image" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" />
                                             </div>

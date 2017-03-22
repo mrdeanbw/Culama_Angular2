@@ -101,8 +101,15 @@
                         icon: '&#xE87C;',
                         link: 'restricted.companyusers'
                     },
+                     {
+                         id: 2,
+                         title_us: 'Messages',
+                         title_in: 'संदेश',
+                         icon: '&#xE0B9;',
+                         link: 'restricted.usermessages'
+                     },
                     {
-                        id: 2,
+                        id: 3,
                         title_us: 'Setting',
                         title_in: 'सेटिंग',
                         icon: '&#xE241;',
@@ -124,7 +131,14 @@
                         title_in: 'डैशबोर्ड',
                         icon: '&#xE871;',
                         link: 'restricted.userdashboard'
-                    }
+                    },
+                     {
+                         id: 1,
+                         title_us: 'Messages',
+                         title_in: 'संदेश',
+                         icon: '&#xE0B9;',
+                         link: 'restricted.usermessages'
+                     }
                 ];
             }
         }

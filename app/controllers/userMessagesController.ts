@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 class UserMessagesController {
+   // loggedUid: any;
     static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
     constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService) {
         this.scope.Messages = [];
@@ -34,6 +35,7 @@ class UserMessagesController {
                 }
             }
         };
+       this.scope.LoggedUserId = this.$rootScope.LoggedUser.UserId;
         var loggedUid = this.$rootScope.LoggedUser.UserId;
         this.scope.showMessageUsers = function (m) {
             if (m.MessageThreadUsers.length > 3) {
@@ -50,11 +52,23 @@ class UserMessagesController {
         }
 
         this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
-            scope.$apply(function () {
-                UIkit.dropdown($('.uk-button-dropdown'), {
-                    mode: 'hover'
+            if ($(element).attr("id") == "chat_div") {
+                //setTimeout(function () {
+                //    var pchartobj = $('#chat_div').parents("div.scroll-content");
+                //    $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
+                //}, 500);
+                var pchartobj = $('#chat_div').parents("div.scroll-content");
+                $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
+                
+            }
+            else {
+                scope.$apply(function () {
+                    UIkit.dropdown($('.uk-button-dropdown'), {
+                        mode: 'hover'
+                    });
                 });
-            });
+            }
+            
         })
         var umg = this;
         this.scope.scopeLoadMessages = function (id) {
@@ -133,6 +147,8 @@ class UserMessagesController {
 
             this.scope.chat_messages = chatObjs;
         }
+
+        
     }
 
     CreateMessage() {
