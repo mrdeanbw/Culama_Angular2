@@ -18,6 +18,39 @@ var altairApp;
             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
                 window.location.href = "#/error";
             }
+            this.scope.selectize_users_options = [];
+            this.scope.selectize_users_config = {
+                plugins: {
+                    'remove_button': {
+                        label: ''
+                    }
+                },
+                maxItems: null,
+                valueField: 'UserId',
+                labelField: 'FullIdentityName',
+                searchField: 'FullIdentityName',
+                create: false,
+                placeholder: "Choose Users to send messages",
+                render: {
+                    option: function (planets_data, escape) {
+                        return '<div class="option">' +
+                            '<span class="title">' + escape(planets_data.FullIdentityName) + '</span>' +
+                            '</div>';
+                    },
+                    item: function (planets_data, escape) {
+                        return '<div class="item">' + escape(planets_data.FullIdentityName) + '</div>';
+                    }
+                },
+                onItemAdd: function (input) {
+                    alert(this.$input.attr("target"));
+                },
+                onItemRemove: function (input) {
+                    alert(this.$input.attr("target"));
+                },
+                onChange: function () {
+                    alert("changed");
+                }
+            };
             this.scope.CompnayName = $rootScope.LoggedUser.CustomerName;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.getCompanyDetail(this.scope.CustomerId);

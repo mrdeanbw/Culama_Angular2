@@ -23,6 +23,9 @@
                                             <span class="md-list-heading">{{ user.FullIdentityName }}</span>
                                             <span class="uk-text-small uk-text-muted">{{user.Phone}}</span>
                                         </div>
+                                        <div>
+                                            <selectize id="message_input_users_{{ user.UserId }}" target="{{ user.UserId }}" config="selectize_users_config" options="CompanyUsers" position="bottom" ng-model="user.selectize_Users"></selectize>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>

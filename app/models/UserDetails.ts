@@ -38,6 +38,7 @@
         public UserGroupId: number;
         public UserGroupName: string;
         public IsAllowMsgToEveryone: boolean;  
+        public UserMessages: any;
 
     }
 
