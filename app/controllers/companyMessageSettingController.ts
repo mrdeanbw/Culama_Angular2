@@ -1,6 +1,9 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
+var ascope;
+var mainCobj;
 module altairApp {
+
     class CompanyMessageSettingController {
         cservice: any;
         lservice: any;
@@ -16,6 +19,9 @@ module altairApp {
             }
 
             this.scope.selectize_users_options = [];
+            var cmobj = this;
+            mainCobj = this;
+            ascope = this.scope;
             this.scope.selectize_users_config = {
                 plugins: {
                     'remove_button': {
@@ -26,7 +32,7 @@ module altairApp {
                 valueField: 'UserId',
                 labelField: 'FullIdentityName',
                 searchField: 'FullIdentityName',
-                create: false,
+                create: true,
                 placeholder: "Choose Users to send messages",
                 render: {
                     option: function (planets_data, escape) {
@@ -39,13 +45,53 @@ module altairApp {
                     }
                 },
                 onItemAdd: function (input) {
-                    alert(this.$input.attr("target"));
+                    var targetUserid = this.$input.attr("target");
+                    var targetUser;
+                    if (!isNaN(targetUserid)) {
+                        $.each(ascope.CompanyUsers, function (index) {
+                            if (this.UserId == parseInt(targetUserid)) {
+                                targetUser = ascope.CompanyUsers[index];
+                            }
+                        });
+                        var userMsgs = targetUser.UserMessages;
+                        var isExsits = false;
+                        $.each(userMsgs, function () {
+                            if (this.AllowSendUserId == parseInt(input)) {
+                                isExsits = true;
+                            }
+                        });
+                        if (!isExsits) {
+                            var msgu = new Object();
+                            msgu.UserId = parseInt(targetUserid);
+                            msgu.AllowSendUserId = parseInt(input);
+                            targetUser.UserMessages.push(msgu);
+                            mainCobj.saveCompanyUser(targetUser);
+                        }
+                    }
+
+
                 },
                 onItemRemove: function (input) {
-                    alert(this.$input.attr("target"));
+                    var targetUserid = this.$input.attr("target");
+                    var targetUser;
+                    if (!isNaN(targetUserid)) {
+                        $.each(ascope.CompanyUsers, function (index) {
+                            if (this.UserId == parseInt(targetUserid)) {
+                                targetUser = ascope.CompanyUsers[index];
+                            }
+                        });
+
+                        var userMsgs = targetUser.UserMessages;
+                        $.each(userMsgs, function (index) {
+                            if (this.AllowSendUserId == parseInt(input)) {
+                                userMsgs.splice(index, 1);
+                            }
+                        });
+
+                        mainCobj.saveCompanyUser(targetUser);
+                    }
                 },
-                onChange: function () {
-                    alert("changed");
+                onInitialize: function (planets_data) {
                 }
             };
 
@@ -54,13 +100,26 @@ module altairApp {
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
-            var cmobj = this;
+
             scope.saveCompany = function () {
                 cmobj.saveCompany();
             };
 
             scope.saveCompanyUser = function (u) {
+                if (u.IsAllowMsgToEveryone) {
+                    u.UserMessages = [];
+                }
                 cmobj.saveCompanyUser(u);
+            };
+
+            scope.getOtherCompanyUsers = function (um) {
+                var selectize_userlist = [];
+                $.each(ascope.CompanyUsers, function () {
+                    if (this.UserId != um.UserId) {
+                        selectize_userlist.push(this);
+                    }
+                });
+                return selectize_userlist;
             };
         }
 
@@ -92,6 +151,9 @@ module altairApp {
                     $.each(this.scope.CompanyUsers, function () {
                         var u = this;
                         u.IsAllowMsgToEveryone = ccheck;
+                        if (u.IsAllowMsgToEveryone) {
+                            u.UserMessages = [];
+                        }
                         cmobj.saveCompanyUser(u);
                     });
 
@@ -102,6 +164,11 @@ module altairApp {
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
                 
+                setTimeout(function () {
+                    this.$rootScope.$emit("toggleLoader", false);
+                }, 500);
+                
+
             });
         }
 
@@ -110,7 +177,6 @@ module altairApp {
             this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
-
                     $.each(this.scope.CompanyUsers, function (index) {
                         var u = this;
                         if (u.UserId == user.UserId) {
@@ -124,11 +190,33 @@ module altairApp {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
+
+                this.$rootScope.$emit("toggleLoader", false);
             });
         }
 
+        //saveCompanyU
 
     }
+
+    export function myFilter() {
+        return function (um) {
+            //  filter stuff here
+            var selectize_userlist = [];
+            if (um.length > 0) {
+                $.each(um, function () {
+                    selectize_userlist.push(this.AllowSendUserId.toString());
+                });
+            }
+            return selectize_userlist;
+
+        }
+    }
+
     angular.module("altairApp")
         .controller("companyMessageSettingController", CompanyMessageSettingController);
+
+    angular.module("altairApp")
+        .filter("myFilter", altairApp.myFilter);
+
 }
