@@ -42,6 +42,11 @@ module altairApp {
             });
         }
 
+        getUserMessagesbyId(id: string): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserMessagesByUserId/' + id, {
+            });
+        }
+
 
         saveUserDetail(user: altairApp.UserDetail): ng.IPromise<ng.IHttpPromiseCallbackArg<altairApp.UserDetail>> {
             var params = JSON.stringify(user);

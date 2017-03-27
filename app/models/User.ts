@@ -10,7 +10,7 @@
         public CustomerUserPrefix: string;
         public Username: string;
         public Valid: boolean;
-
+        public IsAllowMsgToEveryone: boolean;
     }
 
 

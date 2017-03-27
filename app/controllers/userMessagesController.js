@@ -1,13 +1,14 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var UserMessagesController = (function () {
-    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService) {
+    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService, loginService) {
         this.scope = scope;
         this.$rootScope = $rootScope;
         this.$sce = $sce;
         this.$filter = $filter;
         this.companyService = companyService;
         this.messageService = messageService;
+        this.loginService = loginService;
         this.scope.Messages = [];
         this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
@@ -95,12 +96,39 @@ var UserMessagesController = (function () {
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsersByCompanyId(companyid).then(function (result) {
             var loggedUid = _this.$rootScope.LoggedUser.UserId;
+            var umcontoller = _this;
+            var IsAll = true;
             $.each(result.data, function (index) {
                 if (this.UserId == loggedUid) {
                     result.data.splice(index, 1);
+                    if (!this.IsAllowMsgToEveryone) {
+                        IsAll = this.IsAllowMsgToEveryone;
+                        umcontoller.getUserMessages(this.UserId, result.data);
+                    }
                 }
             });
-            _this.scope.selectize_users_options = result.data;
+            if (IsAll) {
+                _this.scope.selectize_users_options = result.data;
+            }
+            _this.$rootScope.$emit("toggleLoader", false);
+        });
+    };
+    UserMessagesController.prototype.getUserMessages = function (userid, userslist) {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.loginService.getUserMessagesbyId(userid).then(function (result) {
+            if (result.data != null && result.data.length > 0) {
+                var umObjList = [];
+                $.each(result.data, function (index) {
+                    var umobj = this;
+                    $.each(userslist, function () {
+                        if (this.UserId == umobj.AllowSendUserId) {
+                            umObjList.push(this);
+                        }
+                    });
+                });
+                _this.scope.selectize_users_options = umObjList;
+            }
             _this.$rootScope.$emit("toggleLoader", false);
         });
     };
@@ -195,6 +223,6 @@ var UserMessagesController = (function () {
     return UserMessagesController;
 }());
 // loggedUid: any;
-UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
+UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
 angular.module("altairApp")
     .controller("userMessagesController", UserMessagesController);

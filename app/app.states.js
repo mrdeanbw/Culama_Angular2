@@ -575,6 +575,7 @@ altairApp
                                 return $ocLazyLoad.load([
                                         'app/services/companyService.js',
                                          'app/services/messagesService.js',
+                                         'app/services/loginService.js',
                                         'app/controllers/userMessagesController.js'
                                 ],
                                     { serie: true });
@@ -598,6 +599,7 @@ altairApp
                             return $ocLazyLoad.load([
                                     'app/services/companyService.js',
                                      'app/services/messagesService.js',
+                                     'app/services/loginService.js',
                                     'app/controllers/userMessagesController.js'
                             ],
                                 { serie: true });

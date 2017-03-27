@@ -110,6 +110,9 @@
                                                             <span class="md-list-heading">{{ u.FullIdentityName }}</span>
                                                             <span class="uk-text-small uk-text-muted">{{u.Phone}}</span>
                                                         </div>
+                                                        <div ng-if="!u.IsAllowMsgToEveryone">
+                                                            <selectize id="message_input_users_{{ u.UserId }}" target="{{ u.UserId }}" config="user.selectize_users_config" options="user.getOtherCompanyUsers(u)" position="bottom" ng-model="u.UserMessages | myFilter"></selectize>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>

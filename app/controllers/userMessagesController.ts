@@ -2,8 +2,8 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 class UserMessagesController {
    // loggedUid: any;
-    static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService"];
-    constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService) {
+    static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService","loginService"];
+    constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService, public loginService : altairApp.LoginService) {
         this.scope.Messages = [];
         this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
@@ -102,13 +102,40 @@ class UserMessagesController {
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
             var loggedUid = this.$rootScope.LoggedUser.UserId;
+            var umcontoller = this;
+            var IsAll = true;
             $.each(result.data, function (index) {
                 if (this.UserId == loggedUid) {
                     result.data.splice(index, 1);
+                    if (!this.IsAllowMsgToEveryone) {
+                        IsAll = this.IsAllowMsgToEveryone;
+                        umcontoller.getUserMessages(this.UserId, result.data);
+                    }
                 }
             });
+            if (IsAll) {
+                this.scope.selectize_users_options = result.data;
+            }
+            this.$rootScope.$emit("toggleLoader", false);
+        });
+    }
 
-            this.scope.selectize_users_options = result.data;
+    getUserMessages(userid,userslist) {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.loginService.getUserMessagesbyId(userid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            if (result.data != null && result.data.length > 0) {
+                var umObjList = [];
+                $.each(result.data, function (index) {
+                    var umobj = this;
+                    $.each(userslist, function () {
+                        if (this.UserId == umobj.AllowSendUserId) {
+                            umObjList.push(this);
+                        }
+                    });
+                });
+                this.scope.selectize_users_options = umObjList;
+            }
+           
             this.$rootScope.$emit("toggleLoader", false);
         });
     }

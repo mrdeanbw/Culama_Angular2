@@ -27,6 +27,9 @@ var altairApp;
         LoginService.prototype.getUserDetailsbyUsername = function (username) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserDetailByUserName/' + username, {});
         };
+        LoginService.prototype.getUserMessagesbyId = function (id) {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserMessagesByUserId/' + id, {});
+        };
         LoginService.prototype.saveUserDetail = function (user) {
             var params = JSON.stringify(user);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveUser', params, {});
