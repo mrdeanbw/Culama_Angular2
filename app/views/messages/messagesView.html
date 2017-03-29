@@ -6,8 +6,9 @@
     .uk-dropdown .uk-nav {
         margin: 0 !important;
     }
+
     .pull-left {
-        float:left;
+        float: left;
     }
 
     .user-message-section div, .user-message-section a {
@@ -50,106 +51,10 @@
         float: left;
     }
 
-    /*.user-message-image img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+    .no-msg {
+        font-size: 19px;
+        color: #333c43;
     }
-
-    .ui-flex {
-        display: block;
-    }
-
-    .msg-card-header {
-        width: 100%;
-        background-color: #1976d2;
-    }
-
-    .msg-card-header h3 {
-        color: #fff;
-        padding: 10px;
-    }
-
-    .user-message-left-section {
-        position: absolute;
-    }
-
-    .user-message-right-section {
-        display: inline-block;
-        float: left;
-        width: 92%;
-        margin-left: 8%;
-    }
-
-    .chat-box {
-        background: #ececec;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        display: inline-block;
-        box-shadow: 1px 4px 11px #e0e0e0;
-    }
-
-    .person-name {
-        margin-bottom: 5px;
-        font-size: 15px;
-    }
-
-    .md-card {
-        display: inline-block;
-    }
-
-    .chat-box p {
-        font-size: 15px;
-        margin: 0;
-    }
-
-    .chat-block {
-        position: relative;
-        float: left;
-        width: 100%;
-    }
-
-    .my-chat {
-        width: 100%;
-        float: left;
-    }
-
-    .my-chat-box {
-        background: #c4dbf3;
-        float: right;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        display: inline-block;
-        box-shadow: 1px 4px 11px #e0e0e0;
-    }
-
-    .msg-send {
-        background: #dbe9f7;
-        color: #8a8a8a;
-        float: right;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        display: inline-block;
-        box-shadow: 1px 4px 11px #e0e0e0;
-    }
-
-    .msg-not-send {
-        background: #dbe9f7;
-        color: #8a8a8a;
-        float: right;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        display: inline-block;
-        box-shadow: 1px 4px 11px #e0e0e0;
-    }
-
-    .my-chat-box p, .msg-send p, .msg-not-send p {
-        margin-bottom: 0;
-    }*/
 </style>
 
 
@@ -267,8 +172,9 @@
             </div>-->
 
             <div class="uk-width-medium-8-10 uk-container-center">
-                <div class="uk-width-large-7-10 uk-grid uk-grid-collapse pull-left" data-uk-grid-margin>
-                 
+                <div ng-show="IsHasMessages">
+                    <div class="uk-width-large-7-10 uk-grid uk-grid-collapse pull-left" data-uk-grid-margin>
+
                         <div class="md-card md-card-single" single-card style="width:100%">
                             <div class="md-card-toolbar">
                                 <!--<div class="md-card-toolbar-actions hidden-print">
@@ -309,8 +215,9 @@
                                         <form id="SendMsgForm" name="SendMsgForm" ng-submit="scopeSendMessage()">
                                             <div class="uk-input-group">
 
+                                                <!--<input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="{{ isUserTypeMessage ? 'Yor are not longer available on this group!' : 'Send message'}}" ng-disabled="isUserTypeMessage" ng-model="SendMessageContent" md-input>-->
                                                 <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input>
-                                                <span class="uk-input-group-addon">
+                                                <span class="uk-input-group-addon" >
                                                     <a ng-click="scopeSendMessage()"><i class="material-icons md-24">&#xE163;</i></a>
                                                 </span>
 
@@ -320,45 +227,48 @@
                                 </div>
                             </div>
                         </div>
-               
-                </div>
-                <div class="uk-width-large-3-10 uk-visible-large pull-left">
-                    <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
-                        <ul class="md-list md-list-addon md-list-outside">
-                            <li ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);">
-                                <div class="md-card-dropdown md-list-action-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
-                                    <i class="md-icon material-icons">&#xE5D4;</i>
-                                    <div class="uk-dropdown uk-dropdown-small">
-                                        <ul class="uk-nav">
-                                            <li><a href="#">Add to chat</a></li>
-                                            <li><a href="#" class="uk-text-danger">Remove</a></li>
-                                        </ul>
+
+                    </div>
+                    <div class="uk-width-large-3-10 uk-visible-large pull-left">
+                        <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
+                            <ul class="md-list md-list-addon md-list-outside">
+                                <li ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);">
+
+                                    <div class="md-list-addon-element">
+                                        <!--<span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
+                                        <span class="element-status element-status-success" ng-if="user.status == 'online'"></span>
+                                        <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>-->
+                                        <img class="md-user-image md-list-addon-avatar" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" add-image-prop />
                                     </div>
-                                </div>
-                                <div class="md-list-addon-element">
-                                    <!--<span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
-                                    <span class="element-status element-status-success" ng-if="user.status == 'online'"></span>
-                                    <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>-->
-                                    <img class="md-user-image md-list-addon-avatar" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" add-image-prop />
-                                </div>
-                                <div class="md-list-content">
-                                    <div class="md-list-action-placeholder"></div>
-                                    <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m)"></span></span>
-                                    <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Description}}</span>
-                                </div>
-                            </li>
-                        </ul>
+                                    <div class="md-list-content">
+                                        <div class="md-list-action-placeholder"></div>
+                                        <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m)"></span></span>
+                                        <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Description}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div ng-show="!IsHasMessages" class="no-msg-container">
+                    <img src="assets/img/no-msg.png" />
+                    <p class="no-msg">Oops, the messages is empty</p>
+                </div>
+
             </div>
+
+            <div class="md-fab-wrapper">
+                <a class="md-fab md-fab-accent" ui-sref="restricted.usercreatemessage" ng-if="isUserCreateMessage">
+                    <i class="material-icons">&#xE145;</i>
+                </a>
+            </div>
+
         </div>
     </div>
 </div>
-</div>
-
-
-<div class="md-fab-wrapper">
-    <a class="md-fab md-fab-accent" ui-sref="restricted.usercreatemessage">
+<!--</div>-->
+<!--<div class="md-fab-wrapper" ng-controller="userMessagesController as usermessages">
+    <a class="md-fab md-fab-accent" ui-sref="restricted.usercreatemessage" ng-if="usermessages.scope.isUserCreateMessage">
         <i class="material-icons">&#xE145;</i>
     </a>
-</div>
+</div>-->
