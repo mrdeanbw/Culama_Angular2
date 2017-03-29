@@ -177,7 +177,7 @@ altairApp
                 .state("restricted.companydashboard",
                 {
                     url: "/company_dashboard",
-                    templateUrl: 'app/views/dashboard/compnayDashboardView.html',
+                    templateUrl: 'app/views/dashboard/CompanyDashboardView.html',
                     controller: 'companyDashBoardCtrl',
                     resolve: {
                         deps: [

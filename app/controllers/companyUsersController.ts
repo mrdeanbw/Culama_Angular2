@@ -11,7 +11,7 @@ module altairApp {
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.cardview = true;
-            this.scope.CompnayName = $rootScope.LoggedUser.CustomerName;
+            this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.companyPrefix = $rootScope.LoggedUser.CustomerPrefix;
             this.newuser.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.scope.IsPhoneUnique = true;
@@ -84,7 +84,7 @@ module altairApp {
                 labelField: 'Description'
             };
 
-            this.scope.userroles = ['Compnay Admin', 'Users'];
+            this.scope.userroles = ['Company Admin', 'Users'];
 
 
             scope.$on('onLastRepeat', function (scope1, element, attrs) {

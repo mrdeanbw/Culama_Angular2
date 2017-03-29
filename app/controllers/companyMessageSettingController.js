@@ -92,7 +92,7 @@ var altairApp;
                 onInitialize: function (planets_data) {
                 }
             };
-            this.scope.CompnayName = $rootScope.LoggedUser.CustomerName;
+            this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);

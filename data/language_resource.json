@@ -81,7 +81,7 @@
       "IN": "अंतिम नाम"
     },
     {
-      "id": "lbl_myprofile_compnayname",
+      "id": "lbl_myprofile_Companyname",
       "US": "Company",
       "IN": "संगठन"
     },
@@ -190,7 +190,7 @@
       "IN": "अंतिम नाम<span class='req'>*</span>"
     },
     {
-      "id": "lbl_user_compnayname",
+      "id": "lbl_user_Companyname",
       "US": "Company",
       "IN": "संगठन"
     },
@@ -282,7 +282,7 @@
       "IN": "अंतिम नाम<span class='req'>*</span>"
     },
     {
-      "id": "lbl_user_compnayname",
+      "id": "lbl_user_Companyname",
       "US": "Company",
       "IN": "संगठन"
     },
@@ -448,7 +448,7 @@
       "IN": "अंतिम नाम<span class='req'>*</span>"
     },
     {
-      "id": "lbl_user_compnayname",
+      "id": "lbl_user_Companyname",
       "US": "Company",
       "IN": "संगठन"
     },
@@ -607,7 +607,7 @@
       "IN": "अंतिम नाम<span class='req'>*</span>"
     },
     {
-      "id": "lbl_user_compnayname",
+      "id": "lbl_user_Companyname",
       "US": "Company",
       "IN": "संगठन"
     },

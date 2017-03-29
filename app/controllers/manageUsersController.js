@@ -19,7 +19,7 @@ var ManageUsersController = (function () {
         }
         scope.vm = this;
         scope.vm.dt_data = [];
-        scope.vm.CompnayName = $rootScope.LoggedUser.CustomerName;
+        scope.vm.CompanyName = $rootScope.LoggedUser.CustomerName;
         this.newuser.CustomerId = this.$rootScope.LoggedUser.CustomerId;
         scope.vm.IsPhoneUnique = true;
         scope.vm.IsPhoneUniqueProcess = false;
