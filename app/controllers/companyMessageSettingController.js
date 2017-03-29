@@ -94,6 +94,7 @@ var altairApp;
             };
             this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
+            debugger;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
             scope.saveCompany = function () {
@@ -117,6 +118,7 @@ var altairApp;
         }
         CompanyMessageSettingController.prototype.getCompanyDetail = function (companyid) {
             var _this = this;
+            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getCompanyById(companyid).then(function (result) {
                 _this.scope.Customer = result.data;
@@ -125,6 +127,7 @@ var altairApp;
         };
         CompanyMessageSettingController.prototype.getCompanyUsers = function (companyid) {
             var _this = this;
+            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
                 _this.scope.CompanyUsers = result.data;

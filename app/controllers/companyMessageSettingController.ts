@@ -98,6 +98,7 @@ module altairApp {
 
             this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
+            debugger;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
 
@@ -124,6 +125,7 @@ module altairApp {
         }
 
         getCompanyDetail(companyid) {
+            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
                 this.scope.Customer = result.data;
@@ -132,6 +134,7 @@ module altairApp {
         }
 
         getCompanyUsers(companyid) {
+            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 this.scope.CompanyUsers = result.data;
@@ -195,7 +198,7 @@ module altairApp {
             });
         }
 
-        //saveCompanyU
+      
 
     }
 

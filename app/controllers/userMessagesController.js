@@ -12,8 +12,11 @@ var UserMessagesController = (function () {
         this.scope.Messages = [];
         this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
+        this.scope.isUserCreateMessage = true;
+        this.scope.isUserTypeMessage = true;
         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
         this.scope.selectize_users_options = [];
+        this.scope.olderChatingGroup = [];
         this.scope.selectize_users_config = {
             plugins: {
                 'remove_button': {
@@ -32,21 +35,21 @@ var UserMessagesController = (function () {
                         '</div>';
                 },
                 item: function (planets_data, escape) {
-                    return '<div class="item">' + escape(planets_data.FullIdentityName) + '</div>';
+                    return '<div class="item participants-item"><input title="IsAdmin" type="checkbox" id="' + planets_data.UserId + '" onclick="setIsAdmin(' + planets_data.UserId + ');" />' + '<p class="participants-label">' + escape(planets_data.FullIdentityName) + '</p>' + '</div>';
                 }
             }
         };
         this.scope.LoggedUserId = this.$rootScope.LoggedUser.UserId;
         var loggedUid = this.$rootScope.LoggedUser.UserId;
         this.scope.showMessageUsers = function (m) {
-            if (m.MessageThreadUsers.length > 3) {
+            if (m.MessageThreadUsers.length >= 3) {
                 var html = "";
                 $.each(m.MessageThreadUsers, function () {
                     if (this.UserId != loggedUid) {
                         html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>";
                     }
                 });
-                return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' data-uk-dropdown>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
+                return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
             }
             else {
                 return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
@@ -54,10 +57,6 @@ var UserMessagesController = (function () {
         };
         this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
             if ($(element).attr("id") == "chat_div") {
-                //setTimeout(function () {
-                //    var pchartobj = $('#chat_div').parents("div.scroll-content");
-                //    $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
-                //}, 500);
                 var pchartobj = $('#chat_div').parents("div.scroll-content");
                 $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
             }
@@ -76,6 +75,9 @@ var UserMessagesController = (function () {
         this.scope.scopeSendMessage = function () {
             umg.sendMessage();
         };
+        //this.scope.addButton = function () {
+        //    alert("hi..");
+        //}
     }
     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
         var _this = this;
@@ -115,6 +117,7 @@ var UserMessagesController = (function () {
     };
     UserMessagesController.prototype.getUserMessages = function (userid, userslist) {
         var _this = this;
+        var currentObj = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.loginService.getUserMessagesbyId(userid).then(function (result) {
             if (result.data != null && result.data.length > 0) {
@@ -127,12 +130,23 @@ var UserMessagesController = (function () {
                         }
                     });
                 });
+                _this.scope.isUserCreateMessage = true;
                 _this.scope.selectize_users_options = umObjList;
+            }
+            else {
+                _this.scope.isUserCreateMessage = _this.$rootScope.LoggedUser.IsAllowMsgToEveryone;
+            }
+            var CurrentUrl = window.location.href;
+            var SplitUrl = CurrentUrl.toString().split('/');
+            var pagename = SplitUrl[SplitUrl.length - 1];
+            if (pagename.toString().toLowerCase() == "create_user_messages" && _this.scope.isUserCreateMessage == false) {
+                window.location.href = "/#/user_messages";
             }
             _this.$rootScope.$emit("toggleLoader", false);
         });
     };
     UserMessagesController.prototype.loadMessages = function (messageId, IsRefreshAll) {
+        var currentObj = this;
         if (IsRefreshAll) {
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
         }
@@ -143,7 +157,14 @@ var UserMessagesController = (function () {
             }
         });
         this.scope.SelectedMessageThread = msg;
+        this.CurrentChatingMembers();
         if (msg != undefined) {
+            var olderGroupMembers = [];
+            for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
+                if (msg.MessageThreadUsers[i].UserId != currentObj.$rootScope.LoggedUser.UserId)
+                    olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
+            }
+            currentObj.scope.olderChatingGroup = olderGroupMembers;
             $.each(msg.MessageThreadDetails, function () {
                 if (typeof this.CreatedOn === 'string') {
                     this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
@@ -164,15 +185,25 @@ var UserMessagesController = (function () {
     };
     UserMessagesController.prototype.CreateMessage = function () {
         var _this = this;
+        var LogidUserID = this.$rootScope.LoggedUser.UserId.toString();
         var users = [];
         this.selectize_Users.push(this.$rootScope.LoggedUser.UserId.toString());
         if (this.selectize_Users.length > 0) {
+            debugger;
+            var adminPermissionIDs = document.getElementById('HDFIsAdminIDs').value;
+            var adminIDs = adminPermissionIDs.toString().split(',');
+            var adminSet = new Set(adminIDs);
             $.each(this.selectize_Users, function (index) {
+                debugger;
                 var msgu = new Object();
                 msgu.UserId = parseInt(this);
                 msgu.MessageId = 0;
                 msgu.IsActive = true;
-                msgu.IsAdmin = true;
+                if (LogidUserID == parseInt(this).toString())
+                    msgu.IsAdmin = true;
+                else
+                    msgu.IsAdmin = adminSet.has(parseInt(this).toString());
+                //msgu.IsAdmin = true;
                 users.push(msgu);
             });
         }
@@ -220,9 +251,55 @@ var UserMessagesController = (function () {
             });
         }
     };
+    UserMessagesController.prototype.CurrentChatingMembers = function () {
+        var currentObj = this;
+        this.loginService.getUserMessagesbyId(this.$rootScope.LoggedUser.UserId).then(function (result) {
+            if (result.data != null && result.data.length > 0) {
+                debugger;
+                var IsDifferentMembers = true;
+                var oldMembers = currentObj.scope.olderChatingGroup;
+                var newMembers = [];
+                for (var j = 0; j < result.data.length; j++) {
+                    newMembers.push(result.data[j].AllowSendUserId);
+                }
+                if (oldMembers.length == newMembers.length) {
+                    var old = new Set(oldMembers);
+                    for (var p = 0; p < newMembers.length; p++) {
+                        if (old.has(newMembers[p]))
+                            IsDifferentMembers = false;
+                        else {
+                            IsDifferentMembers = true;
+                            break;
+                        }
+                    }
+                    currentObj.scope.isUserTypeMessage = IsDifferentMembers;
+                }
+                else {
+                    currentObj.scope.isUserTypeMessage = false;
+                }
+            }
+        });
+    };
     return UserMessagesController;
 }());
 // loggedUid: any;
 UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
+var options = [];
+// Function For the Add/Remove the Admin Permission to the Members
+function setIsAdmin(UserID) {
+    var AdminIDs = "";
+    if (document.getElementById(UserID).checked) {
+        options.push(UserID);
+    }
+    else {
+        for (var i = 0; i < options.length; i++) {
+            if (options[i] == UserID)
+                options.splice(i, 1);
+        }
+    }
+    AdminIDs = options.toString();
+    // To Add the IDs in the Hidden Fields
+    document.getElementById("HDFIsAdminIDs").value = AdminIDs;
+}
 angular.module("altairApp")
     .controller("userMessagesController", UserMessagesController);
