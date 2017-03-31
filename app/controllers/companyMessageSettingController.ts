@@ -18,8 +18,97 @@ module altairApp {
                 window.location.href = "#/error";
             }
 
-            this.scope.selectize_users_options = [];
             var cmobj = this;
+            // Start Point :: Added by Mehul Patel
+
+            this.scope.SelectedUser = "";
+            this.scope.recipientUsers = "";
+
+            this.scope.selectize_users_notAllowed_Msg = [];
+            this.scope.selectize_allrecipient_users = [];
+            this.scope.recipients_users = [];
+            this.scope.recipients_user_ids = [];
+
+            this.scope.selectize_all_users_config = {
+                plugins: {
+                    'tooltip': ''
+                },
+                create: true,
+                maxItems: 1,
+                placeholder: 'Select...',
+                valueField: 'UserId',
+                labelField: 'FullIdentityName'
+            };
+
+
+            this.scope.addUser = function (selecteduserid, isAllowMessage) {
+                cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
+                if (isAllowMessage == true) {
+                    var notAllowedUsers = cmobj.scope.selectize_users_notAllowed_Msg;
+                    for (var t = 0; t < notAllowedUsers.length; t++) {
+                        if (notAllowedUsers[t].UserId == selecteduserid) {
+                            cmobj.scope.selectize_users_notAllowed_Msg.splice(t, 1);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    var AllowedUsers = cmobj.scope.CompanyUsers;
+                    for (var t = 0; t < AllowedUsers.length; t++) {
+                        if (AllowedUsers[t].UserId == selecteduserid) {
+                            cmobj.scope.selectize_users_notAllowed_Msg.push(AllowedUsers[t]);
+                            break;
+                        }
+                    }
+                }
+            };
+
+            this.scope.recipientAction = function (selectedrecipientid, ActionName) {
+                debugger;
+                if (cmobj.scope.Customer.RecipientList != null) {
+                    var alreadyExistRecipients = cmobj.scope.Customer.RecipientList.toString().split(',');
+                    cmobj.scope.recipients_user_ids = alreadyExistRecipients;
+                }
+
+                if (ActionName == "add") {
+                    cmobj.scope.recipients_user_ids.push(selectedrecipientid);
+                }
+                else if (ActionName == "remove") {
+                    // Remove it
+                    for (var i = 0; i < cmobj.scope.recipients_user_ids.length; i++) {
+                        if (cmobj.scope.recipients_user_ids[i] == selectedrecipientid)
+                            cmobj.scope.recipients_user_ids.splice(i, 1);
+                    }
+
+                    for (var i = 0; i < cmobj.scope.recipients_users.length; i++) {
+                        if (cmobj.scope.recipients_users[i] == selectedrecipientid)
+                            cmobj.scope.recipients_users.splice(i, 1);
+                    }
+
+                    // Push it
+                    var AllUsers = cmobj.scope.CompanyUsers;
+                    for (var t = 0; t < AllUsers.length; t++) {
+                        if (AllUsers[t].UserId == selectedrecipientid) {
+                            cmobj.scope.selectize_allrecipient_users.push(AllUsers[t]);
+                            break;
+                        }
+                    }
+                }
+
+                var x = cmobj.scope.recipients_user_ids;
+                var xyz = cmobj.scope.recipients_users;
+
+                //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
+                cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
+                cmobj.saveCompany(selectedrecipientid, ActionName);
+            };
+
+            // End Point
+
+
+
+            this.scope.selectize_users_options = [];
+            //var cmobj = this;
             mainCobj = this;
             ascope = this.scope;
             this.scope.selectize_users_config = {
@@ -98,12 +187,11 @@ module altairApp {
 
             this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
-            debugger;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
 
             scope.saveCompany = function () {
-                cmobj.saveCompany();
+                cmobj.saveCompany("", "");
             };
 
             scope.saveCompanyUser = function (u) {
@@ -125,26 +213,51 @@ module altairApp {
         }
 
         getCompanyDetail(companyid) {
-            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
                 this.scope.Customer = result.data;
+
+                if (result.data.RecipientList != null)
+                    this.getRecipients(result.data.RecipientList);
+
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
 
         getCompanyUsers(companyid) {
-            debugger;
+
+            var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                var notAllowedMsg = [];
                 this.scope.CompanyUsers = result.data;
+                this.scope.selectize_allrecipient_users = result.data;
+                for (var i = 0; i < result.data.length; i++) {
+                    if (result.data[i].IsAllowMsgToEveryone == false)
+                        notAllowedMsg.push(result.data[i]);
+                }
+
+                if (currentObj.scope.Customer.RecipientList != null) {
+                    var alreadyExistRecipients = currentObj.scope.Customer.RecipientList.toString().split(',');
+                    for (var x = 0; x < currentObj.scope.selectize_allrecipient_users.length; x++) {
+                        for (var m = 0; m < alreadyExistRecipients.length; m++) {
+                            var aaaaa = alreadyExistRecipients[m];
+                            var bbbbb = currentObj.scope.selectize_allrecipient_users[x].UserId;
+                            if (alreadyExistRecipients[m] == currentObj.scope.selectize_allrecipient_users[x].UserId)
+                                currentObj.scope.selectize_allrecipient_users.splice(x, 1);
+                        }
+                    }
+                }
+
+                this.scope.selectize_users_notAllowed_Msg = notAllowedMsg;
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
 
-        saveCompany() {
+        saveCompany(RecipientID, actionname) {
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.scope.Customer = result.data;
@@ -153,11 +266,28 @@ module altairApp {
                     var ccheck = this.scope.Customer.IsAllowMsgAllToEveryone;
                     $.each(this.scope.CompanyUsers, function () {
                         var u = this;
-                        u.IsAllowMsgToEveryone = ccheck;
-                        if (u.IsAllowMsgToEveryone) {
-                            u.UserMessages = [];
+                        if (RecipientID == "") {
+                            u.IsAllowMsgToEveryone = ccheck;
+                            if (u.IsAllowMsgToEveryone) {
+                                u.UserMessages = [];
+                            }
+                            cmobj.saveCompanyUser(u);
                         }
-                        cmobj.saveCompanyUser(u);
+                        else {
+                            if (actionname == "add") {
+                                if (u.UserId == RecipientID) {
+                                    cmobj.scope.recipients_users.push(u);
+
+                                    var AllUsers = cmobj.scope.selectize_allrecipient_users;
+                                    for (var t = 0; t < AllUsers.length; t++) {
+                                        if (AllUsers[t].UserId == RecipientID) {
+                                            cmobj.scope.selectize_allrecipient_users.splice(t, 1);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     });
 
                     this.$rootScope.$emit("successnotify",
@@ -166,11 +296,11 @@ module altairApp {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
-                
+
                 setTimeout(function () {
                     this.$rootScope.$emit("toggleLoader", false);
                 }, 500);
-                
+
 
             });
         }
@@ -180,25 +310,52 @@ module altairApp {
             this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
-                    $.each(this.scope.CompanyUsers, function (index) {
+                    var tCusers = this.scope.CompanyUsers;
+                    $.each(tCusers, function (index) {
                         var u = this;
                         if (u.UserId == user.UserId) {
-                            u = result.data;
+                            tCusers[index] = result.data;
                         }
                     })
-
+                    this.scope.CompanyUsers = tCusers;
                     this.$rootScope.$emit("successnotify",
                         { msg: "Your information is updated successfully", status: "success" });
                 } else {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
-
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
 
-      
+        getSelectedUserInfo(selecteduserid, isAllowMessage) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.lservice.getUserDetailsbyId(selecteduserid).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                if (result.data != "" || result.data != null) {
+                    if (isAllowMessage == true)
+                        result.data.IsAllowMsgToEveryone = true;
+                    else if (isAllowMessage == false)
+                        result.data.IsAllowMsgToEveryone = false;
+
+                    this.saveCompanyUser(result.data);
+                }
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+
+        }
+
+        getRecipients(recipientUserIDs) {
+            this.$rootScope.$emit("toggleLoader", true);
+            var Recipients = [];
+            var splitedUsers = recipientUserIDs.toString().split(',');
+            for (var i = 0; i < splitedUsers.length; i++) {
+                this.lservice.getUserDetailsbyId(splitedUsers[i]).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                    Recipients.push(result.data);
+                });
+            }
+            this.scope.recipients_users = Recipients;
+            this.$rootScope.$emit("toggleLoader", false);
+        }
 
     }
 
@@ -213,7 +370,18 @@ module altairApp {
             }
             return selectize_userlist;
 
-        }
+        };
+    }
+
+    export function customFilterForAllowMessage() {
+        return function (user) {
+            var filtered = [];
+            for (var i = 0; i < user.length; i++) {
+                if (user[i].IsAllowMsgToEveryone == true)
+                    filtered.push(user[i]);
+            }
+            return filtered;
+        };
     }
 
     angular.module("altairApp")
@@ -221,5 +389,10 @@ module altairApp {
 
     angular.module("altairApp")
         .filter("myFilter", altairApp.myFilter);
+
+    angular.module("altairApp")
+        .filter("customFilterForAllowMessage", altairApp.customFilterForAllowMessage);
+
+
 
 }

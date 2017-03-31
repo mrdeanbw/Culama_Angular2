@@ -160,7 +160,9 @@ module altairApp {
         }
 
         getLanguages() {
+            debugger;
             this.commonService.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                debugger;
                 this.scope.selectize_a_options = result.data;
                 this.scope.selectize_b_options = result.data;
             });
