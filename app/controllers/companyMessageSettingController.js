@@ -88,6 +88,8 @@ var altairApp;
                 }
                 //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
+                if (cmobj.scope.Customer.RecipientList == "")
+                    cmobj.scope.Customer.RecipientList = null;
                 cmobj.saveCompany(selectedrecipientid, ActionName);
             };
             // End Point
@@ -168,6 +170,10 @@ var altairApp;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
             scope.saveCompany = function () {
+                var ccheck = cmobj.scope.Customer.IsAllowMsgAllToEveryone;
+                if (ccheck == true) {
+                    cmobj.scope.Customer.RecipientList = null;
+                }
                 cmobj.saveCompany("", "");
             };
             scope.saveCompanyUser = function (u) {
@@ -230,8 +236,10 @@ var altairApp;
                     _this.scope.Customer = result.data;
                     var cmobj = _this;
                     var ccheck = _this.scope.Customer.IsAllowMsgAllToEveryone;
+                    var allcompanyusers = [];
                     $.each(_this.scope.CompanyUsers, function () {
                         var u = this;
+                        allcompanyusers.push(u);
                         if (RecipientID == "") {
                             u.IsAllowMsgToEveryone = ccheck;
                             if (u.IsAllowMsgToEveryone) {
@@ -254,13 +262,21 @@ var altairApp;
                             }
                         }
                     });
+                    if (ccheck == true) {
+                        _this.scope.selectize_allrecipient_users = allcompanyusers;
+                        cmobj.scope.recipients_users = [];
+                    }
+                    if (ccheck == false) {
+                        _this.scope.selectize_users_notAllowed_Msg = allcompanyusers;
+                    }
                     _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
                 }
                 else {
                     _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
+                var curobject = _this;
                 setTimeout(function () {
-                    this.$rootScope.$emit("toggleLoader", false);
+                    curobject.$rootScope.$emit("toggleLoader", false);
                 }, 500);
             });
         };
