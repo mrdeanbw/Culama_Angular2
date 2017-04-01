@@ -64,7 +64,6 @@ module altairApp {
             };
 
             this.scope.recipientAction = function (selectedrecipientid, ActionName) {
-                debugger;
                 if (cmobj.scope.Customer.RecipientList != null) {
                     var alreadyExistRecipients = cmobj.scope.Customer.RecipientList.toString().split(',');
                     cmobj.scope.recipients_user_ids = alreadyExistRecipients;
@@ -81,7 +80,7 @@ module altairApp {
                     }
 
                     for (var i = 0; i < cmobj.scope.recipients_users.length; i++) {
-                        if (cmobj.scope.recipients_users[i] == selectedrecipientid)
+                        if (cmobj.scope.recipients_users[i].UserId == selectedrecipientid)
                             cmobj.scope.recipients_users.splice(i, 1);
                     }
 
@@ -94,10 +93,6 @@ module altairApp {
                         }
                     }
                 }
-
-                var x = cmobj.scope.recipients_user_ids;
-                var xyz = cmobj.scope.recipients_users;
-
                 //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
                 cmobj.saveCompany(selectedrecipientid, ActionName);
@@ -229,20 +224,20 @@ module altairApp {
             var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+
                 var notAllowedMsg = [];
+
                 this.scope.CompanyUsers = result.data;
-                this.scope.selectize_allrecipient_users = result.data;
+                this.scope.selectize_allrecipient_users = result.data.slice();
                 for (var i = 0; i < result.data.length; i++) {
                     if (result.data[i].IsAllowMsgToEveryone == false)
                         notAllowedMsg.push(result.data[i]);
                 }
 
-                if (currentObj.scope.Customer.RecipientList != null) {
-                    var alreadyExistRecipients = currentObj.scope.Customer.RecipientList.toString().split(',');
+                if (this.scope.Customer.RecipientList != null) {
+                    var alreadyExistRecipients = this.scope.Customer.RecipientList.toString().split(',');
                     for (var x = 0; x < currentObj.scope.selectize_allrecipient_users.length; x++) {
                         for (var m = 0; m < alreadyExistRecipients.length; m++) {
-                            var aaaaa = alreadyExistRecipients[m];
-                            var bbbbb = currentObj.scope.selectize_allrecipient_users[x].UserId;
                             if (alreadyExistRecipients[m] == currentObj.scope.selectize_allrecipient_users[x].UserId)
                                 currentObj.scope.selectize_allrecipient_users.splice(x, 1);
                         }
@@ -257,7 +252,6 @@ module altairApp {
         saveCompany(RecipientID, actionname) {
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
-
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.scope.Customer = result.data;

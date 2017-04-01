@@ -60,7 +60,6 @@ var altairApp;
                 }
             };
             this.scope.recipientAction = function (selectedrecipientid, ActionName) {
-                debugger;
                 if (cmobj.scope.Customer.RecipientList != null) {
                     var alreadyExistRecipients = cmobj.scope.Customer.RecipientList.toString().split(',');
                     cmobj.scope.recipients_user_ids = alreadyExistRecipients;
@@ -75,7 +74,7 @@ var altairApp;
                             cmobj.scope.recipients_user_ids.splice(i, 1);
                     }
                     for (var i = 0; i < cmobj.scope.recipients_users.length; i++) {
-                        if (cmobj.scope.recipients_users[i] == selectedrecipientid)
+                        if (cmobj.scope.recipients_users[i].UserId == selectedrecipientid)
                             cmobj.scope.recipients_users.splice(i, 1);
                     }
                     // Push it
@@ -87,8 +86,6 @@ var altairApp;
                         }
                     }
                 }
-                var x = cmobj.scope.recipients_user_ids;
-                var xyz = cmobj.scope.recipients_users;
                 //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
                 cmobj.saveCompany(selectedrecipientid, ActionName);
@@ -206,17 +203,15 @@ var altairApp;
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
                 var notAllowedMsg = [];
                 _this.scope.CompanyUsers = result.data;
-                _this.scope.selectize_allrecipient_users = result.data;
+                _this.scope.selectize_allrecipient_users = result.data.slice();
                 for (var i = 0; i < result.data.length; i++) {
                     if (result.data[i].IsAllowMsgToEveryone == false)
                         notAllowedMsg.push(result.data[i]);
                 }
-                if (currentObj.scope.Customer.RecipientList != null) {
-                    var alreadyExistRecipients = currentObj.scope.Customer.RecipientList.toString().split(',');
+                if (_this.scope.Customer.RecipientList != null) {
+                    var alreadyExistRecipients = _this.scope.Customer.RecipientList.toString().split(',');
                     for (var x = 0; x < currentObj.scope.selectize_allrecipient_users.length; x++) {
                         for (var m = 0; m < alreadyExistRecipients.length; m++) {
-                            var aaaaa = alreadyExistRecipients[m];
-                            var bbbbb = currentObj.scope.selectize_allrecipient_users[x].UserId;
                             if (alreadyExistRecipients[m] == currentObj.scope.selectize_allrecipient_users[x].UserId)
                                 currentObj.scope.selectize_allrecipient_users.splice(x, 1);
                         }
