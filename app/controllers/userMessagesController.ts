@@ -110,7 +110,7 @@ class UserMessagesController {
                     result.data.splice(index, 1);
                     if (!this.IsAllowMsgToEveryone) {
                         IsAll = this.IsAllowMsgToEveryone;
-                        umcontoller.getUserMessages(this.UserId, result.data);
+                        //umcontoller.getUserMessages(this.UserId, result.data);
                     }
                 }
             });
@@ -121,38 +121,38 @@ class UserMessagesController {
         });
     }
 
-    getUserMessages(userid, userslist) {
-        var currentObj = this;
-        this.$rootScope.$emit("toggleLoader", true);
-        this.loginService.getUserMessagesbyId(userid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-            if (result.data != null && result.data.length > 0) {          
-                var umObjList = [];
-                $.each(result.data, function (index) {
-                    var umobj = this;
-                    $.each(userslist, function () {
-                        if (this.UserId == umobj.AllowSendUserId) {
-                            umObjList.push(this);
-                        }
-                    });
-                });
-                this.scope.isUserCreateMessage = true;
-                this.scope.selectize_users_options = umObjList;
-            }
-            else {
-                this.scope.isUserCreateMessage = this.$rootScope.LoggedUser.IsAllowMsgToEveryone;
-            }
+    //getUserMessages(userid, userslist) {
+    //    var currentObj = this;
+    //    this.$rootScope.$emit("toggleLoader", true);
+    //    this.loginService.getUserMessagesbyId(userid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+    //        if (result.data != null && result.data.length > 0) {          
+    //            var umObjList = [];
+    //            $.each(result.data, function (index) {
+    //                var umobj = this;
+    //                $.each(userslist, function () {
+    //                    if (this.UserId == umobj.AllowSendUserId) {
+    //                        umObjList.push(this);
+    //                    }
+    //                });
+    //            });
+    //            this.scope.isUserCreateMessage = true;
+    //            this.scope.selectize_users_options = umObjList;
+    //        }
+    //        else {
+    //            this.scope.isUserCreateMessage = this.$rootScope.LoggedUser.IsAllowMsgToEveryone;
+    //        }
 
-            var CurrentUrl = window.location.href;
-            var SplitUrl = CurrentUrl.toString().split('/');
-            var pagename = SplitUrl[SplitUrl.length - 1];
+    //        var CurrentUrl = window.location.href;
+    //        var SplitUrl = CurrentUrl.toString().split('/');
+    //        var pagename = SplitUrl[SplitUrl.length - 1];
 
-            if (pagename.toString().toLowerCase() == "create_user_messages" && this.scope.isUserCreateMessage == false) {
-                window.location.href = "/#/user_messages";
-            }
+    //        if (pagename.toString().toLowerCase() == "create_user_messages" && this.scope.isUserCreateMessage == false) {
+    //            window.location.href = "/#/user_messages";
+    //        }
 
-            this.$rootScope.$emit("toggleLoader", false);
-        });
-    }
+    //        this.$rootScope.$emit("toggleLoader", false);
+    //    });
+    //}
 
     loadMessages(messageId, IsRefreshAll) {
 
@@ -170,7 +170,7 @@ class UserMessagesController {
 
         this.scope.SelectedMessageThread = msg;       
 
-        this.CurrentChatingMembers();
+        //this.CurrentChatingMembers();
 
         if (msg != undefined) {
 
@@ -275,37 +275,37 @@ class UserMessagesController {
         }
     }
 
-    CurrentChatingMembers() {
-        var currentObj = this;
-        this.loginService.getUserMessagesbyId(this.$rootScope.LoggedUser.UserId).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-            if (result.data != null && result.data.length > 0) {
-                debugger;
-                var IsDifferentMembers = true;
-                var oldMembers = currentObj.scope.olderChatingGroup;
-                var newMembers = [];
-                for (var j = 0; j < result.data.length; j++) {
-                    newMembers.push(result.data[j].AllowSendUserId);
-                }
+    //CurrentChatingMembers() {
+    //    var currentObj = this;
+    //    this.loginService.getUserMessagesbyId(this.$rootScope.LoggedUser.UserId).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+    //        if (result.data != null && result.data.length > 0) {
+    //            debugger;
+    //            var IsDifferentMembers = true;
+    //            var oldMembers = currentObj.scope.olderChatingGroup;
+    //            var newMembers = [];
+    //            for (var j = 0; j < result.data.length; j++) {
+    //                newMembers.push(result.data[j].AllowSendUserId);
+    //            }
 
-                if (oldMembers.length == newMembers.length) {
-                    var old = new Set(oldMembers);
-                    for (var p = 0; p < newMembers.length; p++) {
-                        if (old.has(newMembers[p]))
-                            IsDifferentMembers = false;
-                        else {
-                            IsDifferentMembers = true;
-                            break;
-                        }
-                    }
+    //            if (oldMembers.length == newMembers.length) {
+    //                var old = new Set(oldMembers);
+    //                for (var p = 0; p < newMembers.length; p++) {
+    //                    if (old.has(newMembers[p]))
+    //                        IsDifferentMembers = false;
+    //                    else {
+    //                        IsDifferentMembers = true;
+    //                        break;
+    //                    }
+    //                }
 
-                    currentObj.scope.isUserTypeMessage = IsDifferentMembers;
-                }
-                else {
-                    currentObj.scope.isUserTypeMessage = false;
-                }
-            }
-        });
-    }
+    //                currentObj.scope.isUserTypeMessage = IsDifferentMembers;
+    //            }
+    //            else {
+    //                currentObj.scope.isUserTypeMessage = false;
+    //            }
+    //        }
+    //    });
+    //}
 }
 
 var options = [];

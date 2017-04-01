@@ -44,8 +44,7 @@ var altairApp;
                 {
                     "Id": "3",
                     "UserGroupName": "Users"
-                }
-            ];
+                }];
             this.newuser.UserGroupId = 1;
             this.scope.selectize_c_config = {
                 plugins: {
@@ -146,7 +145,9 @@ var altairApp;
         }
         CompanyUsersController.prototype.getLanguages = function () {
             var _this = this;
+            debugger;
             this.commonService.getLanguages().then(function (result) {
+                debugger;
                 _this.scope.selectize_a_options = result.data;
                 _this.scope.selectize_b_options = result.data;
             });
@@ -311,9 +312,9 @@ var altairApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
+        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
-    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("altairApp")
         .controller("companyUsersController", CompanyUsersController);
 })(altairApp || (altairApp = {}));

@@ -7,6 +7,7 @@
         public UserPrefix: string;
         public IsActive: boolean;
         public URL: string;
+        public RecipientList: string;
         public Users: any;
         public IsAllowMsgAllToEveryone: any;
 

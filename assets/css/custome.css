@@ -377,6 +377,67 @@
     position: absolute;
     transform: translate(0,-50%);
 }
+.pull-left
+{
+    float:left !important;
+}
+.user-btn , .user-btn:hover{
+    width: 30px;
+    display: block;
+    text-align: center;
+    height: 30px;
+    background-color: #1e88e5;
+    line-height: 32px;
+    margin-top: 15px;
+    box-shadow: 2px 2px 5px #b7b7b7;
+     color:#fff !important;
+}
+.user-btn a
+{
+    color:#fff;
+}
+.user-list
+{
+    padding:10px;
+    border:1px solid #ddd;
+           margin-top: 8px;
+
+    height: 200px;
+    box-shadow: 1px 1px 5px #e6e6e6;
+    overflow:auto;
+    
+}
+.user-list > div
+{
+       position: relative;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ddd;
+       
+}
+.user-list-label
+{
+    display: inline-block;
+    width: 88%;
+    font-size: 16px;
+        margin-bottom: 0;
+}
+.user-minus-btn
+{
+       display: inline-block;
+    width: 20px;
+    text-align: center;
+    height: 20px;
+    line-height: 21px;
+    position: absolute;
+    color: #1e88e5 !important;
+    right: 0;
+}
+.pl15
+{
+    padding-left:15px !important;
+}
 
 @media (max-width:1219px)
 {
