@@ -14,6 +14,8 @@ var UserMessagesController = (function () {
         this.scope.IsHasMessages = false;
         this.scope.isUserCreateMessage = true;
         this.scope.isUserTypeMessage = true;
+        this.scope.Customer;
+        this.getCompanyDetail(this.$rootScope.LoggedUser.CustomerId);
         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
         this.scope.selectize_users_options = [];
         this.scope.olderChatingGroup = [];
@@ -75,9 +77,6 @@ var UserMessagesController = (function () {
         this.scope.scopeSendMessage = function () {
             umg.sendMessage();
         };
-        //this.scope.addButton = function () {
-        //    alert("hi..");
-        //}
     }
     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
         var _this = this;
@@ -93,23 +92,74 @@ var UserMessagesController = (function () {
             _this.$rootScope.$emit("toggleLoader", false);
         });
     };
+    UserMessagesController.prototype.getCompanyDetail = function (companyid) {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.companyService.getCompanyById(companyid).then(function (result) {
+            _this.scope.Customer = result.data;
+            _this.$rootScope.$emit("toggleLoader", false);
+        });
+    };
+    //getCompanyUsers(companyid) {
+    //    this.$rootScope.$emit("toggleLoader", true);
+    //    this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+    //        debugger;
+    //        var loggedUid = this.$rootScope.LoggedUser.UserId;
+    //        var umcontoller = this;
+    //        var IsAll = true;
+    //        $.each(result.data, function (index) {
+    //            if (this.UserId == loggedUid) {
+    //                result.data.splice(index, 1);
+    //                if (!this.IsAllowMsgToEveryone) {
+    //                    IsAll = this.IsAllowMsgToEveryone;
+    //                    //umcontoller.getUserMessages(this.UserId, result.data);
+    //                }
+    //            }
+    //        });
+    //        if (IsAll) {
+    //            this.scope.selectize_users_options = result.data;
+    //        }
+    //        this.$rootScope.$emit("toggleLoader", false);
+    //    });
+    //}
     UserMessagesController.prototype.getCompanyUsers = function (companyid) {
         var _this = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsersByCompanyId(companyid).then(function (result) {
             var loggedUid = _this.$rootScope.LoggedUser.UserId;
-            var umcontoller = _this;
-            var IsAll = true;
-            $.each(result.data, function (index) {
-                if (this.UserId == loggedUid) {
-                    result.data.splice(index, 1);
-                    if (!this.IsAllowMsgToEveryone) {
-                        IsAll = this.IsAllowMsgToEveryone;
+            var companyusers = result.data.slice();
+            var addedrecipients = [];
+            var IsAll = _this.scope.Customer.IsAllowMsgAllToEveryone;
+            if (IsAll == true) {
+                $.each(result.data, function (index) {
+                    if (this.UserId == loggedUid) {
+                        result.data.splice(index, 1);
+                        if (!this.IsAllowMsgToEveryone) {
+                            IsAll = this.IsAllowMsgToEveryone;
+                        }
+                    }
+                });
+                if (IsAll) {
+                    _this.scope.selectize_users_options = result.data;
+                }
+            }
+            else {
+                var remainrecipients = [];
+                var companyRecipients = _this.scope.Customer.RecipientList;
+                if (companyRecipients != null) {
+                    var splitedrecipients = companyRecipients.toString().split(',');
+                    for (var i = 0; i < splitedrecipients.length; i++) {
+                        if (splitedrecipients[i] != loggedUid)
+                            remainrecipients.push(splitedrecipients[i]);
+                    }
+                    for (var x = 0; x < companyusers.length; x++) {
+                        for (var m = 0; m < remainrecipients.length; m++) {
+                            if (remainrecipients[m] == companyusers[x].UserId)
+                                addedrecipients.push(companyusers[x]);
+                        }
                     }
                 }
-            });
-            if (IsAll) {
-                _this.scope.selectize_users_options = result.data;
+                _this.scope.selectize_users_options = addedrecipients;
             }
             _this.$rootScope.$emit("toggleLoader", false);
         });

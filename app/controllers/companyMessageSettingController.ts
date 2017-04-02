@@ -95,6 +95,8 @@ module culamaApp {
                 }
                 //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
+                if (cmobj.scope.Customer.RecipientList == "")
+                    cmobj.scope.Customer.RecipientList = null;
                 cmobj.saveCompany(selectedrecipientid, ActionName);
             };
 
@@ -186,6 +188,10 @@ module culamaApp {
             this.getCompanyUsers(this.scope.CustomerId);
 
             scope.saveCompany = function () {
+                var ccheck = cmobj.scope.Customer.IsAllowMsgAllToEveryone;
+                if (ccheck == true) {
+                    cmobj.scope.Customer.RecipientList = null;                    
+                }
                 cmobj.saveCompany("", "");
             };
 
@@ -224,7 +230,6 @@ module culamaApp {
             var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-
                 var notAllowedMsg = [];
 
                 this.scope.CompanyUsers = result.data;
@@ -255,11 +260,13 @@ module culamaApp {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.scope.Customer = result.data;
-
                     var cmobj = this;
                     var ccheck = this.scope.Customer.IsAllowMsgAllToEveryone;
-                    $.each(this.scope.CompanyUsers, function () {
+                    var allcompanyusers = [];
+
+                    $.each(this.scope.CompanyUsers, function () {                    
                         var u = this;
+                        allcompanyusers.push(u);
                         if (RecipientID == "") {
                             u.IsAllowMsgToEveryone = ccheck;
                             if (u.IsAllowMsgToEveryone) {
@@ -284,6 +291,15 @@ module culamaApp {
                         }
                     });
 
+                    if (ccheck == true) {
+                        this.scope.selectize_allrecipient_users = allcompanyusers;
+                        cmobj.scope.recipients_users = [];
+                    }
+
+                    if (ccheck == false) {
+                        this.scope.selectize_users_notAllowed_Msg = allcompanyusers;
+                    }
+
                     this.$rootScope.$emit("successnotify",
                         { msg: "Your information is updated successfully", status: "success" });
                 } else {
@@ -291,8 +307,9 @@ module culamaApp {
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
 
+                var curobject = this;
                 setTimeout(function () {
-                    this.$rootScope.$emit("toggleLoader", false);
+                    curobject.$rootScope.$emit("toggleLoader", false);
                 }, 500);
 
 
