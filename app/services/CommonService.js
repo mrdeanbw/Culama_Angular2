@@ -1,7 +1,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var CommonService = (function () {
         function CommonService($http, appConfig) {
             this.$http = $http;
@@ -22,8 +22,8 @@ var altairApp;
         return CommonService;
     }());
     CommonService.$inject = ["$http", "appConfig"];
-    altairApp.CommonService = CommonService;
+    culamaApp.CommonService = CommonService;
     angular
-        .module("altairApp")
+        .module("culamaApp")
         .service("commonService", CommonService);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

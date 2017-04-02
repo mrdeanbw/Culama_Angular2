@@ -1,13 +1,13 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var LoginController = (function () {
         function LoginController(scope, $rootScope, loginService) {
             this.scope = scope;
             this.$rootScope = $rootScope;
             this.loginService = loginService;
-            this.loginuser = new altairApp.LoginUser();
+            this.loginuser = new culamaApp.LoginUser();
             scope.vm = this;
             this.lservice = loginService;
             scope.vm.selectize_a_options = [
@@ -72,6 +72,6 @@ var altairApp;
         return LoginController;
     }());
     LoginController.$inject = ["$scope", "$rootScope", "loginService"];
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("loginController", LoginController);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

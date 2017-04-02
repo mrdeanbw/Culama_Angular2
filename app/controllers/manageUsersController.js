@@ -12,8 +12,8 @@ var ManageUsersController = (function () {
         this.commonService = commonService;
         this.companyService = companyService;
         this.loginService = loginService;
-        this.newuser = new altairApp.UserDetail();
-        this.edituser = new altairApp.UserDetail();
+        this.newuser = new culamaApp.UserDetail();
+        this.edituser = new culamaApp.UserDetail();
         if ($rootScope.LoggedUser.UserGroupId !== 1) {
             window.location.href = "#/error";
         }
@@ -187,7 +187,7 @@ var ManageUsersController = (function () {
                     _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
                 _this.$rootScope.$emit("toggleLoader", false);
-                _this.newuser = new altairApp.UserDetail();
+                _this.newuser = new culamaApp.UserDetail();
                 window.location.href = "/#/manageusers";
             });
         }
@@ -297,5 +297,5 @@ var ManageUsersController = (function () {
     ManageUsersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     return ManageUsersController;
 }());
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("manageUsersController", ManageUsersController);

@@ -1,4 +1,4 @@
-﻿module altairApp {
+﻿module culamaApp {
     export class User {
         public UserId: number;
         public FullName: string;

@@ -1,4 +1,4 @@
-﻿module altairApp {
+﻿module culamaApp {
 
     export class Language {
         public Id: number;
@@ -26,7 +26,7 @@
         public FirstName: string;
         public LastName: string;
         public CustomerId: number;
-        public Customer: altairApp.Customer;
+        public Customer: culamaApp.Customer;
         public Title: string;
         public TitleTranslationId: number;
         public TitleTranslation: Translation;

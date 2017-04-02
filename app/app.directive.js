@@ -4,7 +4,7 @@
 */
 ; 'use strict';
 
-altairApp
+culamaApp
     // page title
     .directive('pageTitle', [
         '$rootScope',

@@ -66,5 +66,5 @@ class AdministratorDashboardController {
     }
 }
 
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("administratorDashboardController", AdministratorDashboardController);

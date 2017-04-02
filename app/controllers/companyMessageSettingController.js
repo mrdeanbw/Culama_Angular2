@@ -2,8 +2,8 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var CompanyMessageSettingController = (function () {
         function CompanyMessageSettingController(scope, $rootScope, companyService, $compile, $timeout, commonService, loginService) {
             this.scope = scope;
@@ -16,7 +16,7 @@ var altairApp;
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.CompanyUsers = [];
-            this.scope.Customer = new altairApp.Customer();
+            this.scope.Customer = new culamaApp.Customer();
             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
                 window.location.href = "#/error";
             }
@@ -327,7 +327,7 @@ var altairApp;
             return selectize_userlist;
         };
     }
-    altairApp.myFilter = myFilter;
+    culamaApp.myFilter = myFilter;
     function customFilterForAllowMessage() {
         return function (user) {
             var filtered = [];
@@ -338,11 +338,11 @@ var altairApp;
             return filtered;
         };
     }
-    altairApp.customFilterForAllowMessage = customFilterForAllowMessage;
-    angular.module("altairApp")
+    culamaApp.customFilterForAllowMessage = customFilterForAllowMessage;
+    angular.module("culamaApp")
         .controller("companyMessageSettingController", CompanyMessageSettingController);
-    angular.module("altairApp")
-        .filter("myFilter", altairApp.myFilter);
-    angular.module("altairApp")
-        .filter("customFilterForAllowMessage", altairApp.customFilterForAllowMessage);
-})(altairApp || (altairApp = {}));
+    angular.module("culamaApp")
+        .filter("myFilter", culamaApp.myFilter);
+    angular.module("culamaApp")
+        .filter("customFilterForAllowMessage", culamaApp.customFilterForAllowMessage);
+})(culamaApp || (culamaApp = {}));

@@ -3,7 +3,7 @@
 class UserMessagesController {
     // loggedUid: any;
     static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
-    constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: altairApp.CompanyService, public messageService: altairApp.MessagesService, public loginService: altairApp.LoginService) {
+    constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService, public messageService: culamaApp.MessagesService, public loginService: culamaApp.LoginService) {
         this.scope.Messages = [];
         this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         this.scope.IsHasMessages = false;
@@ -267,7 +267,7 @@ class UserMessagesController {
                     this.loadMessages(result.data.Id, false);
                 } else {
                     this.$rootScope.$emit("successnotify",
-                        { msg: "Message can't sent. Please try again.", status: "danger" });
+                        { msg: "Message can't send. Please try again.", status: "danger" });
                 }
                 this.scope.SendMessageContent = "";
                 this.$rootScope.$emit("toggleLoader", false);
@@ -328,5 +328,5 @@ function setIsAdmin(UserID) {
 }
 
 
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("userMessagesController", UserMessagesController);

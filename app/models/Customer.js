@@ -1,9 +1,9 @@
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var Customer = (function () {
         function Customer() {
         }
         return Customer;
     }());
-    altairApp.Customer = Customer;
-})(altairApp || (altairApp = {}));
+    culamaApp.Customer = Customer;
+})(culamaApp || (culamaApp = {}));

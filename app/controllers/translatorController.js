@@ -35,5 +35,5 @@ var TranslatorController = (function () {
     return TranslatorController;
 }());
 TranslatorController.$inject = ["$scope", "$rootScope"];
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("translatorController", TranslatorController);

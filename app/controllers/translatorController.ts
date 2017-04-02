@@ -41,5 +41,5 @@ class TranslatorController {
    
 }
 
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("translatorController", TranslatorController);

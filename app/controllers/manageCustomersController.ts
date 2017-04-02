@@ -2,15 +2,15 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
-module altairApp {
+module culamaApp {
     class ManageCustomersController {
         lservice: any;
         cservice: any;
-        public newuser: altairApp.UserDetail = new altairApp.UserDetail();
-        public newcompany: altairApp.Customer = new altairApp.Customer();
-        public editcompany: altairApp.Customer = new altairApp.Customer();
+        public newuser: culamaApp.UserDetail = new culamaApp.UserDetail();
+        public newcompany: culamaApp.Customer = new culamaApp.Customer();
+        public editcompany: culamaApp.Customer = new culamaApp.Customer();
         static $inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: altairApp.CommonService, public companyService: altairApp.CompanyService, public loginService: altairApp.LoginService) {
+        constructor(public scope: any, public $rootScope: any, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public companyService: culamaApp.CompanyService, public loginService: culamaApp.LoginService) {
             this.lservice = loginService;
             this.cservice = commonService;
             if ($rootScope.LoggedUser.UserGroupId !== 1) {
@@ -218,7 +218,7 @@ module altairApp {
                             { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     this.$rootScope.$emit("toggleLoader", false);
-                    this.newcompany = new altairApp.Customer();
+                    this.newcompany = new culamaApp.Customer();
                     window.location.href = "/#/managecompanies";
 
                 });
@@ -228,7 +228,7 @@ module altairApp {
         EditCompany() {
             if (editCompanyForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+                this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
                         this.editcompany = result.data;
@@ -245,7 +245,7 @@ module altairApp {
 
         saveCompany() {
             this.$rootScope.$emit("toggleLoader", true);
-            this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+            this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.editcompany = result.data;
@@ -273,7 +273,7 @@ module altairApp {
                 user.UserMessages = [];
             }
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
 
@@ -351,9 +351,9 @@ module altairApp {
         }
     }
 
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("manageCustomersController", ManageCustomersController);
 
-    angular.module("altairApp")
-        .filter("myFilter", altairApp.myFilter);
+    angular.module("culamaApp")
+        .filter("myFilter", culamaApp.myFilter);
 }

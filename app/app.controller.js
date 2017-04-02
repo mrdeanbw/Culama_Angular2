@@ -4,7 +4,7 @@
  */
 
 angular
-    .module('altairApp')
+    .module('culamaApp')
     .controller('mainCtrl', ['$rootScope',
         '$scope', 'commonService',
         function ($rootScope, $scope, commonService) {

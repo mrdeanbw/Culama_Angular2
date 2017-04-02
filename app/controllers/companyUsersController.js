@@ -1,7 +1,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var CompanyUsersController = (function () {
         function CompanyUsersController(scope, $rootScope, companyService, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, loginService) {
             this.scope = scope;
@@ -14,8 +14,8 @@ var altairApp;
             this.DTColumnDefBuilder = DTColumnDefBuilder;
             this.commonService = commonService;
             this.loginService = loginService;
-            this.newuser = new altairApp.UserDetail();
-            this.edituser = new altairApp.UserDetail();
+            this.newuser = new culamaApp.UserDetail();
+            this.edituser = new culamaApp.UserDetail();
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.cardview = true;
@@ -184,7 +184,7 @@ var altairApp;
                         _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     _this.$rootScope.$emit("toggleLoader", false);
-                    _this.newuser = new altairApp.UserDetail();
+                    _this.newuser = new culamaApp.UserDetail();
                     window.location.href = "/#/companyusers";
                 });
             }
@@ -315,6 +315,6 @@ var altairApp;
         CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

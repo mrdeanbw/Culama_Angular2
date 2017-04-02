@@ -1,9 +1,9 @@
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var LoginUser = (function () {
         function LoginUser() {
         }
         return LoginUser;
     }());
-    altairApp.LoginUser = LoginUser;
-})(altairApp || (altairApp = {}));
+    culamaApp.LoginUser = LoginUser;
+})(culamaApp || (culamaApp = {}));

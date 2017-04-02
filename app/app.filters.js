@@ -1,4 +1,4 @@
-altairApp
+culamaApp
     .filter('multiSelectFilter', function () {
         return function (items, filterData) {
             if(filterData == undefined)

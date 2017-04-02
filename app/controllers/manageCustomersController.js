@@ -2,8 +2,8 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var ManageCustomersController = (function () {
         function ManageCustomersController(scope, $rootScope, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, companyService, loginService) {
             this.scope = scope;
@@ -16,9 +16,9 @@ var altairApp;
             this.commonService = commonService;
             this.companyService = companyService;
             this.loginService = loginService;
-            this.newuser = new altairApp.UserDetail();
-            this.newcompany = new altairApp.Customer();
-            this.editcompany = new altairApp.Customer();
+            this.newuser = new culamaApp.UserDetail();
+            this.newcompany = new culamaApp.Customer();
+            this.editcompany = new culamaApp.Customer();
             this.lservice = loginService;
             this.cservice = commonService;
             if ($rootScope.LoggedUser.UserGroupId !== 1) {
@@ -206,7 +206,7 @@ var altairApp;
                         _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     _this.$rootScope.$emit("toggleLoader", false);
-                    _this.newcompany = new altairApp.Customer();
+                    _this.newcompany = new culamaApp.Customer();
                     window.location.href = "/#/managecompanies";
                 });
             }
@@ -325,9 +325,9 @@ var altairApp;
             return selectize_userlist;
         };
     }
-    altairApp.myFilter = myFilter;
-    angular.module("altairApp")
+    culamaApp.myFilter = myFilter;
+    angular.module("culamaApp")
         .controller("manageCustomersController", ManageCustomersController);
-    angular.module("altairApp")
-        .filter("myFilter", altairApp.myFilter);
-})(altairApp || (altairApp = {}));
+    angular.module("culamaApp")
+        .filter("myFilter", culamaApp.myFilter);
+})(culamaApp || (culamaApp = {}));

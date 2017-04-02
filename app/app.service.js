@@ -1,4 +1,4 @@
-altairApp
+culamaApp
     .service('detectBrowser', [
         '$window',
         function($window) {

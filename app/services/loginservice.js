@@ -1,7 +1,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     //export interface IPwnedService {
     //    check(address: string): ng.IPromise<ng.IHttpPromiseCallbackArg<BreachedAccount[]>>;
     //}
@@ -37,8 +37,8 @@ var altairApp;
         LoginService.$inject = ["$http", "appConfig"];
         return LoginService;
     }());
-    altairApp.LoginService = LoginService;
+    culamaApp.LoginService = LoginService;
     angular
-        .module("altairApp")
+        .module("culamaApp")
         .service("loginService", LoginService);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

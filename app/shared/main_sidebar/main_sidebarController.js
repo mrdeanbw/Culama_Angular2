@@ -1,5 +1,5 @@
 ﻿angular
-    .module('altairApp')
+    .module('culamaApp')
        .filter("lantitlefilter",
         function () {
             return function (x, input) {

@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('culamaApp')
     .controller('main_headerCtrl', [
         '$timeout',
         '$scope',

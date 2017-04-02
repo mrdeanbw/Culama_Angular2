@@ -1,6 +1,6 @@
 ﻿/// <reference path="../views/error.html" />
 angular
-    .module('altairApp')
+    .module('culamaApp')
     .controller('companyDashBoardCtrl', [
        '$rootScope',
         '$scope',

@@ -1,4 +1,4 @@
-altairApp
+culamaApp
     .factory('windowDimensions', [
         '$window',
         function($window) {

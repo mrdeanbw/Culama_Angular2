@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-module altairApp {
+module culamaApp {
 
 
     export class CommonService {
@@ -32,6 +32,6 @@ module altairApp {
     }
 
     angular
-        .module("altairApp")
+        .module("culamaApp")
         .service("commonService", CommonService);
 }
