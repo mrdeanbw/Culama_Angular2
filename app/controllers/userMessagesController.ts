@@ -135,19 +135,13 @@ class UserMessagesController {
             var companyusers = result.data.slice();
             var addedrecipients = [];
             var IsAll = this.scope.Customer.IsAllowMsgAllToEveryone;
-
-            if (IsAll == true) {
+            if (IsAll == true || this.$rootScope.LoggedUser.IsAllowMsgToEveryone == true) {
                 $.each(result.data, function (index) {
                     if (this.UserId == loggedUid) {
-                        result.data.splice(index, 1);
-                        if (!this.IsAllowMsgToEveryone) {
-                            IsAll = this.IsAllowMsgToEveryone;
-                        }
+                        result.data.splice(index, 1);                  
                     }
                 });
-                if (IsAll) {
-                    this.scope.selectize_users_options = result.data;
-                }
+                this.scope.selectize_users_options = result.data;
             }
             else {
                 var remainrecipients = [];

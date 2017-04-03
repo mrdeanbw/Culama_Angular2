@@ -38,7 +38,14 @@
 {
     padding-left: 50px;
 }
-
+.pl-30
+{
+    padding-left:30px !important;
+}
+.pl15
+{
+    padding-left:15px !important;
+}
 .align-right
 {
     text-align: right;
@@ -434,10 +441,7 @@
     color: #1e88e5 !important;
     right: 0;
 }
-.pl15
-{
-    padding-left:15px !important;
-}
+
 
 @media (max-width:1219px)
 {
