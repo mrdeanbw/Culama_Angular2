@@ -26,6 +26,15 @@ module altairApp {
             });
         }
 
+        updateMsgThreadReadPropery(id: string, msgid: string): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateMsgThreadReadPropery/' + id + '/' + msgid, {
+            });
+        }
+
+        getMessageReadInfoByUserID(userid: number): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetMessageReadInfoByUserID/' + userid, {
+            });
+        }
     }
 
     angular
