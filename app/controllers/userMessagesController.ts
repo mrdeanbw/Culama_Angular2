@@ -88,9 +88,35 @@ class UserMessagesController {
             this.scope.Messages = result.data;
             if (result.data.length > 0) {
                 this.scope.IsHasMessages = true;
+
                 if (isLoadMessage) {
-                    this.loadMessages(this.scope.Messages[0].Id, true);
+                    var CurrentUrl = window.location.href;
+                    var SplitUrl = CurrentUrl.toString().split('/');
+                    var pagename = SplitUrl[SplitUrl.length - 1];
+
+                    if (pagename == "user_messages") {
+                        this.loadMessages(this.scope.Messages[0].Id, true);
+                    }
+                    else {
+                        var splitpagename = pagename.toString().split('?');
+                        var msgTID = splitpagename[1].toString().split('=')[1];
+
+                        var allThreads = result.data.slice();
+                        var activeThread = "";
+                        $.each(allThreads, function (index) {
+                            var m = this;
+                            if (m.Id == msgTID) {
+                                activeThread = m.Id;
+                            }
+                        })
+
+                        this.loadMessages(activeThread, true);
+                    }
                 }
+
+                //if (isLoadMessage) {
+                //    this.loadMessages(this.scope.Messages[0].Id, true);
+                //}
             }
             this.$rootScope.$emit("toggleLoader", false);
 
@@ -99,7 +125,7 @@ class UserMessagesController {
 
     getCompanyDetail(companyid) {
         this.$rootScope.$emit("toggleLoader", true);
-        this.companyService.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+        this.companyService.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
             this.scope.Customer = result.data;
             this.$rootScope.$emit("toggleLoader", false);
         });
@@ -206,6 +232,8 @@ class UserMessagesController {
         var currentObj = this;
         if (IsRefreshAll) {
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+
+            this.UpdateMsgThreadReadPropery(this.$rootScope.LoggedUser.UserId, messageId);
         }
 
         var msg;
@@ -320,6 +348,14 @@ class UserMessagesController {
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
+    }
+
+    UpdateMsgThreadReadPropery(LoginuserID, MessageThreadID) {
+        this.$rootScope.$emit("toggleLoader", true);
+        this.messageService.updateMsgThreadReadPropery(LoginuserID, MessageThreadID).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+            var rs = result.data;
+            this.$rootScope.$emit("toggleLoader", false);
+        });
     }
 
     //CurrentChatingMembers() {

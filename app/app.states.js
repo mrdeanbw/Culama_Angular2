@@ -236,7 +236,7 @@ culamaApp
                 {
                     url: "/user_dashboard",
                     templateUrl: 'app/views/dashboard/userDashboardView.html',
-                    controller: 'userDashBoardCtrl',
+                    controller: 'userDashboardController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -250,6 +250,9 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
+                                        'app/services/companyService.js',
+                                         'app/services/messagesService.js',
+                                         'app/services/loginservice.js',
                                         'app/controllers/userDashboardController.js'
                                 ],
                                     { serie: true });

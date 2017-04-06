@@ -86,7 +86,25 @@ var UserMessagesController = (function () {
             if (result.data.length > 0) {
                 _this.scope.IsHasMessages = true;
                 if (isLoadMessage) {
-                    _this.loadMessages(_this.scope.Messages[0].Id, true);
+                    var CurrentUrl = window.location.href;
+                    var SplitUrl = CurrentUrl.toString().split('/');
+                    var pagename = SplitUrl[SplitUrl.length - 1];
+                    if (pagename == "user_messages") {
+                        _this.loadMessages(_this.scope.Messages[0].Id, true);
+                    }
+                    else {
+                        var splitpagename = pagename.toString().split('?');
+                        var msgTID = splitpagename[1].toString().split('=')[1];
+                        var allThreads = result.data.slice();
+                        var activeThread = "";
+                        $.each(allThreads, function (index) {
+                            var m = this;
+                            if (m.Id == msgTID) {
+                                activeThread = m.Id;
+                            }
+                        });
+                        _this.loadMessages(activeThread, true);
+                    }
                 }
             }
             _this.$rootScope.$emit("toggleLoader", false);
@@ -192,6 +210,7 @@ var UserMessagesController = (function () {
         var currentObj = this;
         if (IsRefreshAll) {
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+            this.UpdateMsgThreadReadPropery(this.$rootScope.LoggedUser.UserId, messageId);
         }
         var msg;
         $.each(this.scope.Messages, function () {
@@ -287,12 +306,20 @@ var UserMessagesController = (function () {
                     _this.loadMessages(result.data.Id, false);
                 }
                 else {
-                    _this.$rootScope.$emit("successnotify", { msg: "Message can't sent. Please try again.", status: "danger" });
+                    _this.$rootScope.$emit("successnotify", { msg: "Message can't send. Please try again.", status: "danger" });
                 }
                 _this.scope.SendMessageContent = "";
                 _this.$rootScope.$emit("toggleLoader", false);
             });
         }
+    };
+    UserMessagesController.prototype.UpdateMsgThreadReadPropery = function (LoginuserID, MessageThreadID) {
+        var _this = this;
+        this.$rootScope.$emit("toggleLoader", true);
+        this.messageService.updateMsgThreadReadPropery(LoginuserID, MessageThreadID).then(function (result) {
+            var rs = result.data;
+            _this.$rootScope.$emit("toggleLoader", false);
+        });
     };
     // loggedUid: any;
     UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
