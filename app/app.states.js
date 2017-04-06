@@ -236,7 +236,7 @@ altairApp
                 {
                     url: "/user_dashboard",
                     templateUrl: 'app/views/dashboard/userDashboardView.html',
-                    controller: 'userDashboardController',
+                    controller: 'userDashBoardCtrl',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -250,9 +250,6 @@ altairApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
-                                        'app/services/companyService.js',
-                                         'app/services/messagesService.js',
-                                         'app/services/loginService.js',
                                         'app/controllers/userDashboardController.js'
                                 ],
                                     { serie: true });

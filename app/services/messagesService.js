@@ -18,12 +18,6 @@ var altairApp;
             var params = JSON.stringify(msgObj);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SendMessage', params, {});
         };
-        MessagesService.prototype.updateMsgThreadReadPropery = function (id, msgid) {
-            return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateMsgThreadReadPropery/' + id + '/' + msgid, {});
-        };
-        MessagesService.prototype.getMessageReadInfoByUserID = function (userid) {
-            return this.$http.get(this.appConfig.domain + '/Web/Security/GetMessageReadInfoByUserID/' + userid, {});
-        };
         MessagesService.$inject = ["$http", "appConfig"];
         return MessagesService;
     }());

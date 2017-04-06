@@ -82,30 +82,11 @@ var UserMessagesController = (function () {
         var _this = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.messageService.getMessageThreadsByUserId(id).then(function (result) {
-            debugger;
             _this.scope.Messages = result.data;
             if (result.data.length > 0) {
                 _this.scope.IsHasMessages = true;
                 if (isLoadMessage) {
-                    var CurrentUrl = window.location.href;
-                    var SplitUrl = CurrentUrl.toString().split('/');
-                    var pagename = SplitUrl[SplitUrl.length - 1];
-                    if (pagename == "user_messages") {
-                        _this.loadMessages(_this.scope.Messages[0].Id, true);
-                    }
-                    else {
-                        var splitpagename = pagename.toString().split('?');
-                        var msgTID = splitpagename[1].toString().split('=')[1];
-                        var allThreads = result.data.slice();
-                        var activeThread = "";
-                        $.each(allThreads, function (index) {
-                            var m = this;
-                            if (m.Id == msgTID) {
-                                activeThread = m.Id;
-                            }
-                        });
-                        _this.loadMessages(activeThread, true);
-                    }
+                    _this.loadMessages(_this.scope.Messages[0].Id, true);
                 }
             }
             _this.$rootScope.$emit("toggleLoader", false);
@@ -211,7 +192,6 @@ var UserMessagesController = (function () {
         var currentObj = this;
         if (IsRefreshAll) {
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
-            this.UpdateMsgThreadReadPropery(this.$rootScope.LoggedUser.UserId, messageId);
         }
         var msg;
         $.each(this.scope.Messages, function () {
@@ -222,12 +202,12 @@ var UserMessagesController = (function () {
         this.scope.SelectedMessageThread = msg;
         //this.CurrentChatingMembers();
         if (msg != undefined) {
-            //var olderGroupMembers = [];
-            //for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
-            //    if (msg.MessageThreadUsers[i].UserId != currentObj.$rootScope.LoggedUser.UserId)
-            //        olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
-            //}
-            //currentObj.scope.olderChatingGroup = olderGroupMembers;
+            var olderGroupMembers = [];
+            for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
+                if (msg.MessageThreadUsers[i].UserId != currentObj.$rootScope.LoggedUser.UserId)
+                    olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
+            }
+            currentObj.scope.olderChatingGroup = olderGroupMembers;
             $.each(msg.MessageThreadDetails, function () {
                 if (typeof this.CreatedOn === 'string') {
                     this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
@@ -294,7 +274,6 @@ var UserMessagesController = (function () {
             msgu.UserId = this.$rootScope.LoggedUser.UserId;
             msgu.TextContent = this.scope.SendMessageContent.toString().trim();
             msgu.IsActive = true;
-            //msgu.IsRead = false;
             this.$rootScope.$emit("toggleLoader", true);
             this.messageService.sendMessageThread(msgu).then(function (result) {
                 if (result.data != null) {
@@ -314,14 +293,6 @@ var UserMessagesController = (function () {
                 _this.$rootScope.$emit("toggleLoader", false);
             });
         }
-    };
-    UserMessagesController.prototype.UpdateMsgThreadReadPropery = function (LoginuserID, MessageThreadID) {
-        var _this = this;
-        this.$rootScope.$emit("toggleLoader", true);
-        this.messageService.updateMsgThreadReadPropery(LoginuserID, MessageThreadID).then(function (result) {
-            var rs = result.data;
-            _this.$rootScope.$emit("toggleLoader", false);
-        });
     };
     // loggedUid: any;
     UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
