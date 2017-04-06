@@ -315,5 +315,5 @@ function setIsAdmin(UserID) {
     // To Add the IDs in the Hidden Fields
     document.getElementById("HDFIsAdminIDs").value = AdminIDs;
 }
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("userMessagesController", UserMessagesController);

@@ -3,7 +3,7 @@
 */
 ;"use strict";
 
-var altairApp = angular.module('altairApp', [
+var culamaApp = angular.module('culamaApp', [
     'ui.router',
     'oc.lazyLoad',
     'ngSanitize',
@@ -12,13 +12,13 @@ var altairApp = angular.module('altairApp', [
     'ConsoleLogger'
 ]);
 
-altairApp.constant('variables', {
+culamaApp.constant('variables', {
     header_main_height: 48,
     easing_swiftOut: [ 0.4,0,0.2,1 ],
     bez_easing_swiftOut: $.bez([ 0.4,0,0.2,1 ])
 });
 
-altairApp.config(function($sceDelegateProvider) {
+culamaApp.config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
         'https://www.youtube.com/**',
@@ -27,7 +27,7 @@ altairApp.config(function($sceDelegateProvider) {
 });
 
 // breadcrumbs
-altairApp.config(function($breadcrumbProvider) {
+culamaApp.config(function($breadcrumbProvider) {
     $breadcrumbProvider.setOptions({
         prefixStateName: 'restricted.dashboard',
         templateUrl: 'app/templates/breadcrumbs.tpl.html'
@@ -38,7 +38,7 @@ altairApp.config(function($breadcrumbProvider) {
 function detectIE(){var a=window.navigator.userAgent,b=a.indexOf("MSIE ");if(0<b)return parseInt(a.substring(b+5,a.indexOf(".",b)),10);if(0<a.indexOf("Trident/"))return b=a.indexOf("rv:"),parseInt(a.substring(b+3,a.indexOf(".",b)),10);b=a.indexOf("Edge/");return 0<b?parseInt(a.substring(b+5,a.indexOf(".",b)),10):!1};
 
 /* Run Block */
-altairApp
+culamaApp
     .run([
         '$rootScope',
         '$state',
@@ -151,7 +151,7 @@ altairApp
     }]);
 ;
 
-altairApp
+culamaApp
     .factory('windowDimensions', [
         '$window',
         function($window) {
@@ -277,7 +277,7 @@ angular.module("ConsoleLogger", [])
         };
         return handler;
     }]);
-altairApp
+culamaApp
     .service('detectBrowser', [
         '$window',
         function($window) {
@@ -345,7 +345,7 @@ altairApp
 */
 ;'use strict';
 
-altairApp
+culamaApp
     // page title
     .directive('pageTitle', [
         '$rootScope',
@@ -2168,7 +2168,7 @@ altairApp
         }
     ])
 ;
-altairApp
+culamaApp
     .filter('multiSelectFilter', function () {
         return function (items, filterData) {
             if(filterData == undefined)
@@ -2237,7 +2237,7 @@ altairApp
         }
     }])
 ;
-altairApp
+culamaApp
     .config([
         '$stateProvider',
         '$urlRouterProvider',
@@ -3808,7 +3808,7 @@ altairApp
  */
 
 angular
-    .module('altairApp')
+    .module('culamaApp')
     .controller('mainCtrl', [
         function () {}
     ])
@@ -3816,7 +3816,7 @@ angular
 
 /* ocLazyLoad config */
 
-altairApp
+culamaApp
     .config([
         '$ocLazyLoadProvider',
         function($ocLazyLoadProvider) {

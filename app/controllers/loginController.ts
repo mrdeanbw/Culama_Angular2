@@ -1,11 +1,11 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-module altairApp {
+module culamaApp {
     class LoginController {
         lservice: any;
-        public loginuser: altairApp.LoginUser = new altairApp.LoginUser();
+        public loginuser: culamaApp.LoginUser = new culamaApp.LoginUser();
         static $inject = ["$scope", "$rootScope", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService) {
+        constructor(public scope: any, public $rootScope: any, public loginService: culamaApp.LoginService) {
             scope.vm = this;
             this.lservice = loginService;
             scope.vm.selectize_a_options = [
@@ -52,7 +52,7 @@ module altairApp {
 
         login() {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<altairApp.User>) => {
+            this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.User>) => {
                 if (result.data.Username != null) {
 
                     if (typeof (Storage) !== "undefined") {
@@ -79,7 +79,7 @@ module altairApp {
 
     }
 
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("loginController", LoginController);
 
   

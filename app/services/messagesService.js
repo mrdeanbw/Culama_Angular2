@@ -1,7 +1,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var MessagesService = (function () {
         function MessagesService($http, appConfig) {
             this.$http = $http;
@@ -21,8 +21,8 @@ var altairApp;
         MessagesService.$inject = ["$http", "appConfig"];
         return MessagesService;
     }());
-    altairApp.MessagesService = MessagesService;
+    culamaApp.MessagesService = MessagesService;
     angular
-        .module("altairApp")
+        .module("culamaApp")
         .service("messagesService", MessagesService);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

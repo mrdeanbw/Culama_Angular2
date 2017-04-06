@@ -2,17 +2,17 @@
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
-module altairApp {
+module culamaApp {
 
     class CompanyMessageSettingController {
         cservice: any;
         lservice: any;
         static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public companyService: altairApp.CompanyService, public $compile: any, public $timeout: any, public commonService: altairApp.CommonService, public loginService: altairApp.LoginService) {
+        constructor(public scope: any, public $rootScope: any, public companyService: culamaApp.CompanyService, public $compile: any, public $timeout: any, public commonService: culamaApp.CommonService, public loginService: culamaApp.LoginService) {
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.CompanyUsers = [];
-            this.scope.Customer = new altairApp.Customer();
+            this.scope.Customer = new culamaApp.Customer();
 
             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
                 window.location.href = "#/error";
@@ -215,7 +215,7 @@ module altairApp {
 
         getCompanyDetail(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+            this.cservice.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.scope.Customer = result.data;
 
                 if (result.data.RecipientList != null)
@@ -256,7 +256,7 @@ module altairApp {
 
         saveCompany(RecipientID, actionname) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<altairApp.Customer>) => {
+            this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.scope.Customer = result.data;
@@ -318,7 +318,7 @@ module altairApp {
 
         saveCompanyUser(user) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     var tCusers = this.scope.CompanyUsers;
@@ -341,7 +341,7 @@ module altairApp {
 
         getSelectedUserInfo(selecteduserid, isAllowMessage) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.getUserDetailsbyId(selecteduserid).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.lservice.getUserDetailsbyId(selecteduserid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 if (result.data != "" || result.data != null) {
                     if (isAllowMessage == true)
                         result.data.IsAllowMsgToEveryone = true;
@@ -360,7 +360,7 @@ module altairApp {
             var Recipients = [];
             var splitedUsers = recipientUserIDs.toString().split(',');
             for (var i = 0; i < splitedUsers.length; i++) {
-                this.lservice.getUserDetailsbyId(splitedUsers[i]).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.lservice.getUserDetailsbyId(splitedUsers[i]).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     Recipients.push(result.data);
                 });
             }
@@ -395,14 +395,14 @@ module altairApp {
         };
     }
 
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("companyMessageSettingController", CompanyMessageSettingController);
 
-    angular.module("altairApp")
-        .filter("myFilter", altairApp.myFilter);
+    angular.module("culamaApp")
+        .filter("myFilter", culamaApp.myFilter);
 
-    angular.module("altairApp")
-        .filter("customFilterForAllowMessage", altairApp.customFilterForAllowMessage);
+    angular.module("culamaApp")
+        .filter("customFilterForAllowMessage", culamaApp.customFilterForAllowMessage);
 
 
 

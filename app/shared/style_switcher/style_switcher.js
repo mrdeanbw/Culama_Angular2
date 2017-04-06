@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('culamaApp')
     .directive('styleSwitcher', function ($rootScope,$document,$state,$timeout) {
         return {
             restrict: 'E',

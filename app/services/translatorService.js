@@ -1,7 +1,7 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var TranslatorService = (function () {
         function TranslatorService(scope, $resource) {
             this.scope = scope;
@@ -37,8 +37,8 @@ var altairApp;
         return TranslatorService;
     }());
     TranslatorService.$inject = ["$scope", "$resource"];
-    altairApp.TranslatorService = TranslatorService;
+    culamaApp.TranslatorService = TranslatorService;
     angular
-        .module("altairApp")
+        .module("culamaApp")
         .service("translatorService", TranslatorService);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

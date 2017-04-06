@@ -1,27 +1,27 @@
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var Language = (function () {
         function Language() {
         }
         return Language;
     }());
-    altairApp.Language = Language;
+    culamaApp.Language = Language;
     var TranslationEntry = (function () {
         function TranslationEntry() {
         }
         return TranslationEntry;
     }());
-    altairApp.TranslationEntry = TranslationEntry;
+    culamaApp.TranslationEntry = TranslationEntry;
     var Translation = (function () {
         function Translation() {
         }
         return Translation;
     }());
-    altairApp.Translation = Translation;
+    culamaApp.Translation = Translation;
     var UserDetail = (function () {
         function UserDetail() {
         }
         return UserDetail;
     }());
-    altairApp.UserDetail = UserDetail;
-})(altairApp || (altairApp = {}));
+    culamaApp.UserDetail = UserDetail;
+})(culamaApp || (culamaApp = {}));

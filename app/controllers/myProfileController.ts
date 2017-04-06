@@ -1,14 +1,14 @@
 ﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
 
-module altairApp {
+module culamaApp {
     class MyProfileController {
         lservice: any;
         cservice: any;
-        public userDetail: altairApp.UserDetail = new altairApp.UserDetail();
-        public userAccount: altairApp.LoginUser = new altairApp.LoginUser();
+        public userDetail: culamaApp.UserDetail = new culamaApp.UserDetail();
+        public userAccount: culamaApp.LoginUser = new culamaApp.LoginUser();
         static $inject = ["$scope", "$rootScope", "loginService", "commonService"];
-        constructor(public scope: any, public $rootScope: any, public loginService: altairApp.LoginService, public commonService: altairApp.CommonService) {
+        constructor(public scope: any, public $rootScope: any, public loginService: culamaApp.LoginService, public commonService: culamaApp.CommonService) {
 
             scope.vm = this;
             scope.vm.title = "";
@@ -71,7 +71,7 @@ module altairApp {
         }
 
         getUser(id) {
-            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.userDetail = result.data;
                 var CurrentScope = this.scope.vm;
                 if (this.userDetail != undefined) {
@@ -102,7 +102,7 @@ module altairApp {
         checkPhoneUnique() {
             var $formValidate = $('#form_validation');
             this.scope.vm.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
                     if (result.data.UserId !== this.userDetail.UserId) {
@@ -128,7 +128,7 @@ module altairApp {
         saveInfo() {
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<altairApp.UserDetail>) => {
+                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
 
                     if (result.data != "") {
                         this.userDetail = result.data;
@@ -165,7 +165,7 @@ module altairApp {
        
     }
 
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("myProfileController", MyProfileController);
 
 }

@@ -106,6 +106,8 @@
     "jquery": "~2.2.x",
     "fastclick": "~1.0.6",
     "d3": "~3.5",
-    "angular": "~1.5.3"
+    "angular": "~1.5.3",
+    "fullcalendar": "~3.0.1",
+    "metrics-graphics": "~2.9"
   }
 }

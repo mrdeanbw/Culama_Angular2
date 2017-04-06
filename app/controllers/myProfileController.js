@@ -1,15 +1,15 @@
 /// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
-var altairApp;
-(function (altairApp) {
+var culamaApp;
+(function (culamaApp) {
     var MyProfileController = (function () {
         function MyProfileController(scope, $rootScope, loginService, commonService) {
             this.scope = scope;
             this.$rootScope = $rootScope;
             this.loginService = loginService;
             this.commonService = commonService;
-            this.userDetail = new altairApp.UserDetail();
-            this.userAccount = new altairApp.LoginUser();
+            this.userDetail = new culamaApp.UserDetail();
+            this.userAccount = new culamaApp.LoginUser();
             scope.vm = this;
             scope.vm.title = "";
             scope.vm.newpassword = "";
@@ -144,6 +144,6 @@ var altairApp;
         return MyProfileController;
     }());
     MyProfileController.$inject = ["$scope", "$rootScope", "loginService", "commonService"];
-    angular.module("altairApp")
+    angular.module("culamaApp")
         .controller("myProfileController", MyProfileController);
-})(altairApp || (altairApp = {}));
+})(culamaApp || (culamaApp = {}));

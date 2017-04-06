@@ -69,5 +69,5 @@ var AdministratorDashboardController = (function () {
     return AdministratorDashboardController;
 }());
 AdministratorDashboardController.$inject = ["$scope", "$rootScope", "$interval", "$timeout"];
-angular.module("altairApp")
+angular.module("culamaApp")
     .controller("administratorDashboardController", AdministratorDashboardController);

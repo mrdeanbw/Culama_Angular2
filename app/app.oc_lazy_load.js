@@ -1,6 +1,6 @@
 /* ocLazyLoad config */
 
-altairApp
+culamaApp
     .config([
         '$ocLazyLoadProvider',
         function($ocLazyLoadProvider) {

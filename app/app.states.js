@@ -1,4 +1,4 @@
-altairApp
+culamaApp
     .config([
         '$stateProvider',
         '$urlRouterProvider',
