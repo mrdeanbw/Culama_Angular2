@@ -632,9 +632,9 @@ culamaApp
                         '$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                     'app/services/companyService.js',
-                                     'app/services/messageService.js',
+                                    'app/services/messageService.js',
                                      'app/services/loginService.js',
-                                    'app/controllers/userMessagesController.js'
+                                    'app/areas/messaging/controllers/userMessagesController.js'
                             ],
                                 { serie: true });
                         }

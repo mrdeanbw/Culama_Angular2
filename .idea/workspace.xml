@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8fef8bc-fba1-4a97-9237-72a285715376" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/userMessagesController.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/userMessagesController.ts" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.states.js" afterPath="$PROJECT_DIR$/app/app.states.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" afterPath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts" afterPath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/areas/messaging/models/MessageThreadUser.ts" afterPath="$PROJECT_DIR$/app/areas/messaging/models/MessageThreadUser.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/userDashboardController.js" afterPath="$PROJECT_DIR$/app/controllers/userDashboardController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/userDashboardController.ts" afterPath="$PROJECT_DIR$/app/controllers/userDashboardController.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/messageService.js" afterPath="$PROJECT_DIR$/app/services/messageService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/messageService.ts" afterPath="$PROJECT_DIR$/app/services/messageService.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,14 +56,14 @@
       <file leaf-file-name="userMessagesController.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="501">
+              <caret line="97" column="92" lean-forward="false" selection-start-line="97" selection-start-column="92" selection-end-line="97" selection-end-column="92" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1491593966875" expanded="true" signature="2585:2597" ph="..." />
-                <marker date="1491593966875" expanded="true" signature="2782:2788" ph=" " />
-                <marker date="1491593966875" expanded="true" signature="2848:2880" ph="..." />
-                <marker date="1491593966875" expanded="true" signature="2911:2919" ph="..." />
+                <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
+                <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
+                <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
+                <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
               </folding>
             </state>
           </provider>
@@ -87,12 +81,94 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="messagesView.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/areas/messaging/views/messagesView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="115" lean-forward="false" selection-start-line="27" selection-start-column="115" selection-end-line="27" selection-end-column="115" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="app.states.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/app.states.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="603" column="79" lean-forward="true" selection-start-line="603" selection-start-column="79" selection-end-line="603" selection-end-column="79" />
+            <state relative-caret-position="568">
+              <caret line="636" column="57" lean-forward="false" selection-start-line="636" selection-start-column="57" selection-end-line="636" selection-end-column="57" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Message.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/areas/messaging/models/Message.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userMessagesController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <folding>
+                <marker date="1491595151264" expanded="true" signature="289:17400" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="356:17319" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="416:16940" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="3272:3284" ph="..." />
+                <marker date="1491595151264" expanded="true" signature="3506:3512" ph=" " />
+                <marker date="1491595151264" expanded="true" signature="3572:3604" ph="..." />
+                <marker date="1491595151264" expanded="true" signature="3635:3643" ph="..." />
+                <marker date="1491595151264" expanded="true" signature="5338:7340" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="5565:7316" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="5692:7210" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="5816:7180" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="6147:6290" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="6332:7146" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="6739:7021" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="6863:6979" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="7435:7831" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="7641:7807" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="7925:10287" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="8136:10263" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="8533:8928" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="8604:8815" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="8672:8781" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="8962:10162" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="9178:10047" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="9368:9575" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="9658:10013" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="9750:9975" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="10392:12614" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="10483:10718" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="10816:10973" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="10872:10947" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="11086:12592" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="11228:11466" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="11624:11862" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="11698:11832" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="12115:12500" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="12697:14574" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="13145:13398" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="13661:14552" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="13868:14524" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="13919:14110" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="14148:14335" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="14655:16333" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="14782:16311" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="15278:16283" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="15337:15884" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="15476:15703" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="15550:15665" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="15922:16105" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="16457:16870" ph="{...}" />
+                <marker date="1491595151264" expanded="true" signature="16694:16846" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,20 +184,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>selectize</find>
-      <find>selectizeusersopt</find>
-      <find>userMessagesController</find>
-      <find>me</find>
-      <find>mes</find>
-      <find>mess</find>
-      <find>messages</find>
-      <find>messagesV</find>
-      <find>loggedUserId</find>
-      <find>Im</find>
-      <find>I</find>
-      <find>IMe</find>
-      <find>IMessag</find>
-      <find>IMessageThr</find>
       <find>IMessageThre</find>
       <find>IMessageThrea</find>
       <find>newm</find>
@@ -136,8 +198,22 @@
       <find>messagesView</find>
       <find>IMessage</find>
       <find>service</find>
-      <find>userda</find>
       <find>ogged</find>
+      <find>UIki</find>
+      <find>u</find>
+      <find>userM</find>
+      <find>userMe</find>
+      <find>userMess</find>
+      <find>userMessage</find>
+      <find>userMessages</find>
+      <find>userMessagesC</find>
+      <find>userMessagesCo</find>
+      <find>userMessagesCont</find>
+      <find>userMessagesContro</find>
+      <find>userMessagesControl</find>
+      <find>userMessagesControll</find>
+      <find>userMessagesController</find>
+      <find>userda</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,12 +231,12 @@
         <option value="$PROJECT_DIR$/app/controllers/userMessagesController.ts" />
         <option value="$PROJECT_DIR$/app/areas/messaging/views/messagesView.css" />
         <option value="$PROJECT_DIR$/app/views/messages/messagesView.html" />
-        <option value="$PROJECT_DIR$/app/areas/messaging/views/messagesView.html" />
-        <option value="$PROJECT_DIR$/app/app.states.js" />
         <option value="$PROJECT_DIR$/app/areas/messaging/models/MessageThreadUser.ts" />
         <option value="$PROJECT_DIR$/app/services/messageService.ts" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/app/controllers/userDashboardController.ts" />
+        <option value="$PROJECT_DIR$/app/areas/messaging/views/messagesView.html" />
+        <option value="$PROJECT_DIR$/app/app.states.js" />
         <option value="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts" />
       </list>
     </option>
@@ -616,12 +692,12 @@
       <option name="presentableId" value="Default" />
       <updated>1491431557829</updated>
       <workItem from="1491431559923" duration="19766000" />
-      <workItem from="1491583896228" duration="8277000" />
+      <workItem from="1491583896228" duration="9236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28043000" />
+    <option name="totallyTimeSpent" value="29002000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -768,10 +844,10 @@
           <caret line="232" column="9" lean-forward="true" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1491593966875" expanded="true" signature="2585:2597" ph="..." />
-            <marker date="1491593966875" expanded="true" signature="2782:2788" ph=" " />
-            <marker date="1491593966875" expanded="true" signature="2848:2880" ph="..." />
-            <marker date="1491593966875" expanded="true" signature="2911:2919" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
+            <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
           </folding>
         </state>
       </provider>
@@ -780,14 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4335">
-          <caret line="256" column="21" lean-forward="false" selection-start-line="256" selection-start-column="21" selection-end-line="256" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -804,14 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/areas/messaging/models/Message.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -844,14 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="790">
           <caret line="58" column="1" lean-forward="false" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/areas/messaging/views/messagesView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="173" lean-forward="false" selection-start-line="21" selection-start-column="173" selection-end-line="21" selection-end-column="173" />
           <folding />
         </state>
       </provider>
@@ -893,7 +945,7 @@
         <state relative-caret-position="-221">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -903,7 +955,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -978,14 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.states.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="603" column="79" lean-forward="true" selection-start-line="603" selection-start-column="79" selection-end-line="603" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -1015,16 +1059,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/areas/messaging/models/Message.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/areas/messaging/views/messagesView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="115" lean-forward="false" selection-start-line="27" selection-start-column="115" selection-end-line="27" selection-end-column="115" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding>
+            <marker date="1491595151264" expanded="true" signature="289:17400" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="356:17319" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="416:16940" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="3272:3284" ph="..." />
+            <marker date="1491595151264" expanded="true" signature="3506:3512" ph=" " />
+            <marker date="1491595151264" expanded="true" signature="3572:3604" ph="..." />
+            <marker date="1491595151264" expanded="true" signature="3635:3643" ph="..." />
+            <marker date="1491595151264" expanded="true" signature="5338:7340" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="5565:7316" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="5692:7210" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="5816:7180" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="6147:6290" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="6332:7146" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="6739:7021" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="6863:6979" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="7435:7831" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="7641:7807" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="7925:10287" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="8136:10263" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="8533:8928" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="8604:8815" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="8672:8781" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="8962:10162" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="9178:10047" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="9368:9575" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="9658:10013" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="9750:9975" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="10392:12614" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="10483:10718" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="10816:10973" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="10872:10947" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="11086:12592" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="11228:11466" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="11624:11862" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="11698:11832" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="12115:12500" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="12697:14574" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="13145:13398" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="13661:14552" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="13868:14524" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="13919:14110" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="14148:14335" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="14655:16333" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="14782:16311" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="15278:16283" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="15337:15884" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="15476:15703" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="15550:15665" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="15922:16105" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="16457:16870" ph="{...}" />
+            <marker date="1491595151264" expanded="true" signature="16694:16846" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.states.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="636" column="57" lean-forward="false" selection-start-line="636" selection-start-column="57" selection-end-line="636" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="501">
+          <caret line="97" column="92" lean-forward="false" selection-start-line="97" selection-start-column="92" selection-end-line="97" selection-end-column="92" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1491593966875" expanded="true" signature="2585:2597" ph="..." />
-            <marker date="1491593966875" expanded="true" signature="2782:2788" ph=" " />
-            <marker date="1491593966875" expanded="true" signature="2848:2880" ph="..." />
-            <marker date="1491593966875" expanded="true" signature="2911:2919" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
+            <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
+            <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
           </folding>
         </state>
       </provider>

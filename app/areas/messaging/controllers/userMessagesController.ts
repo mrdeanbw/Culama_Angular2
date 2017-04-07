@@ -95,7 +95,7 @@ module culamaApp.areas.messaging.controllers {
                         var SplitUrl = CurrentUrl.toString().split('/');
                         var pagename = SplitUrl[SplitUrl.length - 1];
 
-                        if (pagename == "user_messages") {
+                        if (pagename == "user_messages" || pagename == "create_user_messages") {
                             currentObj.loadMessages(currentObj.scope.Messages[0].Id, true);
                         }
                         else {
