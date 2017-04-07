@@ -20,6 +20,11 @@ module culamaApp {
             });
         }
 
+        getUserGroups(): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserGroups', {
+            });
+        }
+
         getCompanies(): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetCompanies', {
             });

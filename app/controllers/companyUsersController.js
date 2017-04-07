@@ -32,20 +32,21 @@ var culamaApp;
                 this.scope.IsEditMode = true;
             }
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId.toString());
-            this.scope.selectize_c_options = [
-                {
-                    "Id": "1",
-                    "UserGroupName": "Admin"
-                },
-                {
-                    "Id": "2",
-                    "UserGroupName": "Customer Admin"
-                },
-                {
-                    "Id": "3",
-                    "UserGroupName": "Users"
-                }];
-            this.newuser.UserGroupId = 1;
+            //this.scope.selectize_c_options = [
+            //    {
+            //        "Id": "1",
+            //        "UserGroupName": "Admin"
+            //    },
+            //    {
+            //        "Id": "2",
+            //        "UserGroupName": "Customer Admin"
+            //    },
+            //    {
+            //        "Id": "3",
+            //        "UserGroupName": "Users"
+            //    }];
+            //this.newuser.UserGroupId = 1;
+            this.scope.selectize_c_options = [];
             this.scope.selectize_c_config = {
                 plugins: {
                     'tooltip': ''
@@ -54,7 +55,7 @@ var culamaApp;
                 maxItems: 1,
                 placeholder: 'Select...',
                 valueField: 'Id',
-                labelField: 'UserGroupName'
+                labelField: 'Name'
             };
             this.scope.selectize_a_options = [];
             this.scope.selectize_a_config = {
@@ -78,7 +79,8 @@ var culamaApp;
                 valueField: 'Id',
                 labelField: 'Description'
             };
-            this.scope.userroles = ['Company Admin', 'Users'];
+            //this.scope.userroles = ['Company Admin', 'Users'];
+            this.scope.userroles = [];
             scope.$on('onLastRepeat', function (scope1, element, attrs) {
                 scope.$apply(function () {
                     UIkit.grid($('#contact_list'), {
@@ -128,6 +130,7 @@ var culamaApp;
                 });
             }
             this.getLanguages();
+            this.getUserGroups();
             scope.changeView = function (view) {
                 if (view != "card") {
                     scope.cardview = false;
@@ -145,11 +148,24 @@ var culamaApp;
         }
         CompanyUsersController.prototype.getLanguages = function () {
             var _this = this;
-            debugger;
             this.commonService.getLanguages().then(function (result) {
-                debugger;
                 _this.scope.selectize_a_options = result.data;
                 _this.scope.selectize_b_options = result.data;
+            });
+        };
+        CompanyUsersController.prototype.getUserGroups = function () {
+            var _this = this;
+            this.cservice.getUserGroups().then(function (result) {
+                var roles = [];
+                if (result.data.length > 0) {
+                    _this.scope.selectize_c_options = result.data;
+                    for (var i = 0; i < result.data.length; i++) {
+                        if (result.data[i].Name.toLowerCase() != "Administrator".toLowerCase()) {
+                            roles.push(result.data[i].Name);
+                        }
+                    }
+                    _this.scope.userroles = roles;
+                }
             });
         };
         CompanyUsersController.prototype.getCompanyUsers = function (companyid) {

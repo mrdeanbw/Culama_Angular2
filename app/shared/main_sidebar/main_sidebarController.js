@@ -113,13 +113,13 @@
                         title_us: 'Setting',
                         title_in: 'सेटिंग',
                         icon: '&#xE241;',
-                        submenu: [
-                             {
-                                 title_us: 'Message Setting',
-                                 title_in: 'संदेश सेटिंग',
-                                 link: 'restricted.companymessagesetting'
-                             }
-                        ]
+                        //submenu: [
+                        //     {
+                        //         title_us: 'Message Setting',
+                        //         title_in: 'संदेश सेटिंग',
+                        //         link: 'restricted.companymessagesetting'
+                        //     }
+                        //]
                     }
                 ];
             } else if ($rootScope.LoggedUser.UserGroupId === 3) {

@@ -207,7 +207,7 @@ culamaApp
                 {
                     url: "/customer_admin_dashboard",
                     templateUrl: 'app/views/dashboard/customerAdminDashboardView.html',
-                    controller: 'customerAdminDashBoardCtrl',
+                    controller: 'customerAdminDashboardController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -221,6 +221,8 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
+                                        'app/services/messagesService.js',
+                                         'app/services/loginservice.js',
                                         'app/controllers/customerAdminDashboardController.js'
                                 ],
                                     { serie: true });
@@ -236,7 +238,7 @@ culamaApp
                 {
                     url: "/user_dashboard",
                     templateUrl: 'app/views/dashboard/userDashboardView.html',
-                    controller: 'userDashBoardCtrl',
+                    controller: 'userDashboardController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -250,6 +252,9 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
+                                        'app/services/companyService.js',
+                                         'app/services/messagesService.js',
+                                         'app/services/loginservice.js',
                                         'app/controllers/userDashboardController.js'
                                 ],
                                     { serie: true });
@@ -538,6 +543,35 @@ culamaApp
                 {
                     url: "/company_manage_setting",
                     templateUrl: 'app/views/setting/messageSettingView.html',
+                    controller: 'companyMessageSettingController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                       'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        'app/controllers/companyMessageSettingController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Message Setting'
+                    }
+                })
+
+                .state("restricted.managecompanymessagesetting",
+                {
+                    url: "/manage_company_manage_setting",
+                    templateUrl: 'app/views/account/manageCompanySetting.html',
                     controller: 'companyMessageSettingController',
                     resolve: {
                         deps: [

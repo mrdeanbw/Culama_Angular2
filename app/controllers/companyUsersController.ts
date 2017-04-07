@@ -29,22 +29,23 @@ module culamaApp {
 
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId.toString());
 
-            this.scope.selectize_c_options = [
-                {
-                    "Id": "1",
-                    "UserGroupName": "Admin"
-                },
-                {
-                    "Id": "2",
-                    "UserGroupName": "Customer Admin"
-                },
-                {
-                    "Id": "3",
-                    "UserGroupName": "Users"
-                }];
+            //this.scope.selectize_c_options = [
+            //    {
+            //        "Id": "1",
+            //        "UserGroupName": "Admin"
+            //    },
+            //    {
+            //        "Id": "2",
+            //        "UserGroupName": "Customer Admin"
+            //    },
+            //    {
+            //        "Id": "3",
+            //        "UserGroupName": "Users"
+            //    }];
+            
+            //this.newuser.UserGroupId = 1;
 
-
-            this.newuser.UserGroupId = 1;
+            this.scope.selectize_c_options = [];
 
             this.scope.selectize_c_config = {
                 plugins: {
@@ -54,7 +55,8 @@ module culamaApp {
                 maxItems: 1,
                 placeholder: 'Select...',
                 valueField: 'Id',
-                labelField: 'UserGroupName'
+                labelField: 'Name'
+                //labelField: 'UserGroupName'
             };
 
 
@@ -84,8 +86,8 @@ module culamaApp {
                 labelField: 'Description'
             };
 
-            this.scope.userroles = ['Company Admin', 'Users'];
-
+            //this.scope.userroles = ['Company Admin', 'Users'];
+            this.scope.userroles = [];
 
             scope.$on('onLastRepeat', function (scope1, element, attrs) {
                 scope.$apply(function () {
@@ -142,6 +144,7 @@ module culamaApp {
             }
 
             this.getLanguages();
+            this.getUserGroups();
 
             scope.changeView = function (view) {
                 if (view != "card") {
@@ -160,13 +163,27 @@ module culamaApp {
         }
 
         getLanguages() {
-            debugger;
             this.commonService.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
-                debugger;
                 this.scope.selectize_a_options = result.data;
                 this.scope.selectize_b_options = result.data;
             });
         }
+
+        getUserGroups() {
+            this.cservice.getUserGroups().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                var roles = [];
+                if (result.data.length > 0) {
+                    this.scope.selectize_c_options = result.data;
+                    for (var i = 0; i < result.data.length; i++) {
+                        if (result.data[i].Name.toLowerCase() != "Administrator".toLowerCase()) {
+                            roles.push(result.data[i].Name);
+                        }
+                    }
+                    this.scope.userroles = roles;
+                }                
+            });
+        }
+
 
         getCompanyUsers(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
@@ -182,7 +199,7 @@ module culamaApp {
                         }
                     });
                     this.edituser = findobj;
-                    this.edituser.UserName = this.edituser.UserName.toString().replace(this.edituser.Customer.Prefix + "-", ""); 
+                    this.edituser.UserName = this.edituser.UserName.toString().replace(this.edituser.Customer.Prefix + "-", "");
                 }
 
             });
@@ -249,8 +266,6 @@ module culamaApp {
                 }
             });
         }
-
-       
 
         checkPhoneUnique() {
             this.scope.IsPhoneUniqueProcess = true;
