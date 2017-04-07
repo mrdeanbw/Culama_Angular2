@@ -29,6 +29,6 @@ var culamaApp;
         }());
         MessageService.$inject = ["$http", "appConfig"];
         services.MessageService = MessageService;
-        angular.module('culamaApp.services').service('culamaApp.services.MessageService', MessageService);
+        angular.module('culamaApp').service('culamaApp.services.MessageService', MessageService);
     })(services = culamaApp.services || (culamaApp.services = {}));
 })(culamaApp || (culamaApp = {}));

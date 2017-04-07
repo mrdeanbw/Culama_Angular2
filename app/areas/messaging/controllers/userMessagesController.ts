@@ -4,9 +4,10 @@
 module culamaApp.areas.messaging.controllers {
     class UserMessagesController {
         // loggedUid: any;
-        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
+        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
 
-        constructor(public scope: IUserMessageScope, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService, public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
+        constructor(public scope: IUserMessageScope, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService,
+                    public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
             this.scope.isHasMessages = false;
             this.scope.isUserCreateMessage = true;
@@ -50,7 +51,7 @@ module culamaApp.areas.messaging.controllers {
                     });
                     return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
                 } else {
-                    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
+                    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
                 }
             }
 
@@ -83,18 +84,19 @@ module culamaApp.areas.messaging.controllers {
         }
 
         getMessageThreadByUserId(id, isLoadMessage) {
-            this.$rootScope.$emit("toggleLoader", true);
-            this.messageService.getMessageThreadsByUserId(id).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-                this.scope.Messages = result.data;
+            var currentObj = this;
+            currentObj.$rootScope.$emit("toggleLoader", true);
+            currentObj.messageService.getMessageThreadsByUserId(id).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                currentObj.scope.Messages = result.data;
                 if (result.data.length > 0) {
-                    this.scope.IsHasMessages = true;
+                    currentObj.scope.IsHasMessages = true;
                     if (isLoadMessage) {
                         var CurrentUrl = window.location.href;
                         var SplitUrl = CurrentUrl.toString().split('/');
                         var pagename = SplitUrl[SplitUrl.length - 1];
 
                         if (pagename == "user_messages") {
-                            this.loadMessages(this.scope.Messages[0].Id, true);
+                            currentObj.loadMessages(currentObj.scope.Messages[0].Id, true);
                         }
                         else {
                             var splitpagename = pagename.toString().split('?');
@@ -109,11 +111,11 @@ module culamaApp.areas.messaging.controllers {
                                 }
                             })
 
-                            this.loadMessages(activeThread, true);
+                            currentObj.loadMessages(activeThread, true);
                         }
                     }
                 }
-                this.$rootScope.$emit("toggleLoader", false);
+                currentObj.$rootScope.$emit("toggleLoader", false);
 
             });
         }

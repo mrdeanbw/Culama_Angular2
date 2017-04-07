@@ -3,35 +3,34 @@
 
 module culamaApp {
     class UserDashboardController {
-        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService, public messageService: culamaApp.MessagesService, public loginService: culamaApp.LoginService) {
+        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService, public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
             this.scope.loggedUserID = this.$rootScope.LoggedUser.UserId;
             this.scope.newMessages = [];
             this.scope.firstThreeMsg = [];
             this.scope.IsHasMessages = false;
-            debugger;
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
 
         }
 
         getMessageThreadByUserId(id, isLoadMessage) {
-            debugger;
-            this.$rootScope.$emit("toggleLoader", true);
-            this.messageService.getMessageReadInfoByUserID(id).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            var currentObj = this;
+            currentObj.$rootScope.$emit("toggleLoader", true);
+            currentObj.messageService.getMessageReadInfoByUserID(id).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 if (result.data.length > 0) {
-                    this.scope.IsHasMessages = true;
-                    this.scope.newMessages = result.data;
+                    currentObj.scope.IsHasMessages = true;
+                    currentObj.scope.newMessages = result.data;
                     if (result.data.length > 3) {
                         var newmsg = [];
                         for (var i = 0; i < 3; i++) {
                             newmsg.push(result.data[i]);
                         }
-                        this.scope.firstThreeMsg = newmsg;
+                        currentObj.scope.firstThreeMsg = newmsg;
                     }
                     else
-                        this.scope.firstThreeMsg = result.data;
+                        currentObj.scope.firstThreeMsg = result.data;
                 }
-                this.$rootScope.$emit("toggleLoader", false);
+                currentObj.$rootScope.$emit("toggleLoader", false);
             });
         }
 

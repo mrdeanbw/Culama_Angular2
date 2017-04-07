@@ -15,33 +15,31 @@ var culamaApp;
             this.scope.newMessages = [];
             this.scope.firstThreeMsg = [];
             this.scope.IsHasMessages = false;
-            debugger;
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
         }
         UserDashboardController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
-            var _this = this;
-            debugger;
-            this.$rootScope.$emit("toggleLoader", true);
-            this.messageService.getMessageReadInfoByUserID(id).then(function (result) {
+            var currentObj = this;
+            currentObj.$rootScope.$emit("toggleLoader", true);
+            currentObj.messageService.getMessageReadInfoByUserID(id).then(function (result) {
                 if (result.data.length > 0) {
-                    _this.scope.IsHasMessages = true;
-                    _this.scope.newMessages = result.data;
+                    currentObj.scope.IsHasMessages = true;
+                    currentObj.scope.newMessages = result.data;
                     if (result.data.length > 3) {
                         var newmsg = [];
                         for (var i = 0; i < 3; i++) {
                             newmsg.push(result.data[i]);
                         }
-                        _this.scope.firstThreeMsg = newmsg;
+                        currentObj.scope.firstThreeMsg = newmsg;
                     }
                     else
-                        _this.scope.firstThreeMsg = result.data;
+                        currentObj.scope.firstThreeMsg = result.data;
                 }
-                _this.$rootScope.$emit("toggleLoader", false);
+                currentObj.$rootScope.$emit("toggleLoader", false);
             });
         };
         return UserDashboardController;
     }());
-    UserDashboardController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
+    UserDashboardController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
     function myFilter() {
         return function (msginfo) {
             var filter = [];

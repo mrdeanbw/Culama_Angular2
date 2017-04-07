@@ -35,5 +35,5 @@ module culamaApp.services {
         }
 
     }
-    angular.module('culamaApp.services').service('culamaApp.services.MessageService', MessageService);
+    angular.module('culamaApp').service('culamaApp.services.MessageService', MessageService);
 }

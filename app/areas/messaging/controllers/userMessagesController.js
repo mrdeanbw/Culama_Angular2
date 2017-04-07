@@ -60,7 +60,7 @@ var culamaApp;
                                 return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
                             }
                             else {
-                                return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
+                                return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
                             }
                         };
                         this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
@@ -88,18 +88,18 @@ var culamaApp;
                         };
                     }
                     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
-                        var _this = this;
-                        this.$rootScope.$emit("toggleLoader", true);
-                        this.messageService.getMessageThreadsByUserId(id).then(function (result) {
-                            _this.scope.Messages = result.data;
+                        var currentObj = this;
+                        currentObj.$rootScope.$emit("toggleLoader", true);
+                        currentObj.messageService.getMessageThreadsByUserId(id).then(function (result) {
+                            currentObj.scope.Messages = result.data;
                             if (result.data.length > 0) {
-                                _this.scope.IsHasMessages = true;
+                                currentObj.scope.IsHasMessages = true;
                                 if (isLoadMessage) {
                                     var CurrentUrl = window.location.href;
                                     var SplitUrl = CurrentUrl.toString().split('/');
                                     var pagename = SplitUrl[SplitUrl.length - 1];
                                     if (pagename == "user_messages") {
-                                        _this.loadMessages(_this.scope.Messages[0].Id, true);
+                                        currentObj.loadMessages(currentObj.scope.Messages[0].Id, true);
                                     }
                                     else {
                                         var splitpagename = pagename.toString().split('?');
@@ -112,11 +112,11 @@ var culamaApp;
                                                 activeThread = m.Id;
                                             }
                                         });
-                                        _this.loadMessages(activeThread, true);
+                                        currentObj.loadMessages(activeThread, true);
                                     }
                                 }
                             }
-                            _this.$rootScope.$emit("toggleLoader", false);
+                            currentObj.$rootScope.$emit("toggleLoader", false);
                         });
                     };
                     UserMessagesController.prototype.getCompanyDetail = function (companyid) {
@@ -269,7 +269,7 @@ var culamaApp;
                     return UserMessagesController;
                 }());
                 // loggedUid: any;
-                UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
+                UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
                 var options = [];
                 angular.module("culamaApp")
                     .controller("userMessagesController", UserMessagesController);
