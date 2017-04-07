@@ -2,5 +2,6 @@
     export class MessageThreadUser {
         Id: number;
         UserId: number;
+        FullIdentityName: string;
     }
 }

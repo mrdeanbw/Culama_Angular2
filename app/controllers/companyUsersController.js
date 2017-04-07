@@ -56,6 +56,7 @@ var culamaApp;
                 placeholder: 'Select...',
                 valueField: 'Id',
                 labelField: 'Name'
+                //labelField: 'UserGroupName'
             };
             this.scope.selectize_a_options = [];
             this.scope.selectize_a_config = {
@@ -328,9 +329,9 @@ var culamaApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
-        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
+    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
 })(culamaApp || (culamaApp = {}));

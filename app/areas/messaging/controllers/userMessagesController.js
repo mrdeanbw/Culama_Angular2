@@ -83,7 +83,9 @@ var culamaApp;
                         this.scope.scopeSendMessage = function () {
                             umg.sendMessage();
                         };
-                        this.scope.CreateMessage = function () { umg.createMessage(); };
+                        this.scope.CreateMessage = function () {
+                            umg.createMessage();
+                        };
                     }
                     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
                         var _this = this;
@@ -93,7 +95,25 @@ var culamaApp;
                             if (result.data.length > 0) {
                                 _this.scope.IsHasMessages = true;
                                 if (isLoadMessage) {
-                                    _this.loadMessages(_this.scope.Messages[0].Id, true);
+                                    var CurrentUrl = window.location.href;
+                                    var SplitUrl = CurrentUrl.toString().split('/');
+                                    var pagename = SplitUrl[SplitUrl.length - 1];
+                                    if (pagename == "user_messages") {
+                                        _this.loadMessages(_this.scope.Messages[0].Id, true);
+                                    }
+                                    else {
+                                        var splitpagename = pagename.toString().split('?');
+                                        var msgTID = splitpagename[1].toString().split('=')[1];
+                                        var allThreads = result.data.slice();
+                                        var activeThread = "";
+                                        $.each(allThreads, function (index) {
+                                            var m = this;
+                                            if (m.Id == msgTID) {
+                                                activeThread = m.Id;
+                                            }
+                                        });
+                                        _this.loadMessages(activeThread, true);
+                                    }
                                 }
                             }
                             _this.$rootScope.$emit("toggleLoader", false);
@@ -115,18 +135,13 @@ var culamaApp;
                             var companyusers = result.data.slice();
                             var addedrecipients = [];
                             var IsAll = _this.scope.Customer.IsAllowMsgAllToEveryone;
-                            if (IsAll == true) {
+                            if (IsAll == true || _this.$rootScope.LoggedUser.IsAllowMsgToEveryone == true) {
                                 $.each(result.data, function (index) {
                                     if (this.UserId == loggedUid) {
                                         result.data.splice(index, 1);
-                                        if (!this.IsAllowMsgToEveryone) {
-                                            IsAll = this.IsAllowMsgToEveryone;
-                                        }
                                     }
                                 });
-                                if (IsAll) {
-                                    _this.scope.selectizeUsersOptions = result.data;
-                                }
+                                _this.scope.selectizeUsersOptions = result.data;
                             }
                             else {
                                 var remainrecipients = [];
@@ -153,6 +168,7 @@ var culamaApp;
                         var currentObj = this;
                         if (IsRefreshAll) {
                             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+                            this.updateMsgThreadReadPropery(this.$rootScope.LoggedUser.UserId, messageId);
                         }
                         var msg;
                         $.each(this.scope.Messages, function () {
@@ -161,7 +177,6 @@ var culamaApp;
                             }
                         });
                         this.scope.SelectedMessageThread = msg;
-                        //this.CurrentChatingMembers();
                         if (msg != undefined) {
                             var olderGroupMembers = [];
                             for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
@@ -236,12 +251,20 @@ var culamaApp;
                                     _this.loadMessages(result.data.Id, false);
                                 }
                                 else {
-                                    _this.$rootScope.$emit("successnotify", { msg: "Message can't send. Please try again.", status: "danger" });
+                                    _this.$rootScope.$emit("successnotify", { msg: "Message can't be sent. Please try again.", status: "danger" });
                                 }
                                 _this.scope.SendMessageContent = "";
                                 _this.$rootScope.$emit("toggleLoader", false);
                             });
                         }
+                    };
+                    UserMessagesController.prototype.updateMsgThreadReadPropery = function (LoginuserID, MessageThreadID) {
+                        var _this = this;
+                        this.$rootScope.$emit("toggleLoader", true);
+                        this.messageService.updateMsgThreadReadPropery(LoginuserID, MessageThreadID).then(function (result) {
+                            var rs = result.data;
+                            _this.$rootScope.$emit("toggleLoader", false);
+                        });
                     };
                     return UserMessagesController;
                 }());

@@ -27,12 +27,12 @@ module culamaApp.areas.messaging.controllers {
                 searchField: 'FullIdentityName',
                 create: false,
                 render: {
-                    option: function(data, escape) {
+                    option: function (data, escape) {
                         return '<div class="option">' +
                             '<span class="title">' + escape(data.FullIdentityName) + '</span>' +
                             '</div>';
                     },
-                    item: function(data, escape) {
+                    item: function (data, escape) {
                         return '<div class="item participants-item"><p class="participants-label">' + escape(data.FullIdentityName) + '</p>' + '</div>';
                     }
                 }
@@ -40,10 +40,10 @@ module culamaApp.areas.messaging.controllers {
             this.scope.loggedUserId = this.$rootScope.LoggedUser.UserId;
             this.scope.newMessage = new models.MessageThread();
             var loggedUid = this.$rootScope.LoggedUser.UserId;
-            this.scope.showMessageUsers = function(m) {
+            this.scope.showMessageUsers = function (m) {
                 if (m.MessageThreadUsers.length >= 3) {
                     var html = "";
-                    $.each(m.MessageThreadUsers, function() {
+                    $.each(m.MessageThreadUsers, function () {
                         if (this.UserId != loggedUid) {
                             html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
                         }
@@ -54,13 +54,13 @@ module culamaApp.areas.messaging.controllers {
                 }
             }
 
-            this.scope.$on('onLastRepeat', function(scope1, element, attrs) {
+            this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
                 if ($(element).attr("id") == "chat_div") {
                     var pchartobj = $('#chat_div').parents("div.scroll-content");
                     $(pchartobj).scrollTop($(pchartobj)[0].scrollHeight);
 
                 } else {
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         UIkit.dropdown($('.uk-button-dropdown'), {
                             mode: 'hover'
                         });
@@ -69,15 +69,17 @@ module culamaApp.areas.messaging.controllers {
 
             })
             var umg = this;
-            this.scope.scopeLoadMessages = function(id) {
+            this.scope.scopeLoadMessages = function (id) {
                 umg.loadMessages(id, true);
             }
 
-            this.scope.scopeSendMessage = function() {
+            this.scope.scopeSendMessage = function () {
                 umg.sendMessage();
             }
 
-            this.scope.CreateMessage = function() { umg.createMessage(); }
+            this.scope.CreateMessage = function () {
+                umg.createMessage();
+            }
         }
 
         getMessageThreadByUserId(id, isLoadMessage) {
@@ -87,7 +89,28 @@ module culamaApp.areas.messaging.controllers {
                 if (result.data.length > 0) {
                     this.scope.IsHasMessages = true;
                     if (isLoadMessage) {
-                        this.loadMessages(this.scope.Messages[0].Id, true);
+                        var CurrentUrl = window.location.href;
+                        var SplitUrl = CurrentUrl.toString().split('/');
+                        var pagename = SplitUrl[SplitUrl.length - 1];
+
+                        if (pagename == "user_messages") {
+                            this.loadMessages(this.scope.Messages[0].Id, true);
+                        }
+                        else {
+                            var splitpagename = pagename.toString().split('?');
+                            var msgTID = splitpagename[1].toString().split('=')[1];
+
+                            var allThreads = result.data.slice();
+                            var activeThread = "";
+                            $.each(allThreads, function (index) {
+                                var m = this;
+                                if (m.Id == msgTID) {
+                                    activeThread = m.Id;
+                                }
+                            })
+
+                            this.loadMessages(activeThread, true);
+                        }
                     }
                 }
                 this.$rootScope.$emit("toggleLoader", false);
@@ -111,18 +134,13 @@ module culamaApp.areas.messaging.controllers {
                 var addedrecipients = [];
                 var IsAll = this.scope.Customer.IsAllowMsgAllToEveryone;
 
-                if (IsAll == true) {
-                    $.each(result.data, function(index) {
+                if (IsAll == true || this.$rootScope.LoggedUser.IsAllowMsgToEveryone == true) {
+                    $.each(result.data, function (index) {
                         if (this.UserId == loggedUid) {
                             result.data.splice(index, 1);
-                            if (!this.IsAllowMsgToEveryone) {
-                                IsAll = this.IsAllowMsgToEveryone;
-                            }
                         }
                     });
-                    if (IsAll) {
-                        this.scope.selectizeUsersOptions = result.data;
-                    }
+                    this.scope.selectizeUsersOptions = result.data;
                 } else {
                     var remainrecipients = [];
                     var companyRecipients = this.scope.Customer.RecipientList;
@@ -153,18 +171,17 @@ module culamaApp.areas.messaging.controllers {
             var currentObj = this;
             if (IsRefreshAll) {
                 this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, false);
+                this.updateMsgThreadReadPropery(this.$rootScope.LoggedUser.UserId, messageId);
             }
 
             var msg;
-            $.each(this.scope.Messages, function() {
+            $.each(this.scope.Messages, function () {
                 if (this.Id == messageId) {
                     msg = this;
                 }
             });
 
             this.scope.SelectedMessageThread = msg;
-
-            //this.CurrentChatingMembers();
 
             if (msg != undefined) {
 
@@ -174,7 +191,7 @@ module culamaApp.areas.messaging.controllers {
                         olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
                 }
                 currentObj.scope.olderChatingGroup = olderGroupMembers;
-                $.each(msg.MessageThreadDetails, function() {
+                $.each(msg.MessageThreadDetails, function () {
                     if (typeof this.CreatedOn === 'string') {
                         this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
                     }
@@ -182,7 +199,7 @@ module culamaApp.areas.messaging.controllers {
                 var md = this.$filter('orderBy')(msg.MessageThreadDetails, 'CreatedOn');
                 var chatObjs = [];
                 var ft = this.$filter;
-                $.each(md, function() {
+                $.each(md, function () {
                     var chatobj: models.Chat = new models.Chat();
                     chatobj.UserId = this.UserId;
                     chatobj.Date = ft('date')(this.CreatedOn, "dd MMM HH:mm");
@@ -204,12 +221,12 @@ module culamaApp.areas.messaging.controllers {
             var users = new Array<models.MessageThreadUser>();
             users.push(currentUser);
 
-                $.each(currentObj.scope.newMessageUsers, function(index) {
-                    var msgu = new models.MessageThreadUser();
-                    msgu.UserId = parseInt(this);
-                    msgu.Id = 0;
+            $.each(currentObj.scope.newMessageUsers, function (index) {
+                var msgu = new models.MessageThreadUser();
+                msgu.UserId = parseInt(this);
+                msgu.Id = 0;
 
-                    users.push(msgu);
+                users.push(msgu);
             });
 
             currentObj.scope.newMessage.MessageThreadUsers = users;
@@ -220,10 +237,10 @@ module culamaApp.areas.messaging.controllers {
                 currentObj.messageService.createMessageThread(currentObj.scope.newMessage).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                     if (result.data) {
                         currentObj.$rootScope.$emit("successnotify",
-                        { msg: "Your message group is created successfully", status: "success" });
+                            {msg: "Your message group is created successfully", status: "success"});
                     } else {
                         currentObj.$rootScope.$emit("successnotify",
-                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                            {msg: "Something went wrong. Please try again.", status: "danger"});
                     }
                     currentObj.$rootScope.$emit("toggleLoader", false);
                     window.location.href = "/#/user_messages";
@@ -243,7 +260,7 @@ module culamaApp.areas.messaging.controllers {
                 this.messageService.sendMessageThread(msgu).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                     if (result.data != null) {
                         var mlist = this.scope.Messages;
-                        $.each(mlist, function(index) {
+                        $.each(mlist, function (index) {
                             if (this.Id === result.data.Id) {
                                 mlist[index] = result.data;
                             }
@@ -252,7 +269,7 @@ module culamaApp.areas.messaging.controllers {
                         this.loadMessages(result.data.Id, false);
                     } else {
                         this.$rootScope.$emit("successnotify",
-                        { msg: "Message can't send. Please try again.", status: "danger" });
+                            {msg: "Message can't be sent. Please try again.", status: "danger"});
                     }
                     this.scope.SendMessageContent = "";
                     this.$rootScope.$emit("toggleLoader", false);
@@ -260,39 +277,14 @@ module culamaApp.areas.messaging.controllers {
             }
         }
 
-        //CurrentChatingMembers() {
-        //    var currentObj = this;
-        //    this.loginService.getUserMessagesbyId(this.$rootScope.LoggedUser.UserId).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-        //        if (result.data != null && result.data.length > 0) {
-        //            debugger;
-        //            var IsDifferentMembers = true;
-        //            var oldMembers = currentObj.scope.olderChatingGroup;
-        //            var newMembers = [];
-        //            for (var j = 0; j < result.data.length; j++) {
-        //                newMembers.push(result.data[j].AllowSendUserId);
-        //            }
-
-        //            if (oldMembers.length == newMembers.length) {
-        //                var old = new Set(oldMembers);
-        //                for (var p = 0; p < newMembers.length; p++) {
-        //                    if (old.has(newMembers[p]))
-        //                        IsDifferentMembers = false;
-        //                    else {
-        //                        IsDifferentMembers = true;
-        //                        break;
-        //                    }
-        //                }
-
-        //                currentObj.scope.isUserTypeMessage = IsDifferentMembers;
-        //            }
-        //            else {
-        //                currentObj.scope.isUserTypeMessage = false;
-        //            }
-        //        }
-        //    });
-        //}
+        updateMsgThreadReadPropery(LoginuserID, MessageThreadID) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.messageService.updateMsgThreadReadPropery(LoginuserID, MessageThreadID).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+                var rs = result.data;
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+        }
     }
-
     var options = [];
 
 

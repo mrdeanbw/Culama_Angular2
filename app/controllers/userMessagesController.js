@@ -106,6 +106,9 @@ var UserMessagesController = (function () {
                         _this.loadMessages(activeThread, true);
                     }
                 }
+                //if (isLoadMessage) {
+                //    this.loadMessages(this.scope.Messages[0].Id, true);
+                //}
             }
             _this.$rootScope.$emit("toggleLoader", false);
         });
@@ -321,10 +324,10 @@ var UserMessagesController = (function () {
             _this.$rootScope.$emit("toggleLoader", false);
         });
     };
-    // loggedUid: any;
-    UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
     return UserMessagesController;
 }());
+// loggedUid: any;
+UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "messagesService", "loginService"];
 var options = [];
 // Function For the Add/Remove the Admin Permission to the Members
 function setIsAdmin(UserID) {

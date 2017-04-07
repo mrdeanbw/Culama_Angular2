@@ -221,7 +221,7 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
-                                        'app/services/messagesService.js',
+                                        'app/services/messageService.js',
                                          'app/services/loginservice.js',
                                         'app/controllers/customerAdminDashboardController.js'
                                 ],
@@ -253,7 +253,7 @@ culamaApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/services/companyService.js',
-                                         'app/services/messagesService.js',
+                                         'app/services/messageService.js',
                                          'app/services/loginservice.js',
                                         'app/controllers/userDashboardController.js'
                                 ],
@@ -608,7 +608,7 @@ culamaApp
                             '$ocLazyLoad', function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                         'app/services/companyService.js',
-                                         'app/services/messagesService.js',
+                                         'app/services/messageService.js',
                                          'app/services/loginService.js',
                                         'app/areas/messaging/controllers/userMessagesController.js'
                                 ],
@@ -632,7 +632,7 @@ culamaApp
                         '$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                     'app/services/companyService.js',
-                                     'app/services/messagesService.js',
+                                     'app/services/messageService.js',
                                      'app/services/loginService.js',
                                     'app/controllers/userMessagesController.js'
                             ],
