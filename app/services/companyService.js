@@ -13,6 +13,9 @@ var culamaApp;
         CompanyService.prototype.getUsers = function () {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetUsers', {});
         };
+        CompanyService.prototype.getUserGroups = function () {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserGroups', {});
+        };
         CompanyService.prototype.getCompanies = function () {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetCompanies', {});
         };

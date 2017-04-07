@@ -26,11 +26,21 @@
                     </div>
                     <div class="uk-width-medium-1-4">
                         <div class="inr-box md-card ">
-                            <div class="big-text">1</div>
+                            <div class="big-text">{{ newMessages.length }}</div>
                             <div class="big-text-container">
-                                <h3>1 New Message</h3>
-                                <p class="uk-text-muted uk-text-small">From User 1</p>
-                                <p class="uk-text-muted uk-text-small">Dear User, welcome</p>
+                                <div ng-if="IsHasMessages">
+                                    <h3>{{ newMessages.length }} New Message</h3>
+                                    <div ng-repeat="newmsg in firstThreeMsg | myFilter">
+                                        <p class="uk-text-muted uk-text-small"><a href="/#/user_messages?mti={{ newmsg.MessageId }}">{{ newmsg.MessageThreadDetail.TextContent }} @ {{ newmsg.MessageThreadDetail.User.FullIdentityName }}</a></p>
+                                    </div>
+                                </div>
+                                <div ng-if="!IsHasMessages">
+                                    <h3 class="pt-20">No New Messages</h3>
+                                </div>
+                                <!--<div>
+                                    <p class="uk-text-muted uk-text-small">From User 1</p>
+                                    <p class="uk-text-muted uk-text-small">Dear User, welcome</p>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -38,7 +48,7 @@
                         <div class="inr-box md-card ">
                             <div class="big-text-container pl-50">
                                 <h3>Company XXX</h3>
-                                <a ui-sref="restricted.companydashboard" >Manage Company</a>
+                                <a ui-sref="restricted.managecompanymessagesetting">Manage Company</a>
                             </div>
                         </div>
                     </div>
