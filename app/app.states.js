@@ -567,7 +567,7 @@ culamaApp
                 .state("restricted.usermessages",
                 {
                     url: "/user_messages",
-                    templateUrl: 'app/views/messages/messagesView.html',
+                    templateUrl: 'app/areas/messaging/views/messagesView.html',
                     controller: 'userMessagesController',
                     resolve: {
                         deps: [
@@ -576,7 +576,7 @@ culamaApp
                                         'app/services/companyService.js',
                                          'app/services/messagesService.js',
                                          'app/services/loginService.js',
-                                        'app/controllers/userMessagesController.js'
+                                        'app/areas/messaging/controllers/userMessagesController.js'
                                 ],
                                     { serie: true });
                             }
@@ -591,7 +591,7 @@ culamaApp
             .state("restricted.usercreatemessage",
             {
                 url: "/create_user_messages",
-                templateUrl: 'app/views/messages/createMessageView.html',
+                templateUrl: 'app/areas/messaging/views/createMessageView.html',
                 controller: 'userMessagesController',
                 resolve: {
                     deps: [

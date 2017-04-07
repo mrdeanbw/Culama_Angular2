@@ -34,9 +34,9 @@ var culamaApp;
         LoginService.prototype.deleteUser = function (id) {
             return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteUser/' + id, {});
         };
-        LoginService.$inject = ["$http", "appConfig"];
         return LoginService;
     }());
+    LoginService.$inject = ["$http", "appConfig"];
     culamaApp.LoginService = LoginService;
     angular
         .module("culamaApp")

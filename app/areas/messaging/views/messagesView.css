@@ -1,0 +1,59 @@
+.md-card .md-list > li > .md-list-content, .md-card .md-list > li > .md-list-content .md-list-heading {
+    overflow: visible !important;
+}
+.messagelistitem {
+    float: initial !important;
+}
+
+.uk-dropdown .uk-nav {
+    margin: 0 !important;
+}
+
+.pull-left {
+    float: left;
+}
+
+.user-message-section div, .user-message-section a {
+    display: inline-block;
+    font-size: 13px;
+    color: #9c9c9c;
+}
+
+
+.md-list-heading {
+    overflow: visible !important;
+}
+
+.md-list-outside > li > .md-list-content {
+    overflow: visible !important;
+}
+
+.arrow {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    vertical-align: middle !important;
+}
+
+.user-text {
+    font-size: 13px !important;
+    color: #444 !important;
+    margin-top: 4px;
+}
+
+.msg-card {
+    width: 67.5%;
+    margin-left: 2%;
+    vertical-align: top;
+    margin-top: 0 !important;
+}
+
+.msg-card-section {
+    padding: 3%;
+    width: 94%;
+    float: left;
+}
+
+.no-msg {
+    font-size: 19px;
+    color: #333c43;
+}

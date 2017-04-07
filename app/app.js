@@ -1,5 +1,5 @@
 /*
-*  Altair Admin AngularJS
+*  Culama Admin AngularJS
 */
 ;"use strict";
 

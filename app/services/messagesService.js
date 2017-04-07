@@ -18,9 +18,9 @@ var culamaApp;
             var params = JSON.stringify(msgObj);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SendMessage', params, {});
         };
-        MessagesService.$inject = ["$http", "appConfig"];
         return MessagesService;
     }());
+    MessagesService.$inject = ["$http", "appConfig"];
     culamaApp.MessagesService = MessagesService;
     angular
         .module("culamaApp")

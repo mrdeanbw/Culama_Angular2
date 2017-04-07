@@ -4,12 +4,12 @@
             <h2 id="user_h2_1" md-language>Create Message</h2>
 
             <div class="md-card user_content uk-width-large-5-10 " ng-controller="userMessagesController as msg">
-                <form name="createMessageForm" ng-submit="msg.CreateMessage()" id="createMessageForm">
+                <form name="createMessageForm" ng-submit="CreateMessage()" id="createMessageForm">
                     <div class="uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-2">
                                 <label id="lbl_message_description" for="message_input_description" md-language>Message<span class="req">*</span></label>
-                                <textarea class="md-input" id="message_input_description" required md-language ng-model="msg.newmessage.Message" md-input />
+                                <textarea class="md-input" id="message_input_description" required md-language ng-model="newMessage.Message" md-input />
                             </div>
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-2">
                                 <label id="lbl_message_users" for="message_input_users" md-language>To<span class="req">*</span></label>
-                                <selectize id="message_input_users" config="selectize_users_config" options="selectize_users_options" position="bottom" ng-model="msg.selectize_Users"></selectize>
+                                <selectize id="message_input_users" config="selectizeUsersConfig" options="selectizeUsersOptions" position="bottom" ng-model="newMessageUsers"></selectize>
 
                                 <input type="hidden" id="HDFIsAdminIDs" />
 

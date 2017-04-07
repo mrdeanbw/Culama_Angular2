@@ -1,21 +1,11 @@
 {
-  "name": "altair_admin_angularJS",
+  "name": "Culama Web Admin",
   "version": "2.9.1",
-  "description": "Altair Admin Material Design UIkit Template",
+  "description": "Culama Web Admin",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "admin",
-    "panel",
-    "material design",
-    "dashboard",
-    "angular js"
-  ],
-  "author": "tzd",
-  "license": "http://themeforest.net/licenses",
-  "homepage": "http://altair.tzdthemes.com",
   "private": true,
   "devDependencies": {
     "browser-sync": "^2.17.0",

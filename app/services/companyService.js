@@ -34,9 +34,9 @@ var culamaApp;
         CompanyService.prototype.deleteCompany = function (id) {
             return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteCustomer/' + id, {});
         };
-        CompanyService.$inject = ["$http", "appConfig"];
         return CompanyService;
     }());
+    CompanyService.$inject = ["$http", "appConfig"];
     culamaApp.CompanyService = CompanyService;
     angular
         .module("culamaApp")

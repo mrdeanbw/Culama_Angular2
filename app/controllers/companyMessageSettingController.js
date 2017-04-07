@@ -328,9 +328,9 @@ var culamaApp;
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
         };
-        CompanyMessageSettingController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
         return CompanyMessageSettingController;
     }());
+    CompanyMessageSettingController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
     function myFilter() {
         return function (um) {
             //  filter stuff here

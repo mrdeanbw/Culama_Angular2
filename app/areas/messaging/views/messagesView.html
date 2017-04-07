@@ -1,61 +1,4 @@
-﻿<style>
-    .md-card .md-list > li > .md-list-content, .md-card .md-list > li > .md-list-content .md-list-heading {
-        overflow: visible !important;
-    }
-
-    .uk-dropdown .uk-nav {
-        margin: 0 !important;
-    }
-
-    .pull-left {
-        float: left;
-    }
-
-    .user-message-section div, .user-message-section a {
-        display: inline-block;
-        font-size: 13px;
-        color: #9c9c9c;
-    }
-
-
-    .md-list-heading {
-        overflow: visible !important;
-    }
-
-    .md-list-outside > li > .md-list-content {
-        overflow: visible !important;
-    }
-
-    .arrow {
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        vertical-align: middle !important;
-    }
-
-    .user-text {
-        font-size: 13px !important;
-        color: #444 !important;
-        margin-top: 4px;
-    }
-
-    .msg-card {
-        width: 67.5%;
-        margin-left: 2%;
-        vertical-align: top;
-        margin-top: 0 !important;
-    }
-
-    .msg-card-section {
-        padding: 3%;
-        width: 94%;
-        float: left;
-    }
-
-    .no-msg {
-        font-size: 19px;
-        color: #333c43;
-    }
-</style>
+﻿<link rel="stylesheet" href="/app/areas/messaging/views/messagesView.css">
 
 
 <div id="page_content">
@@ -76,13 +19,13 @@
                             <div class="md-card-content padding-reset">
                                 <div class="chat_box_wrapper">
                                     <div class="chat_box touchscroll chat_box_colors_a" id="chat" custom-scrollbar>
-                                        <div id="chat_div" class="chat_message_wrapper" ng-repeat="block in chat_messages" ng-class="{'chat_message_right': (block.user_id == LoggedUserId) }" on-last-repeat>
+                                        <div id="chat_div" class="chat_message_wrapper" ng-repeat="block in chatMessages" ng-class="{'chat_message_right': (block.UserId == loggedUserId) }" on-last-repeat>
                                             <div class="chat_user_avatar">
                                                 <img class="md-user-image" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" />
                                             </div>
                                             <ul class="chat_message">
-                                                <li ng-repeat="message in block.content">
-                                                    <p>{{message}} <span class="chat_message_time" ng-show="$last">{{block.date}}</span></p>
+                                                <li ng-repeat="message in block.Content">
+                                                    <p>{{message}} <span class="chat_message_time" ng-show="$last">{{block.Date}}</span></p>
                                                 </li>
                                             </ul>
                                         </div>
@@ -110,7 +53,7 @@
                             <ul class="md-list md-list-addon md-list-outside">
                                 <li ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);">
 
-                                    <div class="md-list-addon-element">
+                                    <div class="md-list-addon-element messagelistitem">
                                         <!--<span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
                                         <span class="element-status element-status-success" ng-if="user.status == 'online'"></span>
                                         <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>-->

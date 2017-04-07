@@ -44,7 +44,8 @@ var culamaApp;
                 {
                     "Id": "3",
                     "UserGroupName": "Users"
-                }];
+                }
+            ];
             this.newuser.UserGroupId = 1;
             this.scope.selectize_c_config = {
                 plugins: {
@@ -312,9 +313,9 @@ var culamaApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
-        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
+    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
 })(culamaApp || (culamaApp = {}));
