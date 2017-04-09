@@ -3,8 +3,8 @@
 
 module culamaApp {
     class CustomerAdminDashboardController {
-        static $inject = ["$scope", "$rootScope", "$interval", "$timeout", "messagesService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public $interval: any, public $timeout: any, public messageService: culamaApp.MessagesService, public loginService: culamaApp.LoginService) {
+        static $inject = ["$scope", "$rootScope", "$interval", "$timeout", "culamaApp.services.MessageService", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public $interval: any, public $timeout: any, public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
             this.scope.loggedUserID = this.$rootScope.LoggedUser.UserId;
             this.scope.newMessages = [];
             this.scope.firstThreeMsg = [];
