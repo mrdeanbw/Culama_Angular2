@@ -36,7 +36,7 @@
 
                                                 <!--<input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="{{ isUserTypeMessage ? 'Yor are not longer available on this group!' : 'Send message'}}" ng-disabled="isUserTypeMessage" ng-model="SendMessageContent" md-input>-->
                                                 <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input>
-                                                <span class="uk-input-group-addon" >
+                                                <span class="uk-input-group-addon">
                                                     <a ng-click="scopeSendMessage()"><i class="material-icons md-24">&#xE163;</i></a>
                                                 </span>
 
@@ -62,6 +62,11 @@
                                     <div class="md-list-content">
                                         <div class="md-list-action-placeholder"></div>
                                         <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m)"></span></span>
+                                        <!--<span class="md-list-heading">
+                                            {{ m.Title }} <i class="material-icons arrow"></i>
+                                            <span class="user-message-section" ng-bind-html="showMessageUsers(m)" ng-mouseenter="abc(m)">
+                                            </span>
+                                        </span>-->
                                         <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Message}}</span>
                                     </div>
                                 </li>

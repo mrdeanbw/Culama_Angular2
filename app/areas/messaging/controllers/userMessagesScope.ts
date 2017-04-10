@@ -14,6 +14,8 @@ module culamaApp.areas.messaging.controllers {
         newMessageUsers: Array<number>;
         chatMessages: Array<Models.Chat>;
 
+        gmembers: string;
+
         selectizeUsersOptions: Array<any>; // TODO: This needs to be typed
         olderChatingGroup: Array<any>; // TODO: Still used? If so => needs to be typed
         selectizeUsersConfig: any; // TODO: Needs to be typed
@@ -24,5 +26,6 @@ module culamaApp.areas.messaging.controllers {
         scopeLoadMessages: (id: number) => void;
         scopeSendMessage: () => void;
         CreateMessage: () => void;
+        abc: (msg: Models.MessageThread) => void;
     }
 }
