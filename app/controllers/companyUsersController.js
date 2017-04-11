@@ -3,11 +3,12 @@
 var culamaApp;
 (function (culamaApp) {
     var CompanyUsersController = (function () {
-        function CompanyUsersController(scope, $rootScope, companyService, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, loginService) {
+        function CompanyUsersController(scope, $rootScope, companyService, $compile, $filter, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, loginService) {
             this.scope = scope;
             this.$rootScope = $rootScope;
             this.companyService = companyService;
             this.$compile = $compile;
+            this.$filter = $filter;
             this.$timeout = $timeout;
             this.$resource = $resource;
             this.DTOptionsBuilder = DTOptionsBuilder;
@@ -56,7 +57,6 @@ var culamaApp;
                 placeholder: 'Select...',
                 valueField: 'Id',
                 labelField: 'Name'
-                //labelField: 'UserGroupName'
             };
             this.scope.selectize_a_options = [];
             this.scope.selectize_a_config = {
@@ -172,7 +172,16 @@ var culamaApp;
         CompanyUsersController.prototype.getCompanyUsers = function (companyid) {
             var _this = this;
             this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
+                $.each(result.data, function () {
+                    if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
+                        var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
+                        var lastactivation = new Date(parseInt(this.LastActivationAttempt.substr(6)));
+                        this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                    }
+                });
                 _this.scope.contact_list = result.data;
                 _this.$rootScope.$emit("toggleLoader", false);
                 if (_this.scope.IsEditMode) {
@@ -329,9 +338,9 @@ var culamaApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
+        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
-    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
 })(culamaApp || (culamaApp = {}));

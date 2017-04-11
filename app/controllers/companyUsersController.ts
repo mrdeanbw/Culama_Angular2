@@ -6,8 +6,8 @@ module culamaApp {
         lservice: any;
         public newuser: culamaApp.UserDetail = new culamaApp.UserDetail();
         public edituser: culamaApp.UserDetail = new culamaApp.UserDetail();
-        static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public companyService: culamaApp.CompanyService, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public loginService: culamaApp.LoginService) {
+        static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public companyService: culamaApp.CompanyService, public $compile: any, public $filter: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public loginService: culamaApp.LoginService) {
             this.cservice = companyService;
             this.lservice = loginService;
             this.scope.cardview = true;
@@ -187,7 +187,17 @@ module culamaApp {
 
         getCompanyUsers(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                $.each(result.data, function () {
+                    if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
+                        var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
+                        var lastactivation  = new Date(parseInt(this.LastActivationAttempt.substr(6)));
+
+                        this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                    }
+                });
                 this.scope.contact_list = result.data;
                 this.$rootScope.$emit("toggleLoader", false);
                 if (this.scope.IsEditMode) {

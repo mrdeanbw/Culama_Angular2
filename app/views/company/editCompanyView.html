@@ -72,21 +72,27 @@
                                             <th colspan="6"></th>
                                         </tr>
                                         <tr>
-                                            <th id="th_cuser_cname" md-language>Company Name</th>
+                                            <!--<th id="th_cuser_cname" md-language>Company Name</th>-->
                                             <th id="th_cuser_role" md-language>Role</th>
                                             <th id="th_cuser_username" md-language>Username</th>
                                             <th id="th_cuser_phone" md-language>Phone</th>
                                             <th id="th_cuser_isactive" md-language>IsActive</th>
+                                            <th id="th_cuser_phoneactivated" md-language>PhoneActivated</th>
+                                            <th id="th_cuser_phoneactivatedon" md-language>PhoneActivatedOn</th>
+                                            <th id="th_cuser_lastactivationattempt" md-language>LastActivationAttempt</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="user in user.editcompanyUsers">
                                             <td>{{ user.FullIdentityName }}</td>
-                                            <td>{{user.Customer.CustomerName}}</td>
+                                            <!--<td>{{user.Customer.CustomerName}}</td>-->
                                             <td>{{user.UserGroupName}}</td>
                                             <td>{{user.UserName}}</td>
                                             <td>{{user.Phone}}</td>
                                             <td>{{user.IsActive}}</td>
+                                            <td>{{user.IsPhoneActivated}}</td>
+                                            <td>{{user.PhoneActivatedOn}}</td>
+                                            <td>{{user.LastActivationAttempt}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

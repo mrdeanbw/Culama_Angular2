@@ -22,7 +22,7 @@ module culamaApp.areas.messaging.controllers {
         loggedUserId: number;
 
 
-        showMessageUsers: (msg: Models.MessageThread) => string;
+        showMessageUsers: (msg: Models.MessageThread, isusershow: boolean) => string;
         scopeLoadMessages: (id: number) => void;
         scopeSendMessage: () => void;
         CreateMessage: () => void;
