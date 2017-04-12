@@ -73,6 +73,24 @@
                                             <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.IsActive}}</span>
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_isphoneactivated" md-language>PhoneActivated</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.IsPhoneActivated}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_phoneactivatedon" md-language>PhoneActivatedOn</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.PhoneActivatedOn}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" id="span_cuser_lastactivationattempt" md-language>LastActivationAttempt</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.LastActivationAttempt}}</span>
+                                        </div>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -91,22 +109,28 @@
                                     <th colspan="6"></th>
                                 </tr>
                                 <tr>
-                                    <th id="th_cuser_cname" md-language>Company Name</th>
+                                    <!--<th id="th_cuser_cname" md-language>Company Name</th>-->
                                     <th id="th_cuser_role" md-language>Role</th>
                                     <th id="th_cuser_username" md-language>Username</th>
                                     <th id="th_cuser_phone" md-language>Phone</th>
                                     <th id="th_cuser_isactive" md-language>IsActive</th>
-                                    <th>Action</th>
+                                    <th id="th_cuser_phoneactivated" md-language>PhoneActivated</th>
+                                    <th id="th_cuser_phoneactivatedon" md-language>PhoneActivatedOn</th>
+                                    <th id="th_cuser_lastactivationattempt" md-language>LastActivationAttempt</th>
+                                    <th id="th_cuser_action" md-language>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="user in contact_list">
                                     <td>{{ user.FullIdentityName }}</td>
-                                    <td>{{user.Customer.CustomerName}}</td>
+                                    <!--<td>{{user.Customer.CustomerName}}</td>-->
                                     <td>{{user.UserGroupName}}</td>
                                     <td>{{user.UserName}}</td>
                                     <td>{{user.Phone}}</td>
                                     <td>{{user.IsActive}}</td>
+                                    <td>{{user.IsPhoneActivated}}</td>
+                                    <td>{{user.PhoneActivatedOn}}</td>
+                                    <td>{{user.LastActivationAttempt}}</td>
                                     <td>
                                         <a href="/#/edit_companyusers?id={{ user.UserId }}" ><i class="material-icons">mode_edit</i></a>
                                         <a ng-click="deleteUser(user.UserId);"><i class="material-icons">delete</i></a>

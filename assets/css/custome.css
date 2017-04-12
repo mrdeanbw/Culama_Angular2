@@ -38,14 +38,17 @@
 {
     padding-left: 50px;
 }
-.pl-30
+
+.add-list-btn
 {
-    padding-left:30px !important;
+    padding-left: 6px !important;
 }
+
 .pl15
 {
-    padding-left:15px !important;
+    padding-left: 15px !important;
 }
+
 .align-right
 {
     text-align: right;
@@ -384,11 +387,14 @@
     position: absolute;
     transform: translate(0,-50%);
 }
+
 .pull-left
 {
-    float:left !important;
+    float: left !important;
 }
-.user-btn , .user-btn:hover{
+
+.user-btn, .user-btn:hover
+{
     width: 30px;
     display: block;
     text-align: center;
@@ -397,42 +403,44 @@
     line-height: 32px;
     margin-top: 15px;
     box-shadow: 2px 2px 5px #b7b7b7;
-     color:#fff !important;
+    color: #fff !important;
 }
+
 .user-btn a
 {
-    color:#fff;
+    color: #fff;
 }
+
 .user-list
 {
-    padding:10px;
-    border:1px solid #ddd;
-           margin-top: 8px;
-
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 8px;
     height: 200px;
     box-shadow: 1px 1px 5px #e6e6e6;
-    overflow:auto;
-    
+    overflow: auto;
 }
+
 .user-list > div
 {
-       position: relative;
+    position: relative;
     margin-top: 2px;
     margin-bottom: 2px;
     padding-bottom: 3px;
     border-bottom: 1px solid #ddd;
-       
 }
+
 .user-list-label
 {
     display: inline-block;
     width: 88%;
     font-size: 16px;
-        margin-bottom: 0;
+    margin-bottom: 0;
 }
+
 .user-minus-btn
 {
-       display: inline-block;
+    display: inline-block;
     width: 20px;
     text-align: center;
     height: 20px;
@@ -442,6 +450,17 @@
     right: 0;
 }
 
+.list-content > span > i
+{
+    position: absolute;
+    margin-top: 4px;
+}
+
+.list-content span
+{
+    margin-left: 20px;
+    vertical-align: top;
+}
 
 @media (max-width:1219px)
 {

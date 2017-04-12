@@ -13,13 +13,12 @@ module culamaApp {
             this.lservice = loginService;
             this.scope.CompanyUsers = [];
             this.scope.Customer = new culamaApp.Customer();
-
             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
                 window.location.href = "#/error";
             }
 
             var cmobj = this;
-            // Start Point :: Added by Mehul Patel
+            // Start Point 
 
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";

@@ -7,8 +7,8 @@ module culamaApp {
         cservice: any;
         public userDetail: culamaApp.UserDetail = new culamaApp.UserDetail();
         public userAccount: culamaApp.LoginUser = new culamaApp.LoginUser();
-        static $inject = ["$scope", "$rootScope", "loginService", "commonService"];
-        constructor(public scope: any, public $rootScope: any, public loginService: culamaApp.LoginService, public commonService: culamaApp.CommonService) {
+        static $inject = ["$scope", "$rootScope", "$filter", "loginService", "commonService"];
+        constructor(public scope: any, public $rootScope: any, public $filter: any, public loginService: culamaApp.LoginService, public commonService: culamaApp.CommonService) {
 
             scope.vm = this;
             scope.vm.title = "";
@@ -50,7 +50,7 @@ module culamaApp {
 
             var $formValidate = $('#form_validation');
 
-            
+
             $formValidate.parsley()
                 .on('form:validated', function () {
                     scope.$apply();
@@ -71,12 +71,24 @@ module culamaApp {
         }
 
         getUser(id) {
+            var ft = this.$filter;
             this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                debugger;
+                var x = result.data;
+                if (typeof result.data.PhoneActivatedOn === 'string' || typeof result.data.LastActivationAttempt === 'string') {
+                    var activationon = new Date(parseInt(result.data.PhoneActivatedOn.substr(6)));
+                    var lastactivation = new Date(parseInt(result.data.LastActivationAttempt.substr(6)));
+
+                    this.scope.vm.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                    this.scope.vm.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                }
+
                 this.userDetail = result.data;
                 var CurrentScope = this.scope.vm;
                 if (this.userDetail != undefined) {
                     if (this.userDetail.TitleTranslation != undefined) {
                         this.scope.vm.title = this.userDetail.TitleTranslation.DefaultValue;
+                        this.scope.vm.IsPhoneActivated = this.userDetail.IsPhoneActivated;
                         var Entries = this.userDetail.TitleTranslation.Entries;
                         if (Entries.length > 0) {
                             $.each(Entries,
@@ -113,7 +125,7 @@ module culamaApp {
                         this.scope.vm.IsPhoneUnique = true;
                         document.getElementById("login_phoneno").valid = true;
                     }
-                    
+
                 } else {
                     this.scope.vm.IsPhoneUnique = true;
                     document.getElementById("login_phoneno").valid = true;
@@ -139,9 +151,9 @@ module culamaApp {
                             { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     this.$rootScope.$emit("toggleLoader", false);
-                });    
+                });
             }
-            
+
         }
 
         saveAccountInfo() {
@@ -157,12 +169,12 @@ module culamaApp {
                         this.$rootScope.$emit("successnotify",
                             { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
-                    
+
                 });
             }
 
         }
-       
+
     }
 
     angular.module("culamaApp")

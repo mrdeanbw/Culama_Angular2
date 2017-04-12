@@ -10,8 +10,8 @@ module culamaApp {
         public newuser: culamaApp.UserDetail = new culamaApp.UserDetail();
         public newcompany: culamaApp.Customer = new culamaApp.Customer();
         public editcompany: culamaApp.Customer = new culamaApp.Customer();
-        static $inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
-        constructor(public scope: any, public $rootScope: any, public $compile: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public companyService: culamaApp.CompanyService, public loginService: culamaApp.LoginService) {
+        static $inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
+        constructor(public scope: any, public $rootScope: any, public $compile: any, public $filter: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public companyService: culamaApp.CompanyService, public loginService: culamaApp.LoginService) {
             this.lservice = loginService;
             this.cservice = commonService;
             this.compSrv = companyService;
@@ -27,6 +27,9 @@ module culamaApp {
 
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
+
+            // This is the fixed or Default [white] color for the Background color
+            this.newcompany.UiBackgroundContrastColor = "#ffffff";
 
             this.scope.selectize_users_notAllowed_Msg = [];
             this.scope.selectize_allrecipient_users = [];
@@ -300,6 +303,9 @@ module culamaApp {
             this.compSrv.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.scope.Customer = result.data;
 
+                if (result.data.UiBackgroundContrastColor == null)
+                    this.editcompany.UiBackgroundContrastColor = "#ffffff";
+
                 if (result.data.RecipientList != null)
                     this.getRecipients(result.data.RecipientList);
 
@@ -458,8 +464,20 @@ module culamaApp {
 
         getCompanyUsers(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
             this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 var notAllowedMsg = [];
+
+                // This code for the date formate
+                $.each(result.data, function () {
+                    if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
+                        var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
+                        var lastactivation = new Date(parseInt(this.LastActivationAttempt.substr(6)));
+
+                        this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                    }
+                });
 
                 this.scope.vm.editcompanyUsers = result.data;
                 this.scope.CompanyUsers = result.data;

@@ -21,7 +21,7 @@ var culamaApp;
                 window.location.href = "#/error";
             }
             var cmobj = this;
-            // Start Point :: Added by Mehul Patel
+            // Start Point
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
             this.scope.selectize_users_notAllowed_Msg = [];

@@ -17,11 +17,11 @@ var culamaApp;
                         this.companyService = companyService;
                         this.messageService = messageService;
                         this.loginService = loginService;
-                        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
                         this.scope.isHasMessages = false;
                         this.scope.isUserCreateMessage = true;
                         this.scope.isUserTypeMessage = true;
                         this.scope.selectizeUsersOptions = [];
+                        this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
                         this.getCompanyDetail(this.$rootScope.LoggedUser.CustomerId);
                         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
                         this.scope.selectizeUsersConfig = {
@@ -49,19 +49,53 @@ var culamaApp;
                         this.scope.loggedUserId = this.$rootScope.LoggedUser.UserId;
                         this.scope.newMessage = new messaging.models.MessageThread();
                         var loggedUid = this.$rootScope.LoggedUser.UserId;
-                        this.scope.showMessageUsers = function (m) {
+                        this.scope.gmembers = "";
+                        this.scope.showMessageUsers = function (m, isshowusers) {
                             if (m.MessageThreadUsers.length >= 3) {
-                                var html = "";
-                                $.each(m.MessageThreadUsers, function () {
-                                    if (this.UserId != loggedUid) {
-                                        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>";
-                                    }
-                                });
-                                return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
+                                var msguserString = "";
+                                if (isshowusers == true) {
+                                    var html = "";
+                                    var userlist = "";
+                                    $.each(m.MessageThreadUsers, function () {
+                                        if (this.UserId != loggedUid) {
+                                            html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>";
+                                        }
+                                    });
+                                    var allmsgthread = umg.scope.Messages;
+                                    $.each(allmsgthread, function (index) {
+                                        var t = this;
+                                        if (t.Id == m.Id) {
+                                            userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
+                                            if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
+                                                document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                            }
+                                            document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
+                                        }
+                                        else {
+                                            document.getElementById("userlistdiv" + t.Id).innerHTML = "";
+                                            document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                        }
+                                    });
+                                }
+                                else {
+                                    msguserString = "<div> <div id='lbl" + m.Id + "' class='uk-button-dropdown'>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div id='userlistdiv" + m.Id + "' class='uk-dropdown'></div></div></div>";
+                                }
+                                return $sce.trustAsHtml(msguserString);
                             }
                             else {
                                 return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
                             }
+                            //if (m.MessageThreadUsers.length >= 3) {
+                            //    //var html = "";
+                            //    //$.each(m.MessageThreadUsers, function () {
+                            //    //    if (this.UserId != loggedUid) {
+                            //    //        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
+                            //    //    }
+                            //    //});
+                            //    return $sce.trustAsHtml("<div> <div>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a>  </div></div>");
+                            //} else {
+                            //    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
+                            //}
                         };
                         this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
                             if ($(element).attr("id") == "chat_div") {
@@ -85,6 +119,18 @@ var culamaApp;
                         };
                         this.scope.CreateMessage = function () {
                             umg.createMessage();
+                        };
+                        this.scope.abc = function (msgThreadInfo) {
+                            umg.scope.showMessageUsers(msgThreadInfo, true);
+                            //var html = "";
+                            //$.each(msgThreadInfo.MessageThreadUsers, function () {
+                            //    if (this.UserId != loggedUid) {
+                            //        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
+                            //    }
+                            //});
+                            //debugger;
+                            //var memberstring = "<div> <div class='uk-button-dropdown' ><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>";
+                            ////umg.scope.gmembers = memberstring;
                         };
                     }
                     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
@@ -266,11 +312,10 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
+                    // loggedUid: any;
+                    UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
                     return UserMessagesController;
                 }());
-                // loggedUid: any;
-                UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
-                var options = [];
                 angular.module("culamaApp")
                     .controller("userMessagesController", UserMessagesController);
             })(controllers = messaging.controllers || (messaging.controllers = {}));

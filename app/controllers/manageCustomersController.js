@@ -5,10 +5,11 @@ var mainCobj;
 var culamaApp;
 (function (culamaApp) {
     var ManageCustomersController = (function () {
-        function ManageCustomersController(scope, $rootScope, $compile, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, companyService, loginService) {
+        function ManageCustomersController(scope, $rootScope, $compile, $filter, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, commonService, companyService, loginService) {
             this.scope = scope;
             this.$rootScope = $rootScope;
             this.$compile = $compile;
+            this.$filter = $filter;
             this.$timeout = $timeout;
             this.$resource = $resource;
             this.DTOptionsBuilder = DTOptionsBuilder;
@@ -31,6 +32,8 @@ var culamaApp;
             // Start Point
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
+            // This is the fixed or Default [white] color for the Background color
+            this.newcompany.UiBackgroundContrastColor = "#ffffff";
             this.scope.selectize_users_notAllowed_Msg = [];
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
@@ -275,6 +278,8 @@ var culamaApp;
             this.$rootScope.$emit("toggleLoader", true);
             this.compSrv.getCompanyById(companyid).then(function (result) {
                 _this.scope.Customer = result.data;
+                if (result.data.UiBackgroundContrastColor == null)
+                    _this.editcompany.UiBackgroundContrastColor = "#ffffff";
                 if (result.data.RecipientList != null)
                     _this.getRecipients(result.data.RecipientList);
                 _this.$rootScope.$emit("toggleLoader", false);
@@ -416,8 +421,18 @@ var culamaApp;
         ManageCustomersController.prototype.getCompanyUsers = function (companyid) {
             var _this = this;
             this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
             this.companyService.getUsersByCompanyId(companyid).then(function (result) {
                 var notAllowedMsg = [];
+                // This code for the date formate
+                $.each(result.data, function () {
+                    if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
+                        var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
+                        var lastactivation = new Date(parseInt(this.LastActivationAttempt.substr(6)));
+                        this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                    }
+                });
                 _this.scope.vm.editcompanyUsers = result.data;
                 _this.scope.CompanyUsers = result.data;
                 _this.scope.selectize_allrecipient_users = result.data.slice();
@@ -474,9 +489,9 @@ var culamaApp;
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
         };
+        ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
         return ManageCustomersController;
     }());
-    ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     function myFilter() {
         return function (um) {
             //  filter stuff here

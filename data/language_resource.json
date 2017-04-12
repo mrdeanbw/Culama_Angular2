@@ -129,6 +129,21 @@
       "id": "myprofile_input_phoneno",
       "US": "Please insert phoneno",
       "IN": "कोई फोन डालें"
+    },
+    {
+      "id": "lbl_myprofile_phoneactivated",
+      "US": "PhoneActivated",
+      "IN": "फ़ोन सक्रिय है"
+    },
+    {
+      "id": "lbl_myprofile_phoneactivatedon",
+      "US": "PhoneActivatedOn",
+      "IN": "फोन सक्रिय समय"
+    },
+    {
+      "id": "lbl_myprofile_lastactivationattempt",
+      "US": "LastActivationAttempt",
+      "IN": "अंतिम सक्रियण का समय"
     }
   ],
   "myaccountpage": [
@@ -171,6 +186,160 @@
       "id": "btn_myaccount_savebtn",
       "US": "Save",
       "IN": "परिवर्तनों को सुरक्षित करें"
+    }
+  ],
+  "admincreatecompanypage": [
+    {
+      "id": "user_h2_1",
+      "US": "Create Company",
+      "IN": "कंपनी बनाएं"
+    },
+    {
+      "id": "lbl_company_customername",
+      "US": "Company Name",
+      "IN": "कंपनी का नाम"
+    },
+    {
+      "id": "lbl_company_prefix",
+      "US": "Prefix<span class='req'>*</span>",
+      "IN": "उपसर्ग<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_company_userprefix",
+      "US": "UserPrefix<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता उपसर्ग<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_company_info",
+      "US": "Info",
+      "IN": "जानकारी"
+    },
+    {
+      "id": "lbl_company_url",
+      "US": "URL",
+      "IN": "यूआरएल"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    }
+  ],
+  "admineditcompanypage": [
+    {
+      "id": "user_h2_1",
+      "US": "Edit Company",
+      "IN": "कंपनी संपादित करें"
+    },
+    {
+      "id": "lbl_detail_tab",
+      "US": "Details",
+      "IN": "विवरण"
+    },
+    {
+      "id": "lbl_users_tab",
+      "US": "Users",
+      "IN": "उपयोगकर्ता"
+    },
+    {
+      "id": "lbl_messagesetting_tab",
+      "US": "Message Setting",
+      "IN": "संदेश सेटिंग"
+    },
+    {
+      "id": "lbl_company_customername",
+      "US": "Company Name",
+      "IN": "कंपनी का नाम"
+    },
+    {
+      "id": "lbl_company_prefix",
+      "US": "Prefix<span class='req'>*</span>",
+      "IN": "उपसर्ग<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_company_userprefix",
+      "US": "UserPrefix<span class='req'>*</span>",
+      "IN": "उपयोगकर्ता उपसर्ग<span class='req'>*</span>"
+    },
+    {
+      "id": "lbl_company_info",
+      "US": "Info",
+      "IN": "जानकारी"
+    },
+    {
+      "id": "lbl_company_url",
+      "US": "URL",
+      "IN": "यूआरएल"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    },
+    {
+      "id": "th_cuser_uname",
+      "US": "Name",
+      "IN": "नाम"
+    },
+    {
+      "id": "th_cuser_role",
+      "US": "Role",
+      "IN": "भूमिका"
+    },
+    {
+      "id": "th_cuser_username",
+      "US": "Username",
+      "IN": "उपयोगकर्ता नाम"
+    },
+    {
+      "id": "th_cuser_phone",
+      "US": "Phone",
+      "IN": "फ़ोन नंबर"
+    },
+    {
+      "id": "th_cuser_isactive",
+      "US": "IsActive",
+      "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_cuser_phoneactivated",
+      "US": "PhoneActivated",
+      "IN": "फ़ोन सक्रिय है"
+    },
+    {
+      "id": "th_cuser_phoneactivatedon",
+      "US": "PhoneActivatedOn",
+      "IN": "फोन सक्रिय समय"
+    },
+    {
+      "id": "th_cuser_lastactivationattempt",
+      "US": "LastActivationAttempt",
+      "IN": "अंतिम सक्रियण का समय"
+    },
+    {
+      "id": "lbl_allowmsgtoall_checkbox",
+      "US": "Allow all users to send messages to everyone",
+      "IN": "सभी उपयोगकर्ताओं को सभी को संदेश भेजने की अनुमति दें"
+    },
+    {
+      "id": "span_allowtosendmsg",
+      "US": "User allowed to send to Everyone",
+      "IN": "उपयोगकर्ता को हर किसी को भेजने की अनुमति है"
+    },
+    {
+      "id": "span_recipients",
+      "US": "Recipients to Everyone",
+      "IN": "सभी को प्राप्तकर्ता"
     }
   ],
   "admincreateuserpage": [
@@ -392,6 +561,11 @@
       "id": "th_cuser_isactive",
       "US": "IsActive",
       "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_cuser_action",
+      "US": "Action",
+      "IN": "कार्रवाई"
     }
   ],
   "adminmanagecompanypage": [
@@ -429,6 +603,11 @@
       "id": "th_company_isactive",
       "US": "IsActive",
       "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_company_action",
+      "US": "Action",
+      "IN": "कार्रवाई"
     }
   ],
   "companycreateuserpage": [
@@ -560,6 +739,21 @@
       "IN": "सक्रिय है"
     },
     {
+      "id": "span_cuser_isphoneactivated",
+      "US": "PhoneActivated",
+      "IN": "फ़ोन सक्रिय है"
+    },
+    {
+      "id": "span_cuser_phoneactivatedon",
+      "US": "PhoneActivatedOn",
+      "IN": "फोन सक्रिय समय"
+    },
+    {
+      "id": "span_cuser_lastactivationattempt",
+      "US": "LastActivationAttempt",
+      "IN": "अंतिम सक्रियण का समय"
+    },
+    {
       "id": "th_cuser_uname",
       "US": "Name",
       "IN": "नाम"
@@ -588,6 +782,26 @@
       "id": "th_cuser_isactive",
       "US": "IsActive",
       "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_cuser_phoneactivated",
+      "US": "PhoneActivated",
+      "IN": "फ़ोन सक्रिय है"
+    },
+    {
+      "id": "th_cuser_phoneactivatedon",
+      "US": "PhoneActivatedOn",
+      "IN": "फोन सक्रिय समय"
+    },
+    {
+      "id": "th_cuser_lastactivationattempt",
+      "US": "LastActivationAttempt",
+      "IN": "अंतिम सक्रियण का समय"
+    },
+    {
+      "id": "th_cuser_action",
+      "US": "Action",
+      "IN": "कार्रवाई"
     }
   ],
   "companyedituserpage": [
@@ -680,6 +894,82 @@
       "id": "user_input_username",
       "US": "Please insert username",
       "IN": "उपयोगकर्ता नाम डालें"
+    },
+    {
+      "id": "lbl_myprofile_phoneactivated",
+      "US": "PhoneActivated",
+      "IN": "फ़ोन सक्रिय है"
+    },
+    {
+      "id": "lbl_myprofile_phoneactivatedon",
+      "US": "PhoneActivatedOn",
+      "IN": "फोन सक्रिय समय"
+    },
+    {
+      "id": "lbl_myprofile_lastactivationattempt",
+      "US": "LastActivationAttempt",
+      "IN": "अंतिम सक्रियण का समय"
+    }
+  ],
+  "usermessagespage": [
+    {
+      "id": "span_usermsg_lblchat",
+      "US": "Chat on",
+      "IN": "पर चैट करें"
+    }
+  ],
+  "usercreatemessagepage": [
+    {
+      "id": "user_h2_1",
+      "US": "Create Message",
+      "IN": "संदेश बनायें"
+    },
+    {
+      "id": "lbl_message_description",
+      "US": "Message",
+      "IN": "संदेश"
+    },
+    {
+      "id": "lbl_message_users",
+      "US": "To",
+      "IN": "उपयोगकर्ताओं को भेजें"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    }
+  ],
+  "managecompanysettingspage": [
+    {
+      "id": "user_h2_1",
+      "US": "Manage Company Settings",
+      "IN": "कंपनी सेटिंग्स प्रबंधित करें"
+    },
+    {
+      "id": "lbl_msgsetting_tab",
+      "US": "Message Setting",
+      "IN": "संदेश सेटिंग"
+    },
+    {
+      "id": "lbl_allowmsgtoall_checkbox",
+      "US": "Allow all users to send messages to everyone",
+      "IN": "सभी उपयोगकर्ताओं को सभी को संदेश भेजने की अनुमति दें"
+    },
+    {
+      "id": "span_allowtosendmsg",
+      "US": "User allowed to send to Everyone",
+      "IN": "उपयोगकर्ता को हर किसी को भेजने की अनुमति है"
+    },
+    {
+      "id": "span_recipients",
+      "US": "Recipients to Everyone",
+      "IN": "सभी को प्राप्तकर्ता"
     }
   ]
 }

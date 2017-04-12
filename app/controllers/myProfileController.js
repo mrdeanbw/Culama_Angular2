@@ -3,9 +3,10 @@
 var culamaApp;
 (function (culamaApp) {
     var MyProfileController = (function () {
-        function MyProfileController(scope, $rootScope, loginService, commonService) {
+        function MyProfileController(scope, $rootScope, $filter, loginService, commonService) {
             this.scope = scope;
             this.$rootScope = $rootScope;
+            this.$filter = $filter;
             this.loginService = loginService;
             this.commonService = commonService;
             this.userDetail = new culamaApp.UserDetail();
@@ -58,12 +59,22 @@ var culamaApp;
         }
         MyProfileController.prototype.getUser = function (id) {
             var _this = this;
+            var ft = this.$filter;
             this.lservice.getUserDetailsbyId(id.toString()).then(function (result) {
+                debugger;
+                var x = result.data;
+                if (typeof result.data.PhoneActivatedOn === 'string' || typeof result.data.LastActivationAttempt === 'string') {
+                    var activationon = new Date(parseInt(result.data.PhoneActivatedOn.substr(6)));
+                    var lastactivation = new Date(parseInt(result.data.LastActivationAttempt.substr(6)));
+                    _this.scope.vm.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
+                    _this.scope.vm.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
+                }
                 _this.userDetail = result.data;
                 var CurrentScope = _this.scope.vm;
                 if (_this.userDetail != undefined) {
                     if (_this.userDetail.TitleTranslation != undefined) {
                         _this.scope.vm.title = _this.userDetail.TitleTranslation.DefaultValue;
+                        _this.scope.vm.IsPhoneActivated = _this.userDetail.IsPhoneActivated;
                         var Entries = _this.userDetail.TitleTranslation.Entries;
                         if (Entries.length > 0) {
                             $.each(Entries, function (index) {
@@ -141,9 +152,9 @@ var culamaApp;
                 });
             }
         };
+        MyProfileController.$inject = ["$scope", "$rootScope", "$filter", "loginService", "commonService"];
         return MyProfileController;
     }());
-    MyProfileController.$inject = ["$scope", "$rootScope", "loginService", "commonService"];
     angular.module("culamaApp")
         .controller("myProfileController", MyProfileController);
 })(culamaApp || (culamaApp = {}));

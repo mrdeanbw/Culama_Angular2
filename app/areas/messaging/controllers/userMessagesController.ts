@@ -7,12 +7,12 @@ module culamaApp.areas.messaging.controllers {
         static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
 
         constructor(public scope: IUserMessageScope, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService,
-                    public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
-            this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
+            public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
             this.scope.isHasMessages = false;
             this.scope.isUserCreateMessage = true;
             this.scope.isUserTypeMessage = true;
             this.scope.selectizeUsersOptions = [];
+            this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
             this.getCompanyDetail(this.$rootScope.LoggedUser.CustomerId);
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
 
@@ -41,18 +41,63 @@ module culamaApp.areas.messaging.controllers {
             this.scope.loggedUserId = this.$rootScope.LoggedUser.UserId;
             this.scope.newMessage = new models.MessageThread();
             var loggedUid = this.$rootScope.LoggedUser.UserId;
-            this.scope.showMessageUsers = function (m) {
-                if (m.MessageThreadUsers.length >= 3) {
-                    var html = "";
-                    $.each(m.MessageThreadUsers, function () {
-                        if (this.UserId != loggedUid) {
-                            html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
-                        }
-                    });
-                    return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
+
+            this.scope.gmembers = "";
+
+            this.scope.showMessageUsers = function (m, isshowusers) {
+
+                if (m.MessageThreadUsers.length >= 3) {                    
+                    var msguserString = "";
+                    if (isshowusers == true) {
+                        var html = "";
+                        var userlist = "";
+                        $.each(m.MessageThreadUsers, function () {
+                            if (this.UserId != loggedUid) {
+                                html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
+                            }
+                        });
+                        var allmsgthread = umg.scope.Messages;
+                        $.each(allmsgthread, function (index) {
+
+                            var t = this;
+                            if (t.Id == m.Id) {
+                                userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
+                                if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
+                                    document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                    //document.getElementById("lbl" + t.Id).classList.add("uk-button-dropdown");
+                                }
+                                document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
+                            }
+                            else {
+                                document.getElementById("userlistdiv" + t.Id).innerHTML = "";
+                                document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                //document.getElementById("lbl" + t.Id).classList.remove("uk-button-dropdown");
+                            }
+                        });
+                        
+                    }
+                    else {
+                        msguserString = "<div> <div id='lbl" + m.Id + "' class='uk-button-dropdown'>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div id='userlistdiv" + m.Id + "' class='uk-dropdown'></div></div></div>";
+                    } 
+                    return $sce.trustAsHtml(msguserString);
+                    //return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
                 } else {
                     return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
                 }
+
+
+
+                //if (m.MessageThreadUsers.length >= 3) {
+                //    //var html = "";
+                //    //$.each(m.MessageThreadUsers, function () {
+                //    //    if (this.UserId != loggedUid) {
+                //    //        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
+                //    //    }
+                //    //});
+                //    return $sce.trustAsHtml("<div> <div>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a>  </div></div>");
+                //} else {
+                //    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
+                //}
             }
 
             this.scope.$on('onLastRepeat', function (scope1, element, attrs) {
@@ -80,6 +125,21 @@ module culamaApp.areas.messaging.controllers {
 
             this.scope.CreateMessage = function () {
                 umg.createMessage();
+            }
+
+            this.scope.abc = function (msgThreadInfo) {
+
+                umg.scope.showMessageUsers(msgThreadInfo, true);
+
+                //var html = "";
+                //$.each(msgThreadInfo.MessageThreadUsers, function () {
+                //    if (this.UserId != loggedUid) {
+                //        html += "<li style='color: #444;'>" + this.User.FullIdentityName + "</li>"
+                //    }
+                //});
+                //debugger;
+                //var memberstring = "<div> <div class='uk-button-dropdown' ><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>";
+                ////umg.scope.gmembers = memberstring;
             }
         }
 
@@ -239,10 +299,10 @@ module culamaApp.areas.messaging.controllers {
                 currentObj.messageService.createMessageThread(currentObj.scope.newMessage).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                     if (result.data) {
                         currentObj.$rootScope.$emit("successnotify",
-                            {msg: "Your message group is created successfully", status: "success"});
+                            { msg: "Your message group is created successfully", status: "success" });
                     } else {
                         currentObj.$rootScope.$emit("successnotify",
-                            {msg: "Something went wrong. Please try again.", status: "danger"});
+                            { msg: "Something went wrong. Please try again.", status: "danger" });
                     }
                     currentObj.$rootScope.$emit("toggleLoader", false);
                     window.location.href = "/#/user_messages";
@@ -271,7 +331,7 @@ module culamaApp.areas.messaging.controllers {
                         this.loadMessages(result.data.Id, false);
                     } else {
                         this.$rootScope.$emit("successnotify",
-                            {msg: "Message can't be sent. Please try again.", status: "danger"});
+                            { msg: "Message can't be sent. Please try again.", status: "danger" });
                     }
                     this.scope.SendMessageContent = "";
                     this.$rootScope.$emit("toggleLoader", false);
@@ -287,8 +347,6 @@ module culamaApp.areas.messaging.controllers {
             });
         }
     }
-    var options = [];
-
 
     angular.module("culamaApp")
         .controller("userMessagesController", UserMessagesController);

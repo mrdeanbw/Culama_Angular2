@@ -12,7 +12,7 @@
                         <div class="md-card md-card-single" single-card style="width:100%">
                             <div class="md-card-toolbar">
                                 <h3 class="md-card-toolbar-heading-text large">
-                                    <span class="uk-text-muted">Chat on</span> <a href="#">{{ SelectedMessageThread.Title }}</a>
+                                    <span id="span_usermsg_lblchat" class="uk-text-muted" md-language>Chat on</span> <a href="#">{{ SelectedMessageThread.Title }}</a>
                                     <!--<span class="user-message-section" ng-bind-html="showMessageUsers(SelectedMessageThread)"></span>-->
                                 </h3>
                             </div>
@@ -35,8 +35,8 @@
                                             <div class="uk-input-group">
 
                                                 <!--<input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="{{ isUserTypeMessage ? 'Yor are not longer available on this group!' : 'Send message'}}" ng-disabled="isUserTypeMessage" ng-model="SendMessageContent" md-input>-->
-                                                <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input>
-                                                <span class="uk-input-group-addon" >
+                                                <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input />
+                                                <span class="uk-input-group-addon">
                                                     <a ng-click="scopeSendMessage()"><i class="material-icons md-24">&#xE163;</i></a>
                                                 </span>
 
@@ -49,7 +49,7 @@
 
                     </div>
                     <div class="uk-width-large-3-10 uk-visible-large pull-left">
-                        <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
+                        <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-addon md-list-outside">
                                 <li ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);">
 
@@ -59,10 +59,19 @@
                                         <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>-->
                                         <img class="md-user-image md-list-addon-avatar" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" add-image-prop />
                                     </div>
-                                    <div class="md-list-content">
-                                        <div class="md-list-action-placeholder"></div>
-                                        <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m)"></span></span>
-                                        <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Message}}</span>
+                           
+                                             <div class="md-list-content">
+                                        
+                                        <div class="list-content">
+                                            <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m, false)" ng-mouseenter="abc(m)"></span></span>
+                                            <!--<span class="md-list-heading">
+            {{ m.Title }} <i class="material-icons arrow"></i>
+            <span class="user-message-section" ng-bind-html="showMessageUsers(m)" ng-mouseenter="abc(m)">
+            </span>
+        </span>-->
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Message}}</span>
+                                        </div>
+                                        <!--<div class="md-list-action-placeholder"></div>-->
                                     </div>
                                 </li>
                             </ul>
