@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
@@ -6,3 +6,4 @@
 /app/components/pages/loginView.html.exclude
 /app/components/pages/loginController.min.js.exclude
 /app/components/pages/loginController.js.exclude
+.vs/
