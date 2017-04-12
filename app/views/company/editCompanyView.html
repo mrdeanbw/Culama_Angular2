@@ -3,13 +3,13 @@
         <div id="admineditcompanypage" class="main_page">
             <h2 id="user_h2_1" md-language>Edit Company</h2>
 
-            <div class="user_content uk-width-large-5-10 " ng-controller="manageCustomersController as user">
+            <div class="user_content uk-width-large-6-10 " ng-controller="manageCustomersController as user">
                 <div class="md-card" data-uk-grid-margin>
                     <div class="md-card-content">
                         <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim2', animation:'slide-horizontal'}">
-                            <li class="uk-active"><a href="#">Details</a></li>
-                            <li><a href="#">Users</a></li>
-                            <li><a href="#">Message Setting</a></li>
+                            <li class="uk-active"><a id="lbl_detail_tab" href="#" md-language>Details</a></li>
+                            <li><a id="lbl_users_tab" href="#" md-language>Users</a></li>
+                            <li><a id="lbl_messagesetting_tab" href="#" md-language>Message Setting</a></li>
                         </ul>
                         <ul id="tabs_anim2" class="uk-switcher uk-margin">
                             <li>
@@ -36,6 +36,10 @@
                                                 <div class="uk-width-medium-1-2">
                                                     <label id="lbl_company_userprefix" for="company_input_userprefix" md-language>UserPrefix<span class="req">*</span></label>
                                                     <input class="md-input" type="text" id="company_input_userprefix" required md-language ng-model="user.editcompany.UserPrefix" md-input />
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_uibackgroundcontrastcolor" for="company_input_uibackgroundcontrastcolor" md-language>Ui Background Contrast Color: <input type="color" name="backgroundcolor" ng-model="user.editcompany.UiBackgroundContrastColor" /></label>
+                                                    <!--<input class="md-input" type="color" id="company_input_uibackgroundcontrastcolor" md-input />-->
                                                 </div>
                                             </div>
                                         </div>
@@ -109,14 +113,14 @@
                                             <div>
 
                                                 <div class="uk-width-large-1-2 pull-left">
-                                                    <span>User allowed to send to Everyone</span>
+                                                    <span id="span_allowtosendmsg" md-language>User allowed to send to Everyone</span>
                                                     <div>
                                                         <div class="uk-form-row">
                                                             <div class="uk-grid">
-                                                                <div class="uk-width-medium-7-10">
+                                                                <div class="uk-width-medium-8-10">
                                                                     <input type="text" config="selectize_all_users_config" options="selectize_users_notAllowed_Msg" ng-model="SelectedUser" name="selectize_all_users" selectize />
                                                                 </div>
-                                                                <div class="pl-30">
+                                                                <div class="add-list-btn">
                                                                     <a id="btnadd" class="user-btn" ng-click="addUser(SelectedUser, true);"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                                                 </div>
 
@@ -134,14 +138,14 @@
 
                                                 </div>
                                                 <div class="uk-width-large-1-2 pull-left">
-                                                    <span>Recipients to Everyone</span>
+                                                    <span id="span_recipients" md-language>Recipients to Everyone</span>
                                                     <div>
                                                         <div class="uk-form-row">
                                                             <div class="uk-grid">
-                                                                <div class="uk-width-medium-7-10">
+                                                                <div class="uk-width-medium-8-10">
                                                                     <input type="text" config="selectize_all_users_config" options="selectize_allrecipient_users" ng-model="recipientUsers" name="selectize_recipient_users" selectize />
                                                                 </div>
-                                                                <div class="pl-30">
+                                                                <div class="add-list-btn">
                                                                     <a id="btnadd" class="user-btn" ng-click="recipientAction(recipientUsers, 'add')"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                                                 </div>
 

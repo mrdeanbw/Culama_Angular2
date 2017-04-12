@@ -12,7 +12,7 @@
                         <div class="md-card md-card-single" single-card style="width:100%">
                             <div class="md-card-toolbar">
                                 <h3 class="md-card-toolbar-heading-text large">
-                                    <span class="uk-text-muted">Chat on</span> <a href="#">{{ SelectedMessageThread.Title }}</a>
+                                    <span id="span_usermsg_lblchat" class="uk-text-muted" md-language>Chat on</span> <a href="#">{{ SelectedMessageThread.Title }}</a>
                                     <!--<span class="user-message-section" ng-bind-html="showMessageUsers(SelectedMessageThread)"></span>-->
                                 </h3>
                             </div>
@@ -35,7 +35,7 @@
                                             <div class="uk-input-group">
 
                                                 <!--<input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="{{ isUserTypeMessage ? 'Yor are not longer available on this group!' : 'Send message'}}" ng-disabled="isUserTypeMessage" ng-model="SendMessageContent" md-input>-->
-                                                <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input>
+                                                <input type="text" class="md-input" name="submit_message" id="submit_message" placeholder="Send message" ng-model="SendMessageContent" md-input />
                                                 <span class="uk-input-group-addon">
                                                     <a ng-click="scopeSendMessage()"><i class="material-icons md-24">&#xE163;</i></a>
                                                 </span>

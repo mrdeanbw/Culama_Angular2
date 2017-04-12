@@ -32,6 +32,8 @@ var culamaApp;
             // Start Point
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
+            // This is the fixed or Default [white] color for the Background color
+            this.newcompany.UiBackgroundContrastColor = "#ffffff";
             this.scope.selectize_users_notAllowed_Msg = [];
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
@@ -276,6 +278,8 @@ var culamaApp;
             this.$rootScope.$emit("toggleLoader", true);
             this.compSrv.getCompanyById(companyid).then(function (result) {
                 _this.scope.Customer = result.data;
+                if (result.data.UiBackgroundContrastColor == null)
+                    _this.editcompany.UiBackgroundContrastColor = "#ffffff";
                 if (result.data.RecipientList != null)
                     _this.getRecipients(result.data.RecipientList);
                 _this.$rootScope.$emit("toggleLoader", false);

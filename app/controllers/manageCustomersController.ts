@@ -28,6 +28,9 @@ module culamaApp {
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
 
+            // This is the fixed or Default [white] color for the Background color
+            this.newcompany.UiBackgroundContrastColor = "#ffffff";
+
             this.scope.selectize_users_notAllowed_Msg = [];
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
@@ -299,6 +302,9 @@ module culamaApp {
             this.$rootScope.$emit("toggleLoader", true);
             this.compSrv.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.scope.Customer = result.data;
+
+                if (result.data.UiBackgroundContrastColor == null)
+                    this.editcompany.UiBackgroundContrastColor = "#ffffff";
 
                 if (result.data.RecipientList != null)
                     this.getRecipients(result.data.RecipientList);
