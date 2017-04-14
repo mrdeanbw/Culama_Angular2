@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8fef8bc-fba1-4a97-9237-72a285715376" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/customerAdminDashboardController.js" afterPath="$PROJECT_DIR$/app/controllers/customerAdminDashboardController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/customerAdminDashboardController.ts" afterPath="$PROJECT_DIR$/app/controllers/customerAdminDashboardController.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.vs/Source/v14/.suo" afterPath="$PROJECT_DIR$/.vs/Source/v14/.suo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" afterPath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.js" afterPath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/companyUsersController.js" afterPath="$PROJECT_DIR$/app/controllers/companyUsersController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manageCustomersController.js" afterPath="$PROJECT_DIR$/app/controllers/manageCustomersController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/myProfileController.js" afterPath="$PROJECT_DIR$/app/controllers/myProfileController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/language_resource.json" afterPath="$PROJECT_DIR$/data/language_resource.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,36 +44,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding>
-                <marker date="1491593116612" expanded="true" signature="190:361" ph="{&quot;page_loading&quot;: pageLoading...}" />
-                <marker date="1491593116612" expanded="true" signature="2742:4287" ph="{&quot;sidebar_main_hiding&quot;: primarySidebarHiding...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="userMessagesController.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="88" lean-forward="true" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="121" />
+              <caret line="6" column="88" lean-forward="false" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="121" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
-                <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
-                <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
-                <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
+                <marker date="1492018577791" expanded="true" signature="239:587" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customerAdminDashboardController.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="customerAdminDashboardController.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/customerAdminDashboardController.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -75,6 +65,36 @@
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editUserView.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/account/editUserView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-635">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editCompanyUsersView.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/account/editCompanyUsersView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="93" column="96" lean-forward="false" selection-start-line="93" selection-start-column="96" selection-end-line="93" selection-end-column="96" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="language_resource.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data/language_resource.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="899" column="19" lean-forward="false" selection-start-line="899" selection-start-column="19" selection-end-line="899" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,7 +116,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
               <caret line="27" column="115" lean-forward="false" selection-start-line="27" selection-start-column="115" selection-end-line="27" selection-end-column="115" />
-              <folding />
+              <folding>
+                <marker date="1492018577796" expanded="true" signature="5650:5693" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="5650:5731" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="5650:5765" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="5918:6067" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="6129:6344" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="6245:6325" ph="..." />
+                <marker date="1492018577796" expanded="true" signature="6293:6301" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +154,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-              <folding />
+              <folding>
+                <marker date="1492124208256" expanded="true" signature="356:21315" ph="{...}" />
+                <marker date="1492124208256" expanded="true" signature="416:951" ph="{...}" />
+                <marker date="1492124208256" expanded="true" signature="550:951" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,6 +229,8 @@
         <option value="$PROJECT_DIR$/app/app.states.js" />
         <option value="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts" />
         <option value="$PROJECT_DIR$/app/controllers/customerAdminDashboardController.ts" />
+        <option value="$PROJECT_DIR$/app/views/account/editCompanyUsersView.html" />
+        <option value="$PROJECT_DIR$/data/language_resource.json" />
       </list>
     </option>
   </component>
@@ -217,7 +251,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
@@ -261,6 +295,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="culama_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="culama_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -280,6 +328,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="culama_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="culama_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="account" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -451,7 +521,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Culama.Mobile" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
@@ -652,15 +722,15 @@
       <updated>1491431557829</updated>
       <workItem from="1491431559923" duration="19766000" />
       <workItem from="1491583896228" duration="9236000" />
-      <workItem from="1491748361967" duration="180000" />
+      <workItem from="1491748361967" duration="2164000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29182000" />
+    <option name="totallyTimeSpent" value="31166000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -710,6 +780,227 @@
         <option value="$PROJECT_DIR$/app/areas/messaging/models/Chat.js" />
         <option value="$PROJECT_DIR$/app/areas/messaging/models/MessageThread.js" />
         <option value="$PROJECT_DIR$/app/areas/messaging/models/MessageThreadUser.js" />
+        <option value="$PROJECT_DIR$/publish/bower_components/moment/typing-tests/moment-tests.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/abstractobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/checkedobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/anonymousobservable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/observer-lite.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/es6.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/observable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/anonymousobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/require-dir/test/simple/e.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/disposables/disposable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/bs-recipes/recipes/webpack.typescript/src/main.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/bs-recipes/recipes/webpack.typescript.react/src/main.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/bs-recipes/recipes/webpack.typescript.react/src/components/HelloWorld.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/joins/plan.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/joins/pattern.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/internal/bindcallback.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/internal/isequal.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/internal/util.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/internal/priorityqueue.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/internal/errors.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/subjects/asyncsubject.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/subjects/subject.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/subjects/replaysubject.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/subjects/anonymoussubject.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/subjects/behaviorsubject.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/mockobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/subscription.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/testscheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/mockdisposable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/reactivetest.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/testing/recorded.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/currentthreadscheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/virtualtimescheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/immediatescheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduleperiodicrecursive.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduler.wrappers.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduler.periodic.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/historicalscheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduleditem.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/scheduler.recursive.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/concurrency/defaultscheduler.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/groupedobservable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/connectableobservable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/sum.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/when.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/startwith.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takelastbufferwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takewhile.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/topromise.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/filter.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skipuntil.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/just.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/forkjoinproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/join.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/flatmap.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/sequenceequal.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/retrywhen.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/range.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takewithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/expand.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/withlatestfrom.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/sharereplay.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/dematerialize.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/publishlast.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/concat.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/elementat.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/timestamp.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/defaultifempty.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/pairs.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/every.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/frompromise.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/some.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/for.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/bufferwithtimeorcount.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/publish.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/create.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/let.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/zip.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/if.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skiplastwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/sharevalue.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/never.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/thendo.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/max.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/windowwithcount.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takeuntilwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/jortsort.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/generatewithrelativetime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/combinelatest.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skipwhile.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/merge.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skipwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/fromarray.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/bufferwithcount.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skipuntilwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/pluck.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takelastbuffer.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/amb.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/publishvalue.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/repeat.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/timer.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/fromevent.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/count.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/groupbyuntil.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/tap.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/onerrorresumenextproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/empty.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/concatall.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/reduce.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/startasync.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/debounce.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/mergeall.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/jortsortuntil.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/onerrorresumenext.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/replay.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/concatmapobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/mergeconcat.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/toset.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/toasync.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/pairwise.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/maxby.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/sample.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/window.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/last.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/repeatproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/scan.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/min.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takelastwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/finally.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/while.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/windowwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/take.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/defer.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/fromcallback.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/delay.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skiplast.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/groupby.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/selectmanyobserver.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/combinelatestproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/using.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/average.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/fromnodecallback.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/zipiterable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/first.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/manyselect.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/observeon.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/flatmapwithmaxconcurrent.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/windowwithtimeorcount.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/ofobjectchanges.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/case.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/map.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/flatmapfirst.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/from.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/ambproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/start.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/delaysubscription.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/materialize.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/of.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/subscribeon.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/buffer.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/concatmap.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/dowhile.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/includes.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/transduce.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/pipe.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/interval.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/timeout.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/share.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/minby.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/flatmaplatest.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/ofarraychanges.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/forkjoin.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/switch.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/singleinstance.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/tomap.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/multicast.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takelast.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/toarray.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/fromeventpattern.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/partition.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/concatproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/ignoreelements.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/takeuntil.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/asobservable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/switchfirst.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/generate.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/skip.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/groupjoin.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/generatewithabsolutetime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/catchproto.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/catch.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/findindex.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/distinct.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/bufferwithtime.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/isempty.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/mergedelayerror.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/indexof.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/retry.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/and.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/find.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/distinctuntilchanged.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/single.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/throw.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/throttle.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/spawn.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/linq/observable/timeinterval.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/pausable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/controlled.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/pauser.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/pausablebuffered.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/stopandwait.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/backpressure/windowed.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/disposables/compositedisposable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/disposables/booleandisposable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/disposables/refcountdisposable.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/observer-extras.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/es5.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/notification.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/observer.js" />
+        <option value="$PROJECT_DIR$/publish/node_modules/rx/ts/core/scheduledobserver.js" />
       </list>
     </option>
   </component>
@@ -746,7 +1037,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="115" lean-forward="false" selection-start-line="27" selection-start-column="115" selection-end-line="27" selection-end-column="115" />
-          <folding />
+          <folding>
+            <marker date="1492018577796" expanded="true" signature="5650:5693" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5731" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5765" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5918:6067" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6129:6344" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6245:6325" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6293:6301" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -770,7 +1069,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1492124208256" expanded="true" signature="356:21315" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="416:951" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="550:951" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -780,10 +1083,7 @@
           <caret line="97" column="92" lean-forward="false" selection-start-line="97" selection-start-column="92" selection-end-line="97" selection-end-column="92" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
-            <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
+            <marker date="1492018577791" expanded="true" signature="239:587" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -811,7 +1111,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
           <caret line="78" column="173" lean-forward="false" selection-start-line="78" selection-start-column="173" selection-end-line="78" selection-end-column="173" />
-          <folding />
+          <folding>
+            <marker date="1492018577796" expanded="true" signature="5650:5693" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5731" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5765" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5918:6067" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6129:6344" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6245:6325" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6293:6301" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -856,7 +1164,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4335">
           <caret line="256" column="21" lean-forward="true" selection-start-line="256" selection-start-column="21" selection-end-line="256" selection-end-column="21" />
-          <folding />
+          <folding>
+            <marker date="1492124208256" expanded="true" signature="356:21315" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="416:951" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="550:951" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -866,10 +1178,7 @@
           <caret line="232" column="9" lean-forward="true" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
-            <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
+            <marker date="1492018577791" expanded="true" signature="239:587" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1030,7 +1339,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="115" lean-forward="false" selection-start-line="27" selection-start-column="115" selection-end-line="27" selection-end-column="115" />
-          <folding />
+          <folding>
+            <marker date="1492018577796" expanded="true" signature="5650:5693" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5731" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5650:5765" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="5918:6067" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6129:6344" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6245:6325" ph="..." />
+            <marker date="1492018577796" expanded="true" signature="6293:6301" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,7 +1355,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1492124208256" expanded="true" signature="356:21315" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="416:951" ph="{...}" />
+            <marker date="1492124208256" expanded="true" signature="550:951" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1061,13 +1382,10 @@
     <entry file="file://$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="88" lean-forward="true" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="121" />
+          <caret line="6" column="88" lean-forward="false" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="121" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1491595158306" expanded="true" signature="2585:2597" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2782:2788" ph=" " />
-            <marker date="1491595158306" expanded="true" signature="2848:2880" ph="..." />
-            <marker date="1491595158306" expanded="true" signature="2911:2919" ph="..." />
+            <marker date="1492018577791" expanded="true" signature="239:587" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1079,6 +1397,30 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/account/editUserView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-635">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/account/editCompanyUsersView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="93" column="96" lean-forward="false" selection-start-line="93" selection-start-column="96" selection-end-line="93" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/language_resource.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="899" column="19" lean-forward="false" selection-start-line="899" selection-start-column="19" selection-end-line="899" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>

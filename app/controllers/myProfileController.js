@@ -152,9 +152,9 @@ var culamaApp;
                 });
             }
         };
-        MyProfileController.$inject = ["$scope", "$rootScope", "$filter", "loginService", "commonService"];
         return MyProfileController;
     }());
+    MyProfileController.$inject = ["$scope", "$rootScope", "$filter", "loginService", "commonService"];
     angular.module("culamaApp")
         .controller("myProfileController", MyProfileController);
 })(culamaApp || (culamaApp = {}));

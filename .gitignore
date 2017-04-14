@@ -7,3 +7,4 @@
 /app/components/pages/loginController.min.js.exclude
 /app/components/pages/loginController.js.exclude
 .vs/
+publish/

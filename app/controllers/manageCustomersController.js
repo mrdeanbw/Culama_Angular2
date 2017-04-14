@@ -489,9 +489,9 @@ var culamaApp;
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
         };
-        ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
         return ManageCustomersController;
     }());
+    ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     function myFilter() {
         return function (um) {
             //  filter stuff here

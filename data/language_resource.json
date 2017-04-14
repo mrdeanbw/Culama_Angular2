@@ -897,17 +897,17 @@
     },
     {
       "id": "lbl_myprofile_phoneactivated",
-      "US": "PhoneActivated",
+      "US": "Phone Activated",
       "IN": "फ़ोन सक्रिय है"
     },
     {
       "id": "lbl_myprofile_phoneactivatedon",
-      "US": "PhoneActivatedOn",
+      "US": "Phone Activated On",
       "IN": "फोन सक्रिय समय"
     },
     {
       "id": "lbl_myprofile_lastactivationattempt",
-      "US": "LastActivationAttempt",
+      "US": "Last Activation Attempt",
       "IN": "अंतिम सक्रियण का समय"
     }
   ],
