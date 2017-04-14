@@ -21,10 +21,11 @@ var culamaApp;
                 window.location.href = "#/error";
             }
             var cmobj = this;
-            // Start Point
+            // Start Point 
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
             this.scope.selectize_users_notAllowed_Msg = [];
+            this.scope.allowedUsers = [];
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
             this.scope.recipients_user_ids = [];
@@ -39,25 +40,28 @@ var culamaApp;
                 labelField: 'FullIdentityName'
             };
             this.scope.addUser = function (selecteduserid, isAllowMessage) {
-                cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
+                //cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
                 if (isAllowMessage == true) {
                     var notAllowedUsers = cmobj.scope.selectize_users_notAllowed_Msg;
                     for (var t = 0; t < notAllowedUsers.length; t++) {
                         if (notAllowedUsers[t].UserId == selecteduserid) {
+                            cmobj.scope.allowedUsers.push(notAllowedUsers[t]);
                             cmobj.scope.selectize_users_notAllowed_Msg.splice(t, 1);
                             break;
                         }
                     }
                 }
                 else {
-                    var AllowedUsers = cmobj.scope.CompanyUsers;
+                    var AllowedUsers = cmobj.scope.allowedUsers;
                     for (var t = 0; t < AllowedUsers.length; t++) {
                         if (AllowedUsers[t].UserId == selecteduserid) {
                             cmobj.scope.selectize_users_notAllowed_Msg.push(AllowedUsers[t]);
+                            cmobj.scope.allowedUsers.splice(t, 1);
                             break;
                         }
                     }
                 }
+                //cmobj.scope.allowedUsers = newaddedMember;
             };
             this.scope.recipientAction = function (selectedrecipientid, ActionName) {
                 if (cmobj.scope.Customer.RecipientList != null) {
@@ -66,6 +70,14 @@ var culamaApp;
                 }
                 if (ActionName == "add") {
                     cmobj.scope.recipients_user_ids.push(selectedrecipientid);
+                    var AllUsers = cmobj.scope.selectize_allrecipient_users;
+                    for (var t = 0; t < AllUsers.length; t++) {
+                        if (AllUsers[t].UserId == selectedrecipientid) {
+                            cmobj.scope.recipients_users.push(AllUsers[t]);
+                            cmobj.scope.selectize_allrecipient_users.splice(t, 1);
+                            break;
+                        }
+                    }
                 }
                 else if (ActionName == "remove") {
                     // Remove it
@@ -90,7 +102,7 @@ var culamaApp;
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
                 if (cmobj.scope.Customer.RecipientList == "")
                     cmobj.scope.Customer.RecipientList = null;
-                cmobj.saveCompany(selectedrecipientid, ActionName);
+                //cmobj.saveCompany(selectedrecipientid, ActionName);
             };
             // End Point
             this.scope.selectize_users_options = [];
@@ -140,7 +152,7 @@ var culamaApp;
                             msgu.UserId = parseInt(targetUserid);
                             msgu.AllowSendUserId = parseInt(input);
                             targetUser.UserMessages.push(msgu);
-                            mainCobj.saveCompanyUser(targetUser);
+                            mainCobj.saveCompanyUser(targetUser, false);
                         }
                     }
                 },
@@ -159,7 +171,7 @@ var culamaApp;
                                 userMsgs.splice(index, 1);
                             }
                         });
-                        mainCobj.saveCompanyUser(targetUser);
+                        mainCobj.saveCompanyUser(targetUser, false);
                     }
                 },
                 onInitialize: function (planets_data) {
@@ -169,18 +181,22 @@ var culamaApp;
             this.scope.CustomerId = this.$rootScope.LoggedUser.CustomerId;
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
-            scope.saveCompany = function () {
+            scope.allowEveryonetoMessage = function () {
                 var ccheck = cmobj.scope.Customer.IsAllowMsgAllToEveryone;
                 if (ccheck == true) {
                     cmobj.scope.Customer.RecipientList = null;
                 }
-                cmobj.saveCompany("", "");
+                else {
+                    cmobj.scope.selectize_users_notAllowed_Msg = cmobj.scope.CompanyUsers;
+                    cmobj.scope.allowedUsers = [];
+                }
+                //cmobj.saveCompany("", "");
             };
             scope.saveCompanyUser = function (u) {
                 if (u.IsAllowMsgToEveryone) {
                     u.UserMessages = [];
                 }
-                cmobj.saveCompanyUser(u);
+                cmobj.saveCompanyUser(u, false);
             };
             scope.getOtherCompanyUsers = function (um) {
                 var selectize_userlist = [];
@@ -190,6 +206,17 @@ var culamaApp;
                     }
                 });
                 return selectize_userlist;
+            };
+            scope.saveCompanyMsgSetting = function (isAllowMsgAllToEveryone) {
+                if (isAllowMsgAllToEveryone == true)
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, "");
+                else {
+                    var allowedUserList = cmobj.scope.allowedUsers;
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, allowedUserList);
+                }
+            };
+            scope.cancelRequest = function () {
+                location.reload();
             };
         }
         CompanyMessageSettingController.prototype.getCompanyDetail = function (companyid) {
@@ -208,11 +235,15 @@ var culamaApp;
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
                 var notAllowedMsg = [];
+                var allowedmsg = [];
                 _this.scope.CompanyUsers = result.data;
+                _this.scope.allowedUsers = result.data.slice();
                 _this.scope.selectize_allrecipient_users = result.data.slice();
                 for (var i = 0; i < result.data.length; i++) {
                     if (result.data[i].IsAllowMsgToEveryone == false)
                         notAllowedMsg.push(result.data[i]);
+                    else
+                        allowedmsg.push(result.data[i]);
                 }
                 if (_this.scope.Customer.RecipientList != null) {
                     var alreadyExistRecipients = _this.scope.Customer.RecipientList.toString().split(',');
@@ -224,6 +255,7 @@ var culamaApp;
                     }
                 }
                 _this.scope.selectize_users_notAllowed_Msg = notAllowedMsg;
+                _this.scope.allowedUsers = allowedmsg;
                 _this.$rootScope.$emit("toggleLoader", false);
             });
         };
@@ -245,7 +277,7 @@ var culamaApp;
                             if (u.IsAllowMsgToEveryone) {
                                 u.UserMessages = [];
                             }
-                            cmobj.saveCompanyUser(u);
+                            cmobj.saveCompanyUser(u, true);
                         }
                         else {
                             if (actionname == "add") {
@@ -280,7 +312,7 @@ var culamaApp;
                 }, 500);
             });
         };
-        CompanyMessageSettingController.prototype.saveCompanyUser = function (user) {
+        CompanyMessageSettingController.prototype.saveCompanyUser = function (user, isupdateallusers) {
             var _this = this;
             this.$rootScope.$emit("toggleLoader", true);
             this.lservice.saveUserDetail(user).then(function (result) {
@@ -294,7 +326,8 @@ var culamaApp;
                         }
                     });
                     _this.scope.CompanyUsers = tCusers;
-                    _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+                    if (isupdateallusers == false)
+                        _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
                 }
                 else {
                     _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
@@ -311,7 +344,6 @@ var culamaApp;
                         result.data.IsAllowMsgToEveryone = true;
                     else if (isAllowMessage == false)
                         result.data.IsAllowMsgToEveryone = false;
-                    _this.saveCompanyUser(result.data);
                 }
                 _this.$rootScope.$emit("toggleLoader", false);
             });
@@ -328,9 +360,42 @@ var culamaApp;
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
         };
+        CompanyMessageSettingController.prototype.UpdateUserInformation = function (isAllowMsgAllToEveryone, allowedUserList) {
+            var _this = this;
+            this.$rootScope.$emit("toggleLoader", true);
+            var userupdatedinfo = [];
+            $.each(this.scope.Customer.Users, function () {
+                var x = this;
+                var allowmsg = false;
+                if (isAllowMsgAllToEveryone == false) {
+                    for (var i = 0; i < allowedUserList.length; i++) {
+                        if (x.UserId == allowedUserList[i].UserId) {
+                            allowmsg = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    allowmsg = true;
+                }
+                x.IsAllowMsgToEveryone = allowmsg;
+                userupdatedinfo.push(x);
+            });
+            this.scope.Customer.IsAllowMsgAllToEveryone = isAllowMsgAllToEveryone;
+            this.scope.Customer.Users = userupdatedinfo;
+            this.cservice.saveCompanyDetail(this.scope.Customer).then(function (result) {
+                if (result.data != "") {
+                    _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+                }
+                else {
+                    _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+                _this.$rootScope.$emit("toggleLoader", false);
+            });
+        };
+        CompanyMessageSettingController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
         return CompanyMessageSettingController;
     }());
-    CompanyMessageSettingController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
     function myFilter() {
         return function (um) {
             //  filter stuff here

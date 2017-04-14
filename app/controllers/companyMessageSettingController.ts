@@ -24,6 +24,9 @@ module culamaApp {
             this.scope.recipientUsers = "";
 
             this.scope.selectize_users_notAllowed_Msg = [];
+
+            this.scope.allowedUsers = [];
+
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
             this.scope.recipients_user_ids = [];
@@ -41,25 +44,29 @@ module culamaApp {
 
 
             this.scope.addUser = function (selecteduserid, isAllowMessage) {
-                cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
+                //cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
                 if (isAllowMessage == true) {
                     var notAllowedUsers = cmobj.scope.selectize_users_notAllowed_Msg;
                     for (var t = 0; t < notAllowedUsers.length; t++) {
                         if (notAllowedUsers[t].UserId == selecteduserid) {
-                            cmobj.scope.selectize_users_notAllowed_Msg.splice(t, 1);
+                            cmobj.scope.allowedUsers.push(notAllowedUsers[t]);
+                            cmobj.scope.selectize_users_notAllowed_Msg.splice(t, 1);                            
                             break;
                         }
                     }
                 }
                 else {
-                    var AllowedUsers = cmobj.scope.CompanyUsers;
+                    var AllowedUsers = cmobj.scope.allowedUsers;
                     for (var t = 0; t < AllowedUsers.length; t++) {
                         if (AllowedUsers[t].UserId == selecteduserid) {
                             cmobj.scope.selectize_users_notAllowed_Msg.push(AllowedUsers[t]);
+                            cmobj.scope.allowedUsers.splice(t, 1);
                             break;
                         }
                     }
                 }
+
+                //cmobj.scope.allowedUsers = newaddedMember;
             };
 
             this.scope.recipientAction = function (selectedrecipientid, ActionName) {
@@ -70,6 +77,15 @@ module culamaApp {
 
                 if (ActionName == "add") {
                     cmobj.scope.recipients_user_ids.push(selectedrecipientid);
+                    
+                    var AllUsers = cmobj.scope.selectize_allrecipient_users;
+                    for (var t = 0; t < AllUsers.length; t++) {
+                        if (AllUsers[t].UserId == selectedrecipientid) {
+                            cmobj.scope.recipients_users.push(AllUsers[t]);
+                            cmobj.scope.selectize_allrecipient_users.splice(t, 1);
+                            break;
+                        }
+                    }
                 }
                 else if (ActionName == "remove") {
                     // Remove it
@@ -96,7 +112,9 @@ module culamaApp {
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
                 if (cmobj.scope.Customer.RecipientList == "")
                     cmobj.scope.Customer.RecipientList = null;
-                cmobj.saveCompany(selectedrecipientid, ActionName);
+
+
+                //cmobj.saveCompany(selectedrecipientid, ActionName);
             };
 
             // End Point
@@ -150,7 +168,7 @@ module culamaApp {
                             msgu.UserId = parseInt(targetUserid);
                             msgu.AllowSendUserId = parseInt(input);
                             targetUser.UserMessages.push(msgu);
-                            mainCobj.saveCompanyUser(targetUser);
+                            mainCobj.saveCompanyUser(targetUser, false);
                         }
                     }
 
@@ -173,7 +191,7 @@ module culamaApp {
                             }
                         });
 
-                        mainCobj.saveCompanyUser(targetUser);
+                        mainCobj.saveCompanyUser(targetUser, false);
                     }
                 },
                 onInitialize: function (planets_data) {
@@ -186,19 +204,23 @@ module culamaApp {
             this.getCompanyDetail(this.scope.CustomerId);
             this.getCompanyUsers(this.scope.CustomerId);
 
-            scope.saveCompany = function () {
+            scope.allowEveryonetoMessage = function () {
                 var ccheck = cmobj.scope.Customer.IsAllowMsgAllToEveryone;
                 if (ccheck == true) {
-                    cmobj.scope.Customer.RecipientList = null;                    
+                    cmobj.scope.Customer.RecipientList = null;
                 }
-                cmobj.saveCompany("", "");
+                else {
+                    cmobj.scope.selectize_users_notAllowed_Msg = cmobj.scope.CompanyUsers;
+                    cmobj.scope.allowedUsers = [];
+                }
+                //cmobj.saveCompany("", "");
             };
 
             scope.saveCompanyUser = function (u) {
                 if (u.IsAllowMsgToEveryone) {
                     u.UserMessages = [];
                 }
-                cmobj.saveCompanyUser(u);
+                cmobj.saveCompanyUser(u, false);
             };
 
             scope.getOtherCompanyUsers = function (um) {
@@ -210,6 +232,19 @@ module culamaApp {
                 });
                 return selectize_userlist;
             };
+
+            scope.saveCompanyMsgSetting = function (isAllowMsgAllToEveryone) {
+                if (isAllowMsgAllToEveryone == true)
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, "");
+                else {
+                    var allowedUserList = cmobj.scope.allowedUsers;
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, allowedUserList);
+                }
+            };
+
+            scope.cancelRequest = function () {
+                location.reload();
+            }
         }
 
         getCompanyDetail(companyid) {
@@ -230,14 +265,19 @@ module culamaApp {
             this.$rootScope.$emit("toggleLoader", true);
             this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 var notAllowedMsg = [];
+                var allowedmsg = [];
 
                 this.scope.CompanyUsers = result.data;
+
+                this.scope.allowedUsers = result.data.slice();
+
                 this.scope.selectize_allrecipient_users = result.data.slice();
                 for (var i = 0; i < result.data.length; i++) {
                     if (result.data[i].IsAllowMsgToEveryone == false)
                         notAllowedMsg.push(result.data[i]);
+                    else
+                        allowedmsg.push(result.data[i]);
                 }
-
                 if (this.scope.Customer.RecipientList != null) {
                     var alreadyExistRecipients = this.scope.Customer.RecipientList.toString().split(',');
                     for (var x = 0; x < currentObj.scope.selectize_allrecipient_users.length; x++) {
@@ -249,6 +289,9 @@ module culamaApp {
                 }
 
                 this.scope.selectize_users_notAllowed_Msg = notAllowedMsg;
+
+                this.scope.allowedUsers = allowedmsg;
+
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
@@ -271,7 +314,7 @@ module culamaApp {
                             if (u.IsAllowMsgToEveryone) {
                                 u.UserMessages = [];
                             }
-                            cmobj.saveCompanyUser(u);
+                            cmobj.saveCompanyUser(u, true);
                         }
                         else {
                             if (actionname == "add") {
@@ -315,7 +358,7 @@ module culamaApp {
             });
         }
 
-        saveCompanyUser(user) {
+        saveCompanyUser(user, isupdateallusers) {
             this.$rootScope.$emit("toggleLoader", true);
             this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
@@ -328,8 +371,10 @@ module culamaApp {
                         }
                     })
                     this.scope.CompanyUsers = tCusers;
-                    this.$rootScope.$emit("successnotify",
-                        { msg: "Your information is updated successfully", status: "success" });
+
+                    if (isupdateallusers == false)
+                        this.$rootScope.$emit("successnotify",
+                            { msg: "Your information is updated successfully", status: "success" });
                 } else {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
@@ -347,7 +392,7 @@ module culamaApp {
                     else if (isAllowMessage == false)
                         result.data.IsAllowMsgToEveryone = false;
 
-                    this.saveCompanyUser(result.data);
+                    //this.saveCompanyUser(result.data, false);
                 }
                 this.$rootScope.$emit("toggleLoader", false);
             });
@@ -365,6 +410,45 @@ module culamaApp {
             }
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
+        }
+
+        UpdateUserInformation(isAllowMsgAllToEveryone, allowedUserList) {
+            this.$rootScope.$emit("toggleLoader", true);            
+            var userupdatedinfo = [];
+
+            $.each(this.scope.Customer.Users, function () {
+                var x = this;
+                var allowmsg = false;
+                if (isAllowMsgAllToEveryone == false) {
+                    for (var i = 0; i < allowedUserList.length; i++) {
+                        if (x.UserId == allowedUserList[i].UserId) {
+                            allowmsg = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    allowmsg = true;
+                }
+                x.IsAllowMsgToEveryone = allowmsg;
+                userupdatedinfo.push(x)
+            });
+
+            this.scope.Customer.IsAllowMsgAllToEveryone = isAllowMsgAllToEveryone;
+            this.scope.Customer.Users = userupdatedinfo;
+
+            this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+                if (result.data != "") {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your information is updated successfully", status: "success" });
+                }
+                else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+
         }
 
     }

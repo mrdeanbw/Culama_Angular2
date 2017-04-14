@@ -340,6 +340,16 @@
       "id": "span_recipients",
       "US": "Recipients to Everyone",
       "IN": "सभी को प्राप्तकर्ता"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
     }
   ],
   "admincreateuserpage": [
@@ -970,6 +980,16 @@
       "id": "span_recipients",
       "US": "Recipients to Everyone",
       "IN": "सभी को प्राप्तकर्ता"
+    },
+    {
+      "id": "btn_user_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_user_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
     }
   ]
 }

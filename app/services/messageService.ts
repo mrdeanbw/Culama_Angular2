@@ -33,7 +33,6 @@ module culamaApp.services {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetMessageReadInfoByUserID/' + userid, {
             });
         }
-
     }
     angular.module('culamaApp').service('culamaApp.services.MessageService', MessageService);
 }

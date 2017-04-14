@@ -32,6 +32,9 @@ module culamaApp {
             this.newcompany.UiBackgroundContrastColor = "#ffffff";
 
             this.scope.selectize_users_notAllowed_Msg = [];
+
+            this.scope.allowedUsers = [];
+
             this.scope.selectize_allrecipient_users = [];
             this.scope.recipients_users = [];
             this.scope.recipients_user_ids = [];
@@ -47,26 +50,42 @@ module culamaApp {
                 labelField: 'FullIdentityName'
             };
 
+            scope.allowEveryonetoMessage = function () {
+                var ccheck = cmobj.scope.Customer.IsAllowMsgAllToEveryone;
+                if (ccheck == true) {
+                    cmobj.scope.Customer.RecipientList = null;
+                }
+                else {
+                    cmobj.scope.selectize_users_notAllowed_Msg = cmobj.scope.CompanyUsers;
+                    cmobj.scope.allowedUsers = [];
+                }
+                //cmobj.saveCompany("", "");
+            };
+
             this.scope.addUser = function (selecteduserid, isAllowMessage) {
-                cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
+                //cmobj.getSelectedUserInfo(selecteduserid, isAllowMessage);
                 if (isAllowMessage == true) {
                     var notAllowedUsers = cmobj.scope.selectize_users_notAllowed_Msg;
                     for (var t = 0; t < notAllowedUsers.length; t++) {
                         if (notAllowedUsers[t].UserId == selecteduserid) {
+                            cmobj.scope.allowedUsers.push(notAllowedUsers[t]);
                             cmobj.scope.selectize_users_notAllowed_Msg.splice(t, 1);
                             break;
                         }
                     }
                 }
                 else {
-                    var AllowedUsers = cmobj.scope.CompanyUsers;
+                    var AllowedUsers = cmobj.scope.allowedUsers;
                     for (var t = 0; t < AllowedUsers.length; t++) {
                         if (AllowedUsers[t].UserId == selecteduserid) {
                             cmobj.scope.selectize_users_notAllowed_Msg.push(AllowedUsers[t]);
+                            cmobj.scope.allowedUsers.splice(t, 1);
                             break;
                         }
                     }
                 }
+
+                //cmobj.scope.allowedUsers = newaddedMember;
             };
 
             this.scope.recipientAction = function (selectedrecipientid, ActionName) {
@@ -77,6 +96,15 @@ module culamaApp {
 
                 if (ActionName == "add") {
                     cmobj.scope.recipients_user_ids.push(selectedrecipientid);
+
+                    var AllUsers = cmobj.scope.selectize_allrecipient_users;
+                    for (var t = 0; t < AllUsers.length; t++) {
+                        if (AllUsers[t].UserId == selectedrecipientid) {
+                            cmobj.scope.recipients_users.push(AllUsers[t]);
+                            cmobj.scope.selectize_allrecipient_users.splice(t, 1);
+                            break;
+                        }
+                    }
                 }
                 else if (ActionName == "remove") {
                     // Remove it
@@ -99,10 +127,13 @@ module culamaApp {
                         }
                     }
                 }
+                //cmobj.scope.recipients_user_ids.push(selectedrecipientid);
                 cmobj.scope.Customer.RecipientList = cmobj.scope.recipients_user_ids.toString();
                 if (cmobj.scope.Customer.RecipientList == "")
                     cmobj.scope.Customer.RecipientList = null;
-                cmobj.saveCompany(selectedrecipientid, ActionName);
+
+
+                //cmobj.saveCompany(selectedrecipientid, ActionName);
             };
 
             // End Point
@@ -187,6 +218,19 @@ module culamaApp {
             var cobj = this;
             mainCobj = this;
             ascope = this.scope;
+
+            scope.allowEveryonetoMessage = function () {
+                var ccheck = cmobj.editcompany.IsAllowMsgAllToEveryone;
+                if (ccheck == true) {
+                    cmobj.scope.Customer.RecipientList = null;
+                }
+                else {
+                    cmobj.scope.selectize_users_notAllowed_Msg = cmobj.scope.CompanyUsers;
+                    cmobj.scope.allowedUsers = [];
+                }
+                //cmobj.saveCompany("", "");
+            };
+
             scope.vm.deleteCompany = function (id) {
                 UIkit.modal.confirm('Are you sure want to delete?', function () {
                     cobj.DeleteCompany(id);
@@ -276,7 +320,18 @@ module culamaApp {
                 }
             };
 
-           
+            scope.saveCompanyMsgSetting = function (isAllowMsgAllToEveryone) {
+                if (isAllowMsgAllToEveryone == true)
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, "");
+                else {
+                    var allowedUserList = cmobj.scope.allowedUsers;
+                    cmobj.UpdateUserInformation(isAllowMsgAllToEveryone, allowedUserList);
+                }
+            };
+
+            scope.cancelRequest = function () {
+                location.reload();
+            }
 
         }
         getCompanies() {
@@ -467,6 +522,7 @@ module culamaApp {
             var ft = this.$filter;
             this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 var notAllowedMsg = [];
+                var allowedmsg = [];
 
                 // This code for the date formate
                 $.each(result.data, function () {
@@ -481,11 +537,16 @@ module culamaApp {
 
                 this.scope.vm.editcompanyUsers = result.data;
                 this.scope.CompanyUsers = result.data;
+
+                this.scope.allowedUsers = result.data.slice();
+
                 this.scope.selectize_allrecipient_users = result.data.slice();
 
                 for (var i = 0; i < result.data.length; i++) {
                     if (result.data[i].IsAllowMsgToEveryone == false)
                         notAllowedMsg.push(result.data[i]);
+                    else
+                        allowedmsg.push(result.data[i]);
                 }
 
                 if (this.scope.Customer.RecipientList != null) {
@@ -499,6 +560,7 @@ module culamaApp {
                 }
 
                 this.scope.selectize_users_notAllowed_Msg = notAllowedMsg;
+                this.scope.allowedUsers = allowedmsg;
                 this.$rootScope.$emit("toggleLoader", false);
             });
         }
@@ -542,6 +604,45 @@ module culamaApp {
             }
             this.scope.recipients_users = Recipients;
             this.$rootScope.$emit("toggleLoader", false);
+        }
+
+        UpdateUserInformation(isAllowMsgAllToEveryone, allowedUserList) {
+            this.$rootScope.$emit("toggleLoader", true);
+            var userupdatedinfo = [];
+
+            $.each(this.scope.Customer.Users, function () {
+                var x = this;
+                var allowmsg = false;
+                if (isAllowMsgAllToEveryone == false) {
+                    for (var i = 0; i < allowedUserList.length; i++) {
+                        if (x.UserId == allowedUserList[i].UserId) {
+                            allowmsg = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    allowmsg = true;
+                }
+                x.IsAllowMsgToEveryone = allowmsg;
+                userupdatedinfo.push(x)
+            });
+
+            this.scope.Customer.IsAllowMsgAllToEveryone = isAllowMsgAllToEveryone;
+            this.scope.Customer.Users = userupdatedinfo;
+
+            this.compSrv.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+                if (result.data != "") {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your information is updated successfully", status: "success" });
+                }
+                else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+
         }
     }
 

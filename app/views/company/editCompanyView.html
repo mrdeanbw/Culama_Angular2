@@ -106,7 +106,7 @@
                                     <form id="msgsettingform" name="msgsettingform" class="uk-form-stacked">
 
                                         <div class="uk-form-row">
-                                            <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="user.editcompany.IsAllowMsgAllToEveryone" icheck ng-change="user.saveCompany('','')" />
+                                            <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="user.editcompany.IsAllowMsgAllToEveryone" icheck ng-change="user.scope.allowEveryonetoMessage()" />
                                             <label id="lbl_allowmsgtoall_checkbox" for="allowmsgtoall_checkbox" md-language> Allow all users to send messages to everyone</label>
                                         </div>
                                         <div class="uk-form-row" ng-show="!user.editcompany.IsAllowMsgAllToEveryone">
@@ -126,7 +126,7 @@
 
                                                                 <div class="uk-width-medium-9-10">
                                                                     <div class="user-list">
-                                                                        <div ng-repeat="cmpuser in CompanyUsers | customFilterForAllowMessage">
+                                                                        <div ng-repeat="cmpuser in allowedUsers | customFilterForAllowMessage">
                                                                             <p class="user-list-label">{{ cmpuser.FullIdentityName }}</p>
                                                                             <a class="user-minus-btn" ng-click="addUser(cmpuser.UserId, false);"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                                         </div>
@@ -187,6 +187,15 @@
 
 
                                         </div>
+
+                                        <div class="uk-width-medium-1-1 mt-20">
+                                            <!--<a id="btn_user_savebtn" md-language class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>-->
+                                            <button type="button" ng-click="saveCompanyMsgSetting(user.editcompany.IsAllowMsgAllToEveryone)" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                                                Save
+                                            </button>
+                                            <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ng-click="user.scope.cancelRequest()">Cancel</a>
+                                        </div>
+
                                     </form>
                                 </div>
                             </li>
