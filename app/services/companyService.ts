@@ -58,6 +58,12 @@ module culamaApp {
             });
         }
 
+        updateUsersDetails(userlist: any): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            var params = JSON.stringify(userlist);
+            return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateUsersDetails', params, {
+            });
+        }
+
     }
 
     angular

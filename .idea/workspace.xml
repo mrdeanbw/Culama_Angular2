@@ -3,12 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="c8fef8bc-fba1-4a97-9237-72a285715376" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.vs/Source/v14/.suo" afterPath="$PROJECT_DIR$/.vs/Source/v14/.suo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" afterPath="$PROJECT_DIR$/app/areas/messaging/controllers/userMessagesController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.vs/config/applicationhost.config" afterPath="$PROJECT_DIR$/.vs/config/applicationhost.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.states.js" afterPath="$PROJECT_DIR$/app/app.states.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.js" afterPath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/companyUsersController.js" afterPath="$PROJECT_DIR$/app/controllers/companyUsersController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.ts" afterPath="$PROJECT_DIR$/app/controllers/companyMessageSettingController.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manageCustomersController.js" afterPath="$PROJECT_DIR$/app/controllers/manageCustomersController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/myProfileController.js" afterPath="$PROJECT_DIR$/app/controllers/myProfileController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manageCustomersController.ts" afterPath="$PROJECT_DIR$/app/controllers/manageCustomersController.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/companyService.js" afterPath="$PROJECT_DIR$/app/services/companyService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/companyService.ts" afterPath="$PROJECT_DIR$/app/services/companyService.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/messageService.js" afterPath="$PROJECT_DIR$/app/services/messageService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/messageService.ts" afterPath="$PROJECT_DIR$/app/services/messageService.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/account/manageCompanySetting.html" afterPath="$PROJECT_DIR$/app/views/account/manageCompanySetting.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/company/editCompanyView.html" afterPath="$PROJECT_DIR$/app/views/company/editCompanyView.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/language_resource.json" afterPath="$PROJECT_DIR$/data/language_resource.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,8 +35,8 @@
             <file leaf-file-name="messageService.ts" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/app/services/messageService.ts">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="629">
-                    <caret line="37" column="74" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="74" />
+                  <state relative-caret-position="612">
+                    <caret line="36" column="74" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="74" />
                     <folding />
                   </state>
                 </provider>
@@ -92,8 +98,8 @@
       <file leaf-file-name="language_resource.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/language_resource.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="899" column="19" lean-forward="false" selection-start-line="899" selection-start-column="19" selection-end-line="899" selection-end-column="19" />
+            <state relative-caret-position="561">
+              <caret line="909" column="19" lean-forward="false" selection-start-line="909" selection-start-column="19" selection-end-line="909" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -133,8 +139,70 @@
         <entry file="file://$PROJECT_DIR$/app/app.states.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="10812">
-              <caret line="636" column="57" lean-forward="false" selection-start-line="636" selection-start-column="57" selection-end-line="636" selection-end-column="57" />
-              <folding />
+              <caret line="639" column="57" lean-forward="false" selection-start-line="639" selection-start-column="57" selection-end-line="639" selection-end-column="57" />
+              <folding>
+                <marker date="1492211630702" expanded="true" signature="17837:18178" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="17837:18263" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="17837:18289" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="17837:18311" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="17837:18432" ph="{&quot;url&quot;: &quot;/create_company&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="17837:30927" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="17837:30933" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="18339:18414" ph="{&quot;pageTitle&quot;: 'Create Company'...}" />
+                <marker date="1492211630702" expanded="true" signature="18552:19901" ph="{&quot;url&quot;: &quot;/edit_company&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="18761:19782" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="18793:19760" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="18861:19734" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="18919:19649" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="19810:19883" ph="{&quot;pageTitle&quot;: 'Edit Company'...}" />
+                <marker date="1492211630702" expanded="true" signature="20027:21362" ph="{&quot;url&quot;: &quot;/create_users&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="20231:21243" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="20263:21221" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="20331:21195" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="20389:21110" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="21271:21344" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+                <marker date="1492211630702" expanded="true" signature="21486:22815" ph="{&quot;url&quot;: &quot;/edit_users&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="21686:22698" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="21718:22676" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="21786:22650" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="21844:22565" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="22726:22797" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+                <marker date="1492211630702" expanded="true" signature="22953:24310" ph="{&quot;url&quot;: &quot;/create_companyusers&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="23173:24191" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="23205:24169" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="23273:24143" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="23331:24058" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="24219:24292" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+                <marker date="1492211630702" expanded="true" signature="24441:25792" ph="{&quot;url&quot;: &quot;/edit_companyusers&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="24657:25675" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="24689:25653" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="24757:25627" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="24815:25542" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="25703:25774" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+                <marker date="1492211630702" expanded="true" signature="25933:27309" ph="{&quot;url&quot;: &quot;/company_manage_setting&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="26161:27187" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="26193:27165" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="26261:27139" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="26319:27054" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="27215:27291" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+                <marker date="1492211630702" expanded="true" signature="27393:28778" ph="{&quot;url&quot;: &quot;/manage_company_manage_setting&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="27630:28656" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="27662:28634" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="27730:28608" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="27788:28523" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="28684:28760" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+                <marker date="1492211630702" expanded="true" signature="28900:29880" ph="{&quot;url&quot;: &quot;/user_messages&quot;...}" />
+                <marker date="1492211630702" expanded="true" signature="29112:29760" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="29144:29738" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="29212:29712" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="29270:29627" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="29788:29862" ph="{&quot;pageTitle&quot;: 'User Messages'...}" />
+                <marker date="1492211630702" expanded="true" signature="30209:30808" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="30237:30790" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="30301:30768" ph="{...}" />
+                <marker date="1492211630702" expanded="true" signature="30355:30691" ph="[...]" />
+                <marker date="1492211630702" expanded="true" signature="30832:30900" ph="{&quot;pageTitle&quot;: 'Create Messages'...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1053,7 +1121,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10812">
           <caret line="636" column="57" lean-forward="false" selection-start-line="636" selection-start-column="57" selection-end-line="636" selection-end-column="57" />
-          <folding />
+          <folding>
+            <marker date="1492211630702" expanded="true" signature="17837:18178" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="17837:18263" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:18289" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="17837:18311" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:18432" ph="{&quot;url&quot;: &quot;/create_company&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:30927" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:30933" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="18339:18414" ph="{&quot;pageTitle&quot;: 'Create Company'...}" />
+            <marker date="1492211630702" expanded="true" signature="18552:19901" ph="{&quot;url&quot;: &quot;/edit_company&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="18761:19782" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="18793:19760" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="18861:19734" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="18919:19649" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="19810:19883" ph="{&quot;pageTitle&quot;: 'Edit Company'...}" />
+            <marker date="1492211630702" expanded="true" signature="20027:21362" ph="{&quot;url&quot;: &quot;/create_users&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="20231:21243" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="20263:21221" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="20331:21195" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="20389:21110" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="21271:21344" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="21486:22815" ph="{&quot;url&quot;: &quot;/edit_users&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="21686:22698" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="21718:22676" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="21786:22650" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="21844:22565" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="22726:22797" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="22953:24310" ph="{&quot;url&quot;: &quot;/create_companyusers&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="23173:24191" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="23205:24169" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="23273:24143" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="23331:24058" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="24219:24292" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="24441:25792" ph="{&quot;url&quot;: &quot;/edit_companyusers&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="24657:25675" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="24689:25653" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="24757:25627" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="24815:25542" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="25703:25774" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="25933:27309" ph="{&quot;url&quot;: &quot;/company_manage_setting&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="26161:27187" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="26193:27165" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="26261:27139" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="26319:27054" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="27215:27291" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+            <marker date="1492211630702" expanded="true" signature="27393:28778" ph="{&quot;url&quot;: &quot;/manage_company_manage_setting&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="27630:28656" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="27662:28634" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="27730:28608" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="27788:28523" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="28684:28760" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+            <marker date="1492211630702" expanded="true" signature="28900:29880" ph="{&quot;url&quot;: &quot;/user_messages&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="29112:29760" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="29144:29738" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="29212:29712" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="29270:29627" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="29788:29862" ph="{&quot;pageTitle&quot;: 'User Messages'...}" />
+            <marker date="1492211630702" expanded="true" signature="30209:30808" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="30237:30790" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="30301:30768" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="30355:30691" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="30832:30900" ph="{&quot;pageTitle&quot;: 'Create Messages'...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1366,15 +1496,77 @@
     <entry file="file://$PROJECT_DIR$/app/app.states.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10812">
-          <caret line="636" column="57" lean-forward="false" selection-start-line="636" selection-start-column="57" selection-end-line="636" selection-end-column="57" />
-          <folding />
+          <caret line="639" column="57" lean-forward="false" selection-start-line="639" selection-start-column="57" selection-end-line="639" selection-end-column="57" />
+          <folding>
+            <marker date="1492211630702" expanded="true" signature="17837:18178" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="17837:18263" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:18289" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="17837:18311" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:18432" ph="{&quot;url&quot;: &quot;/create_company&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:30927" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="17837:30933" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="18339:18414" ph="{&quot;pageTitle&quot;: 'Create Company'...}" />
+            <marker date="1492211630702" expanded="true" signature="18552:19901" ph="{&quot;url&quot;: &quot;/edit_company&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="18761:19782" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="18793:19760" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="18861:19734" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="18919:19649" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="19810:19883" ph="{&quot;pageTitle&quot;: 'Edit Company'...}" />
+            <marker date="1492211630702" expanded="true" signature="20027:21362" ph="{&quot;url&quot;: &quot;/create_users&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="20231:21243" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="20263:21221" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="20331:21195" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="20389:21110" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="21271:21344" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="21486:22815" ph="{&quot;url&quot;: &quot;/edit_users&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="21686:22698" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="21718:22676" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="21786:22650" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="21844:22565" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="22726:22797" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="22953:24310" ph="{&quot;url&quot;: &quot;/create_companyusers&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="23173:24191" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="23205:24169" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="23273:24143" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="23331:24058" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="24219:24292" ph="{&quot;pageTitle&quot;: 'Create Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="24441:25792" ph="{&quot;url&quot;: &quot;/edit_companyusers&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="24657:25675" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="24689:25653" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="24757:25627" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="24815:25542" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="25703:25774" ph="{&quot;pageTitle&quot;: 'Edit Users'...}" />
+            <marker date="1492211630702" expanded="true" signature="25933:27309" ph="{&quot;url&quot;: &quot;/company_manage_setting&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="26161:27187" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="26193:27165" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="26261:27139" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="26319:27054" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="27215:27291" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+            <marker date="1492211630702" expanded="true" signature="27393:28778" ph="{&quot;url&quot;: &quot;/manage_company_manage_setting&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="27630:28656" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="27662:28634" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="27730:28608" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="27788:28523" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="28684:28760" ph="{&quot;pageTitle&quot;: 'Message Setting'...}" />
+            <marker date="1492211630702" expanded="true" signature="28900:29880" ph="{&quot;url&quot;: &quot;/user_messages&quot;...}" />
+            <marker date="1492211630702" expanded="true" signature="29112:29760" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="29144:29738" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="29212:29712" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="29270:29627" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="29788:29862" ph="{&quot;pageTitle&quot;: 'User Messages'...}" />
+            <marker date="1492211630702" expanded="true" signature="30209:30808" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="30237:30790" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="30301:30768" ph="{...}" />
+            <marker date="1492211630702" expanded="true" signature="30355:30691" ph="[...]" />
+            <marker date="1492211630702" expanded="true" signature="30832:30900" ph="{&quot;pageTitle&quot;: 'Create Messages'...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/services/messageService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="74" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="74" />
+        <state relative-caret-position="612">
+          <caret line="36" column="74" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="74" />
           <folding />
         </state>
       </provider>
@@ -1418,8 +1610,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/language_resource.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="899" column="19" lean-forward="false" selection-start-line="899" selection-start-column="19" selection-end-line="899" selection-end-column="19" />
+        <state relative-caret-position="561">
+          <caret line="909" column="19" lean-forward="false" selection-start-line="909" selection-start-column="19" selection-end-line="909" selection-end-column="19" />
           <folding />
         </state>
       </provider>

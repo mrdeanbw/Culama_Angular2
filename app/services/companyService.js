@@ -37,6 +37,10 @@ var culamaApp;
         CompanyService.prototype.deleteCompany = function (id) {
             return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteCustomer/' + id, {});
         };
+        CompanyService.prototype.updateUsersDetails = function (userlist) {
+            var params = JSON.stringify(userlist);
+            return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateUsersDetails', params, {});
+        };
         return CompanyService;
     }());
     CompanyService.$inject = ["$http", "appConfig"];

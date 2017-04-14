@@ -1,3 +1,5 @@
+/// <reference path="../assets/js/custom/uikit_fileinput.js" />
+/// <reference path="../assets/js/custom/uikit_fileinput.js" />
 culamaApp
     .config([
         '$stateProvider',
@@ -373,6 +375,7 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'app/models/Customer.js',
+                                        'assets/js/custom/uikit_fileinput.js',
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
