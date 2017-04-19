@@ -87,8 +87,8 @@
             var preview = this.$preview;
             var element = this.$element;
 
-            reader.onload = function(re) {
-                var $img = $('<img>');
+            reader.onload = function (re) {
+                var $img = $('<img id="uploaded_Image1">');
                 $img[0].src = re.target.result;
                 files[0].result = re.target.result;
 

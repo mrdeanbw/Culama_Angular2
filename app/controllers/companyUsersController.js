@@ -57,7 +57,6 @@ var culamaApp;
                 placeholder: 'Select...',
                 valueField: 'Id',
                 labelField: 'Name'
-                //labelField: 'UserGroupName'
             };
             this.scope.selectize_a_options = [];
             this.scope.selectize_a_config = {
@@ -172,6 +171,7 @@ var culamaApp;
         };
         CompanyUsersController.prototype.getCompanyUsers = function (companyid) {
             var _this = this;
+            var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
             var ft = this.$filter;
             this.cservice.getUsersByCompanyId(companyid).then(function (result) {
@@ -182,6 +182,10 @@ var culamaApp;
                         this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
                         this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
                     }
+                    if (this.Base64StringofUserPhoto != null)
+                        this.user_photo = "data:image/jpeg;base64," + this.Base64StringofUserPhoto.toString();
+                    else
+                        this.user_photo = "assets/img/avatars/avatar_02.png";
                 });
                 _this.scope.contact_list = result.data;
                 _this.$rootScope.$emit("toggleLoader", false);
@@ -191,6 +195,10 @@ var culamaApp;
                     $.each(_this.scope.contact_list, function (index) {
                         if (this.UserId.toString() === euid) {
                             findobj = this;
+                            if (findobj.Base64StringofUserPhoto != null)
+                                currentObj.scope.userphoto = "data:image/jpeg;base64," + findobj.Base64StringofUserPhoto.toString();
+                            else
+                                currentObj.scope.userphoto = "assets/img/avatars/user.png";
                         }
                     });
                     _this.edituser = findobj;
@@ -202,6 +210,19 @@ var culamaApp;
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (logo != "assets/img/avatars/user.png") {
+                    debugger;
+                    var myBaseString = logo;
+                    var reader = new FileReader();
+                    // Split the base64 string in data and contentType
+                    var block = myBaseString.split(";");
+                    // Get the content type
+                    var dataType = block[0].split(":")[1]; // In this case "image/png"
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+                    this.newuser.Base64StringofUserPhoto = realData;
+                }
                 this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
                 this.cservice.createUser(this.newuser).then(function (result) {
                     if (result.data) {
@@ -220,7 +241,23 @@ var culamaApp;
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                debugger;
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
+                    if (editlogo != this.edituser.Base64StringofUserPhoto) {
+                        var editmyBaseString = editlogo;
+                        // Split the base64 string in data and contentType
+                        var editblock = editmyBaseString.split(";");
+                        // Get the content type
+                        var editdataType = editblock[0].split(":")[1]; // In this case "image/png"
+                        // get the real base64 content of the file
+                        var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
+                        this.edituser.Base64StringofUserPhoto = editrealData.toString();
+                    }
+                }
                 this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
+                var xxxxx = this.edituser;
                 this.lservice.saveUserDetail(this.edituser).then(function (result) {
                     _this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
@@ -339,9 +376,9 @@ var culamaApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
+        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
-    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
 })(culamaApp || (culamaApp = {}));

@@ -32,6 +32,7 @@ var culamaApp;
             // Start Point
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
+            this.newcompany.logoBase64String = null;
             // This is the fixed or Default [white] color for the Background color
             this.newcompany.UiBackgroundContrastColor = "#ffffff";
             this.scope.selectize_users_notAllowed_Msg = [];
@@ -324,6 +325,10 @@ var culamaApp;
             this.$rootScope.$emit("toggleLoader", true);
             this.compSrv.getCompanyById(companyid).then(function (result) {
                 _this.scope.Customer = result.data;
+                if (result.data.logoBase64String != null)
+                    _this.scope.logosrc = "data:image/jpeg;base64," + result.data.logoBase64String.toString();
+                else
+                    _this.scope.logosrc = "assets/img/avatars/user.png";
                 if (result.data.UiBackgroundContrastColor == null)
                     _this.editcompany.UiBackgroundContrastColor = "#ffffff";
                 if (result.data.RecipientList != null)
@@ -334,7 +339,21 @@ var culamaApp;
         ManageCustomersController.prototype.CreateCompany = function () {
             var _this = this;
             if (createCompanyForm.checkValidity()) {
+                debugger;
                 this.$rootScope.$emit("toggleLoader", true);
+                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (logo != "assets/img/avatars/user.png") {
+                    debugger;
+                    var myBaseString = logo;
+                    var reader = new FileReader();
+                    // Split the base64 string in data and contentType
+                    var block = myBaseString.split(";");
+                    // Get the content type
+                    var dataType = block[0].split(":")[1]; // In this case "image/png"
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+                    this.newcompany.logoBase64String = realData.toString();
+                }
                 this.companyService.createCompany(this.newcompany).then(function (result) {
                     if (result.data) {
                         _this.$rootScope.$emit("successnotify", { msg: "Company is created successfully", status: "success" });
@@ -352,7 +371,22 @@ var culamaApp;
             var _this = this;
             if (editCompanyForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
+                    if (editlogo != this.editcompany.logoBase64String) {
+                        var editmyBaseString = editlogo;
+                        // Split the base64 string in data and contentType
+                        var editblock = editmyBaseString.split(";");
+                        // Get the content type
+                        var editdataType = editblock[0].split(":")[1]; // In this case "image/png"
+                        // get the real base64 content of the file
+                        var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
+                        this.editcompany.logoBase64String = editrealData.toString();
+                    }
+                }
                 this.companyService.saveCompanyDetail(this.editcompany).then(function (result) {
+                    debugger;
                     _this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
                         _this.editcompany = result.data;

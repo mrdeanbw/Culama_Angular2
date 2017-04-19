@@ -27,10 +27,12 @@ var culamaApp;
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {});
         };
         CompanyService.prototype.createCompany = function (customer) {
+            debugger;
             var params = JSON.stringify(customer);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {});
         };
         CompanyService.prototype.saveCompanyDetail = function (customer) {
+            debugger;
             var params = JSON.stringify(customer);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveCompany', params, {});
         };
@@ -41,9 +43,9 @@ var culamaApp;
             var params = JSON.stringify(userlist);
             return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateUsersDetails', params, {});
         };
+        CompanyService.$inject = ["$http", "appConfig"];
         return CompanyService;
     }());
-    CompanyService.$inject = ["$http", "appConfig"];
     culamaApp.CompanyService = CompanyService;
     angular
         .module("culamaApp")

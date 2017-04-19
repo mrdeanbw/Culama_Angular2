@@ -76,12 +76,25 @@
                                 <label id="lbl_user_userrole" md-language>User Role</label>
                                 <input type="text" config="user.scope.selectize_c_config" options="user.scope.selectize_c_options" ng-model="user.edituser.UserGroupId" name="selectize_c" selectize />
                             </div>
+
+
                             <div class="uk-width-medium-1-2">
-                                <div><span id="lbl_myprofile_phoneactivated" md-language>PhoneActivated</span>: <input id="chk_activatephone" type="checkbox" ng-model="user.edituser.IsPhoneActivated" ng-disabled="true" icheck /></div>
-                                <!--<div class="uk-form-row">
-                                    <input type="checkbox" ng-model="user.edituser.IsPhoneActivated" />
-                                </div>-->
+                                <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img id="customer_logo" ng-src="{{ user.scope.userphoto }}" alt="user avatar" />
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div class="user_avatar_controls">
+                                        <span class="btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                            <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                        </span>
+                                        <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="uk-form-row">
@@ -90,12 +103,14 @@
                                 <label id="lbl_user_mainlan" md-language>Main Language</label>
                                 <input type="text" config="user.scope.selectize_a_config" options="user.scope.selectize_a_options" ng-model="user.edituser.LanguageId" name="selectize_a" selectize />
                             </div>
+
                             <div class="uk-width-medium-1-2">
-                                <div><span id="lbl_myprofile_phoneactivatedon" md-language>PhoneActivatedOn</span>: {{ user.edituser.PhoneActivatedOn }}</div>
+                                <div><span id="lbl_myprofile_phoneactivated" md-language>PhoneActivated</span>: <input id="chk_activatephone" type="checkbox" ng-model="user.edituser.IsPhoneActivated" ng-disabled="true" icheck /></div>
                                 <!--<div class="uk-form-row">
-                                    <input type="text" class="md-input" disabled ng-model="user.edituser.PhoneActivatedOn" ng-readonly="true" md-input />
+                                    <input type="checkbox" ng-model="user.edituser.IsPhoneActivated" />
                                 </div>-->
                             </div>
+
                         </div>
                     </div>
                     <div class="uk-form-row">
@@ -104,14 +119,33 @@
                                 <label id="lbl_user_otherlan" md-language>Other Language</label>
                                 <input type="text" config="user.scope.selectize_b_config" options="user.scope.selectize_b_options" ng-model="user.edituser.PreferredLanguageId" name="selectize_b" selectize />
                             </div>
+
+                            <div class="uk-width-medium-1-2">
+                                <div><span id="lbl_myprofile_phoneactivatedon" md-language>PhoneActivatedOn</span>: {{ user.edituser.PhoneActivatedOn }}</div>
+                                <!--<div class="uk-form-row">
+                                    <input type="text" class="md-input" disabled ng-model="user.edituser.PhoneActivatedOn" ng-readonly="true" md-input />
+                                </div>-->
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                            </div>
+
                             <div class="uk-width-medium-1-2">
                                 <div><span id="lbl_myprofile_lastactivationattempt" md-language>LastActivationAttempt</span>: {{ user.edituser.LastActivationAttempt }}</div>
                                 <!--<div class="uk-form-row">
                                     <input type="text" class="md-input" disabled ng-model="user.edituser.LastActivationAttempt" ng-readonly="true" md-input />
                                 </div>-->
                             </div>
+
                         </div>
                     </div>
+
+
                     <div class="uk-width-medium-1-1 mt-20">
                         <!--<a id="btn_user_savebtn" md-language class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>-->
                         <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>

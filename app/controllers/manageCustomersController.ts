@@ -28,6 +28,8 @@ module culamaApp {
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
 
+            this.newcompany.logoBase64String = null;
+
             // This is the fixed or Default [white] color for the Background color
             this.newcompany.UiBackgroundContrastColor = "#ffffff";
 
@@ -135,7 +137,6 @@ module culamaApp {
 
                 //cmobj.saveCompany(selectedrecipientid, ActionName);
             };
-
             // End Point
 
             scope.vm = this;
@@ -358,6 +359,11 @@ module culamaApp {
             this.compSrv.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.scope.Customer = result.data;
 
+                if (result.data.logoBase64String != null)
+                    this.scope.logosrc = "data:image/jpeg;base64," + result.data.logoBase64String.toString();
+                else
+                    this.scope.logosrc = "assets/img/avatars/user.png";
+
                 if (result.data.UiBackgroundContrastColor == null)
                     this.editcompany.UiBackgroundContrastColor = "#ffffff";
 
@@ -370,7 +376,34 @@ module culamaApp {
 
         CreateCompany() {
             if (createCompanyForm.checkValidity()) {
+                debugger;
                 this.$rootScope.$emit("toggleLoader", true);
+
+                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (logo != "assets/img/avatars/user.png") {
+                    debugger;
+                    var myBaseString = logo;
+                    var reader = new FileReader();
+
+                    // Split the base64 string in data and contentType
+                    var block = myBaseString.split(";");
+
+                    // Get the content type
+                    var dataType = block[0].split(":")[1];// In this case "image/png"
+
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+
+                    this.newcompany.logoBase64String = realData.toString();
+
+                    //this.newcompany.CustomerLogo = realData;
+
+                    //var BlobData = this.ConvertBase64ToBlob(realData, dataType, "");
+                    //var BlobData = this.ConvertBase64ToBlob(realData);
+                    //var BlobData = this.ConvertBase64ToBlob(realData);
+
+                    //this.newcompany.CustomerLogo = BlobData;
+                }
                 this.companyService.createCompany(this.newcompany).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
                     if (result.data) {
                         this.$rootScope.$emit("successnotify",
@@ -389,8 +422,31 @@ module culamaApp {
 
         EditCompany() {
             if (editCompanyForm.checkValidity()) {
+
                 this.$rootScope.$emit("toggleLoader", true);
+
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
+                    if (editlogo != this.editcompany.logoBase64String) {
+
+                        var editmyBaseString = editlogo;
+
+                        // Split the base64 string in data and contentType
+                        var editblock = editmyBaseString.split(";");
+
+                        // Get the content type
+                        var editdataType = editblock[0].split(":")[1];// In this case "image/png"
+
+                        // get the real base64 content of the file
+                        var editrealData = editblock[1].split(",")[1];// In this case "iVBORw0KGg....           
+
+                        this.editcompany.logoBase64String = editrealData.toString();
+                    }
+                }
                 this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+                    debugger;
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
                         this.editcompany = result.data;
@@ -644,6 +700,61 @@ module culamaApp {
             });
 
         }
+
+        //ConvertBase64ToBlob(base64) {
+        //    debugger;
+        //    var binary_string = window.atob(base64);
+        //    var len = binary_string.length;
+        //    var bytes = new Uint8Array(len);
+        //    for (var i = 0; i < len; i++) {
+        //        bytes[i] = binary_string.charCodeAt(i);
+        //    }
+        //    return bytes;
+        //}
+
+        //ConvertBase64ToBlob(b64Data, contentType, sliceSize) {
+        //    debugger;
+        //    contentType = contentType || '';
+        //    sliceSize = sliceSize || 512;
+
+        //    var byteCharacters = atob(b64Data);
+        //    var byteArrays = [];
+
+        //    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        //        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        //        var byteNumbers = new Array(slice.length);
+        //        for (var i = 0; i < slice.length; i++) {
+        //            byteNumbers[i] = slice.charCodeAt(i);
+        //        }
+
+        //        var byteArray = new Uint8Array(byteNumbers);
+
+        //        byteArrays.push(byteArray);
+        //    }
+        //    debugger;
+        //    //return new Blob(byteArrays, { type: contentType });
+        //    //return byteArray;
+
+        //    return byteArrays;
+
+        //    //debugger;
+        //    //var blob = new Blob(byteArrays, { type: contentType });
+        //    //return blob;
+
+        //    //return byteArray;
+        //}
+
+        //ConvertBase64ToBlob(base64) {
+        //    debugger;
+        //    var binary_string = window.atob(base64);
+        //    var len = binary_string.length;
+        //    var bytes = new Uint8Array(len);
+        //    for (var i = 0; i < len; i++) {
+        //        bytes[i] = binary_string.charCodeAt(i);
+        //    }
+        //    return bytes.buffer;
+        //}
     }
 
     export function myFilter() {

@@ -29,6 +29,25 @@
                                                     <label id="lbl_company_prefix" for="company_input_prefix" md-language>Prefix<span class="req">*</span></label>
                                                     <input class="md-input" type="text" id="company_input_prefix" required md-language ng-model="user.editcompany.Prefix" md-input />
                                                 </div>
+
+                                                <div class="uk-width-medium-1-2">
+                                                    <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img id="customer_logo" ng-src="{{ user.scope.logosrc }}" alt="user avatar" />
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                        <div class="user_avatar_controls">
+                                                            <span class="btn-file">
+                                                                <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                                                <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                                                <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                                            </span>
+                                                            <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                         <div class="uk-form-row">
