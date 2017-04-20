@@ -42,7 +42,6 @@ module culamaApp {
         }
 
         createCompany(customer: culamaApp.Customer): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
-            debugger;
             var params = JSON.stringify(customer);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {
             });

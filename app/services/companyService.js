@@ -27,7 +27,6 @@ var culamaApp;
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateUser', params, {});
         };
         CompanyService.prototype.createCompany = function (customer) {
-            debugger;
             var params = JSON.stringify(customer);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {});
         };

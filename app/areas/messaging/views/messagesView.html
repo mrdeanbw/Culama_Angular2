@@ -51,24 +51,24 @@
                     <div class="uk-width-large-3-10 uk-visible-large pull-left">
                         <div class="md-list-outside-wrapper">
                             <ul class="md-list md-list-addon md-list-outside">
-                                <li ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);">
+                                <li id="msgt{{ m.Id }}" ng-repeat="m in Messages" on-last-repeat ng-click="scopeLoadMessages(m.Id);" class="{{ currentllyActiveThread == m.Id ? 'chat-li active' : 'chat-li' }}">
 
-                                    <div class="md-list-addon-element messagelistitem">
-                                        <!--<span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
+                                    <!--<div class="md-list-addon-element messagelistitem">
+                                        <span class="element-status element-status-danger" ng-if="user.status == 'offline'"></span>
                                         <span class="element-status element-status-success" ng-if="user.status == 'online'"></span>
-                                        <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>-->
+                                        <span class="element-status element-status-warning" ng-if="user.status == 'afk'"></span>
                                         <img class="md-user-image md-list-addon-avatar" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" add-image-prop />
-                                    </div>
-                           
-                                             <div class="md-list-content">
-                                        
+                                    </div>-->
+
+                                    <div class="md-list-content">
+
                                         <div class="list-content">
                                             <span class="md-list-heading">{{ m.Title }} <i class="material-icons arrow"></i> <span class="user-message-section" ng-bind-html="showMessageUsers(m, false)" ng-mouseenter="abc(m)"></span></span>
                                             <!--<span class="md-list-heading">
-            {{ m.Title }} <i class="material-icons arrow"></i>
-            <span class="user-message-section" ng-bind-html="showMessageUsers(m)" ng-mouseenter="abc(m)">
-            </span>
-        </span>-->
+                                                {{ m.Title }} <i class="material-icons arrow"></i>
+                                                <span class="user-message-section" ng-bind-html="showMessageUsers(m)" ng-mouseenter="abc(m)">
+                                                </span>
+                                            </span>-->
                                             <span class="uk-text-small uk-text-muted uk-text-truncate">{{m.Message}}</span>
                                         </div>
                                         <!--<div class="md-list-action-placeholder"></div>-->

@@ -12,10 +12,11 @@ module culamaApp.areas.messaging.controllers {
             this.scope.isUserCreateMessage = true;
             this.scope.isUserTypeMessage = true;
             this.scope.selectizeUsersOptions = [];
+            this.scope.currentllyActiveThread = 1;
             this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
             this.getCompanyDetail(this.$rootScope.LoggedUser.CustomerId);
             this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
-
+            
             this.scope.selectizeUsersConfig = {
                 plugins: {
                     'remove_button': {
@@ -239,6 +240,7 @@ module culamaApp.areas.messaging.controllers {
             var msg;
             $.each(this.scope.Messages, function () {
                 if (this.Id == messageId) {
+                    currentObj.scope.currentllyActiveThread = parseInt(this.Id);
                     msg = this;
                 }
             });

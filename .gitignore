@@ -8,3 +8,4 @@
 /app/components/pages/loginController.js.exclude
 .vs/
 publish/
+/bower_components/angular

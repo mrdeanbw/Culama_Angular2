@@ -9,7 +9,7 @@
         public URL: string;
         public RecipientList: string;
         public UiBackgroundContrastColor: string;
-        public CustomerLogo: any;
+        public CustomerLogo: any;        
         public logoBase64String: string;
         public Users: any;
         public IsAllowMsgAllToEveryone: any;

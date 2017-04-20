@@ -375,6 +375,7 @@ module culamaApp {
         }
 
         CreateCompany() {
+            var base64Arr = [];
             if (createCompanyForm.checkValidity()) {
                 debugger;
                 this.$rootScope.$emit("toggleLoader", true);
@@ -403,6 +404,14 @@ module culamaApp {
                     //var BlobData = this.ConvertBase64ToBlob(realData);
 
                     //this.newcompany.CustomerLogo = BlobData;
+
+                    //this.newcompany.CustomerLogo = BlobData;
+
+                    //for (var i = 0; i < realData.length; i++) {
+                    //    base64Arr.push(realData[i]);
+                    //}
+                    //var aaaaaaaaa = base64Arr;
+
                 }
                 this.companyService.createCompany(this.newcompany).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
                     if (result.data) {
@@ -712,38 +721,31 @@ module culamaApp {
         //    return bytes;
         //}
 
-        //ConvertBase64ToBlob(b64Data, contentType, sliceSize) {
-        //    debugger;
-        //    contentType = contentType || '';
-        //    sliceSize = sliceSize || 512;
+        ConvertBase64ToBlob(base64String) {
+            try {
+                debugger;
+                var sliceSize = 1024;
+                var byteCharacters = atob(base64String);
+                var bytesLength = byteCharacters.length;
+                var slicesCount = Math.ceil(bytesLength / sliceSize);
+                var byteArrays = new Array(slicesCount);
 
-        //    var byteCharacters = atob(b64Data);
-        //    var byteArrays = [];
+                for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+                    var begin = sliceIndex * sliceSize;
+                    var end = Math.min(begin + sliceSize, bytesLength);
 
-        //    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        //        var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-        //        var byteNumbers = new Array(slice.length);
-        //        for (var i = 0; i < slice.length; i++) {
-        //            byteNumbers[i] = slice.charCodeAt(i);
-        //        }
-
-        //        var byteArray = new Uint8Array(byteNumbers);
-
-        //        byteArrays.push(byteArray);
-        //    }
-        //    debugger;
-        //    //return new Blob(byteArrays, { type: contentType });
-        //    //return byteArray;
-
-        //    return byteArrays;
-
-        //    //debugger;
-        //    //var blob = new Blob(byteArrays, { type: contentType });
-        //    //return blob;
-
-        //    //return byteArray;
-        //}
+                    var bytes = new Array(end - begin);
+                    for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+                        bytes[i] = byteCharacters[offset].charCodeAt(0);
+                    }
+                    byteArrays[sliceIndex] = new Uint8Array(bytes);
+                }
+                return byteArrays;
+            } catch (e) {
+                console.log("Couldn't convert to byte array: " + e);
+                return undefined;
+            }
+        }
 
         //ConvertBase64ToBlob(base64) {
         //    debugger;

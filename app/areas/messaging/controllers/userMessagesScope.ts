@@ -5,6 +5,7 @@ module culamaApp.areas.messaging.controllers {
 
     export interface IUserMessageScope extends ng.IScope {
         messages: Array<Models.MessageThread>;
+        currentllyActiveThread: number;
         isHasMessages: boolean;
         isUserCreateMessage: boolean;
         isUserTypeMessage: boolean;

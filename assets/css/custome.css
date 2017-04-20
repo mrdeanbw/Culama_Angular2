@@ -461,6 +461,30 @@
     margin-left: 20px;
     vertical-align: top;
 }
+.chat-li.active
+{
+        background-color: #1976d2;
+}
+.chat-li.active .material-icons
+{
+        color: #fff;
+}
+.chat-li.active .uk-button-dropdown
+{
+     color: #fff;
+}
+.chat-li.active .uk-button-dropdown > a
+{
+         color: #bdbdbd;
+    font-weight: bold;
+}
+.chat-li.active .uk-button-dropdown > a > i{
+        color: #fff;
+}
+.md-list-outside > li > .md-list-content
+{
+    padding: 12px 16px;
+}
 
 @media (max-width:1219px)
 {
