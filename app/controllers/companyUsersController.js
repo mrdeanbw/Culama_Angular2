@@ -209,20 +209,27 @@ var culamaApp;
         CompanyUsersController.prototype.CreateUser = function () {
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
+                var base64Arr = [];
                 this.$rootScope.$emit("toggleLoader", true);
-                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
-                if (logo != "assets/img/avatars/user.png") {
-                    debugger;
-                    var myBaseString = logo;
-                    var reader = new FileReader();
-                    // Split the base64 string in data and contentType
-                    var block = myBaseString.split(";");
-                    // Get the content type
-                    var dataType = block[0].split(":")[1]; // In this case "image/png"
-                    // get the real base64 content of the file
-                    var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
-                    this.newuser.Base64StringofUserPhoto = realData;
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                    if (logo != "assets/img/avatars/user.png") {
+                        var myBaseString = logo;
+                        var reader = new FileReader();
+                        // Split the base64 string in data and contentType
+                        var block = myBaseString.split(";");
+                        // Get the content type
+                        var dataType = block[0].split(":")[1]; // In this case "image/png"
+                        // get the real base64 content of the file
+                        var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+                        // to create and add the String array of the Base64 String
+                        for (var i = 0; i < realData.length; i++) {
+                            base64Arr.push(realData[i]);
+                        }
+                    }
                 }
+                this.newuser.UserPhoto = base64Arr;
                 this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
                 this.cservice.createUser(this.newuser).then(function (result) {
                     if (result.data) {
@@ -241,7 +248,8 @@ var culamaApp;
             var _this = this;
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                debugger;
+                var base64Arr = [];
+                var ConvertedBase64String = "";
                 var checkLogoIsModified = document.getElementById("uploaded_Image1");
                 if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
                     var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
@@ -253,11 +261,19 @@ var culamaApp;
                         var editdataType = editblock[0].split(":")[1]; // In this case "image/png"
                         // get the real base64 content of the file
                         var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
-                        this.edituser.Base64StringofUserPhoto = editrealData.toString();
+                        ConvertedBase64String = editrealData;
                     }
                 }
+                else {
+                    ConvertedBase64String = this.edituser.Base64StringofUserPhoto;
+                }
+                // to create and add the String array of the Base64 String
+                for (var i = 0; i < ConvertedBase64String.length; i++) {
+                    base64Arr.push(ConvertedBase64String[i]);
+                }
+                this.edituser.UserPhoto = base64Arr;
+                this.edituser.Base64StringofUserPhoto = null;
                 this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
-                var xxxxx = this.edituser;
                 this.lservice.saveUserDetail(this.edituser).then(function (result) {
                     _this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {

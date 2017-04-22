@@ -42,7 +42,7 @@ module culamaApp {
             //        "Id": "3",
             //        "UserGroupName": "Users"
             //    }];
-            
+
             //this.newuser.UserGroupId = 1;
 
             this.scope.selectize_c_options = [];
@@ -180,7 +180,7 @@ module culamaApp {
                         }
                     }
                     this.scope.userroles = roles;
-                }                
+                }
             });
         }
 
@@ -193,10 +193,10 @@ module culamaApp {
                 $.each(result.data, function () {
                     if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
                         var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
-                        var lastactivation  = new Date(parseInt(this.LastActivationAttempt.substr(6)));
+                        var lastactivation = new Date(parseInt(this.LastActivationAttempt.substr(6)));
 
                         this.PhoneActivatedOn = ft('date')(activationon, "MMM dd yyyy HH:mm");
-                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm"); 
+                        this.LastActivationAttempt = ft('date')(lastactivation, "MMM dd yyyy HH:mm");
                     }
 
                     if (this.Base64StringofUserPhoto != null)
@@ -228,26 +228,33 @@ module culamaApp {
 
         CreateUser() {
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && createUserForm.checkValidity()) {
+                var base64Arr = [];
                 this.$rootScope.$emit("toggleLoader", true);
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                    if (logo != "assets/img/avatars/user.png") {
+                        var myBaseString = logo;
+                        var reader = new FileReader();
 
-                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
-                if (logo != "assets/img/avatars/user.png") {
-                    debugger;
-                    var myBaseString = logo;
-                    var reader = new FileReader();
+                        // Split the base64 string in data and contentType
+                        var block = myBaseString.split(";");
 
-                    // Split the base64 string in data and contentType
-                    var block = myBaseString.split(";");
+                        // Get the content type
+                        var dataType = block[0].split(":")[1];// In this case "image/png"
 
-                    // Get the content type
-                    var dataType = block[0].split(":")[1];// In this case "image/png"
+                        // get the real base64 content of the file
+                        var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
 
-                    // get the real base64 content of the file
-                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+                        // to create and add the String array of the Base64 String
+                        for (var i = 0; i < realData.length; i++) {
+                            base64Arr.push(realData[i]);
+                        }
 
-                    this.newuser.Base64StringofUserPhoto = realData;
+                        //this.newuser.Base64StringofUserPhoto = realData;
+                    }
                 }
-
+                this.newuser.UserPhoto = base64Arr;
                 this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
                 this.cservice.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     if (result.data) {
@@ -268,7 +275,8 @@ module culamaApp {
         EditUser() {
             if (this.scope.IsPhoneUnique && this.scope.IsUsernameUnique && editUserForm.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                debugger;
+                var base64Arr = [];
+                var ConvertedBase64String = "";
                 var checkLogoIsModified = document.getElementById("uploaded_Image1");
 
                 if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
@@ -286,14 +294,20 @@ module culamaApp {
                         // get the real base64 content of the file
                         var editrealData = editblock[1].split(",")[1];// In this case "iVBORw0KGg....           
 
-                        this.edituser.Base64StringofUserPhoto = editrealData.toString();
+                        ConvertedBase64String = editrealData;
+                        //this.edituser.Base64StringofUserPhoto = editrealData.toString();
                     }
                 }
-                
+                else {
+                    ConvertedBase64String = this.edituser.Base64StringofUserPhoto;
+                }
+                // to create and add the String array of the Base64 String
+                for (var i = 0; i < ConvertedBase64String.length; i++) {
+                    base64Arr.push(ConvertedBase64String[i]);
+                }
+                this.edituser.UserPhoto = base64Arr;
+                this.edituser.Base64StringofUserPhoto = null;
                 this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
-
-                var xxxxx = this.edituser;
-
                 this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {

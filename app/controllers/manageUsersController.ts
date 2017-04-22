@@ -168,6 +168,7 @@ class ManageUsersController {
     }
 
     getUsers() {
+        var currentObj = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsers().then((result: ng.IHttpPromiseCallbackArg<any>) => {
             this.scope.vm.dt_data = result.data;
@@ -178,6 +179,11 @@ class ManageUsersController {
                 $.each(this.scope.vm.dt_data, function (index) {
                     if (this.UserId.toString() === euid) {
                         findobj = this;
+
+                        if (findobj.Base64StringofUserPhoto != null)
+                            currentObj.scope.userphoto = "data:image/jpeg;base64," + findobj.Base64StringofUserPhoto.toString();
+                        else
+                            currentObj.scope.userphoto = "assets/img/avatars/user.png";
                     }
                 });
                 this.edituser = findobj;
@@ -197,6 +203,32 @@ class ManageUsersController {
     CreateUser() {
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && createUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            var base64Arr = [];
+            var checkLogoIsModified = document.getElementById("uploaded_Image1");
+            if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (logo != "assets/img/avatars/user.png") {
+                    var myBaseString = logo;
+                    var reader = new FileReader();
+
+                    // Split the base64 string in data and contentType
+                    var block = myBaseString.split(";");
+
+                    // Get the content type
+                    var dataType = block[0].split(":")[1];// In this case "image/png"
+
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+
+                    // to create and add the String array of the Base64 String
+                    for (var i = 0; i < realData.length; i++) {
+                        base64Arr.push(realData[i]);
+                    }
+
+                    //this.newuser.Base64StringofUserPhoto = realData;
+                }
+            }
+            this.newuser.UserPhoto = base64Arr;
             this.newuser.UserName = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
             this.companyService.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 if (result.data) {
@@ -217,6 +249,39 @@ class ManageUsersController {
     EditUser() {
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+
+            var base64Arr = [];
+            var ConvertedBase64String = "";
+            var checkLogoIsModified = document.getElementById("uploaded_Image1");
+
+            if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (editlogo != this.edituser.Base64StringofUserPhoto) {
+
+                    var editmyBaseString = editlogo;
+
+                    // Split the base64 string in data and contentType
+                    var editblock = editmyBaseString.split(";");
+
+                    // Get the content type
+                    var editdataType = editblock[0].split(":")[1];// In this case "image/png"
+
+                    // get the real base64 content of the file
+                    var editrealData = editblock[1].split(",")[1];// In this case "iVBORw0KGg....           
+
+                    ConvertedBase64String = editrealData;
+                    //this.edituser.Base64StringofUserPhoto = editrealData.toString();
+                }
+            }
+            else {
+                ConvertedBase64String = this.edituser.Base64StringofUserPhoto;
+            }
+            // to create and add the String array of the Base64 String
+            for (var i = 0; i < ConvertedBase64String.length; i++) {
+                base64Arr.push(ConvertedBase64String[i]);
+            }
+            this.edituser.UserPhoto = base64Arr;
+            this.edituser.Base64StringofUserPhoto = null;
             this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
             this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);

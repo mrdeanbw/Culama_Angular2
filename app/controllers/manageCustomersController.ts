@@ -25,6 +25,8 @@ module culamaApp {
             var cmobj = this;
             // Start Point
 
+            this.scope.cmpPhoto = "";
+
             this.scope.SelectedUser = "";
             this.scope.recipientUsers = "";
 
@@ -377,42 +379,36 @@ module culamaApp {
         CreateCompany() {
             var base64Arr = [];
             if (createCompanyForm.checkValidity()) {
-                debugger;
                 this.$rootScope.$emit("toggleLoader", true);
 
-                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
-                if (logo != "assets/img/avatars/user.png") {
-                    debugger;
-                    var myBaseString = logo;
-                    var reader = new FileReader();
+                var checkLogoIsModified = document.getElementById("uploaded_Image1");
+                if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                    
+                    var logo = document.getElementById("uploaded_Image1").getAttribute("src");
 
-                    // Split the base64 string in data and contentType
-                    var block = myBaseString.split(";");
+                    if (logo != "assets/img/avatars/user.png") {
+                        var myBaseString = logo;
+                        var reader = new FileReader();
 
-                    // Get the content type
-                    var dataType = block[0].split(":")[1];// In this case "image/png"
+                        // Split the base64 string in data and contentType
+                        var block = myBaseString.split(";");
 
-                    // get the real base64 content of the file
-                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+                        // Get the content type
+                        var dataType = block[0].split(":")[1];// In this case "image/png"
 
-                    this.newcompany.logoBase64String = realData.toString();
+                        // get the real base64 content of the file
+                        var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
 
-                    //this.newcompany.CustomerLogo = realData;
+                        // to create and add the String array of the Base64 String
+                        for (var i = 0; i < realData.length; i++) {
+                            base64Arr.push(realData[i]);
+                        }
+                        //this.newcompany.logoBase64String = realData.toString();
 
-                    //var BlobData = this.ConvertBase64ToBlob(realData, dataType, "");
-                    //var BlobData = this.ConvertBase64ToBlob(realData);
-                    //var BlobData = this.ConvertBase64ToBlob(realData);
-
-                    //this.newcompany.CustomerLogo = BlobData;
-
-                    //this.newcompany.CustomerLogo = BlobData;
-
-                    //for (var i = 0; i < realData.length; i++) {
-                    //    base64Arr.push(realData[i]);
-                    //}
-                    //var aaaaaaaaa = base64Arr;
-
+                        //var BlobData = this._base64ToArrayBuffer(realData);
+                    }
                 }
+                this.newcompany.CustomerLogo = base64Arr;
                 this.companyService.createCompany(this.newcompany).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
                     if (result.data) {
                         this.$rootScope.$emit("successnotify",
@@ -431,11 +427,10 @@ module culamaApp {
 
         EditCompany() {
             if (editCompanyForm.checkValidity()) {
-
+                var base64Arr = [];
+                var ConvertedBase64String = "";
                 this.$rootScope.$emit("toggleLoader", true);
-
                 var checkLogoIsModified = document.getElementById("uploaded_Image1");
-
                 if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
                     var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
                     if (editlogo != this.editcompany.logoBase64String) {
@@ -451,11 +446,21 @@ module culamaApp {
                         // get the real base64 content of the file
                         var editrealData = editblock[1].split(",")[1];// In this case "iVBORw0KGg....           
 
-                        this.editcompany.logoBase64String = editrealData.toString();
+                        ConvertedBase64String = editrealData;
                     }
                 }
+                else {
+                    ConvertedBase64String = this.editcompany.logoBase64String;
+                }
+
+                // to create and add the String array of the Base64 String
+                for (var i = 0; i < ConvertedBase64String.length; i++) {
+                    base64Arr.push(ConvertedBase64String[i]);
+                }
+                this.editcompany.CustomerLogo = base64Arr;
+                this.editcompany.logoBase64String = null;
+
                 this.companyService.saveCompanyDetail(this.editcompany).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
-                    debugger;
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
                         this.editcompany = result.data;
@@ -710,7 +715,7 @@ module culamaApp {
 
         }
 
-        //ConvertBase64ToBlob(base64) {
+        //_base64ToArrayBuffer(base64) {
         //    debugger;
         //    var binary_string = window.atob(base64);
         //    var len = binary_string.length;
@@ -719,43 +724,7 @@ module culamaApp {
         //        bytes[i] = binary_string.charCodeAt(i);
         //    }
         //    return bytes;
-        //}
-
-        ConvertBase64ToBlob(base64String) {
-            try {
-                debugger;
-                var sliceSize = 1024;
-                var byteCharacters = atob(base64String);
-                var bytesLength = byteCharacters.length;
-                var slicesCount = Math.ceil(bytesLength / sliceSize);
-                var byteArrays = new Array(slicesCount);
-
-                for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-                    var begin = sliceIndex * sliceSize;
-                    var end = Math.min(begin + sliceSize, bytesLength);
-
-                    var bytes = new Array(end - begin);
-                    for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
-                        bytes[i] = byteCharacters[offset].charCodeAt(0);
-                    }
-                    byteArrays[sliceIndex] = new Uint8Array(bytes);
-                }
-                return byteArrays;
-            } catch (e) {
-                console.log("Couldn't convert to byte array: " + e);
-                return undefined;
-            }
-        }
-
-        //ConvertBase64ToBlob(base64) {
-        //    debugger;
-        //    var binary_string = window.atob(base64);
-        //    var len = binary_string.length;
-        //    var bytes = new Uint8Array(len);
-        //    for (var i = 0; i < len; i++) {
-        //        bytes[i] = binary_string.charCodeAt(i);
-        //    }
-        //    return bytes.buffer;
+        //    //return bytes.buffer;
         //}
     }
 

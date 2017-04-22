@@ -43,12 +43,10 @@ module culamaApp {
 
         createCompany(customer: culamaApp.Customer): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
             var params = JSON.stringify(customer);
-            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {
-            });
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateCustomer', params, {});
         }
 
         saveCompanyDetail(customer: culamaApp.Customer): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.Customer>> {
-            debugger;
             var params = JSON.stringify(customer);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveCompany', params, {
             });

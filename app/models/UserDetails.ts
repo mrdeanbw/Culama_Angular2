@@ -39,6 +39,7 @@
         public UserGroupName: string;
         public IsAllowMsgToEveryone: boolean;  
         public UserMessages: any;
+        public UserPhoto: any;
         public Base64StringofUserPhoto: string;
     }
 

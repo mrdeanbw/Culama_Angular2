@@ -43,8 +43,7 @@ var ManageUsersController = (function () {
             {
                 "Id": "3",
                 "UserGroupName": "Users"
-            }
-        ];
+            }];
         scope.vm.newuser.UserGroupId = 1;
         scope.vm.selectize_c_config = {
             plugins: {
@@ -150,6 +149,7 @@ var ManageUsersController = (function () {
     };
     ManageUsersController.prototype.getUsers = function () {
         var _this = this;
+        var currentObj = this;
         this.$rootScope.$emit("toggleLoader", true);
         this.companyService.getUsers().then(function (result) {
             _this.scope.vm.dt_data = result.data;
@@ -160,6 +160,10 @@ var ManageUsersController = (function () {
                 $.each(_this.scope.vm.dt_data, function (index) {
                     if (this.UserId.toString() === euid) {
                         findobj = this;
+                        if (findobj.Base64StringofUserPhoto != null)
+                            currentObj.scope.userphoto = "data:image/jpeg;base64," + findobj.Base64StringofUserPhoto.toString();
+                        else
+                            currentObj.scope.userphoto = "assets/img/avatars/user.png";
                     }
                 });
                 _this.edituser = findobj;
@@ -179,6 +183,26 @@ var ManageUsersController = (function () {
         var _this = this;
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && createUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            var base64Arr = [];
+            var checkLogoIsModified = document.getElementById("uploaded_Image1");
+            if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                var logo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (logo != "assets/img/avatars/user.png") {
+                    var myBaseString = logo;
+                    var reader = new FileReader();
+                    // Split the base64 string in data and contentType
+                    var block = myBaseString.split(";");
+                    // Get the content type
+                    var dataType = block[0].split(":")[1]; // In this case "image/png"
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+                    // to create and add the String array of the Base64 String
+                    for (var i = 0; i < realData.length; i++) {
+                        base64Arr.push(realData[i]);
+                    }
+                }
+            }
+            this.newuser.UserPhoto = base64Arr;
             this.newuser.UserName = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
             this.companyService.createUser(this.newuser).then(function (result) {
                 if (result.data) {
@@ -197,6 +221,31 @@ var ManageUsersController = (function () {
         var _this = this;
         if (this.scope.vm.IsPhoneUnique && this.scope.vm.IsUsernameUnique && editUserForm.checkValidity()) {
             this.$rootScope.$emit("toggleLoader", true);
+            var base64Arr = [];
+            var ConvertedBase64String = "";
+            var checkLogoIsModified = document.getElementById("uploaded_Image1");
+            if (checkLogoIsModified != null || checkLogoIsModified != undefined) {
+                var editlogo = document.getElementById("uploaded_Image1").getAttribute("src");
+                if (editlogo != this.edituser.Base64StringofUserPhoto) {
+                    var editmyBaseString = editlogo;
+                    // Split the base64 string in data and contentType
+                    var editblock = editmyBaseString.split(";");
+                    // Get the content type
+                    var editdataType = editblock[0].split(":")[1]; // In this case "image/png"
+                    // get the real base64 content of the file
+                    var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
+                    ConvertedBase64String = editrealData;
+                }
+            }
+            else {
+                ConvertedBase64String = this.edituser.Base64StringofUserPhoto;
+            }
+            // to create and add the String array of the Base64 String
+            for (var i = 0; i < ConvertedBase64String.length; i++) {
+                base64Arr.push(ConvertedBase64String[i]);
+            }
+            this.edituser.UserPhoto = base64Arr;
+            this.edituser.Base64StringofUserPhoto = null;
             this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
             this.lservice.saveUserDetail(this.edituser).then(function (result) {
                 _this.$rootScope.$emit("toggleLoader", false);
@@ -295,8 +344,8 @@ var ManageUsersController = (function () {
             return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     };
+    ManageUsersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     return ManageUsersController;
 }());
-ManageUsersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
 angular.module("culamaApp")
     .controller("manageUsersController", ManageUsersController);
