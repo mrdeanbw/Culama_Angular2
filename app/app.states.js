@@ -614,7 +614,8 @@ culamaApp
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
-                                return $ocLazyLoad.load([
+                                return $ocLazyLoad.load([                                    
+                                    'assets/js/jquery.signalR-2.2.1.js',
                                         'app/services/companyService.js',
                                          'app/services/messageService.js',
                                          'app/services/loginService.js',

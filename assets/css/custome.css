@@ -485,7 +485,48 @@
 {
     padding: 12px 16px;
 }
-
+.message-box
+{
+    padding:20px;
+}
+.message-box-dropdown
+{
+    display:block;
+    width:100%;
+}
+.message-section
+{
+    width:100%;
+}
+.message-section-left
+{
+        width: 75%;
+    display: inline-block;
+    float: left;
+}
+.message-section-right
+{
+      width: 25%;
+    display: inline-block;
+    float: left;
+}
+.person-name
+{
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+.person-msg
+{
+        margin: 0;
+}
+.msg-user-image
+{
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
 @media (max-width:1219px)
 {
     .no-msg-container

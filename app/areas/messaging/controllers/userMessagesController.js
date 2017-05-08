@@ -1,5 +1,7 @@
 /// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
+var myHub = "";
+var updatedchatObjs = [];
 var culamaApp;
 (function (culamaApp) {
     var areas;
@@ -9,7 +11,7 @@ var culamaApp;
             var controllers;
             (function (controllers) {
                 var UserMessagesController = (function () {
-                    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService, loginService) {
+                    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService, loginService, notification) {
                         this.scope = scope;
                         this.$rootScope = $rootScope;
                         this.$sce = $sce;
@@ -22,6 +24,31 @@ var culamaApp;
                         this.scope.isUserTypeMessage = true;
                         this.scope.selectizeUsersOptions = [];
                         this.scope.currentllyActiveThread = 1;
+                        var umg = this;
+                        //debugger;
+                        //$.getScript('http://localhost:55507/Scripts/jquery.signalR-2.2.1.min.js', function () {
+                        //    $.getScript('http://localhost:55507/signalr/hubs', function () {
+                        //        debugger;
+                        //        $.connection.hub.url = 'http://localhost:55507/signalr';
+                        //        myHub = $.connection.notificationHub;
+                        //        myHub.client.receiveNotification = function (as, msgThradId, notifyusers) {
+                        //            debugger;
+                        //            //var currentMessages = [];
+                        //            //currentMessages = umg.scope.SelectedMessageThread.MessageThreadDetails;
+                        //            //var currentMessagesIndex = umg.scope.SelectedMessageThread.MessageThreadDetails.length;
+                        //            //currentMessages.push(updatedchatObjs[0]);
+                        //            //umg.scope.chatMessages = currentMessages;
+                        //            umg.$rootScope.$emit("newMessage",
+                        //                { msg: "You have new notification", status: "success" });
+                        //            umg.scope.$apply();
+                        //        }
+                        //        $.connection.hub.start().done(function () {
+                        //            debugger;
+                        //            console.log('Connection Established.');
+                        //            //myHub.server.sendNotifications("Hello friends...");
+                        //        });
+                        //    });
+                        //});
                         this.getMessageThreadByUserId(this.$rootScope.LoggedUser.UserId, true);
                         this.getCompanyDetail(this.$rootScope.LoggedUser.CustomerId);
                         this.getCompanyUsers(this.$rootScope.LoggedUser.CustomerId);
@@ -111,7 +138,6 @@ var culamaApp;
                                 });
                             }
                         });
-                        var umg = this;
                         this.scope.scopeLoadMessages = function (id) {
                             umg.loadMessages(id, true);
                         };
@@ -133,6 +159,11 @@ var culamaApp;
                             //var memberstring = "<div> <div class='uk-button-dropdown' ><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>";
                             ////umg.scope.gmembers = memberstring;
                         };
+                        //notification.client.receiveNotification = function (message) {
+                        //    debugger;
+                        //    this.$rootScope.$emit("successnotify",
+                        //        { msg: "You have new notification", status: "success" });
+                        //};
                     }
                     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
                         var currentObj = this;
@@ -226,12 +257,12 @@ var culamaApp;
                         });
                         this.scope.SelectedMessageThread = msg;
                         if (msg != undefined) {
-                            var olderGroupMembers = [];
-                            for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
-                                if (msg.MessageThreadUsers[i].UserId != currentObj.$rootScope.LoggedUser.UserId)
-                                    olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
-                            }
-                            currentObj.scope.olderChatingGroup = olderGroupMembers;
+                            //var olderGroupMembers = [];
+                            //for (var i = 0; i < msg.MessageThreadUsers.length; i++) {
+                            //    if (msg.MessageThreadUsers[i].UserId != currentObj.$rootScope.LoggedUser.UserId)
+                            //        olderGroupMembers.push(msg.MessageThreadUsers[i].UserId);
+                            //}
+                            //currentObj.scope.olderChatingGroup = olderGroupMembers;
                             $.each(msg.MessageThreadDetails, function () {
                                 if (typeof this.CreatedOn === 'string') {
                                     this.CreatedOn = new Date(parseInt(this.CreatedOn.substr(6)));
@@ -281,6 +312,7 @@ var culamaApp;
                     };
                     UserMessagesController.prototype.sendMessage = function () {
                         var _this = this;
+                        var curr = this;
                         if (this.scope.SendMessageContent.toString().trim() != "") {
                             var msgu = new messaging.models.Message();
                             msgu.MessageId = this.scope.SelectedMessageThread.Id;
@@ -289,6 +321,9 @@ var culamaApp;
                             this.$rootScope.$emit("toggleLoader", true);
                             this.messageService.sendMessageThread(msgu).then(function (result) {
                                 if (result.data != null) {
+                                    //updatedchatObjs = [];
+                                    //var msglength = result.data.MessageThreadDetails.length - 1;
+                                    //updatedchatObjs.push(result.data.MessageThreadDetails[msglength]);
                                     var mlist = _this.scope.Messages;
                                     $.each(mlist, function (index) {
                                         if (this.Id === result.data.Id) {
@@ -296,7 +331,22 @@ var culamaApp;
                                         }
                                     });
                                     _this.scope.Messages = mlist;
+                                    var nofifyUsers = "";
+                                    $.each(_this.scope.Messages, function () {
+                                        if (this.Id == result.data.Id) {
+                                            for (var i = 0; i < this.MessageThreadUsers.length; i++) {
+                                                if (this.MessageThreadUsers[i].UserId != curr.$rootScope.LoggedUser.UserId)
+                                                    nofifyUsers += this.MessageThreadUsers[i].UserId.toString() + ",";
+                                            }
+                                        }
+                                    });
                                     _this.loadMessages(result.data.Id, false);
+                                    //var proxy = $.connection.notificationHub;
+                                    debugger;
+                                    var msglength = result.data.MessageThreadDetails.length - 1;
+                                    var groupname = "Group" + result.data.Id;
+                                    myHub.server.joinGroup(groupname);
+                                    myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), nofifyUsers);
                                 }
                                 else {
                                     _this.$rootScope.$emit("successnotify", { msg: "Message can't be sent. Please try again.", status: "danger" });

@@ -26,9 +26,8 @@
     <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!--<link href="bower_components/kendo-ui/styles/kendo.material.min.css" rel="stylesheet" />-->
-   
-
     <!-- JS -->
+    <script src="assets/js/jquery-1.6.4.js"></script>
     <!-- common functions -->
     <script src="assets/js/common.min.js"></script>
 
@@ -87,6 +86,33 @@
     <div ui-view id="main_view" ng-class="{'uk-height-1-1': page_full_height }"></div>
 
     <button id="successnotifybtn" class="md-btn" ng-show="false" message="<a href='#' class='notify-action'>Clear</a> {{ notifymsg }}" status="{{ notfifystatus }}" position="bottom-center" uk-notification></button>
+
+    <!--<button id="newMessagePopup" class="md-btn" ng-show="false" message="<a href='#' class='notify-action'>Clear</a> {{ notifymsg }}" status="{{ notfifystatus }}" position="bottom-center" uk-notification></button>-->
+
+    <div id="newMessagePopup" ng-show="ishidenewmsg">
+        <div class="uk-width-large-2-10 uk-grid uk-grid-collapse pull-right md-card message-box" data-uk-grid-margin="">
+            
+            <div class="uk-button-dropdown message-box-dropdown" aria-haspopup="true" aria-expanded="false">
+                <!--<span class="menu_icon"><i class="material-icons ng-binding" ng-bind-html="section.icon"></i></span>-->  Messanger &nbsp;<a>
+                    <!--3 more-->
+                    <i style="font-size: 13px;color: #9c9c9c;" class="material-icons arrow"></i>
+                </a><div id="userlistdiv1" class="uk-dropdown uk-dropdown-bottom" aria-hidden="true" tabindex="" style="min-width: 200px; top: 18px; left: 0px;">
+                    <ul id="1" class="uk-nav uk-nav-dropdown"><li style="color: #444;">Mayur Bhavsar</li><li style="color: #444;">Darshan Prajapati</li><li style="color: #444;">Vikram Sisodiya</li></ul>
+                </div>
+            </div>
+            <div class="message-section">
+                <div class="message-section-left">
+                    <p class="person-name">{{ senderName }}</p>
+                    <p class="person-msg">{{ notifymsg }}</p>
+                </div>
+                <div class="message-section-right">
+                    <div>
+                        <img class="msg-user-image" ng-src="assets/img/avatars/avatar_02_tn.png" alt="" src="assets/img/avatars/avatar_02_tn.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- google web fonts -->
     <script>

@@ -41,9 +41,9 @@ var culamaApp;
                 _this.$rootScope.$emit("toggleLoader", false);
             });
         };
+        CustomerAdminDashboardController.$inject = ["$scope", "$rootScope", "$interval", "$timeout", "culamaApp.services.MessageService", "loginService"];
         return CustomerAdminDashboardController;
     }());
-    CustomerAdminDashboardController.$inject = ["$scope", "$rootScope", "$interval", "$timeout", "culamaApp.services.MessageService", "loginService"];
     function myFilter() {
         return function (msginfo) {
             var filter = [];

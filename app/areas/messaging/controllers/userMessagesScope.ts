@@ -28,5 +28,6 @@ module culamaApp.areas.messaging.controllers {
         scopeSendMessage: () => void;
         CreateMessage: () => void;
         abc: (msg: Models.MessageThread) => void;
+        receiveNotification: (msg: string) => void;
     }
 }
