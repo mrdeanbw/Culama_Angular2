@@ -111,10 +111,6 @@ angular
                     }
                     $.connection.hub.start().done(function () {
                         console.log('Connection Established.');
-
-                        //myHub.server.sendNotifications("Hello friends...");
-
-
                     });
                 });
             });

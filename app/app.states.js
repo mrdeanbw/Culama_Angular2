@@ -614,7 +614,7 @@ culamaApp
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
-                                return $ocLazyLoad.load([                                    
+                                return $ocLazyLoad.load([
                                     'assets/js/jquery.signalR-2.2.1.js',
                                         'app/services/companyService.js',
                                          'app/services/messageService.js',
@@ -652,7 +652,88 @@ culamaApp
                 data: {
                     pageTitle: 'Create Messages'
                 }
-            });
+            })
+
+                 // --  MANAGE COMPANY WALL PAGE -- 
+            .state("restricted.managecompanywalls",
+                {
+                    url: "/companywalls",
+                    templateUrl: 'app/areas/company_walls/views/manageCompanyWalls.html',
+                    controller: 'companyWallController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                       'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'assets/js/custom/uikit_fileinput.js',
+                                        'app/areas/company_walls/controllers/companyWallController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Company walls'
+                    }
+                })
+
+            // --  MANAGE COMPANY WALL POSTS -- 
+            .state("restricted.managewallposts",
+                {
+                    url: "/managecompanywallposts",
+                    templateUrl: 'app/areas/company_walls/views/manageCompanyWallPosts.html',
+                    controller: 'companyWallController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                       'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'assets/js/custom/uikit_fileinput.js',
+                                        'app/areas/company_walls/controllers/companyWallController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Company walls'
+                    }
+                })
+
+            // --  CREATE COMPANY WALL POST -- 
+            .state("restricted.createwallposts",
+                {
+                    url: "/createcompanywallposts",
+                    templateUrl: 'app/areas/company_walls/views/createCompanyWallPost.html',
+                    controller: 'companyWallController',
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                       'bower_components/angular-resource/angular-resource.min.js',
+                                        'lazy_datatables',
+                                        'lazy_parsleyjs',
+                                        'lazy_uikit',
+                                        'lazy_iCheck',
+                                        'assets/js/custom/uikit_fileinput.js',
+                                        'app/areas/company_walls/controllers/companyWallController.js'
+                                ],
+                                    { serie: true });
+                            }
+                        ]
+                    },
+                    data: {
+                        pageTitle: 'Company walls'
+                    }
+                });
 
         }
     ]);
