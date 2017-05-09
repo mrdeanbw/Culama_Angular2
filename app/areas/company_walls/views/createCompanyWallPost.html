@@ -1,4 +1,36 @@
 ﻿
+<script src="assets/js/custom/cutomfileupload.js" type="text/javascript"></script>
+
+<link href="assets/css/customFileUpload.css" rel="stylesheet" />
+
+<style>
+    .uk-lbl-top
+    {
+        margin-top: 22px;
+    }
+
+    .fileUpload
+    {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .fileUpload input.upload
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+</style>
+
+
 <div id="page_content">
     <div id="page_content_inner">
         <div id="manageCompanyWallPosts" class="main_page">
@@ -6,6 +38,91 @@
             <div class="uk-position-relative">
                 <h3 class="heading_b uk-margin-bottom">Create Company Wall Posts</h3>
             </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-form-row">
+                                <label id="lbl_user_title" md-language>Title</label>
+                                <input type="text" class="md-input" md-input />
+                            </div>
+                            <div class="uk-form-row">
+                                <label id="lbl_message_description" for="message_input_description" md-language>Details<span class="req">*</span></label>
+                                <textarea class="md-input" id="message_input_description" md-input />
+                            </div>
+
+                            <div class="uk-lbl-top">
+                                <div class="md-card">
+                                    <div class="md-card-toolbar">
+                                        <div class="md-card-toolbar-actions">
+                                            <!--<button type="button" class="uk-button uk-button-primary">Add Images</button>-->
+                                            <!--<input type="file" id="files" name="files[]" multiple />-->
+
+                                            <div class="fileUpload uk-button uk-button-primary">
+                                                <span>Add Images</span>
+                                                <input type="file" id="files" name="files[]" multiple class="upload uk-button uk-button-primary" />
+                                            </div>
+
+                                        </div>
+                                        <h3 class="md-card-toolbar-heading-text">
+                                            Post Photoes
+                                        </h3>
+                                    </div>
+                                    <div class="md-card-content">
+                                        <div id="preview_images"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-width-medium-1-1 mt-20">
+                                <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                                    Save
+                                </button>
+                                <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light">Cancel</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="uk-grid">
+                <div class="uk-width-1-3">
+                    <div class="md-card">
+                        <div class="md-card-toolbar">
+                            <h3 class="md-card-toolbar-heading-text">
+                                General Information
+                            </h3>
+                        </div>
+                        <div class="md-card-content">
+                            <div class="uk-form-row">
+                                <label id="lbl_user_title" md-language>Title</label>
+                                <input type="text" class="md-input" md-input />
+                            </div>
+                            <div  class="uk-form-row">
+                                <label id="lbl_message_description" for="message_input_description" md-language>Details<span class="req">*</span></label>
+                                <textarea class="md-input" id="message_input_description" md-input />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="md-card">
+                        <div class="md-card-toolbar">
+                            <h3 class="md-card-toolbar-heading-text">
+                                Post Photoes
+                            </h3>
+                        </div>
+                        <div class="md-card-content">
+                        </div>
+                    </div>
+                </div>
+            </div>-->
 
         </div>
     </div>

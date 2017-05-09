@@ -686,7 +686,7 @@ culamaApp
                 {
                     url: "/managecompanywallposts",
                     templateUrl: 'app/areas/company_walls/views/manageCompanyWallPosts.html',
-                    controller: 'companyWallController',
+                    //controller: 'companyWallController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -696,8 +696,7 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'assets/js/custom/uikit_fileinput.js',
-                                        'app/areas/company_walls/controllers/companyWallController.js'
+                                        //'app/areas/company_walls/controllers/companyWallController.js'
                                 ],
                                     { serie: true });
                             }
@@ -713,7 +712,7 @@ culamaApp
                 {
                     url: "/createcompanywallposts",
                     templateUrl: 'app/areas/company_walls/views/createCompanyWallPost.html',
-                    controller: 'companyWallController',
+                    //controller: 'companyWallController',
                     resolve: {
                         deps: [
                             '$ocLazyLoad', function ($ocLazyLoad) {
@@ -723,8 +722,7 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'assets/js/custom/uikit_fileinput.js',
-                                        'app/areas/company_walls/controllers/companyWallController.js'
+                                        //'app/areas/company_walls/controllers/companyWallController.js'
                                 ],
                                     { serie: true });
                             }
