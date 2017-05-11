@@ -382,7 +382,6 @@ module culamaApp.areas.messaging.controllers {
                         this.loadMessages(result.data.Id, false);
                       
                         //var proxy = $.connection.notificationHub;
-                        debugger; 
                         var isconnEstablish = myHub.server;
                         if (isconnEstablish == undefined) {
                             myHub = curr.$rootScope.signalRConnection;
@@ -391,7 +390,7 @@ module culamaApp.areas.messaging.controllers {
                         var msglength = result.data.MessageThreadDetails.length - 1;
                         var groupname = "Group" + result.data.Id;
                         //myHub.server.joinGroup(groupname);
-                        myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), nofifyUsers);
+                        myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), result.data.MessageThreadDetails[msglength].User.UserId);
                         // $.connection.hub.start();
 
                     } else {

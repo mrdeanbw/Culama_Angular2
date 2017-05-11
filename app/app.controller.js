@@ -61,13 +61,21 @@ angular
             };
 
             $scope.showNewMessagePopup = function (message, sendername) {
-                document.getElementById('newMessagePopup').style.display = 'block';
+                debugger; 
                 $scope.ishidenewmsg = true;
                 $scope.notifymsg = message;
                 $scope.senderName = sendername;
-                setTimeout(function () {
-                    document.getElementById('newMessagePopup').style.display = 'none';
-                    $scope.ishidenewmsg = false;
+
+                $("#personname").text(sendername);
+                $("#msg").text(message);
+
+                $("#newMessagePopup").delay(200).fadeIn(500);
+                //document.getElementById('newMessagePopup').style.display = 'block';
+                window.setTimeout(function () {
+                    debugger;
+                    //document.getElementById('newMessagePopup').style.display = 'none';
+                    $scope.ishidenewmsg = false;                    
+                    $('#newMessagePopup').fadeOut(5000);
                     //$("#newMessagePopup").click();
                 }, 10000);
             };
@@ -100,9 +108,11 @@ angular
                     $.connection.hub.url = signalRServer + '/signalr';
                     myHub = $.connection.notificationHub;
                     $rootScope.signalRConnection = myHub;
-                    myHub.client.receiveNotification = function (newmessage, msgThradId, notifyusers, senderName) {
-                        $rootScope.$emit("newMessage",
-                            { msg: newmessage, sender: senderName });
+                    myHub.client.receiveNotification = function (newmessage, msgThradId, senderUserID, senderName) {
+                        if (senderUserID != $rootScope.LoggedUser.UserId) {
+                            $rootScope.$emit("newMessage",
+                                { msg: newmessage, sender: senderName });
+                        }
                     }
                     $.connection.hub.start().done(function () {
                         getconnectedThreadIDs($rootScope.LoggedUser.UserId);
