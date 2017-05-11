@@ -9,7 +9,7 @@ module culamaApp.areas.messaging.controllers {
         static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
 
         constructor(public scope: IUserMessageScope, public $rootScope: any, public $sce: any, public $filter: any, public companyService: culamaApp.CompanyService,
-            public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService, notification) {
+            public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {
             this.scope.isHasMessages = false;
             this.scope.isUserCreateMessage = true;
             this.scope.isUserTypeMessage = true;
@@ -176,12 +176,6 @@ module culamaApp.areas.messaging.controllers {
                 //var memberstring = "<div> <div class='uk-button-dropdown' ><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>";
                 ////umg.scope.gmembers = memberstring;
             }
-
-            //notification.client.receiveNotification = function (message) {
-            //    debugger;
-            //    this.$rootScope.$emit("successnotify",
-            //        { msg: "You have new notification", status: "success" });
-            //};
         }
 
         getMessageThreadByUserId(id, isLoadMessage) {
@@ -352,7 +346,6 @@ module culamaApp.areas.messaging.controllers {
         }
 
         sendMessage() {
-
             var curr = this;
             if (this.scope.SendMessageContent.toString().trim() != "") {
                 var msgu = new models.Message();
@@ -390,13 +383,16 @@ module culamaApp.areas.messaging.controllers {
                       
                         //var proxy = $.connection.notificationHub;
                         debugger; 
+                        var isconnEstablish = myHub.server;
+                        if (isconnEstablish == undefined) {
+                            myHub = curr.$rootScope.signalRConnection;
+                        }
+
                         var msglength = result.data.MessageThreadDetails.length - 1;
                         var groupname = "Group" + result.data.Id;
-                        myHub.server.joinGroup(groupname);
+                        //myHub.server.joinGroup(groupname);
                         myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), nofifyUsers);
                         // $.connection.hub.start();
-
-                        
 
                     } else {
                         this.$rootScope.$emit("successnotify",

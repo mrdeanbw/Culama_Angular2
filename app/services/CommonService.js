@@ -19,9 +19,12 @@ var culamaApp;
         CommonService.prototype.getTranslation = function (elemid, targetPage) {
             return this.$http.get('/data/language_resource.json');
         };
+        CommonService.prototype.getUserConnectedThreads = function (userid) {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserConnectedThreadByUserID/' + userid, {});
+        };
+        CommonService.$inject = ["$http", "appConfig"];
         return CommonService;
     }());
-    CommonService.$inject = ["$http", "appConfig"];
     culamaApp.CommonService = CommonService;
     angular
         .module("culamaApp")

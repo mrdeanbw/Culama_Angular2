@@ -99,21 +99,42 @@ angular
                 $.getScript(signalRServer + '/signalr/hubs', function () {
                     $.connection.hub.url = signalRServer + '/signalr';
                     myHub = $.connection.notificationHub;
+                    $rootScope.signalRConnection = myHub;
                     myHub.client.receiveNotification = function (newmessage, msgThradId, notifyusers, senderName) {
-                        //var currentMessages = [];
-                        //currentMessages = umg.scope.SelectedMessageThread.MessageThreadDetails;
-                        //var currentMessagesIndex = umg.scope.SelectedMessageThread.MessageThreadDetails.length;
-                        //currentMessages.push(updatedchatObjs[0]);
-                        //umg.scope.chatMessages = currentMessages;
                         $rootScope.$emit("newMessage",
                             { msg: newmessage, sender: senderName });
-                        //scope.$apply();
                     }
                     $.connection.hub.start().done(function () {
+                        getconnectedThreadIDs($rootScope.LoggedUser.UserId);
+                        //myHub.server.joinGroup($rootScope.connectedThreadIDs);
                         console.log('Connection Established.');
                     });
                 });
             });
+
+            function getconnectedThreadIDs (userID)
+            {
+                commonService.getUserConnectedThreads(userID).then(function (result) {
+                    debugger;
+                    if(result.data.length > 0)
+                    {
+                        var TIDs = "";
+                        for(var i = 0; i < result.data.length; i++)
+                        {
+                            TIDs += result.data[i].MessageId + ",";
+                        }
+
+                        $rootScope.connectedThreadIDs = TIDs;
+
+                        var hubconnection = myHub.server;
+
+                        if (hubconnection == undefined)
+                            myHub = $rootScope.signalRConnection;
+
+                        myHub.server.joinGroup($rootScope.connectedThreadIDs);
+                    }
+                });
+            }
 
             //$scope.getLanguage = function () {
             //    return commonService.getLanguage();

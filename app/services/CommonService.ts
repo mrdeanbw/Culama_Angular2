@@ -28,7 +28,10 @@ module culamaApp {
             return this.$http.get('/data/language_resource.json');
         }
 
-
+        getUserConnectedThreads(userid: number): ng.IPromise<ng.IHttpPromiseCallbackArg<any>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetUserConnectedThreadByUserID/' + userid, {
+            });
+        }
     }
 
     angular

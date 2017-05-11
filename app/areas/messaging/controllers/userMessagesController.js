@@ -11,7 +11,7 @@ var culamaApp;
             var controllers;
             (function (controllers) {
                 var UserMessagesController = (function () {
-                    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService, loginService, notification) {
+                    function UserMessagesController(scope, $rootScope, $sce, $filter, companyService, messageService, loginService) {
                         this.scope = scope;
                         this.$rootScope = $rootScope;
                         this.$sce = $sce;
@@ -159,11 +159,6 @@ var culamaApp;
                             //var memberstring = "<div> <div class='uk-button-dropdown' ><div class='uk-dropdown'><ul class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>";
                             ////umg.scope.gmembers = memberstring;
                         };
-                        //notification.client.receiveNotification = function (message) {
-                        //    debugger;
-                        //    this.$rootScope.$emit("successnotify",
-                        //        { msg: "You have new notification", status: "success" });
-                        //};
                     }
                     UserMessagesController.prototype.getMessageThreadByUserId = function (id, isLoadMessage) {
                         var currentObj = this;
@@ -343,9 +338,13 @@ var culamaApp;
                                     _this.loadMessages(result.data.Id, false);
                                     //var proxy = $.connection.notificationHub;
                                     debugger;
+                                    var isconnEstablish = myHub.server;
+                                    if (isconnEstablish == undefined) {
+                                        myHub = curr.$rootScope.signalRConnection;
+                                    }
                                     var msglength = result.data.MessageThreadDetails.length - 1;
                                     var groupname = "Group" + result.data.Id;
-                                    myHub.server.joinGroup(groupname);
+                                    //myHub.server.joinGroup(groupname);
                                     myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), nofifyUsers);
                                 }
                                 else {
