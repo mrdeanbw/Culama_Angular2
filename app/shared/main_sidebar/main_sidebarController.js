@@ -120,6 +120,19 @@
                         //         link: 'restricted.companymessagesetting'
                         //     }
                         //]
+                    },
+                    {
+                        id: 3,
+                        title_us: 'Wall',
+                        title_in: 'दीवार',
+                        icon: '&#xE241;',
+                        submenu: [
+                             {
+                                 title_us: 'Manage Wall',
+                                 title_in: 'दीवार का प्रबंधन करें',
+                                 link: 'restricted.managecompanywalls'
+                             }
+                        ]
                     }
                 ];
             } else if ($rootScope.LoggedUser.UserGroupId === 3) {

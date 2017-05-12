@@ -61,7 +61,6 @@ angular
             };
 
             $scope.showNewMessagePopup = function (message, sendername) {
-                debugger; 
                 $scope.ishidenewmsg = true;
                 $scope.notifymsg = message;
                 $scope.senderName = sendername;
@@ -72,7 +71,6 @@ angular
                 $("#newMessagePopup").delay(200).fadeIn(500);
                 //document.getElementById('newMessagePopup').style.display = 'block';
                 window.setTimeout(function () {
-                    debugger;
                     //document.getElementById('newMessagePopup').style.display = 'none';
                     $scope.ishidenewmsg = false;                    
                     $('#newMessagePopup').fadeOut(5000);
@@ -125,7 +123,6 @@ angular
             function getconnectedThreadIDs (userID)
             {
                 commonService.getUserConnectedThreads(userID).then(function (result) {
-                    debugger;
                     if(result.data.length > 0)
                     {
                         var TIDs = "";

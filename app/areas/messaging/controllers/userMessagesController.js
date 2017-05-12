@@ -92,16 +92,18 @@ var culamaApp;
                                     var allmsgthread = umg.scope.Messages;
                                     $.each(allmsgthread, function (index) {
                                         var t = this;
-                                        if (t.Id == m.Id) {
-                                            userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
-                                            if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
-                                                document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                        if (t.MessageThreadUsers.length >= 3) {
+                                            if (t.Id == m.Id) {
+                                                userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
+                                                if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
+                                                    document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                                }
+                                                document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
                                             }
-                                            document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
-                                        }
-                                        else {
-                                            document.getElementById("userlistdiv" + t.Id).innerHTML = "";
-                                            document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                            else {
+                                                document.getElementById("userlistdiv" + t.Id).innerHTML = "";
+                                                document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                            }
                                         }
                                     });
                                 }
@@ -111,7 +113,7 @@ var culamaApp;
                                 return $sce.trustAsHtml(msguserString);
                             }
                             else {
-                                return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
+                                return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
                             }
                             //if (m.MessageThreadUsers.length >= 3) {
                             //    //var html = "";
@@ -207,7 +209,9 @@ var culamaApp;
                             var loggedUid = _this.$rootScope.LoggedUser.UserId;
                             var companyusers = result.data.slice();
                             var addedrecipients = [];
-                            var IsAll = _this.scope.Customer.IsAllowMsgAllToEveryone;
+                            var IsAll = false;
+                            if (_this.scope.Customer != undefined)
+                                IsAll = _this.scope.Customer.IsAllowMsgAllToEveryone;
                             if (IsAll == true || _this.$rootScope.LoggedUser.IsAllowMsgToEveryone == true) {
                                 $.each(result.data, function (index) {
                                     if (this.UserId == loggedUid) {
