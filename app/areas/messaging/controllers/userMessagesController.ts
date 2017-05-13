@@ -80,7 +80,6 @@ module culamaApp.areas.messaging.controllers {
             this.scope.gmembers = "";
 
             this.scope.showMessageUsers = function (m, isshowusers) {
-
                 if (m.MessageThreadUsers.length >= 3) {
                     var msguserString = "";
                     if (isshowusers == true) {
@@ -93,20 +92,21 @@ module culamaApp.areas.messaging.controllers {
                         });
                         var allmsgthread = umg.scope.Messages;
                         $.each(allmsgthread, function (index) {
-
                             var t = this;
-                            if (t.Id == m.Id) {
-                                userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
-                                if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
-                                    document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
-                                    //document.getElementById("lbl" + t.Id).classList.add("uk-button-dropdown");
+                            if (t.MessageThreadUsers.length >= 3) {
+                                if (t.Id == m.Id) {
+                                    userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
+                                    if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
+                                        document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                        //document.getElementById("lbl" + t.Id).classList.add("uk-button-dropdown");
+                                    }
+                                    document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
                                 }
-                                document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
-                            }
-                            else {
-                                document.getElementById("userlistdiv" + t.Id).innerHTML = "";
-                                document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
-                                //document.getElementById("lbl" + t.Id).classList.remove("uk-button-dropdown");
+                                else {
+                                    document.getElementById("userlistdiv" + t.Id).innerHTML = "";
+                                    document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                    //document.getElementById("lbl" + t.Id).classList.remove("uk-button-dropdown");
+                                }
                             }
                         });
 
@@ -117,7 +117,7 @@ module culamaApp.areas.messaging.controllers {
                     return $sce.trustAsHtml(msguserString);
                     //return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
                 } else {
-                    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullName + "</div>");
+                    return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
                 }
 
 
@@ -229,7 +229,9 @@ module culamaApp.areas.messaging.controllers {
                 var loggedUid = this.$rootScope.LoggedUser.UserId;
                 var companyusers = result.data.slice();
                 var addedrecipients = [];
-                var IsAll = this.scope.Customer.IsAllowMsgAllToEveryone;
+                var IsAll = false;
+                if (this.scope.Customer != undefined)
+                    IsAll = this.scope.Customer.IsAllowMsgAllToEveryone;
 
                 if (IsAll == true || this.$rootScope.LoggedUser.IsAllowMsgToEveryone == true) {
                     $.each(result.data, function (index) {
@@ -356,7 +358,7 @@ module culamaApp.areas.messaging.controllers {
                 this.$rootScope.$emit("toggleLoader", true);
                 this.messageService.sendMessageThread(msgu).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                     if (result.data != null) {
-                        
+
                         //updatedchatObjs = [];
                         //var msglength = result.data.MessageThreadDetails.length - 1;
                         //updatedchatObjs.push(result.data.MessageThreadDetails[msglength]);
@@ -380,7 +382,7 @@ module culamaApp.areas.messaging.controllers {
                         });
 
                         this.loadMessages(result.data.Id, false);
-                      
+
                         //var proxy = $.connection.notificationHub;
                         var isconnEstablish = myHub.server;
                         if (isconnEstablish == undefined) {

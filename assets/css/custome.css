@@ -571,6 +571,14 @@
     font-weight: bold;
 }
 
+.wallinfo
+{
+    float: left;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+
 @media (max-width:1219px)
 {
     .no-msg-container
