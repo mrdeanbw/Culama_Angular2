@@ -13,6 +13,12 @@ module culamaApp {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallID/' + wallId, {
             });
         }
+
+        createWallPost(wallpost: culamaApp.areas.companyWall.models.WallPost): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
+            var params = JSON.stringify(wallpost);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {
+            });
+        }
     }
 
     angular

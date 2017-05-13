@@ -578,6 +578,15 @@
     margin-bottom: 15px;
 }
 
+.list_footer
+{
+    margin-bottom: 15px;
+    overflow: visible;
+}
+.post-img {
+    width: 335px;
+    height: 200px;
+}
 
 @media (max-width:1219px)
 {

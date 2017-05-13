@@ -698,6 +698,7 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
+                                        'app/areas/company_walls/models/WallPost.js',
                                         'app/services/companyWallPostService.js',
                                         'app/areas/company_walls/controllers/companyWallPostController.js'
                                 ],
@@ -725,6 +726,7 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
+                                        'app/areas/company_walls/models/WallPost.js',
                                         'app/services/companyWallPostService.js',
                                         'app/areas/company_walls/controllers/companyWallPostController.js'
                                 ],

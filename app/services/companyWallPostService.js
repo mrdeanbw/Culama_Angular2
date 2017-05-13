@@ -10,6 +10,10 @@ var culamaApp;
         CompanyWallPostService.prototype.getCompanyWallPostsByWallId = function (wallId) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallID/' + wallId, {});
         };
+        CompanyWallPostService.prototype.createWallPost = function (wallpost) {
+            var params = JSON.stringify(wallpost);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {});
+        };
         CompanyWallPostService.$inject = ["$http", "appConfig"];
         return CompanyWallPostService;
     }());
