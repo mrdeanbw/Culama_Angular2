@@ -4,7 +4,7 @@
  */
 
 var myHub = "";
-var signalRServer = "http://localhost:55507";
+var signalRServer = "http://api.culama.com:8080";
 
 angular
     .module('culamaApp')
