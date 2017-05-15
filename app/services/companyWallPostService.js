@@ -10,9 +10,20 @@ var culamaApp;
         CompanyWallPostService.prototype.getCompanyWallPostsByWallId = function (wallId) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallID/' + wallId, {});
         };
+        CompanyWallPostService.prototype.getCompanyWallPostInfoByPostId = function (wallPostId) {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallPostID/' + wallPostId, {});
+        };
         CompanyWallPostService.prototype.createWallPost = function (wallpost) {
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {});
+        };
+        CompanyWallPostService.prototype.saveWallPostDetails = function (wallpost) {
+            debugger;
+            var params = JSON.stringify(wallpost);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveWallPostDetails', params, {});
+        };
+        CompanyWallPostService.prototype.deleteWallPost = function (wallPostId) {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteWallPost/' + wallPostId, {});
         };
         CompanyWallPostService.$inject = ["$http", "appConfig"];
         return CompanyWallPostService;

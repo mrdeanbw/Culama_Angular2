@@ -583,9 +583,16 @@
     margin-bottom: 15px;
     overflow: visible;
 }
-.post-img {
+
+.post-img
+{
     width: 335px;
     height: 200px;
+}
+
+.read-more
+{
+    margin-top: 5px;
 }
 
 @media (max-width:1219px)

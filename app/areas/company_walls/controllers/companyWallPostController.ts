@@ -9,11 +9,17 @@ module culamaApp.areas.companyWall.controllers {
 
         constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyWallPostService: culamaApp.CompanyWallPostService) {
             var currObj = this;
+            var currUrl;
             this.scope.isWallPosts = false;
             this.scope.isEditMode = false;
-            this.scope.wallID = this.getParameterByName("wid");
-
-            this.getWallPosts(this.scope.wallID);
+            debugger;
+            //this.scope.wallID = this.getParameterByName("wid");
+            this.scope.wallID = this.getParameterByName();
+            debugger;
+            if (this.scope.isEditMode == false)
+                this.getWallPosts(this.scope.wallID);
+            else
+                this.getWallPostDetailsByWallPostId(this.scope.wallID);
 
             var $formValidate = $('#wallPostForm');
             if ($formValidate.length != 0) {
@@ -30,6 +36,17 @@ module culamaApp.areas.companyWall.controllers {
 
             this.scope.saveWallPostInfo = function () {
                 currObj.createWallPost();
+            }
+
+            this.scope.deleteWallPost = function (wallpostId) {
+                UIkit.modal.confirm('Are you sure want to delete?', function () {
+                    currObj.deleteWallPost(wallpostId);
+                });
+            }
+
+            this.scope.abccc = function () {
+                debugger;
+                alert("hi...");
             }
         }
 
@@ -48,16 +65,55 @@ module culamaApp.areas.companyWall.controllers {
                     this.scope.wallPosts = result.data;
                 }
             });
+            this.$rootScope.$emit("toggleLoader", false);
         }
 
-        getParameterByName(wallinfo) {
+        getWallPostDetailsByWallPostId(wallPostId) {
+            this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
+            this.companyWallPostService.getCompanyWallPostInfoByPostId(wallPostId).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
+                debugger;
+                if (result.data != null) {
+                    this.wallpost = result.data;
+
+                    if (result.data.WallPostMediaInfo != null) {
+                        var existingImgs = "";
+                        $("#preview_images").empty();
+                        for (var i = 0; i < result.data.WallPostMediaInfo.length; i++) {
+
+                            var fullImg = "data:image/png;base64," + result.data.WallPostMediaInfo[i].PostImageBase64String;
+
+                            existingImgs += "<span class='pip pip-container'>";
+                            existingImgs += "<img class='imageThumb' src='" + fullImg + "' />";
+                            existingImgs += "<br/><span ng-click='abccc()' class='remove remove-icon'><a class=''><i class='material-icons'></i></a></span>";
+                            existingImgs += "</span>";
+                        }
+                        $("#preview_images").append(existingImgs);
+                    }
+                }
+            });
+            this.$rootScope.$emit("toggleLoader", false);
+        }
+
+        getParameterByName() {
+            debugger;
             var url = window.location.href;
-            wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
+            var SplitUrl = url.toString().split('/');
+            var pagename = SplitUrl[SplitUrl.length - 1];
+            var splitpagename = pagename.toString().split('?');
+            var wallinfo = splitpagename[1].toString().split('=')[0];
+
+            if (wallinfo == "wpid")
+                this.scope.isEditMode = true;
+
+            return splitpagename[1].toString().split('=')[1];
+
+            //wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
+            //var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"),
+            //    results = regex.exec(url);
+            //if (!results) return null;
+            //if (!results[2]) return '';
+            //return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
         createWallPost() {
@@ -104,7 +160,74 @@ module culamaApp.areas.companyWall.controllers {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
-                this.$rootScope.$emit("toggleLoader", false); 
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+        }
+
+        editWallPost() {
+            debugger;
+            this.$rootScope.$emit("toggleLoader", true);
+            var isImgs = $('#preview_images').html();
+            var imgArray = [];
+            if (isImgs != "") {
+                var addedImgs = $('#preview_images').find('.add-new-img').find('img');
+
+                $.each(addedImgs, function () {
+                    debugger;
+                    var base64Arr = [];
+                    var imgsrc = this.src;
+
+                    // Split the base64 string in data and contentType
+                    var block = imgsrc.split(";");
+
+                    // Get the content type
+                    var dataType = block[0].split(":")[1];// In this case "image/png"
+
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+
+                    for (var i = 0; i < realData.length; i++) {
+                        base64Arr.push(realData[i]);
+                    }
+                    imgArray.push(base64Arr);
+                });
+                this.wallpost.WallPostImages = imgArray;                
+            }
+            debugger;
+            this.wallpost.WallPostMediaInfo = null;
+            this.companyWallPostService.saveWallPostDetails(this.wallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
+                debugger;
+                if (result.data != "") {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your information is updated successfully", status: "success" });
+                } else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+
+            });
+            this.$rootScope.$emit("toggleLoader", false);
+        }
+
+        deleteWallPost(wallpostId) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.companyWallPostService.deleteWallPost(wallpostId).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+                if (result.data) {
+                    var wallPostList = this.scope.wallPosts;
+                    $.each(wallPostList, function (index) {
+                        if (this.Id === wallpostId) {
+                            wallPostList.splice(index, 1);
+                            return false;
+                        }
+                    });
+                    this.scope.wallPosts = wallPostList;
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Wall Post is deleted successfully", status: "success" });
+                } else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+                this.$rootScope.$emit("toggleLoader", false);
             });
         }
 

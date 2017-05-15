@@ -26,17 +26,19 @@
                                 </div>
                                 <div class="blog_list_footer list_footer">
 
-                                    <a class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read more</a>
+                                    <div class="gallery_grid_image_menu" data-uk-dropdown="{pos:'top-right'}" aria-haspopup="true" aria-expanded="false">
+                                        <i class="md-icon material-icons"></i>
+                                        <div class="uk-dropdown uk-dropdown-small uk-dropdown-top" aria-hidden="true" tabindex="" style="min-width: 160px; top: -68px; left: -128px;">
+                                            <ul class="uk-nav">
+                                                <li><a href="/#/createcompanywallposts?wpid={{ wallpostinfo.Id }}"><i class="material-icons uk-margin-small-right"></i> Edit</a></li>
+                                                <li><a ng-click="deleteWallPost(wallpostinfo.Id)"><i class="material-icons uk-margin-small-right"></i> Remove</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right read-more">Read more</a>
+
                                     <div class="">
-                                        <!--<div class="gallery_grid_image_menu" data-uk-dropdown="{pos:'top-right'}" aria-haspopup="true" aria-expanded="false">
-                                            <i class="md-icon material-icons"></i>
-                                            <div class="uk-dropdown uk-dropdown-small uk-dropdown-top" aria-hidden="true" tabindex="" style="min-width: 160px; top: -68px; z-index: 9999999; left: -128px;">
-                                                <ul class="uk-nav">
-                                                    <li><a href="#"><i class="material-icons uk-margin-small-right"></i> Edit</a></li>
-                                                    <li><a href="#"><i class="material-icons uk-margin-small-right"></i> Remove</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>-->
                                         <span class="gallery_image_title uk-text-truncate ng-binding">
                                             <span class="blog_list_footer_info">
                                                 <span class="uk-margin-right"><i class="material-icons"></i> <small class="ng-binding">16</small></span>
