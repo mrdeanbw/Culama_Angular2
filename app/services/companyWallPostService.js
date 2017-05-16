@@ -13,12 +13,14 @@ var culamaApp;
         CompanyWallPostService.prototype.getCompanyWallPostInfoByPostId = function (wallPostId) {
             return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallPostID/' + wallPostId, {});
         };
+        CompanyWallPostService.prototype.getWallInfoByWallId = function (wallId) {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallDetailsByWallID/' + wallId, {});
+        };
         CompanyWallPostService.prototype.createWallPost = function (wallpost) {
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {});
         };
         CompanyWallPostService.prototype.saveWallPostDetails = function (wallpost) {
-            debugger;
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveWallPostDetails', params, {});
         };

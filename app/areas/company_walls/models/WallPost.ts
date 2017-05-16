@@ -8,5 +8,6 @@ module culamaApp.areas.companyWall.models {
         public WallPostImages: any;
         public CreatorId: number;
         public WallPostMediaInfo: any;
+        public RemoveExistingImageIds: string;
     }
 }

@@ -5,19 +5,20 @@
 module culamaApp.areas.companyWall.controllers {
     class CompanyWallPostController {
         public wallpost: culamaApp.areas.companyWall.models.WallPost = new culamaApp.areas.companyWall.models.WallPost();
-        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyWallPostService"];
+        static $inject = ["$scope", "$rootScope", "$sce", "$compile", "$filter", "companyWallPostService"];
 
-        constructor(public scope: any, public $rootScope: any, public $sce: any, public $filter: any, public companyWallPostService: culamaApp.CompanyWallPostService) {
+        constructor(public scope: any, public $rootScope: any, public $sce: any, public $compile: any, public $filter: any, public companyWallPostService: culamaApp.CompanyWallPostService) {
             var currObj = this;
             var currUrl;
             this.scope.isWallPosts = false;
             this.scope.isEditMode = false;
-            debugger;
             //this.scope.wallID = this.getParameterByName("wid");
             this.scope.wallID = this.getParameterByName();
             debugger;
-            if (this.scope.isEditMode == false)
+            if (this.scope.isEditMode == false) {
+                this.getWallInfo(this.scope.wallID);
                 this.getWallPosts(this.scope.wallID);
+            }
             else
                 this.getWallPostDetailsByWallPostId(this.scope.wallID);
 
@@ -44,16 +45,35 @@ module culamaApp.areas.companyWall.controllers {
                 });
             }
 
-            this.scope.abccc = function () {
-                debugger;
-                alert("hi...");
+            this.scope.removeExistingImg = function (existingImgId) {
+                if (currObj.wallpost.RemoveExistingImageIds == null)
+                    currObj.wallpost.RemoveExistingImageIds = existingImgId;
+                else
+                    currObj.wallpost.RemoveExistingImageIds += "," + existingImgId;
+                $('#span' + existingImgId).remove();
             }
+        }
+
+        getWallInfo(wallId) {
+            this.$rootScope.$emit("toggleLoader", true);
+            this.companyWallPostService.getWallInfoByWallId(wallId).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.Wall>) => {
+                if (result.data != null) {
+                    if (result.data.WallBase64String != null)
+                        result.data.WallBase64String = "data:image/jpeg;base64," + result.data.WallBase64String.toString();
+                    else
+                        result.data.WallBase64String = "assets/img/avatars/avatar_02.png";
+                    this.scope.wallDetails = result.data;
+                }
+                this.$rootScope.$emit("toggleLoader", false);
+            });
         }
 
         getWallPosts(wallId) {
             this.$rootScope.$emit("toggleLoader", true);
+            var currentObj = this;
             var ft = this.$filter;
             this.companyWallPostService.getCompanyWallPostsByWallId(wallId).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+                debugger;
                 if (result.data.length > 0) {
                     $.each(result.data, function () {
                         if (typeof this.CreatedOn === 'string') {
@@ -72,7 +92,6 @@ module culamaApp.areas.companyWall.controllers {
             this.$rootScope.$emit("toggleLoader", true);
             var ft = this.$filter;
             this.companyWallPostService.getCompanyWallPostInfoByPostId(wallPostId).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
-                debugger;
                 if (result.data != null) {
                     this.wallpost = result.data;
 
@@ -83,12 +102,13 @@ module culamaApp.areas.companyWall.controllers {
 
                             var fullImg = "data:image/png;base64," + result.data.WallPostMediaInfo[i].PostImageBase64String;
 
-                            existingImgs += "<span class='pip pip-container'>";
+                            existingImgs += "<span id='span" + result.data.WallPostMediaInfo[i].Id + "' class='pip pip-container'>";
                             existingImgs += "<img class='imageThumb' src='" + fullImg + "' />";
-                            existingImgs += "<br/><span ng-click='abccc()' class='remove remove-icon'><a class=''><i class='material-icons'></i></a></span>";
+                            existingImgs += "<br/><span ng-click='removeExistingImg(" + result.data.WallPostMediaInfo[i].Id + ")' class='remove remove-icon'><a class=''><i class='material-icons'></i></a></span>";
                             existingImgs += "</span>";
                         }
-                        $("#preview_images").append(existingImgs);
+                        var compileDivInfo = this.$compile(existingImgs)(this.scope);
+                        $("#preview_images").append(compileDivInfo);
                     }
                 }
             });
@@ -96,7 +116,6 @@ module culamaApp.areas.companyWall.controllers {
         }
 
         getParameterByName() {
-            debugger;
             var url = window.location.href;
             var SplitUrl = url.toString().split('/');
             var pagename = SplitUrl[SplitUrl.length - 1];
@@ -117,6 +136,7 @@ module culamaApp.areas.companyWall.controllers {
         }
 
         createWallPost() {
+            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             var imgArray = [];
             var isImgs = $('#preview_images').html();
@@ -148,7 +168,6 @@ module culamaApp.areas.companyWall.controllers {
             this.wallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
 
             this.companyWallPostService.createWallPost(this.wallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
-                debugger;
                 if (result.data) {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Wall Post is created successfully", status: "success" });
@@ -165,7 +184,6 @@ module culamaApp.areas.companyWall.controllers {
         }
 
         editWallPost() {
-            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             var isImgs = $('#preview_images').html();
             var imgArray = [];
@@ -173,7 +191,6 @@ module culamaApp.areas.companyWall.controllers {
                 var addedImgs = $('#preview_images').find('.add-new-img').find('img');
 
                 $.each(addedImgs, function () {
-                    debugger;
                     var base64Arr = [];
                     var imgsrc = this.src;
 
@@ -191,12 +208,10 @@ module culamaApp.areas.companyWall.controllers {
                     }
                     imgArray.push(base64Arr);
                 });
-                this.wallpost.WallPostImages = imgArray;                
+                this.wallpost.WallPostImages = imgArray;
             }
-            debugger;
             this.wallpost.WallPostMediaInfo = null;
             this.companyWallPostService.saveWallPostDetails(this.wallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
-                debugger;
                 if (result.data != "") {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Your information is updated successfully", status: "success" });
@@ -204,9 +219,8 @@ module culamaApp.areas.companyWall.controllers {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
                 }
-
+                this.$rootScope.$emit("toggleLoader", false);
             });
-            this.$rootScope.$emit("toggleLoader", false);
         }
 
         deleteWallPost(wallpostId) {

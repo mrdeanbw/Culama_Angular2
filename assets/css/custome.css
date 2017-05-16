@@ -594,7 +594,22 @@
 {
     margin-top: 5px;
 }
-
+#manageCompanyWallPosts .heading_b .sub-heading
+{
+    font-size: 13px;
+}
+#manageCompanyWallPosts .no-msg-container {
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+ #manageCompanyWallPosts .user_content
+    {
+        overflow:auto;
+        position:relative;
+    }
 @media (max-width:1219px)
 {
     .no-msg-container

@@ -9,10 +9,11 @@ var culamaApp;
             var controllers;
             (function (controllers) {
                 var CompanyWallPostController = (function () {
-                    function CompanyWallPostController(scope, $rootScope, $sce, $filter, companyWallPostService) {
+                    function CompanyWallPostController(scope, $rootScope, $sce, $compile, $filter, companyWallPostService) {
                         this.scope = scope;
                         this.$rootScope = $rootScope;
                         this.$sce = $sce;
+                        this.$compile = $compile;
                         this.$filter = $filter;
                         this.companyWallPostService = companyWallPostService;
                         this.wallpost = new culamaApp.areas.companyWall.models.WallPost();
@@ -20,12 +21,13 @@ var culamaApp;
                         var currUrl;
                         this.scope.isWallPosts = false;
                         this.scope.isEditMode = false;
-                        debugger;
                         //this.scope.wallID = this.getParameterByName("wid");
                         this.scope.wallID = this.getParameterByName();
                         debugger;
-                        if (this.scope.isEditMode == false)
+                        if (this.scope.isEditMode == false) {
+                            this.getWallInfo(this.scope.wallID);
                             this.getWallPosts(this.scope.wallID);
+                        }
                         else
                             this.getWallPostDetailsByWallPostId(this.scope.wallID);
                         var $formValidate = $('#wallPostForm');
@@ -48,16 +50,35 @@ var culamaApp;
                                 currObj.deleteWallPost(wallpostId);
                             });
                         };
-                        this.scope.abccc = function () {
-                            debugger;
-                            alert("hi...");
+                        this.scope.removeExistingImg = function (existingImgId) {
+                            if (currObj.wallpost.RemoveExistingImageIds == null)
+                                currObj.wallpost.RemoveExistingImageIds = existingImgId;
+                            else
+                                currObj.wallpost.RemoveExistingImageIds += "," + existingImgId;
+                            $('#span' + existingImgId).remove();
                         };
                     }
+                    CompanyWallPostController.prototype.getWallInfo = function (wallId) {
+                        var _this = this;
+                        this.$rootScope.$emit("toggleLoader", true);
+                        this.companyWallPostService.getWallInfoByWallId(wallId).then(function (result) {
+                            if (result.data != null) {
+                                if (result.data.WallBase64String != null)
+                                    result.data.WallBase64String = "data:image/jpeg;base64," + result.data.WallBase64String.toString();
+                                else
+                                    result.data.WallBase64String = "assets/img/avatars/avatar_02.png";
+                                _this.scope.wallDetails = result.data;
+                            }
+                            _this.$rootScope.$emit("toggleLoader", false);
+                        });
+                    };
                     CompanyWallPostController.prototype.getWallPosts = function (wallId) {
                         var _this = this;
                         this.$rootScope.$emit("toggleLoader", true);
+                        var currentObj = this;
                         var ft = this.$filter;
                         this.companyWallPostService.getCompanyWallPostsByWallId(wallId).then(function (result) {
+                            debugger;
                             if (result.data.length > 0) {
                                 $.each(result.data, function () {
                                     if (typeof this.CreatedOn === 'string') {
@@ -76,7 +97,6 @@ var culamaApp;
                         this.$rootScope.$emit("toggleLoader", true);
                         var ft = this.$filter;
                         this.companyWallPostService.getCompanyWallPostInfoByPostId(wallPostId).then(function (result) {
-                            debugger;
                             if (result.data != null) {
                                 _this.wallpost = result.data;
                                 if (result.data.WallPostMediaInfo != null) {
@@ -84,19 +104,19 @@ var culamaApp;
                                     $("#preview_images").empty();
                                     for (var i = 0; i < result.data.WallPostMediaInfo.length; i++) {
                                         var fullImg = "data:image/png;base64," + result.data.WallPostMediaInfo[i].PostImageBase64String;
-                                        existingImgs += "<span class='pip pip-container'>";
+                                        existingImgs += "<span id='span" + result.data.WallPostMediaInfo[i].Id + "' class='pip pip-container'>";
                                         existingImgs += "<img class='imageThumb' src='" + fullImg + "' />";
-                                        existingImgs += "<br/><span ng-click='abccc()' class='remove remove-icon'><a class=''><i class='material-icons'></i></a></span>";
+                                        existingImgs += "<br/><span ng-click='removeExistingImg(" + result.data.WallPostMediaInfo[i].Id + ")' class='remove remove-icon'><a class=''><i class='material-icons'></i></a></span>";
                                         existingImgs += "</span>";
                                     }
-                                    $("#preview_images").append(existingImgs);
+                                    var compileDivInfo = _this.$compile(existingImgs)(_this.scope);
+                                    $("#preview_images").append(compileDivInfo);
                                 }
                             }
                         });
                         this.$rootScope.$emit("toggleLoader", false);
                     };
                     CompanyWallPostController.prototype.getParameterByName = function () {
-                        debugger;
                         var url = window.location.href;
                         var SplitUrl = url.toString().split('/');
                         var pagename = SplitUrl[SplitUrl.length - 1];
@@ -114,6 +134,7 @@ var culamaApp;
                     };
                     CompanyWallPostController.prototype.createWallPost = function () {
                         var _this = this;
+                        debugger;
                         this.$rootScope.$emit("toggleLoader", true);
                         var imgArray = [];
                         var isImgs = $('#preview_images').html();
@@ -138,7 +159,6 @@ var culamaApp;
                         this.wallpost.WallId = this.scope.wallID;
                         this.wallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
                         this.companyWallPostService.createWallPost(this.wallpost).then(function (result) {
-                            debugger;
                             if (result.data) {
                                 _this.$rootScope.$emit("successnotify", { msg: "Wall Post is created successfully", status: "success" });
                                 _this.wallpost = new culamaApp.areas.companyWall.models.WallPost();
@@ -153,14 +173,12 @@ var culamaApp;
                     };
                     CompanyWallPostController.prototype.editWallPost = function () {
                         var _this = this;
-                        debugger;
                         this.$rootScope.$emit("toggleLoader", true);
                         var isImgs = $('#preview_images').html();
                         var imgArray = [];
                         if (isImgs != "") {
                             var addedImgs = $('#preview_images').find('.add-new-img').find('img');
                             $.each(addedImgs, function () {
-                                debugger;
                                 var base64Arr = [];
                                 var imgsrc = this.src;
                                 // Split the base64 string in data and contentType
@@ -176,18 +194,16 @@ var culamaApp;
                             });
                             this.wallpost.WallPostImages = imgArray;
                         }
-                        debugger;
                         this.wallpost.WallPostMediaInfo = null;
                         this.companyWallPostService.saveWallPostDetails(this.wallpost).then(function (result) {
-                            debugger;
                             if (result.data != "") {
                                 _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
                             }
                             else {
                                 _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
                             }
+                            _this.$rootScope.$emit("toggleLoader", false);
                         });
-                        this.$rootScope.$emit("toggleLoader", false);
                     };
                     CompanyWallPostController.prototype.deleteWallPost = function (wallpostId) {
                         var _this = this;
@@ -210,7 +226,7 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
-                    CompanyWallPostController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyWallPostService"];
+                    CompanyWallPostController.$inject = ["$scope", "$rootScope", "$sce", "$compile", "$filter", "companyWallPostService"];
                     return CompanyWallPostController;
                 }());
                 angular.module("culamaApp")

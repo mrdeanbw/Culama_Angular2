@@ -19,6 +19,11 @@ module culamaApp {
             });
         }
 
+        getWallInfoByWallId(wallId: string): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.Wall>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallDetailsByWallID/' + wallId, {
+            });
+        }
+
         createWallPost(wallpost: culamaApp.areas.companyWall.models.WallPost): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {
@@ -26,7 +31,6 @@ module culamaApp {
         }
 
         saveWallPostDetails(wallpost: culamaApp.areas.companyWall.models.WallPost): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
-            debugger;
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/SaveWallPostDetails', params, {
             });
