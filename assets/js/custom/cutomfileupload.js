@@ -9,7 +9,7 @@
                 fileReader.onload = (function (e) {
                     var file = e.target;
 
-                    var cusomeimages = $("<span class=\"pip pip-container\">" +
+                    var cusomeimages = $("<span class=\"pip pip-container add-new-img\">" +
                       "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
                       "<br/><span class=\"remove remove-icon\"><a class=\"\"><i class=\"material-icons\"></i></a></span>" +
                       "</span>");
@@ -21,9 +21,15 @@
                     //  "<br/><span class=\"remove abcdd\">Remove image</span>" +
                     //  "</span>").insertAfter("#files");
 
-                    $(".remove").click(function () {
+                    //$(".remove").click(function () {
+                    //    $(this).parent(".pip").remove();
+                    //});
+
+                    $(document).on("click", ".remove", function () {
+                        debugger;
                         $(this).parent(".pip").remove();
                     });
+
                 });
                 fileReader.readAsDataURL(f);
             }

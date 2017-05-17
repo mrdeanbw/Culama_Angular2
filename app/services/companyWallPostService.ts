@@ -14,11 +14,33 @@ module culamaApp {
             });
         }
 
+        getCompanyWallPostInfoByPostId(wallPostId: string): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallPostDetailsByWallPostID/' + wallPostId, {
+            });
+        }
+
+        getWallInfoByWallId(wallId: string): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.Wall>> {
+            return this.$http.get(this.appConfig.domain + '/Web/Security/GetWallDetailsByWallID/' + wallId, {
+            });
+        }
+
         createWallPost(wallpost: culamaApp.areas.companyWall.models.WallPost): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
             var params = JSON.stringify(wallpost);
             return this.$http.post(this.appConfig.domain + '/Web/Security/CreateWallPost', params, {
             });
         }
+
+        saveWallPostDetails(wallpost: culamaApp.areas.companyWall.models.WallPost): ng.IPromise<ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>> {
+            var params = JSON.stringify(wallpost);
+            return this.$http.post(this.appConfig.domain + '/Web/Security/SaveWallPostDetails', params, {
+            });
+        }
+
+        deleteWallPost(wallPostId: string): ng.IPromise<ng.IHttpPromiseCallbackArg<boolean>> {
+            return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteWallPost/' + wallPostId, {
+            });
+        }
+
     }
 
     angular

@@ -991,5 +991,149 @@
       "US": "Cancel",
       "IN": "रद्द करना"
     }
+  ],
+  "manageCompanyWall": [
+    {
+      "id": "page-title",
+      "US": "Manage Company Walls",
+      "IN": "कंपनी की दीवारों का प्रबंधन करें"
+    },
+    {
+      "id": "span_wall_title",
+      "US": "Title",
+      "IN": "शीर्षक"
+    },
+    {
+      "id": "span_wall_description",
+      "US": "Description",
+      "IN": "विवरण"
+    },
+    {
+      "id": "a_wall_editlink",
+      "US": "Edit",
+      "IN": "संपादित करें"
+    },
+    {
+      "id": "a_wall_removelink",
+      "US": "Delete",
+      "IN": "हटाना"
+    },
+    {
+      "id": "th_wall_title",
+      "US": "Title",
+      "IN": "शीर्षक"
+    },
+    {
+      "id": "th_wall_description",
+      "US": "Description",
+      "IN": "विवरण"
+    },
+    {
+      "id": "th_wall_active",
+      "US": "IsActive",
+      "IN": "सक्रिय है"
+    },
+    {
+      "id": "th_wall_createdon",
+      "US": "Created Date",
+      "IN": "रचना तिथि"
+    },
+    {
+      "id": "th_wall_action",
+      "US": "Action",
+      "IN": "कार्य"
+    },
+    {
+      "id": "wall_dailog_title",
+      "US": "Create Company Wall",
+      "IN": "कंपनी वॉल बनाएं"
+    },
+    {
+      "id": "lbl_wall_title",
+      "US": "Title",
+      "IN": "शीर्षक"
+    },
+    {
+      "id": "lbl_wall_description",
+      "US": "Description",
+      "IN": "विवरण"
+    },
+    {
+      "id": "lbl_wall_pic",
+      "US": "Wall Picture",
+      "IN": "वॉल फोटो"
+    },
+    {
+      "id": "btn_wall_savebtn",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_wall_cancelbtn",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    }
+  ],
+  "manageCompanyWallPosts": [
+    {
+      "id": "lbl_wallpost_page_title",
+      "US": "Company Wall Posts",
+      "IN": "कंपनी वॉल पोस्ट"
+    },
+    {
+      "id": "lbl_wallpost_info",
+      "US": "Info",
+      "IN": "जानकारी"
+    },
+    {
+      "id": "lbl_new_wallpost",
+      "US": "Create New Post",
+      "IN": "नई पोस्ट बनाएं"
+    },
+    {
+      "id": "span_wallpost_edit",
+      "US": "Edit",
+      "IN": "संपादित करें"
+    },
+    {
+      "id": "span_wallpost_remove",
+      "US": "Delete",
+      "IN": "हटाना"
+    },
+    {
+      "id": "lbl_read_more",
+      "US": "Read more",
+      "IN": "अधिक पढ़ें"
+    },
+    {
+      "id": "wallpost_dailog_title",
+      "US": "Create Company Wall Post",
+      "IN": "कंपनी वाल पोस्ट बनाएं"
+    },
+    {
+      "id": "lbl_wallpost_text",
+      "US": "Post Text",
+      "IN": "पोस्ट टेक्स्ट"
+    },
+    {
+      "id": "lbl_add_img",
+      "US": "Add Images",
+      "IN": "छवियां जोड़ें"
+    },
+    {
+      "id": "lbl_post_photoes",
+      "US": "Post Photoes",
+      "IN": "तस्वीरें पोस्ट करें"
+    },
+    {
+      "id": "btn_wallpost_Save",
+      "US": "Save",
+      "IN": "परिवर्तनों को सुरक्षित करें"
+    },
+    {
+      "id": "btn_wallpost_cancel",
+      "US": "Cancel",
+      "IN": "रद्द करना"
+    }    
   ]
 }

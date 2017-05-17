@@ -113,9 +113,11 @@ angular
                         }
                     }
                     $.connection.hub.start().done(function () {
-                        getconnectedThreadIDs($rootScope.LoggedUser.UserId);
-                        //myHub.server.joinGroup($rootScope.connectedThreadIDs);
-                        console.log('Connection Established.');
+                        if ($rootScope.LoggedUser != null) {
+                            getconnectedThreadIDs($rootScope.LoggedUser.UserId);
+                            //myHub.server.joinGroup($rootScope.connectedThreadIDs);
+                            console.log('Connection Established.');
+                        }
                     });
                 });
             });

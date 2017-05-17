@@ -11,6 +11,11 @@
         margin-left: 100px;
         margin-top: -45px;
     }
+
+    .views-list{
+        margin-right: 5px;
+    }
+
 </style>
 
 
@@ -22,11 +27,11 @@
 
             <div ng-show="isHasWalls">
                 <div class="uk-position-relative">
-                    <h3 class="heading_b uk-margin-bottom">Manage Company Walls</h3>
-                    <!--<div class="view-control">
+                    <h3 id="page-title" class="heading_b uk-margin-bottom" md-language>Manage Company Walls</h3>
+                    <div class="view-control views-list">
                         <a data-uk-tooltip title="Card View" ng-click="changeView('card');"><i class="material-icons " ng-class="{'active':cardview === true}">view_module</i></a>
                         <a data-uk-tooltip title="List View" ng-click="changeView('list');"><i class="material-icons" ng-class="{'active':cardview === false}">view_list</i></a>
-                    </div>-->
+                    </div>
                 </div>
 
                 <div id="Cardview" class="card-view" ng-show="cardview">
@@ -38,8 +43,8 @@
                                         <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.UserGroupId == 2}">&#xE5D4;</i>
                                         <div class="uk-dropdown uk-dropdown-small">
                                             <ul class="uk-nav">
-                                                <li><a href="#" id="a_cuser_editlink" ng-click="editWallInfo(wallinfo.Id);" data-uk-modal="{target:'#dailog_create_companywall'}" md-language>Edit</a></li>
-                                                <li><a id="a_cuser_removelink" ng-click="deletewall(wallinfo.Id);" md-language>Delete</a></li>
+                                                <li><a href="#" id="a_wall_editlink" ng-click="editWallInfo(wallinfo.Id);" data-uk-modal="{target:'#dailog_create_companywall'}" md-language>Edit</a></li>
+                                                <li><a id="a_wall_removelink" ng-click="deletewall(wallinfo.Id);" md-language>Delete</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -53,19 +58,52 @@
                                     <ul class="md-list">
                                         <li>
                                             <div class="md-list-content">
-                                                <span class="md-list-heading" id="span_cuser_username" md-language>Title</span>
+                                                <span class="md-list-heading" id="span_wall_title" md-language>Title</span>
                                                 <span class="uk-text-small uk-text-muted">{{ wallinfo.Title }}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="md-list-content">
-                                                <span class="md-list-heading" id="span_cuser_phone" md-language>Description</span>
+                                                <span class="md-list-heading" id="span_wall_description" md-language>Description</span>
                                                 <span class="uk-text-small uk-text-muted">{{ wallinfo.Description }}</span>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Listview" class="list-view" ng-show="!cardview">
+                    <div class="md-card uk-margin-medium-bottom">
+                        <div class="md-card-content">
+                            <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" id="th_wall_title" md-language>Title</th>
+                                        <th colspan="6"></th>
+                                    </tr>
+                                    <tr>
+                                        <th id="th_wall_description" md-language>Description</th>
+                                        <th id="th_wall_active" md-language>IsActive</th>
+                                        <th id="th_wall_createdon" md-language>Created Date</th>
+                                        <th id="th_wall_action" md-language>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="wallinfo in companyWalls">
+                                        <td>{{ wallinfo.Title }}</td>
+                                        <td>{{ wallinfo.Description }}</td>
+                                        <td>{{ wallinfo.Active }}</td>
+                                        <td>{{ wallinfo.CreatedOn }}</td>
+                                        <td>
+                                            <a ng-click="editWallInfo(wallinfo.Id);" data-uk-modal="{target:'#dailog_create_companywall'}"><i class="material-icons">mode_edit</i></a>
+                                            <a ng-click="deletewall(wallinfo.Id);"><i class="material-icons">delete</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -78,7 +116,7 @@
                     <div class="uk-modal-dialog">
                         <button type="button" class="uk-modal-close uk-close"></button>
                         <div class="uk-modal-header">
-                            <h3 class="uk-modal-title">Create Company Wall
+                            <h3 id="wall_dailog_title" class="uk-modal-title" md-language>Create Company Wall </h3>
                         </div>
 
                         <div class="uk-form-row">
@@ -86,12 +124,12 @@
                             <div class="uk-grid">
                                 <div class="uk-width-medium-1-2">
                                     <div class="uk-form-row">
-                                        <label id="lbl_user_title" md-language>Title</label>
+                                        <label id="lbl_wall_title" md-language>Title</label>
                                         <input type="text" ng-model="wall.newwall.Title" class="md-input" required md-input />
                                     </div>
                                 </div>
                                 <div class="uk-width-medium-1-2">
-                                    <div class="right-lbl">Wall Picture</div>
+                                    <div id="lbl_wall_pic" class="right-lbl" md-language>Wall Picture</div>
                                     <div class="img-upload-class">
                                         <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
@@ -116,15 +154,15 @@
                         <div class="uk-form-row">
                             <div class="uk-grid">
                                 <div class="uk-width-medium-1-2">
-                                    <label id="lbl_message_description" for="message_input_description" md-language>Details<span class="req">*</span></label>
+                                    <label id="lbl_wall_description" for="message_input_description" md-language>Description<span class="req">*</span></label>
                                     <textarea class="md-input" id="message_input_description" ng-model="wall.newwall.Description" md-input />
                                 </div>
                             </div>
                         </div>
 
                         <div class="uk-modal-footer uk-text-right">
-                            <button type="button" class="uk-button uk-modal-close">Close</button>
-                            <button type="submit" class="uk-button uk-button-primary">Save</button>
+                            <button id="btn_wall_cancelbtn" type="button" class="uk-button uk-modal-close" md-language>Cancel</button>
+                            <button id="btn_wall_savebtn" type="submit" class="uk-button uk-button-primary" md-language>Save</button>
                         </div>
                     </div>
                 </form>
