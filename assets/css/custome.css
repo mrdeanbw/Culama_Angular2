@@ -594,22 +594,67 @@
 {
     margin-top: 5px;
 }
+
 #manageCompanyWallPosts .heading_b .sub-heading
 {
     font-size: 13px;
 }
-#manageCompanyWallPosts .no-msg-container {
+
+#manageCompanyWallPosts .no-msg-container
+{
     top: 50%;
     text-align: center;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
 }
- #manageCompanyWallPosts .user_content
-    {
-        overflow:auto;
-        position:relative;
-    }
+
+#manageCompanyWallPosts .user_content
+{
+    overflow: auto;
+    position: relative;
+}
+
+.wall-heading
+{
+    padding: 24px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background: #1976d2;*/
+    color: #fff;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-transition: all 280ms cubic-bezier(.4,0,.2,1);
+    transition: all 280ms cubic-bezier(.4,0,.2,1);
+}
+
+.user_heading_content
+{
+    display: inline-block;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 8px;
+}
+
+.user_heading_content h2
+{
+    padding: 4px 37px;
+    margin: 0 !important;
+}
+.post-img-uploader .md-card-content
+{
+        max-height: 140px;
+    overflow: auto;
+    min-height: 140px;
+}
+.post-img-uploader .md-card-content #preview_images .pip
+{
+    margin-bottom: 25px !important;
+}
+.post-img-uploader .md-card-content #preview_images .pip .imageThumb
+{
+    width: 155px;
+}
+
 @media (max-width:1219px)
 {
     .no-msg-container
