@@ -17,19 +17,14 @@ var culamaApp;
                         this.$filter = $filter;
                         this.companyWallPostService = companyWallPostService;
                         this.wallpost = new culamaApp.areas.companyWall.models.WallPost();
+                        this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
                         var currObj = this;
                         var currUrl;
                         this.scope.isWallPosts = false;
                         this.scope.isEditMode = false;
-                        //this.scope.wallID = this.getParameterByName("wid");
-                        this.scope.wallID = this.getParameterByName();
-                        debugger;
-                        if (this.scope.isEditMode == false) {
-                            this.getWallInfo(this.scope.wallID);
-                            this.getWallPosts(this.scope.wallID);
-                        }
-                        else
-                            this.getWallPostDetailsByWallPostId(this.scope.wallID);
+                        this.scope.wallID = this.getParameterByName("wid");
+                        this.getWallInfo(this.scope.wallID);
+                        this.getWallPosts(this.scope.wallID);
                         var $formValidate = $('#wallPostForm');
                         if ($formValidate.length != 0) {
                             $formValidate.parsley()
@@ -45,16 +40,20 @@ var culamaApp;
                         this.scope.saveWallPostInfo = function () {
                             currObj.createWallPost();
                         };
+                        this.scope.editWallPost = function (wallPostId) {
+                            currObj.scope.isEditMode = true;
+                            currObj.getWallPostDetailsByWallPostId(wallPostId);
+                        };
                         this.scope.deleteWallPost = function (wallpostId) {
                             UIkit.modal.confirm('Are you sure want to delete?', function () {
                                 currObj.deleteWallPost(wallpostId);
                             });
                         };
                         this.scope.removeExistingImg = function (existingImgId) {
-                            if (currObj.wallpost.RemoveExistingImageIds == null)
-                                currObj.wallpost.RemoveExistingImageIds = existingImgId;
+                            if (currObj.newwallpost.RemoveExistingImageIds == null)
+                                currObj.newwallpost.RemoveExistingImageIds = existingImgId;
                             else
-                                currObj.wallpost.RemoveExistingImageIds += "," + existingImgId;
+                                currObj.newwallpost.RemoveExistingImageIds += "," + existingImgId;
                             $('#span' + existingImgId).remove();
                         };
                     }
@@ -78,7 +77,6 @@ var culamaApp;
                         var currentObj = this;
                         var ft = this.$filter;
                         this.companyWallPostService.getCompanyWallPostsByWallId(wallId).then(function (result) {
-                            debugger;
                             if (result.data.length > 0) {
                                 $.each(result.data, function () {
                                     if (typeof this.CreatedOn === 'string') {
@@ -98,7 +96,7 @@ var culamaApp;
                         var ft = this.$filter;
                         this.companyWallPostService.getCompanyWallPostInfoByPostId(wallPostId).then(function (result) {
                             if (result.data != null) {
-                                _this.wallpost = result.data;
+                                _this.newwallpost = result.data;
                                 if (result.data.WallPostMediaInfo != null) {
                                     var existingImgs = "";
                                     $("#preview_images").empty();
@@ -116,25 +114,18 @@ var culamaApp;
                         });
                         this.$rootScope.$emit("toggleLoader", false);
                     };
-                    CompanyWallPostController.prototype.getParameterByName = function () {
+                    CompanyWallPostController.prototype.getParameterByName = function (wallinfo) {
                         var url = window.location.href;
-                        var SplitUrl = url.toString().split('/');
-                        var pagename = SplitUrl[SplitUrl.length - 1];
-                        var splitpagename = pagename.toString().split('?');
-                        var wallinfo = splitpagename[1].toString().split('=')[0];
-                        if (wallinfo == "wpid")
-                            this.scope.isEditMode = true;
-                        return splitpagename[1].toString().split('=')[1];
-                        //wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
-                        //var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"),
-                        //    results = regex.exec(url);
-                        //if (!results) return null;
-                        //if (!results[2]) return '';
-                        //return decodeURIComponent(results[2].replace(/\+/g, " "));
+                        wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
+                        var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+                        if (!results)
+                            return null;
+                        if (!results[2])
+                            return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, " "));
                     };
                     CompanyWallPostController.prototype.createWallPost = function () {
                         var _this = this;
-                        debugger;
                         this.$rootScope.$emit("toggleLoader", true);
                         var imgArray = [];
                         var isImgs = $('#preview_images').html();
@@ -154,16 +145,18 @@ var culamaApp;
                                 }
                                 imgArray.push(base64Arr);
                             });
-                            this.wallpost.WallPostImages = imgArray;
+                            this.newwallpost.WallPostImages = imgArray;
                         }
-                        this.wallpost.WallId = this.scope.wallID;
-                        this.wallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
-                        this.companyWallPostService.createWallPost(this.wallpost).then(function (result) {
+                        this.newwallpost.WallId = this.scope.wallID;
+                        this.newwallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
+                        this.companyWallPostService.createWallPost(this.newwallpost).then(function (result) {
                             if (result.data) {
                                 _this.$rootScope.$emit("successnotify", { msg: "Wall Post is created successfully", status: "success" });
-                                _this.wallpost = new culamaApp.areas.companyWall.models.WallPost();
-                                _this.$rootScope.$emit("toggleLoader", false);
-                                window.location.href = "/#/managecompanywallposts?wid=" + _this.scope.wallID;
+                                _this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                                var modal = UIkit.modal("#WallPost_Dailog");
+                                modal.hide();
+                                $("#preview_images").empty();
+                                _this.getWallPosts(_this.scope.wallID);
                             }
                             else {
                                 _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
@@ -192,11 +185,26 @@ var culamaApp;
                                 }
                                 imgArray.push(base64Arr);
                             });
-                            this.wallpost.WallPostImages = imgArray;
+                            this.newwallpost.WallPostImages = imgArray;
                         }
-                        this.wallpost.WallPostMediaInfo = null;
-                        this.companyWallPostService.saveWallPostDetails(this.wallpost).then(function (result) {
+                        this.newwallpost.WallPostMediaInfo = null;
+                        this.companyWallPostService.saveWallPostDetails(this.newwallpost).then(function (result) {
                             if (result.data != "") {
+                                var ft = _this.$filter;
+                                var createdon = new Date(parseInt(result.data.CreatedOn.substr(6)));
+                                result.data.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                                var wallPostList = _this.scope.wallPosts;
+                                $.each(wallPostList, function (index) {
+                                    var u = this;
+                                    if (u.Id == result.data.Id) {
+                                        wallPostList[index] = result.data;
+                                    }
+                                });
+                                _this.scope.wallPosts = wallPostList;
+                                _this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                                var modal = UIkit.modal("#WallPost_Dailog");
+                                modal.hide();
+                                $("#preview_images").empty();
                                 _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
                             }
                             else {

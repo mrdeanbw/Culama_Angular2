@@ -9,11 +9,15 @@ var culamaApp;
             var controllers;
             (function (controllers) {
                 var CompanyWallController = (function () {
-                    function CompanyWallController(scope, $rootScope, $sce, $filter, companyWallService) {
+                    function CompanyWallController(scope, $rootScope, $sce, $filter, $compile, $timeout, DTOptionsBuilder, DTColumnDefBuilder, companyWallService) {
                         this.scope = scope;
                         this.$rootScope = $rootScope;
                         this.$sce = $sce;
                         this.$filter = $filter;
+                        this.$compile = $compile;
+                        this.$timeout = $timeout;
+                        this.DTOptionsBuilder = DTOptionsBuilder;
+                        this.DTColumnDefBuilder = DTColumnDefBuilder;
                         this.companyWallService = companyWallService;
                         this.newwall = new culamaApp.areas.companyWall.models.Wall();
                         this.scope.cardview = true;
@@ -60,10 +64,15 @@ var culamaApp;
                     CompanyWallController.prototype.getCompanyWalls = function () {
                         var _this = this;
                         this.$rootScope.$emit("toggleLoader", true);
+                        var ft = this.$filter;
                         this.companyWallService.getCompanyWalls().then(function (result) {
                             if (result.data.length > 0) {
                                 _this.scope.isHasWalls = true;
                                 $.each(result.data, function () {
+                                    if (typeof this.CreatedOn === 'string') {
+                                        var createdon = new Date(parseInt(this.CreatedOn.substr(6)));
+                                        this.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                                    }
                                     if (this.WallBase64String != null)
                                         this.WallImage = "data:image/jpeg;base64," + this.WallBase64String.toString();
                                     else
@@ -150,6 +159,7 @@ var culamaApp;
                         }
                         this.newwall.WallImage = base64Arr;
                         this.newwall.WallBase64String = null;
+                        this.newwall.CreatedOn = null;
                         this.companyWallService.updateCompanyWall(this.newwall).then(function (result) {
                             if (result.data != "") {
                                 _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
@@ -184,7 +194,7 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
-                    CompanyWallController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyWallService"];
+                    CompanyWallController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "$compile", "$timeout", "DTOptionsBuilder", "DTColumnDefBuilder", "companyWallService"];
                     return CompanyWallController;
                 }());
                 angular.module("culamaApp")

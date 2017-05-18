@@ -5,9 +5,9 @@
 module culamaApp.areas.companyWall.controllers {
     class CompanyWallController {
         public newwall: culamaApp.areas.companyWall.models.Wall = new culamaApp.areas.companyWall.models.Wall();
-        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "companyWallService"];
+        static $inject = ["$scope", "$rootScope", "$sce", "$filter", "$compile", "$timeout", "DTOptionsBuilder", "DTColumnDefBuilder", "companyWallService"];
 
-        constructor(public scope: ICompanyWallScope, public $rootScope: any, public $sce: any, public $filter: any, public companyWallService: culamaApp.CompanyWallService) {
+        constructor(public scope: ICompanyWallScope, public $rootScope: any, public $sce: any, public $filter: any, public $compile: any, public $timeout: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public companyWallService: culamaApp.CompanyWallService) {
             this.scope.cardview = true;
             this.scope.isHasWalls = false;
             this.scope.isEditMode = false;
@@ -58,10 +58,16 @@ module culamaApp.areas.companyWall.controllers {
 
         getCompanyWalls() {
             this.$rootScope.$emit("toggleLoader", true);
+            var ft = this.$filter;
             this.companyWallService.getCompanyWalls().then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 if (result.data.length > 0) {
                     this.scope.isHasWalls = true;
                     $.each(result.data, function () {
+                        if (typeof this.CreatedOn === 'string') {
+                            var createdon = new Date(parseInt(this.CreatedOn.substr(6)));
+                            this.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                        }
+
                         if (this.WallBase64String != null)
                             this.WallImage = "data:image/jpeg;base64," + this.WallBase64String.toString();
                         else
@@ -128,7 +134,6 @@ module culamaApp.areas.companyWall.controllers {
 
         editCompanyWall() {
             this.$rootScope.$emit("toggleLoader", true);
-
             var base64Arr = [];
             var ConvertedBase64String = "";
             var checkLogoIsModified = document.getElementById("uploaded_Image1");
@@ -161,7 +166,7 @@ module culamaApp.areas.companyWall.controllers {
             }
             this.newwall.WallImage = base64Arr;
             this.newwall.WallBase64String = null;
-
+            this.newwall.CreatedOn = null;
             this.companyWallService.updateCompanyWall(this.newwall).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Wall>) => {
                 if (result.data != "") {                    
                     this.$rootScope.$emit("successnotify",

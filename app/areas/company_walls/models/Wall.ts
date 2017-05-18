@@ -5,6 +5,7 @@ module culamaApp.areas.companyWall.models {
         public Id: number;
         public Title: string;
         public Description: string;
+        public CreatedOn: Date;
         public WallImage: any;
         public WallBase64String: string;
     }

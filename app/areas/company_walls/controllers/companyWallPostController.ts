@@ -5,22 +5,18 @@
 module culamaApp.areas.companyWall.controllers {
     class CompanyWallPostController {
         public wallpost: culamaApp.areas.companyWall.models.WallPost = new culamaApp.areas.companyWall.models.WallPost();
+        public newwallpost: culamaApp.areas.companyWall.models.WallPost = new culamaApp.areas.companyWall.models.WallPost();
         static $inject = ["$scope", "$rootScope", "$sce", "$compile", "$filter", "companyWallPostService"];
 
-        constructor(public scope: any, public $rootScope: any, public $sce: any, public $compile: any, public $filter: any, public companyWallPostService: culamaApp.CompanyWallPostService) {
+        constructor(public scope: ICompanyWallPostScope, public $rootScope: any, public $sce: any, public $compile: any, public $filter: any, public companyWallPostService: culamaApp.CompanyWallPostService) {
             var currObj = this;
             var currUrl;
             this.scope.isWallPosts = false;
             this.scope.isEditMode = false;
-            //this.scope.wallID = this.getParameterByName("wid");
-            this.scope.wallID = this.getParameterByName();
-            debugger;
-            if (this.scope.isEditMode == false) {
-                this.getWallInfo(this.scope.wallID);
-                this.getWallPosts(this.scope.wallID);
-            }
-            else
-                this.getWallPostDetailsByWallPostId(this.scope.wallID);
+            this.scope.wallID = this.getParameterByName("wid");
+
+            this.getWallInfo(this.scope.wallID);
+            this.getWallPosts(this.scope.wallID);
 
             var $formValidate = $('#wallPostForm');
             if ($formValidate.length != 0) {
@@ -39,6 +35,11 @@ module culamaApp.areas.companyWall.controllers {
                 currObj.createWallPost();
             }
 
+            this.scope.editWallPost = function (wallPostId) {
+                currObj.scope.isEditMode = true;
+                currObj.getWallPostDetailsByWallPostId(wallPostId);
+            }
+
             this.scope.deleteWallPost = function (wallpostId) {
                 UIkit.modal.confirm('Are you sure want to delete?', function () {
                     currObj.deleteWallPost(wallpostId);
@@ -46,10 +47,10 @@ module culamaApp.areas.companyWall.controllers {
             }
 
             this.scope.removeExistingImg = function (existingImgId) {
-                if (currObj.wallpost.RemoveExistingImageIds == null)
-                    currObj.wallpost.RemoveExistingImageIds = existingImgId;
+                if (currObj.newwallpost.RemoveExistingImageIds == null)
+                    currObj.newwallpost.RemoveExistingImageIds = existingImgId;
                 else
-                    currObj.wallpost.RemoveExistingImageIds += "," + existingImgId;
+                    currObj.newwallpost.RemoveExistingImageIds += "," + existingImgId;
                 $('#span' + existingImgId).remove();
             }
         }
@@ -73,7 +74,6 @@ module culamaApp.areas.companyWall.controllers {
             var currentObj = this;
             var ft = this.$filter;
             this.companyWallPostService.getCompanyWallPostsByWallId(wallId).then((result: ng.IHttpPromiseCallbackArg<any>) => {
-                debugger;
                 if (result.data.length > 0) {
                     $.each(result.data, function () {
                         if (typeof this.CreatedOn === 'string') {
@@ -93,7 +93,7 @@ module culamaApp.areas.companyWall.controllers {
             var ft = this.$filter;
             this.companyWallPostService.getCompanyWallPostInfoByPostId(wallPostId).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
                 if (result.data != null) {
-                    this.wallpost = result.data;
+                    this.newwallpost = result.data;
 
                     if (result.data.WallPostMediaInfo != null) {
                         var existingImgs = "";
@@ -115,28 +115,17 @@ module culamaApp.areas.companyWall.controllers {
             this.$rootScope.$emit("toggleLoader", false);
         }
 
-        getParameterByName() {
+        getParameterByName(wallinfo) {
             var url = window.location.href;
-            var SplitUrl = url.toString().split('/');
-            var pagename = SplitUrl[SplitUrl.length - 1];
-            var splitpagename = pagename.toString().split('?');
-            var wallinfo = splitpagename[1].toString().split('=')[0];
-
-            if (wallinfo == "wpid")
-                this.scope.isEditMode = true;
-
-            return splitpagename[1].toString().split('=')[1];
-
-            //wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
-            //var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"),
-            //    results = regex.exec(url);
-            //if (!results) return null;
-            //if (!results[2]) return '';
-            //return decodeURIComponent(results[2].replace(/\+/g, " "));
+            wallinfo = wallinfo.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + wallinfo + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
         createWallPost() {
-            debugger;
             this.$rootScope.$emit("toggleLoader", true);
             var imgArray = [];
             var isImgs = $('#preview_images').html();
@@ -161,20 +150,19 @@ module culamaApp.areas.companyWall.controllers {
                     }
                     imgArray.push(base64Arr);
                 });
-                this.wallpost.WallPostImages = imgArray;
+                this.newwallpost.WallPostImages = imgArray;
             }
-
-            this.wallpost.WallId = this.scope.wallID;
-            this.wallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
-
-            this.companyWallPostService.createWallPost(this.wallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
+            this.newwallpost.WallId = this.scope.wallID;
+            this.newwallpost.CreatorId = this.$rootScope.LoggedUser.UserId;
+            this.companyWallPostService.createWallPost(this.newwallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
                 if (result.data) {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Wall Post is created successfully", status: "success" });
-
-                    this.wallpost = new culamaApp.areas.companyWall.models.WallPost();
-                    this.$rootScope.$emit("toggleLoader", false);
-                    window.location.href = "/#/managecompanywallposts?wid=" + this.scope.wallID;
+                    this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                    var modal = UIkit.modal("#WallPost_Dailog");
+                    modal.hide();
+                    $("#preview_images").empty();
+                    this.getWallPosts(this.scope.wallID);
                 } else {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Something went wrong. Please try again.", status: "danger" });
@@ -208,11 +196,27 @@ module culamaApp.areas.companyWall.controllers {
                     }
                     imgArray.push(base64Arr);
                 });
-                this.wallpost.WallPostImages = imgArray;
+                this.newwallpost.WallPostImages = imgArray;
             }
-            this.wallpost.WallPostMediaInfo = null;
-            this.companyWallPostService.saveWallPostDetails(this.wallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
+            this.newwallpost.WallPostMediaInfo = null;
+            this.companyWallPostService.saveWallPostDetails(this.newwallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
                 if (result.data != "") {
+                    var ft = this.$filter;
+                    var createdon = new Date(parseInt(result.data.CreatedOn.substr(6)));
+                    result.data.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                    var wallPostList = this.scope.wallPosts;
+                    $.each(wallPostList, function (index) {
+                        var u = this;
+                        if (u.Id == result.data.Id) {
+                            wallPostList[index] = result.data; 
+                        }
+                    });
+                    this.scope.wallPosts = wallPostList;                    
+                    this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                    var modal = UIkit.modal("#WallPost_Dailog");
+                    modal.hide();
+                    $("#preview_images").empty();
+
                     this.$rootScope.$emit("successnotify",
                         { msg: "Your information is updated successfully", status: "success" });
                 } else {
