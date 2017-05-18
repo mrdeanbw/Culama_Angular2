@@ -19,8 +19,8 @@ culamaApp.constant('variables', {
 });
 
 culamaApp.constant('appConfig', {
-    //domain: 'http://api.culama.com'
-    domain: 'http://127.0.0.1:62028'
+    domain: 'http://api.culama.com'
+    //domain: 'http://127.0.0.1:62028'
 });
 
 culamaApp.config(function($sceDelegateProvider) {

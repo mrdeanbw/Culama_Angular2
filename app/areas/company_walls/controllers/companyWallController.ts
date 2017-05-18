@@ -41,7 +41,7 @@ module culamaApp.areas.companyWall.controllers {
             }
 
             this.scope.deletewall = function (id) {
-                UIkit.modal.confirm('Are you sure want to delete?', function () {
+                UIkit.modal.confirm('Are you sure you want to delete?', function () {
                     currObj.deleteCompanyWall(id);
                 });
             }

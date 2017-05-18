@@ -32,7 +32,7 @@
     },
     {
       "id": "lbl-error",
-      "US": "Your username and password is incorrect.",
+      "US": "Your username or password is incorrect.",
       "IN": "आपका उपयोक्तानाम और पासवर्ड गलत है।"
     },
     {
@@ -137,12 +137,12 @@
     },
     {
       "id": "lbl_myprofile_phoneactivatedon",
-      "US": "PhoneActivatedOn",
+      "US": "Phone Activated On",
       "IN": "फोन सक्रिय समय"
     },
     {
       "id": "lbl_myprofile_lastactivationattempt",
-      "US": "LastActivationAttempt",
+      "US": "Last Activation Attempt",
       "IN": "अंतिम सक्रियण का समय"
     }
   ],
@@ -179,7 +179,7 @@
     },
     {
       "id": "myaccount_input_cpassword",
-      "US": "Please insert confirm password",
+      "US": "Please confirm password",
       "IN": "पासवर्ड की पुष्टि डालें"
     },
     {
@@ -263,7 +263,7 @@
     },
     {
       "id": "lbl_company_userprefix",
-      "US": "UserPrefix<span class='req'>*</span>",
+      "US": "User Prefix<span class='req'>*</span>",
       "IN": "उपयोगकर्ता उपसर्ग<span class='req'>*</span>"
     },
     {
@@ -308,22 +308,22 @@
     },
     {
       "id": "th_cuser_isactive",
-      "US": "IsActive",
+      "US": "Is Active",
       "IN": "सक्रिय है"
     },
     {
       "id": "th_cuser_phoneactivated",
-      "US": "PhoneActivated",
+      "US": "Phone Activated",
       "IN": "फ़ोन सक्रिय है"
     },
     {
       "id": "th_cuser_phoneactivatedon",
-      "US": "PhoneActivatedOn",
+      "US": "Phone Activated On",
       "IN": "फोन सक्रिय समय"
     },
     {
       "id": "th_cuser_lastactivationattempt",
-      "US": "LastActivationAttempt",
+      "US": "Last Activation Attempt",
       "IN": "अंतिम सक्रियण का समय"
     },
     {
@@ -333,7 +333,7 @@
     },
     {
       "id": "span_allowtosendmsg",
-      "US": "User allowed to send to Everyone",
+      "US": "Users allowed to send to Everyone",
       "IN": "उपयोगकर्ता को हर किसी को भेजने की अनुमति है"
     },
     {
@@ -435,7 +435,7 @@
     },
     {
       "id": "user_input_phoneno",
-      "US": "Please insert phoneno",
+      "US": "Please insert phone number",
       "IN": "कोई फोन डालें"
     },
     {
@@ -601,7 +601,7 @@
     },
     {
       "id": "th_company_userprefix",
-      "US": "UserPrefix",
+      "US": "User Prefix",
       "IN": "उपयोगकर्ता उपसर्ग"
     },
     {
@@ -611,7 +611,7 @@
     },
     {
       "id": "th_company_isactive",
-      "US": "IsActive",
+      "US": "Is Active",
       "IN": "सक्रिय है"
     },
     {
@@ -703,7 +703,7 @@
     },
     {
       "id": "user_input_phoneno",
-      "US": "Please insert phoneno",
+      "US": "Please insert phone number",
       "IN": "कोई फोन डालें"
     },
     {
@@ -750,17 +750,17 @@
     },
     {
       "id": "span_cuser_isphoneactivated",
-      "US": "PhoneActivated",
+      "US": "Phone Activated",
       "IN": "फ़ोन सक्रिय है"
     },
     {
       "id": "span_cuser_phoneactivatedon",
-      "US": "PhoneActivatedOn",
+      "US": "Phone Activated On",
       "IN": "फोन सक्रिय समय"
     },
     {
       "id": "span_cuser_lastactivationattempt",
-      "US": "LastActivationAttempt",
+      "US": "Last Activation Attempt",
       "IN": "अंतिम सक्रियण का समय"
     },
     {
@@ -790,22 +790,22 @@
     },
     {
       "id": "th_cuser_isactive",
-      "US": "IsActive",
+      "US": "Is Active",
       "IN": "सक्रिय है"
     },
     {
       "id": "th_cuser_phoneactivated",
-      "US": "PhoneActivated",
+      "US": "Phone Activated",
       "IN": "फ़ोन सक्रिय है"
     },
     {
       "id": "th_cuser_phoneactivatedon",
-      "US": "PhoneActivatedOn",
+      "US": "Phone ActivatedOn",
       "IN": "फोन सक्रिय समय"
     },
     {
       "id": "th_cuser_lastactivationattempt",
-      "US": "LastActivationAttempt",
+      "US": "Last Activation Attempt",
       "IN": "अंतिम सक्रियण का समय"
     },
     {

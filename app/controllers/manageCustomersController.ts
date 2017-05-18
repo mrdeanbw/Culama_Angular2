@@ -235,7 +235,7 @@ module culamaApp {
             };
 
             scope.vm.deleteCompany = function (id) {
-                UIkit.modal.confirm('Are you sure want to delete?', function () {
+                UIkit.modal.confirm('Are you sure you want to delete?', function () {
                     cobj.DeleteCompany(id);
                 });
             }
