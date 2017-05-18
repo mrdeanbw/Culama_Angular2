@@ -159,6 +159,7 @@ var culamaApp;
                         }
                         this.newwall.WallImage = base64Arr;
                         this.newwall.WallBase64String = null;
+                        this.newwall.CreatedOn = null;
                         this.companyWallService.updateCompanyWall(this.newwall).then(function (result) {
                             if (result.data != "") {
                                 _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });

@@ -12,10 +12,15 @@
         margin-top: -45px;
     }
 
-    .views-list{
+    .views-list
+    {
         margin-right: 5px;
     }
 
+    .wall-detail-height
+    {
+        height: 30px;
+    }
 </style>
 
 
@@ -65,7 +70,7 @@
                                         <li>
                                             <div class="md-list-content">
                                                 <span class="md-list-heading" id="span_wall_description" md-language>Description</span>
-                                                <span class="uk-text-small uk-text-muted">{{ wallinfo.Description }}</span>
+                                                <span class="uk-text-small uk-text-muted wall-detail-height">{{ wallinfo.Description.length <= 80 ? wallinfo.Description : wallinfo.Description.toString().substring(0, 80) + '...' }}</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -73,6 +78,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div id="Listview" class="list-view" ng-show="!cardview">
@@ -94,7 +100,7 @@
                                 <tbody>
                                     <tr ng-repeat="wallinfo in companyWalls">
                                         <td>{{ wallinfo.Title }}</td>
-                                        <td>{{ wallinfo.Description }}</td>
+                                        <td>{{ wallinfo.Description.length <= 50 ? wallinfo.Description : wallinfo.Description.toString().substring(0, 50) + '...' }}</td>
                                         <td>{{ wallinfo.Active }}</td>
                                         <td>{{ wallinfo.CreatedOn }}</td>
                                         <td>
@@ -167,7 +173,6 @@
                     </div>
                 </form>
             </div>
-
 
             <div ng-show="!isHasWalls" class="no-msg-container">
                 <img src="assets/img/no-msg.png" />

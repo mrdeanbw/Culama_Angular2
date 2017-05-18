@@ -39,6 +39,10 @@
         filter: alpha(opacity=0);
     }
 
+    .post-text-height
+    {
+        height: 60px;
+    }
 </style>
 <script>
     $(document).ready(function () {
@@ -99,8 +103,7 @@
                                             <img ng-src="{{ 'data:image/jpeg;base64,'+ wallpostinfo.WallPostMediaInfo[0].PostImageBase64String }}" alt="" class="blog_list_teaser_image ng-scope post-img" />
 
                                             <div class="blog_list_teaser">
-                                                <h2 class="blog_list_teaser_title uk-text-truncate ng-binding">{{ wallpostinfo.Title }}</h2>
-                                                <p class="ng-binding">{{ wallpostinfo.Text }}</p>
+                                                <p class="ng-binding post-text-height">{{ wallpostinfo.Text.length <= 120 ? wallpostinfo.Text : wallpostinfo.Text.toString().substring(0, 120) + '...' }}</p>
                                                 <span class="uk-text-muted uk-text-small ng-binding">{{ wallpostinfo.CreatedOn }}</span>
                                             </div>
                                             <div class="blog_list_footer list_footer">

@@ -134,7 +134,6 @@ module culamaApp.areas.companyWall.controllers {
 
         editCompanyWall() {
             this.$rootScope.$emit("toggleLoader", true);
-
             var base64Arr = [];
             var ConvertedBase64String = "";
             var checkLogoIsModified = document.getElementById("uploaded_Image1");
@@ -167,7 +166,7 @@ module culamaApp.areas.companyWall.controllers {
             }
             this.newwall.WallImage = base64Arr;
             this.newwall.WallBase64String = null;
-
+            this.newwall.CreatedOn = null;
             this.companyWallService.updateCompanyWall(this.newwall).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Wall>) => {
                 if (result.data != "") {                    
                     this.$rootScope.$emit("successnotify",
