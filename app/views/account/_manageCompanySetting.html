@@ -1,0 +1,97 @@
+﻿
+
+<div id="page_content">
+    <div id="page_content_inner">
+        <div id="managecompanysettingspage" class="main_page">
+            <h2 id="user_h2_1" md-language>Manage Company Settings</h2>
+
+            <div class="user_content uk-width-large-6-10 ">
+                <div class="md-card" data-uk-grid-margin>
+                    <div class="md-card-content">
+
+                        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim2', animation:'slide-horizontal'}">
+                            <li class="uk-active"><a id="lbl_msgsetting_tab" href="#" md-language>Message Setting</a></li>
+                        </ul>
+                        <ul id="tabs_anim2" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="md-card-content">
+
+                                    <form id="msgsettingform" name="msgsettingform" class="uk-form-stacked">
+                                        <div class="uk-form-row">
+                                            <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="Customer.IsAllowMsgAllToEveryone" icheck ng-change="allowEveryonetoMessage()" />
+                                            <label id="lbl_allowmsgtoall_checkbox" for="allowmsgtoall_checkbox" md-language> Allow all users to send messages to everyone</label>
+                                        </div>
+                                        <div class="uk-form-row" ng-show="!Customer.IsAllowMsgAllToEveryone">
+                                            <div>
+                                                <div class="uk-width-large-1-2 pull-left">
+                                                    <span id="span_allowtosendmsg" md-language>User allowed to send to Everyone</span>
+                                                    <div>
+                                                        <div class="uk-form-row">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-8-10">
+                                                                    <input type="text" config="selectize_all_users_config" options="selectize_users_notAllowed_Msg" ng-model="SelectedUser" name="selectize_all_users" selectize />
+                                                                </div>
+                                                                <div class="add-list-btn">
+                                                                    <a id="btnadd" class="user-btn" ng-click="addUser(SelectedUser, true);"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </div>
+
+                                                                <div class="uk-width-medium-9-10">
+                                                                    <div class="user-list">
+                                                                        <!--<div ng-repeat="user in CompanyUsers | customFilterForAllowMessage">-->
+                                                                        <div ng-repeat="user in allowedUsers">
+                                                                            <p class="user-list-label">{{ user.FullIdentityName }}</p>
+                                                                            <a class="user-minus-btn" ng-click="addUser(user.UserId, false);"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-large-1-2 pull-left">
+                                                    <span id="span_recipients" md-language>Recipients to Everyone</span>
+                                                    <div>
+                                                        <div class="uk-form-row">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-8-10">
+                                                                    <input type="text" config="selectize_all_users_config" options="selectize_allrecipient_users" ng-model="recipientUsers" name="selectize_recipient_users" selectize />
+                                                                </div>
+                                                                <div class="add-list-btn">
+                                                                    <a id="btnadd" class="user-btn" ng-click="recipientAction(recipientUsers, 'add')"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </div>
+
+                                                                <div class="uk-width-medium-9-10">
+                                                                    <div class="user-list">
+                                                                        <div ng-repeat="recipient in recipients_users">
+                                                                            <p class="user-list-label">{{ recipient.FullIdentityName }}</p>
+                                                                            <a class="user-minus-btn" ng-click="recipientAction(recipient.UserId, 'remove')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="uk-width-medium-1-1 mt-20">
+                                            <!--<a id="btn_user_savebtn" md-language class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>-->
+                                            <button type="button" ng-click="saveCompanyMsgSetting(Customer.IsAllowMsgAllToEveryone)" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                                                Save
+                                            </button>
+                                            <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ng-click="cancelRequest()">Cancel</a>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

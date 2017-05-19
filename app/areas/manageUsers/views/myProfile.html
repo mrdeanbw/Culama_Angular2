@@ -1,0 +1,116 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="myprofilepage" class="main_page">
+            <form id="form_validation" name="form_validation" class="uk-form-stacked">
+                <div class="md-card user_content uk-width-large-5-10 ">
+                    <div class="uk-form-row">
+                        <div class="profile">
+                            <h4 id="myprofile_h4_1" md-language>Profile</h4>
+                        </div>
+                        <div class="user-pic-placeholder">
+                            <img src="../../../assets/img/others/user-pic.jpg" />
+                            <a class="material-icons edit-p">&#xE254;</a>
+                        </div>
+
+                        <div class="user-details">
+                            <h3>{{ vm.userDetail.FullIdentityName }}</h3>
+                            <p class="margin0">{{ vm.title }}</p>
+                            <p class="margin0">{{ vm.userDetail.Customer.CustomerName }}</p>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_myprofile_firstname" for="login_firstname" md-language>First Name</label>
+                                <input class="md-input" type="text" id="myprofile_input_firstname" required md-language ng-model="vm.userDetail.FirstName" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_myprofile_lastname" for="login_lastname" md-language>Last Name</label>
+                                <input class="md-input" type="text" id="myprofile_input_lastname" required md-language ng-model="vm.userDetail.LastName" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <div id="lbl_myprofile_Companyname" md-language>Company</div>
+                                <div class="uk-form-row">
+                                    <input type="text" class="md-input" disabled ng-model="vm.userDetail.Customer.CustomerName" md-input />
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div id="lbl_myprofile_title" md-language>Title</div>
+                                <div class="uk-form-row">
+                                    <input type="text" class="md-input" disabled ng-model="vm.title" md-input />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-2-4 uk-width-medium-1-2">
+                                <div class="uk-input-group">
+                                    <div class="md-input-wrapper">
+                                        <label id="lbl_myprofile_phone" for="login_lastname" md-language>Phone Number</label>
+                                        <input class="md-input" type="text" id="myprofile_input_phoneno" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !vm.IsPhoneUnique}" name="login_phoneno" required ng-model="vm.userDetail.Phone" ng-change="vm.checkPhoneUnique()" data-parsley-type="digits" md-input />
+                                        <div class="parsley-errors-list filled" ng-show="!vm.IsPhoneUnique">
+                                            <span class="parsley-required" id="lbl_myprofile_phoneunquieerror" md-language>This phone number is already assigned.</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="uk-input-group-addon">
+                                        <i class="uk-icon-refresh uk-icon-spin" ng-show="vm.IsPhoneUniqueProcess"></i>
+                                        <i class="material-icons uk-text-success" ng-show="vm.IsPhoneUnique && !vm.IsPhoneUniqueProcess && form_validation.$valid">check_circle</i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div><spn id="lbl_myprofile_phoneactivated" md-language>PhoneActivated</spn> : <input id="chk_activatephone" type="checkbox" ng-model="vm.IsPhoneActivated" ng-disabled="true" icheck /></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_myprofile_mainlan" md-language>Main Language</label>
+                                <input type="text" config="vm.selectize_a_config" options="vm.selectize_a_options" ng-model="vm.userDetail.LanguageId" name="selectize_a" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div><span id="lbl_myprofile_phoneactivatedon" md-language>PhoneActivatedOn</span>: {{ vm.PhoneActivatedOn }}</div>
+                                <!--<div class="uk-form-row">
+                                    <input type="text" class="md-input" disabled ng-model="vm.PhoneActivatedOn" md-input />
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_myprofile_otherlan" md-language>Other Language</label>
+                                <input type="text" config="vm.selectize_b_config" options="vm.selectize_b_options" ng-model="vm.userDetail.PreferredLanguageId" name="selectize_b" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div><span id="lbl_myprofile_lastactivationattempt" md-language>LastActivationAttempt</span>: {{ vm.LastActivationAttempt }}</div>
+                                <!--<div class="uk-form-row">
+                                    <input type="text" class="md-input" disabled ng-model="vm.LastActivationAttempt" md-input />
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <button id="btn_myprofile_savebtn" md-language type="submit" ng-click="vm.saveInfo()" ng-disabled="form_validation.$invalid" class="md-btn md-btn-primary md-btn-wave-light">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

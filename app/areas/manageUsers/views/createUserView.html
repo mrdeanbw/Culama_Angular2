@@ -1,0 +1,127 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <div id="admincreateuserpage" class="main_page">
+            <h2 id="user_h2_1" md-language>Create User</h2>
+
+            <div class="md-card user_content uk-width-large-5-10 " ng-controller="manageUsersController as user">
+                <form name="createUserForm" ng-submit="user.CreateUser()" id="createUserForm">
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_user_firstname" for="user_input_firstname" md-language>First Name</label>
+                                <input class="md-input" type="text" id="user_input_firstname" required md-language ng-model="user.newuser.FirstName" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_user_lastname" for="user_input_lastname" md-language>Last Name<span class="req">*</span></label>
+                                <input class="md-input" type="text" id="user_input_lastname" required md-language ng-model="user.newuser.LastName" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <div class="uk-form-row">
+                                    <label id="lbl_user_Companyname" md-language>Company</label>
+                                    <input type="text" config="user.selectize_z_config" options="user.companies" ng-model="user.newuser.CustomerId" name="selectize_z" selectize />
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div class="uk-form-row">
+                                    <label id="lbl_user_title" md-language>Title</label>
+                                    <input type="text" class="md-input" ng-model="user.newuser.Title" md-input />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <div class="uk-input-group">
+                                    <div class="md-input-wrapper">
+                                        <label id="lbl_user_phone" for="user_input_phoneno" md-language>Phone Number</label>
+                                        <input class="md-input" type="text" id="user_input_phoneno" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !user.IsPhoneUnique}" name="user_input_phoneno" required ng-model="user.newuser.Phone" ng-change="user.checkPhoneUnique()" data-parsley-type="digits" md-input />
+                                        <div class="parsley-errors-list filled" ng-show="!user.IsPhoneUnique">
+                                            <span class="parsley-required" id="lbl_user_phoneunquieerror" md-language>This phone number is already assigned.</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="uk-input-group-addon">
+                                        <i class="uk-icon-refresh uk-icon-spin" ng-show="user.IsPhoneUniqueProcess"></i>
+                                        <i class="material-icons uk-text-success" ng-show="user.IsPhoneUnique && !user.IsPhoneUniqueProcess && createUserForm.user_input_phoneno.$valid">check_circle</i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">{{ user.companyPrefix }}</span>
+                                    <div class="md-input-wrapper">
+                                        <label id="lbl_user_username" for="user_input_username" md-language>Username</label>
+                                        <input class="md-input" type="text" id="user_input_username" md-language ng-class="{ 'ng-invalid md-input-danger ng-touched': !user.IsUsernameUnique}" name="user_input_username" required ng-model="user.newuser.UserName" ng-change="user.checkUserNameUnique()" md-input />
+                                        <div class="parsley-errors-list filled" ng-show="!user.IsUsernameUnique">
+                                            <span class="parsley-required" id="lbl_user_usernameunquieerror" md-language>This username is already assigned.</span>
+                                        </div>
+                                    </div>
+                                    <span class="uk-input-group-addon">
+                                        <i class="uk-icon-refresh uk-icon-spin" ng-show="user.IsUsernameUniqueProcess"></i>
+                                        <i class="material-icons uk-text-success" ng-show="user.IsUsernameUnique && !user.IsUsernameUniqueProcess && createUserForm.user_input_username.$valid">check_circle</i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_user_userrole" md-language>User Role</label>
+                                <input type="text" config="user.selectize_c_config" options="user.selectize_c_options" ng-model="user.newuser.UserGroupId" name="selectize_c" selectize />
+                            </div>
+
+                            <div class="uk-width-medium-1-2">
+                                <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img id="customer_logo" ng-src="assets/img/avatars/user.png" alt="user avatar" />
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div class="user_avatar_controls">
+                                        <span class="btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                            <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                        </span>
+                                        <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_user_mainlan" md-language>Main Language</label>
+                                <input type="text" config="user.selectize_a_config" options="user.selectize_a_options" ng-model="user.newuser.LanguageId" name="selectize_a" selectize />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_user_otherlan" md-language>Other Language</label>
+                                <input type="text" config="user.selectize_b_config" options="user.selectize_b_options" ng-model="user.newuser.PreferredLanguageId" name="selectize_b" selectize />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-1-1 mt-20">
+                        <!--<a id="btn_user_savebtn" md-language class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>-->
+                        <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                            Save
+                        </button>
+                        <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ui-sref="restricted.manageusers">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="myaccountpage" class="main_page">
+            <form id="form_validation" name="form_validation" class="uk-form-stacked">
+                <div class="md-card user_content uk-width-large-3  -10 ">
+                    <div class="uk-form-row">
+                        <div class="profile">
+                            <h4 id="myaccount_h4_1" md-language>Profile</h4>
+                        </div>
+                        <div class="user-pic-placeholder">
+                            <img src="../../../assets/img/others/user-pic.jpg" />
+                            <a class="material-icons edit-p">&#xE254;</a>
+                        </div>
+                        <div class="user-details">
+                            <h3>{{ vm.userDetail.FullIdentityName }}</h3>
+                            <p class="margin0">{{ vm.userDetail.Title }}</p>
+                            <p class="margin0">{{ vm.userDetail.Customer.CustomerName }}</p>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <label id="lbl_myaccount_username" for="myaccount_input_username" md-language>Username</label>
+                        <input id="myaccount_input_username" class="md-input" type="text" disabled ng-model="vm.userDetail.UserName" required md-input md-language />
+                    </div>
+                    <div class="uk-form-row">
+                        <label id="lbl_myaccount_password" for="myaccount_input_password" md-language>Password</label>
+                        <input id="myaccount_input_password" class="md-input" type="password" ng-model="vm.newpassword" required md-input md-language />
+                    </div>
+                    <div class="uk-form-row">
+                        <label id="lbl_myaccount_confirmpassword"  for="myaccount_input_cpassword" md-language>Confirm Password</label>
+                        <input class="md-input" type="password" id="myaccount_input_cpassword" ng-class="{ 'ng-invalid md-input-danger ng-touched': !vm.IsPasswordMatch}" ng-model="vm.confirmpassword" ng-blur="vm.checkPasswordMatch()" required md-input md-language/>
+                        <div class="parsley-errors-list filled" ng-show="!vm.IsPasswordMatch">
+                            <span class="parsley-required" id="lbl_myaccount_passwordmatcherror" md-language>Your confirm password didn't matched.</span>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <button id="btn_myaccount_savebtn" md-language type="submit" ng-click="vm.saveAccountInfo()" ng-disabled="form_validation.$invalid" class="md-btn md-btn-primary md-btn-wave-light" id="saveButton">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
