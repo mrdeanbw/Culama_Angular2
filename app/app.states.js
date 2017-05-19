@@ -54,8 +54,8 @@ culamaApp
                                     'lazy_selectizeJS',
                                      'lazy_parsleyjs',
                                     'app/services/loginservice.js',
-                                    'app/models/LoginUser.js',
-                                    'app/models/User.js',
+                                    'app/areas/login/models/LoginUser.js',
+                                    'app/areas/login/models/User.js',
                                     //'app/controllers/loginController.js'
                                     'app/areas/login/controllers/loginController.js'
                                 ]);
@@ -82,10 +82,10 @@ culamaApp
                                     'lazy_parsleyjs',
                                     'app/services/loginservice.js',
                                     'app/services/CommonService.js',
-                                    'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/models/LoginUser.js',
-                                    'app/models/User.js',
+                                    'app/areas/manageUsers/models/Customer.js',
+                                    'app/areas/manageUsers/models/UserDetails.js',
+                                    'app/areas/manageUsers/models/LoginUser.js',
+                                    'app/areas/manageUsers/models/User.js',
                                     //'app/controllers/myProfileController.js'
                                     'app/areas/manageUsers/controllers/myProfileController.js',
                                 ]);
@@ -112,10 +112,10 @@ culamaApp
                                     'lazy_parsleyjs',
                                     'app/services/loginservice.js',
                                     'app/services/CommonService.js',
-                                    'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/models/LoginUser.js',
-                                    'app/models/User.js',
+                                    'app/areas/manageUsers/models/Customer.js',
+                                    'app/areas/manageUsers/models/UserDetails.js',
+                                    'app/areas/manageUsers/models/LoginUser.js',
+                                    'app/areas/manageUsers/models/User.js',
                                     //'app/controllers/myProfileController.js'
                                     'app/areas/manageUsers/controllers/myProfileController.js'
                                 ]);
@@ -297,8 +297,8 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/companyUsersController.js'
@@ -333,9 +333,9 @@ culamaApp
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
                                         'lazy_parsleyjs',
-                                        'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/services/loginservice.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
+                                        'app/services/loginservice.js',
                                          'app/services/companyService.js',
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
@@ -363,8 +363,8 @@ culamaApp
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
                                         'lazy_parsleyjs',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageCompanies/models/Customer.js',
+                                        'app/areas/manageCompanies/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         // 'app/controllers/manageCustomersController.js'
@@ -395,9 +395,9 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'app/models/Customer.js',
                                         'assets/js/custom/uikit_fileinput.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageCompanies/models/Customer.js',
+                                        'app/areas/manageCompanies/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/manageCustomersController.js'
@@ -430,8 +430,8 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'assets/js/custom/uikit_fileinput.js',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageCompanies/models/Customer.js',
+                                        'app/areas/manageCompanies/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/manageCustomersController.js'
@@ -463,9 +463,9 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'assets/js/custom/uikit_fileinput.js',
-                                          'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/services/loginservice.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
+                                        'app/services/loginservice.js',
                                          'app/services/companyService.js',
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
@@ -496,9 +496,9 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'assets/js/custom/uikit_fileinput.js',
-                                          'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/services/loginservice.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
+                                        'app/services/loginservice.js',
                                          'app/services/companyService.js',
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
@@ -530,8 +530,8 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'assets/js/custom/uikit_fileinput.js',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/companyUsersController.js'
@@ -564,8 +564,8 @@ culamaApp
                                         'lazy_uikit',
                                         'lazy_iCheck',
                                         'assets/js/custom/uikit_fileinput.js',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/manageUsers/models/Customer.js',
+                                        'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/companyUsersController.js'
@@ -596,8 +596,8 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/setting/models/Customer.js',
+                                        'app/areas/setting/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
                                         //'app/controllers/companyMessageSettingController.js'
@@ -626,11 +626,11 @@ culamaApp
                                         'lazy_parsleyjs',
                                         'lazy_uikit',
                                         'lazy_iCheck',
-                                        'app/models/Customer.js',
-                                        'app/models/UserDetails.js',
+                                        'app/areas/setting/models/Customer.js',
+                                        'app/areas/setting/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/companyMessageSettingController.js'
+                                        'app/areas/setting/controllers/companyMessageSettingController.js'
                                 ],
                                     { serie: true });
                             }
