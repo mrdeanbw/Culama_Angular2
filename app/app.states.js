@@ -54,6 +54,11 @@ culamaApp
                                     'lazy_selectizeJS',
                                      'lazy_parsleyjs',
                                     'app/services/loginservice.js',
+<<<<<<< HEAD
+                                    //'app/models/LoginUser.js',
+                                    //'app/models/User.js',
+=======
+>>>>>>> master
                                     'app/areas/login/models/LoginUser.js',
                                     'app/areas/login/models/User.js',
                                     //'app/controllers/loginController.js'
@@ -336,7 +341,11 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
+<<<<<<< HEAD
+                                        'app/services/companyService.js',
+=======
                                          'app/services/companyService.js',
+>>>>>>> master
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
@@ -466,7 +475,11 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
+<<<<<<< HEAD
+                                        'app/services/companyService.js',
+=======
                                          'app/services/companyService.js',
+>>>>>>> master
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
@@ -499,7 +512,11 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
+<<<<<<< HEAD
+                                        'app/services/companyService.js',
+=======
                                          'app/services/companyService.js',
+>>>>>>> master
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
@@ -615,7 +632,8 @@ culamaApp
                 .state("restricted.managecompanymessagesetting",
                 {
                     url: "/manage_company_manage_setting",
-                    templateUrl: 'app/views/account/manageCompanySetting.html',
+                    //templateUrl: 'app/views/account/manageCompanySetting.html',
+                    templateUrl: 'app/areas/setting/views//manageCompanySetting.html',
                     controller: 'companyMessageSettingController',
                     resolve: {
                         deps: [
@@ -630,7 +648,14 @@ culamaApp
                                         'app/areas/setting/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
+<<<<<<< HEAD
+                                        //'app/controllers/companyMessageSettingController.js'
                                         'app/areas/setting/controllers/companyMessageSettingController.js'
+
+                                        
+=======
+                                        'app/areas/setting/controllers/companyMessageSettingController.js'
+>>>>>>> master
                                 ],
                                     { serie: true });
                             }
@@ -653,8 +678,8 @@ culamaApp
                                 return $ocLazyLoad.load([
                                     'assets/js/jquery.signalR-2.2.1.js',
                                         'app/services/companyService.js',
-                                         'app/services/messageService.js',
-                                         'app/services/loginService.js',
+                                        'app/services/messageService.js',
+                                        'app/services/loginService.js',
                                         'app/areas/messaging/controllers/userMessagesController.js'
                                 ],
                                     { serie: true });
@@ -678,7 +703,7 @@ culamaApp
                             return $ocLazyLoad.load([
                                     'app/services/companyService.js',
                                     'app/services/messageService.js',
-                                     'app/services/loginService.js',
+                                    'app/services/loginService.js',
                                     'app/areas/messaging/controllers/userMessagesController.js'
                             ],
                                 { serie: true });

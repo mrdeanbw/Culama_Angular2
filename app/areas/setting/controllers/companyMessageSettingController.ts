@@ -1,5 +1,5 @@
-﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
+﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
 module culamaApp {

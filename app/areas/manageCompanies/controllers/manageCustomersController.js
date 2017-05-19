@@ -1,5 +1,5 @@
-/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
+/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
 var culamaApp;
@@ -358,6 +358,8 @@ var culamaApp;
                         for (var i = 0; i < realData.length; i++) {
                             base64Arr.push(realData[i]);
                         }
+                        //this.newcompany.logoBase64String = realData.toString();
+                        //var BlobData = this._base64ToArrayBuffer(realData);
                     }
                 }
                 this.newcompany.CustomerLogo = base64Arr;
@@ -624,9 +626,9 @@ var culamaApp;
                 _this.$rootScope.$emit("toggleLoader", false);
             });
         };
-        ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
         return ManageCustomersController;
     }());
+    ManageCustomersController.$inject = ["$scope", "$rootScope", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
     function myFilter() {
         return function (um) {
             //  filter stuff here

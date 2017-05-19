@@ -1,5 +1,5 @@
-﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
+﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 class AdministratorDashboardController {
     static $inject = ["$scope", "$rootScope", "$interval", "$timeout"];
     constructor(public scope: any, public $rootScope: any, public $interval: any, public $timeout: any) {

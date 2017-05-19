@@ -148,6 +148,7 @@ var culamaApp;
                                 // get the real base64 content of the file
                                 var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
                                 ConvertedBase64String = editrealData;
+                                //this.edituser.Base64StringofUserPhoto = editrealData.toString();
                             }
                         }
                         else {
@@ -194,9 +195,9 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
-                    CompanyWallController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "$compile", "$timeout", "DTOptionsBuilder", "DTColumnDefBuilder", "companyWallService"];
                     return CompanyWallController;
                 }());
+                CompanyWallController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "$compile", "$timeout", "DTOptionsBuilder", "DTColumnDefBuilder", "companyWallService"];
                 angular.module("culamaApp")
                     .controller("companyWallController", CompanyWallController);
             })(controllers = companyWall.controllers || (companyWall.controllers = {}));
