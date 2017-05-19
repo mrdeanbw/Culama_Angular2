@@ -144,14 +144,14 @@ var culamaApp;
                                 }
                             });
                         }
-                        this.lservice = loginService;
-                        this.cservice = commonService;
+                        this.loginService = loginService;
+                        this.commonService = commonService;
                         this.getLanguages();
                         this.getCompanies();
                     }
                     ManageUsersController.prototype.getLanguages = function () {
                         var _this = this;
-                        this.cservice.getLanguages().then(function (result) {
+                        this.commonService.getLanguages().then(function (result) {
                             _this.scope.vm.selectize_a_options = result.data;
                             _this.scope.vm.selectize_b_options = result.data;
                         });
@@ -258,7 +258,7 @@ var culamaApp;
                             this.edituser.UserPhoto = base64Arr;
                             this.edituser.Base64StringofUserPhoto = null;
                             this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
-                            this.lservice.saveUserDetail(this.edituser).then(function (result) {
+                            this.loginService.saveUserDetail(this.edituser).then(function (result) {
                                 _this.$rootScope.$emit("toggleLoader", false);
                                 if (result.data != "") {
                                     _this.edituser = result.data;
@@ -275,7 +275,7 @@ var culamaApp;
                         var _this = this;
                         this.scope.vm.IsPhoneUniqueProcess = true;
                         if (this.scope.vm.IsEditMode) {
-                            this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then(function (result) {
+                            this.loginService.getUserDetailsbyPhone(this.edituser.Phone).then(function (result) {
                                 _this.scope.vm.IsPhoneUniqueProcess = false;
                                 if (result.data != "") {
                                     if (result.data.UserId !== _this.edituser.UserId) {
@@ -294,7 +294,7 @@ var culamaApp;
                             });
                         }
                         else {
-                            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
+                            this.loginService.getUserDetailsbyPhone(this.newuser.Phone).then(function (result) {
                                 _this.scope.vm.IsPhoneUniqueProcess = false;
                                 if (result.data != "") {
                                     _this.scope.vm.IsPhoneUnique = false;
@@ -312,7 +312,7 @@ var culamaApp;
                         this.scope.vm.IsUsernameUniqueProcess = true;
                         if (this.scope.vm.IsEditMode) {
                             var uname = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
-                            this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
+                            this.loginService.getUserDetailsbyUsername(uname).then(function (result) {
                                 _this.scope.vm.IsUsernameUniqueProcess = false;
                                 if (result.data != "") {
                                     if (result.data.UserId !== _this.edituser.UserId) {
@@ -332,7 +332,7 @@ var culamaApp;
                         }
                         else {
                             var uname = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
-                            this.lservice.getUserDetailsbyUsername(uname).then(function (result) {
+                            this.loginService.getUserDetailsbyUsername(uname).then(function (result) {
                                 _this.scope.vm.IsUsernameUniqueProcess = false;
                                 if (result.data != "") {
                                     _this.scope.vm.IsUsernameUnique = false;

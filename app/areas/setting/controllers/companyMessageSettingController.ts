@@ -2,15 +2,16 @@
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 var ascope;
 var mainCobj;
-module culamaApp {
+
+module culamaApp.areas.setting.controllers {
 
     class CompanyMessageSettingController {
-        cservice: any;
-        lservice: any;
+        companyService: any;
+        loginService: any;
         static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$timeout", "commonService", "loginService"];
         constructor(public scope: any, public $rootScope: any, public companyService: culamaApp.CompanyService, public $compile: any, public $timeout: any, public commonService: culamaApp.CommonService, public loginService: culamaApp.LoginService) {
-            this.cservice = companyService;
-            this.lservice = loginService;
+            this.companyService = companyService;
+            this.loginService = loginService;
             this.scope.CompanyUsers = [];
             this.scope.Customer = new culamaApp.Customer();
             if ($rootScope.LoggedUser.UserGroupId !== 1 && $rootScope.LoggedUser.UserGroupId !== 2) {
@@ -249,7 +250,7 @@ module culamaApp {
 
         getCompanyDetail(companyid) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+            this.companyService.getCompanyById(companyid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.scope.Customer = result.data;
 
                 if (result.data.RecipientList != null)
@@ -263,7 +264,7 @@ module culamaApp {
 
             var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 var notAllowedMsg = [];
                 var allowedmsg = [];
 
@@ -298,7 +299,7 @@ module culamaApp {
 
         saveCompany(RecipientID, actionname) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+            this.companyService.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.scope.Customer = result.data;
@@ -360,7 +361,7 @@ module culamaApp {
 
         saveCompanyUser(user, isupdateallusers) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.saveUserDetail(user).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     var tCusers = this.scope.CompanyUsers;
@@ -385,7 +386,7 @@ module culamaApp {
 
         getSelectedUserInfo(selecteduserid, isAllowMessage) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.getUserDetailsbyId(selecteduserid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyId(selecteduserid).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 if (result.data != "" || result.data != null) {
                     if (isAllowMessage == true)
                         result.data.IsAllowMsgToEveryone = true;
@@ -404,7 +405,7 @@ module culamaApp {
             var Recipients = [];
             var splitedUsers = recipientUserIDs.toString().split(',');
             for (var i = 0; i < splitedUsers.length; i++) {
-                this.lservice.getUserDetailsbyId(splitedUsers[i]).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.getUserDetailsbyId(splitedUsers[i]).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     Recipients.push(result.data);
                 });
             }
@@ -437,7 +438,7 @@ module culamaApp {
             this.scope.Customer.IsAllowMsgAllToEveryone = isAllowMsgAllToEveryone;
             this.scope.Customer.Users = userupdatedinfo;
 
-            this.cservice.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
+            this.companyService.saveCompanyDetail(this.scope.Customer).then((result: ng.IHttpPromiseCallbackArg<culamaApp.Customer>) => {
                 if (result.data != "") {
                     this.$rootScope.$emit("successnotify",
                         { msg: "Your information is updated successfully", status: "success" });

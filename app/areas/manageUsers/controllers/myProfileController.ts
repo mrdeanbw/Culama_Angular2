@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 
-module culamaApp {
+module culamaApp.areas.manageUsers.controllers {
     class MyProfileController {
-        lservice: any;
-        cservice: any;
+        loginService: any;
+        commonService: any;
         public userDetail: culamaApp.UserDetail = new culamaApp.UserDetail();
         public userAccount: culamaApp.LoginUser = new culamaApp.LoginUser();
         static $inject = ["$scope", "$rootScope", "$filter", "loginService", "commonService"];
@@ -61,15 +61,15 @@ module culamaApp {
                     }
                 });
 
-            this.lservice = loginService;
-            this.cservice = commonService;
+            this.loginService = loginService;
+            this.commonService = commonService;
             this.getLanguages();
             this.getUser(this.$rootScope.LoggedUser.UserId);
         }
 
         getUser(id) {
             var ft = this.$filter;
-            this.lservice.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyId(id.toString()).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 debugger;
                 var x = result.data;
                 if (typeof result.data.PhoneActivatedOn === 'string' || typeof result.data.LastActivationAttempt === 'string') {
@@ -102,7 +102,7 @@ module culamaApp {
 
 
         getLanguages() {
-            this.cservice.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.commonService.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 this.scope.vm.selectize_a_options = result.data;
                 this.scope.vm.selectize_b_options = result.data;
             });
@@ -111,7 +111,7 @@ module culamaApp {
         checkPhoneUnique() {
             var $formValidate = $('#form_validation');
             this.scope.vm.IsPhoneUniqueProcess = true;
-            this.lservice.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyPhone(this.userDetail.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
                     if (result.data.UserId !== this.userDetail.UserId) {
@@ -137,7 +137,7 @@ module culamaApp {
         saveInfo() {
             if (this.scope.vm.IsPhoneUnique && form_validation.checkValidity()) {
                 this.$rootScope.$emit("toggleLoader", true);
-                this.lservice.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.saveUserDetail(this.userDetail).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
 
                     if (result.data != "") {
                         this.userDetail = result.data;
@@ -158,7 +158,7 @@ module culamaApp {
                 this.$rootScope.$emit("toggleLoader", true);
                 this.userAccount.username = this.scope.vm.userDetail.UserName;
                 this.userAccount.password = this.scope.vm.newpassword;
-                this.lservice.changePassword(this.userAccount).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+                this.loginService.changePassword(this.userAccount).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data) {
                         this.$rootScope.$emit("logout", {});
@@ -178,3 +178,4 @@ module culamaApp {
         .controller("myProfileController", MyProfileController);
 
 }
+

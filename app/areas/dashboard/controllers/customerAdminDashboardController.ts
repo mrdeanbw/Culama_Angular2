@@ -1,7 +1,7 @@
-﻿/// <reference path="../../Scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../../Scripts/typings/angularjs/angular-route.d.ts" />
+﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 
-module culamaApp {
+module culamaApp.areas.manageUsers.controllers {
     class CustomerAdminDashboardController {
         static $inject = ["$scope", "$rootScope", "$interval", "$timeout", "culamaApp.services.MessageService", "loginService"];
         constructor(public scope: any, public $rootScope: any, public $interval: any, public $timeout: any, public messageService: culamaApp.services.MessageService, public loginService: culamaApp.LoginService) {

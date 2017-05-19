@@ -3,8 +3,8 @@
 
 module culamaApp.areas.manageUsers.controllers {
 class ManageUsersController {
-    lservice: any;
-    cservice: any;
+    loginService: any;
+    commonService: any;
     public newuser: culamaApp.UserDetail = new culamaApp.UserDetail();
     public edituser: culamaApp.UserDetail = new culamaApp.UserDetail();
     static $inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
@@ -156,14 +156,14 @@ class ManageUsersController {
         }
 
 
-        this.lservice = loginService;
-        this.cservice = commonService;
+        this.loginService = loginService;
+        this.commonService = commonService;
         this.getLanguages();
         this.getCompanies();
     }
 
     getLanguages() {
-        this.cservice.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+        this.commonService.getLanguages().then((result: ng.IHttpPromiseCallbackArg<any>) => {
             this.scope.vm.selectize_a_options = result.data;
             this.scope.vm.selectize_b_options = result.data;
         });
@@ -285,7 +285,7 @@ class ManageUsersController {
             this.edituser.UserPhoto = base64Arr;
             this.edituser.Base64StringofUserPhoto = null;
             this.edituser.UserName = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
-            this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data != "") {
                     this.edituser = result.data;
@@ -303,7 +303,7 @@ class ManageUsersController {
     checkPhoneUnique() {
         this.scope.vm.IsPhoneUniqueProcess = true;
         if (this.scope.vm.IsEditMode) {
-            this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
                     if (result.data.UserId !== this.edituser.UserId) {
@@ -321,7 +321,7 @@ class ManageUsersController {
                 }
             });
         } else {
-            this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsPhoneUniqueProcess = false;
                 if (result.data != "") {
                     this.scope.vm.IsPhoneUnique = false;
@@ -338,7 +338,7 @@ class ManageUsersController {
         this.scope.vm.IsUsernameUniqueProcess = true;
         if (this.scope.vm.IsEditMode) {
             var uname = this.scope.vm.companyPrefix + "-" + this.edituser.UserName;
-            this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
 
@@ -359,7 +359,7 @@ class ManageUsersController {
 
         } else {
             var uname = this.scope.vm.companyPrefix + "-" + this.newuser.UserName;
-            this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+            this.loginService.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                 this.scope.vm.IsUsernameUniqueProcess = false;
                 if (result.data != "") {
                     this.scope.vm.IsUsernameUnique = false;

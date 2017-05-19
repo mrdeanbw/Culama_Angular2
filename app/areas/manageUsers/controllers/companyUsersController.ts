@@ -1,15 +1,16 @@
 ﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
-module culamaApp {
+
+module culamaApp.areas.manageUsers.controllers {
     class CompanyUsersController {
-        cservice: any;
-        lservice: any;
+        companyService: any;
+        loginService: any;
         public newuser: culamaApp.UserDetail = new culamaApp.UserDetail();
         public edituser: culamaApp.UserDetail = new culamaApp.UserDetail();
         static $inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         constructor(public scope: any, public $rootScope: any, public companyService: culamaApp.CompanyService, public $compile: any, public $filter: any, public $timeout: any, public $resource: any, public DTOptionsBuilder: any, public DTColumnDefBuilder: any, public commonService: culamaApp.CommonService, public loginService: culamaApp.LoginService) {
-            this.cservice = companyService;
-            this.lservice = loginService;
+            this.companyService = companyService;
+            this.loginService = loginService;
             this.scope.cardview = true;
             this.scope.CompanyName = $rootScope.LoggedUser.CustomerName;
             this.scope.companyPrefix = $rootScope.LoggedUser.CustomerPrefix;
@@ -170,7 +171,7 @@ module culamaApp {
         }
 
         getUserGroups() {
-            this.cservice.getUserGroups().then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.companyService.getUserGroups().then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 var roles = [];
                 if (result.data.length > 0) {
                     this.scope.selectize_c_options = result.data;
@@ -189,7 +190,7 @@ module culamaApp {
             var currentObj = this;
             this.$rootScope.$emit("toggleLoader", true);
             var ft = this.$filter;
-            this.cservice.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
+            this.companyService.getUsersByCompanyId(companyid).then((result: ng.IHttpPromiseCallbackArg<any>) => {
                 $.each(result.data, function () {
                     if (typeof this.PhoneActivatedOn === 'string' || typeof this.LastActivationAttempt === 'string') {
                         var activationon = new Date(parseInt(this.PhoneActivatedOn.substr(6)));
@@ -256,7 +257,7 @@ module culamaApp {
                 }
                 this.newuser.UserPhoto = base64Arr;
                 this.newuser.UserName = this.scope.companyPrefix + "-" + this.newuser.UserName;
-                this.cservice.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.companyService.createUser(this.newuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     if (result.data) {
                         this.$rootScope.$emit("successnotify",
                             { msg: "Your user is created successfully", status: "success" });
@@ -308,7 +309,7 @@ module culamaApp {
                 this.edituser.UserPhoto = base64Arr;
                 this.edituser.Base64StringofUserPhoto = null;
                 this.edituser.UserName = this.scope.companyPrefix + "-" + this.edituser.UserName;
-                this.lservice.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.saveUserDetail(this.edituser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.$rootScope.$emit("toggleLoader", false);
                     if (result.data != "") {
                         this.edituser = result.data;
@@ -325,7 +326,7 @@ module culamaApp {
 
         DeleteCompanyUser(id) {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.deleteUser(id).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
+            this.loginService.deleteUser(id).then((result: ng.IHttpPromiseCallbackArg<boolean>) => {
                 this.$rootScope.$emit("toggleLoader", false);
                 if (result.data) {
                     var userlist = this.scope.contact_list;
@@ -349,7 +350,7 @@ module culamaApp {
         checkPhoneUnique() {
             this.scope.IsPhoneUniqueProcess = true;
             if (this.scope.IsEditMode) {
-                this.lservice.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.getUserDetailsbyPhone(this.edituser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.scope.IsPhoneUniqueProcess = false;
                     if (result.data != "") {
                         if (result.data.UserId !== this.edituser.UserId) {
@@ -367,7 +368,7 @@ module culamaApp {
                     }
                 });
             } else {
-                this.lservice.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.getUserDetailsbyPhone(this.newuser.Phone).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.scope.IsPhoneUniqueProcess = false;
                     if (result.data != "") {
                         this.scope.IsPhoneUnique = false;
@@ -386,7 +387,7 @@ module culamaApp {
 
             if (this.scope.IsEditMode) {
                 var uname = this.scope.companyPrefix + "-" + this.edituser.UserName;
-                this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
 
@@ -407,7 +408,7 @@ module culamaApp {
 
             } else {
                 var uname = this.scope.companyPrefix + "-" + this.newuser.UserName;
-                this.lservice.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
+                this.loginService.getUserDetailsbyUsername(uname).then((result: ng.IHttpPromiseCallbackArg<culamaApp.UserDetail>) => {
                     this.scope.IsUsernameUniqueProcess = false;
                     if (result.data != "") {
                         this.scope.IsUsernameUnique = false;
@@ -442,4 +443,5 @@ module culamaApp {
 
 
 }
+
 

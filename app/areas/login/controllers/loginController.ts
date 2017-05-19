@@ -1,13 +1,13 @@
 ﻿/// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
-module culamaApp {
+module culamaApp.areas.login.controllers {
     class LoginController {
-        lservice: any;
+        loginService: any;
         public loginuser: culamaApp.LoginUser = new culamaApp.LoginUser();
         static $inject = ["$scope", "$rootScope", "loginService"];
         constructor(public scope: any, public $rootScope: any, public loginService: culamaApp.LoginService) {
             scope.vm = this;
-            this.lservice = loginService;
+            this.loginService = loginService;
             scope.vm.selectize_a_options = [
                 { id: 1, title: 'English', value: 'US' },
                 { id: 2, title: 'Hindi', value: 'IN' }
@@ -52,7 +52,7 @@ module culamaApp {
 
         login() {
             this.$rootScope.$emit("toggleLoader", true);
-            this.lservice.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.User>) => {
+            this.loginService.login(this.loginuser).then((result: ng.IHttpPromiseCallbackArg<culamaApp.User>) => {
                 if (result.data.Username != null) {
 
                     if (typeof (Storage) !== "undefined") {
