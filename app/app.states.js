@@ -68,7 +68,8 @@ culamaApp
                 .state("restricted.myprofile",
                 {
                     url: "/myprofile",
-                    templateUrl: 'app/views/account/myProfile.html',
+                    //templateUrl: 'app/views/account/myProfile.html',
+                    templateUrl: 'app/areas/manageUsers/views/myProfile.html',
                     controller: 'myProfileController',
                     resolve: {
                         deps: [
@@ -83,7 +84,8 @@ culamaApp
                                     'app/models/UserDetails.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
-                                    'app/controllers/myProfileController.js'
+                                    //'app/controllers/myProfileController.js'
+                                    'app/areas/manageUsers/controllers/myProfileController.js',
                                 ]);
                             }
                         ]
@@ -96,7 +98,8 @@ culamaApp
                 .state("restricted.myaccount",
                 {
                     url: "/myaccount",
-                    templateUrl: 'app/views/account/myAccountInfo.html',
+                    //templateUrl: 'app/views/account/myAccountInfo.html',
+                    templateUrl: 'app/areas/manageUsers/views/myAccountInfo.html',
                     controller: 'myProfileController',
                     resolve: {
                         deps: [
@@ -111,7 +114,8 @@ culamaApp
                                     'app/models/UserDetails.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
-                                    'app/controllers/myProfileController.js'
+                                    //'app/controllers/myProfileController.js'
+                                    'app/areas/manageUsers/controllers/myProfileController.js'
                                 ]);
                             }
                         ]
@@ -271,7 +275,8 @@ culamaApp
                 .state("restricted.companyusers",
                 {
                     url: "/companyusers",
-                    templateUrl: 'app/views/account/companyUsers.html',
+                    //templateUrl: 'app/views/account/companyUsers.html',
+                    templateUrl: 'app/areas/manageUsers/views/companyUsers.html',
                     controller: 'companyUsersController',
                     resolve: {
                         deps: [
@@ -286,7 +291,8 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/companyUsersController.js'
+                                        //'app/controllers/companyUsersController.js'
+                                        'app/areas/manageUsers/controllers/companyUsersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -307,7 +313,8 @@ culamaApp
                 .state("restricted.manageusers",
                 {
                     url: "/manageusers",
-                    templateUrl: 'app/views/account/manageUsers.html',
+                    //templateUrl: 'app/views/account/manageUsers.html',
+                    templateUrl: 'app/areas/manageUsers/views/manageUsers.html',
                     controller: 'manageUsersController',
                     resolve: {
                         deps: [
@@ -320,7 +327,8 @@ culamaApp
                                     'app/models/UserDetails.js',
                                     'app/services/loginservice.js',
                                          'app/services/companyService.js',
-                                        'app/controllers/manageUsersController.js'
+                                        //'app/controllers/manageUsersController.js'
+                                        'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -425,7 +433,8 @@ culamaApp
                 .state("restricted.createusers",
                 {
                     url: "/create_users",
-                    templateUrl: 'app/views/account/createUserView.html',
+                    //templateUrl: 'app/views/account/createUserView.html',
+                    templateUrl: 'app/areas/manageUsers/views/createUserView.html',
                     controller: 'manageUsersController',
                     resolve: {
                         deps: [
@@ -441,7 +450,8 @@ culamaApp
                                     'app/models/UserDetails.js',
                                     'app/services/loginservice.js',
                                          'app/services/companyService.js',
-                                        'app/controllers/manageUsersController.js'
+                                        //'app/controllers/manageUsersController.js'
+                                        'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -456,7 +466,8 @@ culamaApp
                 .state("restricted.editusers",
                 {
                     url: "/edit_users",
-                    templateUrl: 'app/views/account/editUserView.html',
+                    //templateUrl: 'app/views/account/editUserView.html',
+                    templateUrl: 'app/areas/manageUsers/views/editUserView.html',
                     controller: 'manageUsersController',
                     resolve: {
                         deps: [
@@ -472,7 +483,8 @@ culamaApp
                                     'app/models/UserDetails.js',
                                     'app/services/loginservice.js',
                                          'app/services/companyService.js',
-                                        'app/controllers/manageUsersController.js'
+                                        //'app/controllers/manageUsersController.js'
+                                        'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -487,7 +499,9 @@ culamaApp
                 .state("restricted.createcompanyusers",
                 {
                     url: "/create_companyusers",
-                    templateUrl: 'app/views/account/createCompanyUsersView.html',
+                    //templateUrl: 'app/views/account/createCompanyUsersView.html',
+                    templateUrl: 'app/areas/manageUsers/views/createCompanyUsersView.html',
+                    
                     controller: 'companyUsersController',
                     resolve: {
                         deps: [
@@ -503,7 +517,8 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/companyUsersController.js'
+                                        //'app/controllers/companyUsersController.js'
+                                        'app/areas/manageUsers/controllers/companyUsersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -519,7 +534,8 @@ culamaApp
                 .state("restricted.editcompanyusers",
                 {
                     url: "/edit_companyusers",
-                    templateUrl: 'app/views/account/editCompanyUsersView.html',
+                    //templateUrl: 'app/views/account/editCompanyUsersView.html',
+                    templateUrl: 'app/areas/manageUsers/views/editCompanyUsersView.html',
                     controller: 'companyUsersController',
                     resolve: {
                         deps: [
@@ -535,7 +551,8 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/companyUsersController.js'
+                                        //'app/controllers/companyUsersController.js'
+                                        'app/areas/manageUsers/controllers/companyUsersController.js'
                                 ],
                                     { serie: true });
                             }
