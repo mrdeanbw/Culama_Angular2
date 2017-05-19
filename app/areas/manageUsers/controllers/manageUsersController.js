@@ -4,8 +4,8 @@ var culamaApp;
 (function (culamaApp) {
     var areas;
     (function (areas) {
-        var messaging;
-        (function (messaging) {
+        var manageUsers;
+        (function (manageUsers) {
             var controllers;
             (function (controllers) {
                 var ManageUsersController = (function () {
@@ -360,7 +360,7 @@ var culamaApp;
                 ManageUsersController.$inject = ["$scope", "$rootScope", "$compile", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "companyService", "loginService"];
                 angular.module("culamaApp")
                     .controller("manageUsersController", ManageUsersController);
-            })(controllers = messaging.controllers || (messaging.controllers = {}));
-        })(messaging = areas.messaging || (areas.messaging = {}));
+            })(controllers = manageUsers.controllers || (manageUsers.controllers = {}));
+        })(manageUsers = areas.manageUsers || (areas.manageUsers = {}));
     })(areas = culamaApp.areas || (culamaApp.areas = {}));
 })(culamaApp || (culamaApp = {}));

@@ -41,9 +41,9 @@ var culamaApp;
             var params = JSON.stringify(userlist);
             return this.$http.put(this.appConfig.domain + '/Web/Security/UpdateUsersDetails', params, {});
         };
-        CompanyService.$inject = ["$http", "appConfig"];
         return CompanyService;
     }());
+    CompanyService.$inject = ["$http", "appConfig"];
     culamaApp.CompanyService = CompanyService;
     angular
         .module("culamaApp")

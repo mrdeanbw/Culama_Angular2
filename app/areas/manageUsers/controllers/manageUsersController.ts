@@ -1,7 +1,7 @@
 /// <reference path="../../../../Scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../Scripts/typings/angularjs/angular-route.d.ts" />
 
-module culamaApp.areas.messaging.controllers {
+module culamaApp.areas.manageUsers.controllers {
 class ManageUsersController {
     lservice: any;
     cservice: any;

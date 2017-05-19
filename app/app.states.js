@@ -54,11 +54,6 @@ culamaApp
                                     'lazy_selectizeJS',
                                      'lazy_parsleyjs',
                                     'app/services/loginservice.js',
-<<<<<<< HEAD
-                                    //'app/models/LoginUser.js',
-                                    //'app/models/User.js',
-=======
->>>>>>> master
                                     'app/areas/login/models/LoginUser.js',
                                     'app/areas/login/models/User.js',
                                     //'app/controllers/loginController.js'
@@ -341,12 +336,9 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
-<<<<<<< HEAD
+
                                         'app/services/companyService.js',
-=======
-                                         'app/services/companyService.js',
->>>>>>> master
-                                        //'app/controllers/manageUsersController.js'
+                                       //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
                                     { serie: true });
@@ -475,11 +467,8 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
-<<<<<<< HEAD
                                         'app/services/companyService.js',
-=======
                                          'app/services/companyService.js',
->>>>>>> master
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
@@ -512,11 +501,8 @@ culamaApp
                                         'app/areas/manageUsers/models/Customer.js',
                                         'app/areas/manageUsers/models/UserDetails.js',
                                         'app/services/loginservice.js',
-<<<<<<< HEAD
                                         'app/services/companyService.js',
-=======
                                          'app/services/companyService.js',
->>>>>>> master
                                         //'app/controllers/manageUsersController.js'
                                         'app/areas/manageUsers/controllers/manageUsersController.js'
                                 ],
@@ -648,14 +634,10 @@ culamaApp
                                         'app/areas/setting/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-<<<<<<< HEAD
                                         //'app/controllers/companyMessageSettingController.js'
                                         'app/areas/setting/controllers/companyMessageSettingController.js'
 
-                                        
-=======
-                                        'app/areas/setting/controllers/companyMessageSettingController.js'
->>>>>>> master
+
                                 ],
                                     { serie: true });
                             }

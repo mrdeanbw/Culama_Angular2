@@ -27,9 +27,9 @@ var culamaApp;
         CompanyWallPostService.prototype.deleteWallPost = function (wallPostId) {
             return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteWallPost/' + wallPostId, {});
         };
-        CompanyWallPostService.$inject = ["$http", "appConfig"];
         return CompanyWallPostService;
     }());
+    CompanyWallPostService.$inject = ["$http", "appConfig"];
     culamaApp.CompanyWallPostService = CompanyWallPostService;
     angular
         .module("culamaApp")

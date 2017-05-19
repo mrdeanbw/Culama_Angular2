@@ -25,9 +25,9 @@ var culamaApp;
             MessageService.prototype.getMessageReadInfoByUserID = function (userid) {
                 return this.$http.get(this.appConfig.domain + '/Web/Security/GetMessageReadInfoByUserID/' + userid, {});
             };
-            MessageService.$inject = ["$http", "appConfig"];
             return MessageService;
         }());
+        MessageService.$inject = ["$http", "appConfig"];
         services.MessageService = MessageService;
         angular.module('culamaApp').service('culamaApp.services.MessageService', MessageService);
     })(services = culamaApp.services || (culamaApp.services = {}));

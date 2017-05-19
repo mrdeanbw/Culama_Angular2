@@ -97,12 +97,14 @@ var culamaApp;
                                                 userlist = "<ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul>";
                                                 if (!document.getElementById("userlistdiv" + t.Id).classList.contains("uk-dropdown")) {
                                                     document.getElementById("userlistdiv" + t.Id).classList.add("uk-dropdown");
+                                                    //document.getElementById("lbl" + t.Id).classList.add("uk-button-dropdown");
                                                 }
                                                 document.getElementById("userlistdiv" + t.Id).innerHTML = userlist;
                                             }
                                             else {
                                                 document.getElementById("userlistdiv" + t.Id).innerHTML = "";
                                                 document.getElementById("userlistdiv" + t.Id).classList.remove("uk-dropdown");
+                                                //document.getElementById("lbl" + t.Id).classList.remove("uk-button-dropdown");
                                             }
                                         }
                                     });
@@ -111,6 +113,7 @@ var culamaApp;
                                     msguserString = "<div> <div id='lbl" + m.Id + "' class='uk-button-dropdown'>You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div id='userlistdiv" + m.Id + "' class='uk-dropdown'></div></div></div>";
                                 }
                                 return $sce.trustAsHtml(msguserString);
+                                //return $sce.trustAsHtml("<div> <div class='uk-button-dropdown' >You and &nbsp;<a>" + (m.MessageThreadUsers.length - 1) + " more <i style='font- size: 13px;color: #9c9c9c;' class='material-icons arrow'>&#xE313;</i></a><div class='uk-dropdown'><ul id='" + m.Id + "' class='uk-nav uk-nav-dropdown'>" + html + "</ul></div></div></div>");
                             }
                             else {
                                 return $sce.trustAsHtml("<div>You and " + m.MessageThreadUsers[1].User.FullIdentityName + "</div>");
@@ -349,6 +352,7 @@ var culamaApp;
                                     var groupname = "Group" + result.data.Id;
                                     //myHub.server.joinGroup(groupname);
                                     myHub.server.sendNotifications(groupname, result.data.MessageThreadDetails[msglength].TextContent, result.data.MessageThreadDetails[msglength].User.FullIdentityName, result.data.Id.toString(), result.data.MessageThreadDetails[msglength].User.UserId);
+                                    // $.connection.hub.start();
                                 }
                                 else {
                                     _this.$rootScope.$emit("successnotify", { msg: "Message can't be sent. Please try again.", status: "danger" });
@@ -366,10 +370,10 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
-                    // loggedUid: any;
-                    UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
                     return UserMessagesController;
                 }());
+                // loggedUid: any;
+                UserMessagesController.$inject = ["$scope", "$rootScope", "$sce", "$filter", "companyService", "culamaApp.services.MessageService", "loginService"];
                 angular.module("culamaApp")
                     .controller("userMessagesController", UserMessagesController);
             })(controllers = messaging.controllers || (messaging.controllers = {}));

@@ -21,9 +21,9 @@ var culamaApp;
         CompanyWallService.prototype.deleteCompanyWall = function (id) {
             return this.$http.put(this.appConfig.domain + '/Web/Security/DeleteCompanyWall/' + id, {});
         };
-        CompanyWallService.$inject = ["$http", "appConfig"];
         return CompanyWallService;
     }());
+    CompanyWallService.$inject = ["$http", "appConfig"];
     culamaApp.CompanyWallService = CompanyWallService;
     angular
         .module("culamaApp")
