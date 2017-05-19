@@ -1,0 +1,53 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+
+        <div>
+            <h2>User Dashboard</h2>
+        </div>
+        <div class="uk-width-large-10">
+            <div class="uk-form-row">
+                <div class="uk-grid">
+
+                    <div class="uk-width-medium-1-4">
+                        <div class="inr-box md-card ">
+                            <div class="big-text">4</div>
+                            <div class="big-text-container">
+                                <h3>4 New Posts</h3>
+                                <p class="uk-text-muted uk-text-small">by User 1, User 3, User 5</p>
+                                <p class="uk-text-muted uk-text-small">5 Flows Followed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <div class="inr-box md-card ">
+                            <div class="big-text">0</div>
+                            <div class="big-text-container">
+                                <h3 class="pt-20">No New Documents</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <div class="inr-box md-card ">
+                            <div class="big-text">{{ newMessages.length }}</div>
+                            <div class="big-text-container">
+                                <div ng-if="IsHasMessages">
+                                    <h3>{{ newMessages.length }} New Message</h3>
+                                    <div ng-repeat="newmsg in firstThreeMsg | myFilter">
+                                        <p class="uk-text-muted uk-text-small"><a href="/#/user_messages?mti={{ newmsg.MessageId }}">{{ newmsg.MessageThreadDetail.TextContent }} @ {{ newmsg.MessageThreadDetail.User.FullIdentityName }}</a></p>
+                                    </div>
+                                </div>
+                                <div ng-if="!IsHasMessages">
+                                    <h3 class="pt-20">No New Messages</h3>
+                                </div>
+                                <!--<div>
+                                    <p class="uk-text-muted uk-text-small">From User 1</p>
+                                    <p class="uk-text-muted uk-text-small">Dear User, welcome</p>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

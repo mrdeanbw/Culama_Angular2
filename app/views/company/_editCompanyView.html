@@ -1,0 +1,233 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="admineditcompanypage" class="main_page">
+            <h2 id="user_h2_1" md-language>Edit Company</h2>
+
+            <div class="user_content uk-width-large-6-10 " ng-controller="manageCustomersController as user">
+                <div class="md-card" data-uk-grid-margin>
+                    <div class="md-card-content">
+                        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim2', animation:'slide-horizontal'}">
+                            <li class="uk-active"><a id="lbl_detail_tab" href="#" md-language>Details</a></li>
+                            <li><a id="lbl_users_tab" href="#" md-language>Users</a></li>
+                            <li><a id="lbl_messagesetting_tab" href="#" md-language>Message Setting</a></li>
+                        </ul>
+                        <ul id="tabs_anim2" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="md-card-content">
+                                    <form name="editCompanyForm" ng-submit="user.EditCompany()" id="editCompanyForm">
+                                        <div class="uk-form-row">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_customername" for="company_input_customername" md-language>Company Name</label>
+                                                    <input class="md-input" type="text" id="company_input_customername" required md-language ng-model="user.editcompany.CustomerName" md-input />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_prefix" for="company_input_prefix" md-language>Prefix<span class="req">*</span></label>
+                                                    <input class="md-input" type="text" id="company_input_prefix" required md-language ng-model="user.editcompany.Prefix" md-input />
+                                                </div>
+
+                                                <div class="uk-width-medium-1-2">
+                                                    <div id="main_file_upload" class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img id="customer_logo" ng-src="{{ user.scope.logosrc }}" alt="user avatar" />
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                        <div class="user_avatar_controls">
+                                                            <span class="btn-file">
+                                                                <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                                                <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                                                <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                                            </span>
+                                                            <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_userprefix" for="company_input_userprefix" md-language>UserPrefix<span class="req">*</span></label>
+                                                    <input class="md-input" type="text" id="company_input_userprefix" required md-language ng-model="user.editcompany.UserPrefix" md-input />
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_uibackgroundcontrastcolor" for="company_input_uibackgroundcontrastcolor" md-language>Ui Background Contrast Color: <input type="color" name="backgroundcolor" ng-model="user.editcompany.UiBackgroundContrastColor" /></label>
+                                                    <!--<input class="md-input" type="color" id="company_input_uibackgroundcontrastcolor" md-input />-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_info" for="company_input_info" md-language>Info</label>
+                                                    <textarea class="md-input" id="company_input_info" md-language ng-model="user.editcompany.Info" md-input />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-medium-1-2">
+                                                    <label id="lbl_company_url" for="company_input_url" md-language>URL</label>
+                                                    <input class="md-input" type="text" id="company_input_url" md-language ng-model="user.editcompany.URL" md-input />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-medium-1-1 mt-20">
+                                            <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                                                Save
+                                            </button>
+                                            <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ui-sref="restricted.managecompanies">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <table datatable="ng" dt-options="user.dtuserOptions" dt-column-defs="user.dtuserColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" id="th_cuser_uname" md-language>Name</th>
+                                            <th colspan="6"></th>
+                                        </tr>
+                                        <tr>
+                                            <!--<th id="th_cuser_cname" md-language>Company Name</th>-->
+                                            <th id="th_cuser_role" md-language>Role</th>
+                                            <th id="th_cuser_username" md-language>Username</th>
+                                            <th id="th_cuser_phone" md-language>Phone</th>
+                                            <th id="th_cuser_isactive" md-language>IsActive</th>
+                                            <th id="th_cuser_phoneactivated" md-language>PhoneActivated</th>
+                                            <th id="th_cuser_phoneactivatedon" md-language>PhoneActivatedOn</th>
+                                            <th id="th_cuser_lastactivationattempt" md-language>LastActivationAttempt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="user in user.editcompanyUsers">
+                                            <td>{{ user.FullIdentityName }}</td>
+                                            <!--<td>{{user.Customer.CustomerName}}</td>-->
+                                            <td>{{user.UserGroupName}}</td>
+                                            <td>{{user.UserName}}</td>
+                                            <td>{{user.Phone}}</td>
+                                            <td>{{user.IsActive}}</td>
+                                            <td>{{user.IsPhoneActivated}}</td>
+                                            <td>{{user.PhoneActivatedOn}}</td>
+                                            <td>{{user.LastActivationAttempt}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                            <li>
+                                <div class="md-card-content">
+                                    <form id="msgsettingform" name="msgsettingform" class="uk-form-stacked">
+
+                                        <div class="uk-form-row">
+                                            <input id="allowmsgtoall_checkbox" type="checkbox" ng-model="user.editcompany.IsAllowMsgAllToEveryone" icheck ng-change="user.scope.allowEveryonetoMessage()" />
+                                            <label id="lbl_allowmsgtoall_checkbox" for="allowmsgtoall_checkbox" md-language> Allow all users to send messages to everyone</label>
+                                        </div>
+                                        <div class="uk-form-row" ng-show="!user.editcompany.IsAllowMsgAllToEveryone">
+                                            <div>
+
+                                                <div class="uk-width-large-1-2 pull-left">
+                                                    <span id="span_allowtosendmsg" md-language>User allowed to send to Everyone</span>
+                                                    <div>
+                                                        <div class="uk-form-row">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-8-10">
+                                                                    <input type="text" config="selectize_all_users_config" options="selectize_users_notAllowed_Msg" ng-model="SelectedUser" name="selectize_all_users" selectize />
+                                                                </div>
+                                                                <div class="add-list-btn">
+                                                                    <a id="btnadd" class="user-btn" ng-click="addUser(SelectedUser, true);"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </div>
+
+                                                                <div class="uk-width-medium-9-10">
+                                                                    <div class="user-list">
+                                                                        <div ng-repeat="cmpuser in allowedUsers | customFilterForAllowMessage">
+                                                                            <p class="user-list-label">{{ cmpuser.FullIdentityName }}</p>
+                                                                            <a class="user-minus-btn" ng-click="addUser(cmpuser.UserId, false);"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="uk-width-large-1-2 pull-left">
+                                                    <span id="span_recipients" md-language>Recipients to Everyone</span>
+                                                    <div>
+                                                        <div class="uk-form-row">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-8-10">
+                                                                    <input type="text" config="selectize_all_users_config" options="selectize_allrecipient_users" ng-model="recipientUsers" name="selectize_recipient_users" selectize />
+                                                                </div>
+                                                                <div class="add-list-btn">
+                                                                    <a id="btnadd" class="user-btn" ng-click="recipientAction(recipientUsers, 'add')"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </div>
+
+                                                                <div class="uk-width-medium-9-10">
+                                                                    <div class="user-list">
+                                                                        <div ng-repeat="recipient in recipients_users">
+                                                                            <p class="user-list-label">{{ recipient.FullIdentityName }}</p>
+                                                                            <a class="user-minus-btn" ng-click="recipientAction(recipient.UserId, 'remove')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--<div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+                                                <div class="uk-width-large uk-width-medium-1-2">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li ng-repeat="u in user.editcompanyUsers">
+                                                            <div class="md-list-addon-element">
+                                                                <input id="{{ u.UserId }}" class="user-check" type="checkbox" icheck ng-model="u.IsAllowMsgToEveryone" ng-change="user.saveCompanyUser(u)" />
+                                                            </div>
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{ u.FullIdentityName }}</span>
+                                                                <span class="uk-text-small uk-text-muted">{{u.Phone}}</span>
+                                                            </div>
+                                                            <div ng-if="!u.IsAllowMsgToEveryone">
+                                                                <selectize id="message_input_users_{{ u.UserId }}" target="{{ u.UserId }}" config="user.selectize_users_config" options="user.getOtherCompanyUsers(u)" position="bottom" ng-model="u.UserMessages | myFilter"></selectize>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>-->
+
+
+                                        </div>
+
+                                        <div class="uk-width-medium-1-1 mt-20">
+                                            <!--<a id="btn_user_savebtn" md-language class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)">Save</a>-->
+                                            <button type="button" ng-click="saveCompanyMsgSetting(user.editcompany.IsAllowMsgAllToEveryone)" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                                                Save
+                                            </button>
+                                            <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ng-click="user.scope.cancelRequest()">Cancel</a>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

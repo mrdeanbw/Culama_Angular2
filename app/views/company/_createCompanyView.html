@@ -1,0 +1,83 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="admincreatecompanypage" class="main_page">
+            <h2 id="user_h2_1" md-language>Create Company</h2>
+
+            <div class="md-card user_content uk-width-large-5-10 " ng-controller="manageCustomersController as user">
+                <form name="createCompanyForm" ng-submit="user.CreateCompany()" id="createCompanyForm" enctype="multipart/form-data">
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_customername" for="company_input_customername" md-language>Company Name</label>
+                                <input class="md-input" type="text" id="company_input_customername" required md-language ng-model="user.newcompany.CustomerName" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_prefix" for="company_input_prefix" md-language>Prefix<span class="req">*</span></label>
+                                <input class="md-input" type="text" id="company_input_prefix" required md-language ng-model="user.newcompany.Prefix" md-input />
+                            </div>
+
+                            <div class="uk-width-medium-1-2">
+                                <div id="main_file_upload" class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img id="customer_logo" ng-src="assets/img/avatars/user.png" alt="user avatar" />
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div class="user_avatar_controls">
+                                        <span class="btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                            <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                        </span>
+                                        <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_userprefix" for="company_input_userprefix" md-language>UserPrefix<span class="req">*</span></label>
+                                <input class="md-input" type="text" id="company_input_userprefix" required md-language ng-model="user.newcompany.UserPrefix" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_uibackgroundcontrastcolor" for="company_input_uibackgroundcontrastcolor" md-language>Ui Background Contrast Color: <input type="color" name="backgroundcolor" ng-model="user.newcompany.UiBackgroundContrastColor" /></label>                           
+                                <!--<input class="md-input" type="color" id="company_input_uibackgroundcontrastcolor" md-input />-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_info" for="company_input_info" md-language>Info</label>
+                                <textarea class="md-input" id="company_input_info" md-language ng-model="user.newcompany.Info" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-2">
+                                <label id="lbl_company_url" for="company_input_url" md-language>URL</label>
+                                <input class="md-input" type="text" id="company_input_url" md-language ng-model="user.newcompany.URL" md-input />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-1-1 mt-20">
+                        <button type="submit" class="md-btn md-btn-primary md-btn-wave-light" id="btn_user_savebtn" md-language>
+                            Save
+                        </button>
+                        <a id="btn_user_cancelbtn" md-language class="md-btn md-btn-danger md-btn-wave-light" ui-sref="restricted.managecompanies">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

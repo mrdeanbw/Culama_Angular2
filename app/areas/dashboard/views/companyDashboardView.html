@@ -1,0 +1,71 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+
+        <div>
+            <h2>Manage Company X</h2>
+        </div>
+
+        <!-- statistics (small charts) -->
+        <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin hierarchical-show>
+            <div ng-repeat="stat in dynamicStats" on-last-repeat>
+                <div class="md-card" id="stat_{{$index+1}}">
+                    <div class="md-card-content">
+                        <div class="uk-float-right uk-margin-top uk-margin-small-right">
+                            <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '1'"></peity-bar-chart>
+                            <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '2'"></peity-line-chart>
+                            <peity-donut-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '3'"></peity-donut-chart>
+                            <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '4'"></peity-line-chart>
+                        </div>
+                        <span class="uk-text-muted uk-text-small">{{ stat.title }}</span>
+                        <h2 class="uk-margin-remove">
+                            <span ng-if="stat.id == '1'" count-up id="count_1" separator="." ng-model="stat.count">0</span>
+                            <span ng-if="stat.id == '2'" count-up prefix="$" id="count_2" ng-model="stat.count">0</span>
+                            <span ng-if="stat.id == '3'" count-up suffix="%" id="count_3" ng-model="stat.count">0</span>
+                            <span ng-if="stat.id == '4'" count-up id="count_4" ng-model="stat.count">0</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        <div class="dashoard-manage">
+            <h3>
+                Manage
+            </h3>
+            <div class="content">
+                <a class="manage-label" href="#">Users</a>
+            </div>
+        </div>
+        <div class="dashoard-manage">
+            <h3>
+                Manage
+            </h3>
+            <div class="content">
+                <a class="manage-label" href="#">Divisions</a>
+            </div>
+        </div>
+        <div class="dashoard-manage">
+            <h3>
+                Manage
+            </h3>
+            <div class="content">
+                <a class="manage-label" href="#">Flows</a>
+            </div>
+        </div>
+        <div class="dashoard-billing">
+            <h3>
+                Billing
+            </h3>
+            <div class="content">
+                <p class="manage-label">Active until 30/03/2017</p>
+                <p class="manage-label">Enterprise plan</p>
+                <p class="manage-label">Statements</p>
+            </div>
+        </div>
+    </div>
+</div>

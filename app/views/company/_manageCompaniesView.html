@@ -1,0 +1,50 @@
+﻿<div id="page_content">
+    <div id="page_content_inner">
+        <div id="adminmanagecompanypage" class="main_page">
+            <div class="uk-position-relative">
+                <h3 id="managecompany_h3_1"  class="heading_b uk-margin-bottom"  md-language>Manage Companies</h3>
+                <div class="md-card uk-margin-medium-bottom">
+                    <div class="md-card-content" ng-controller="manageCustomersController as showCase">
+                        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" id="th_company_name" md-language>Company Name</th>
+                                    <th colspan="6"></th>
+                                </tr>
+                                <tr>
+                                    <th id="th_company_info" md-language>Info</th>
+                                    <th id="th_company_prefix" md-language>Prefix</th>
+                                    <th id="th_company_userprefix" md-language>UserPrefix</th>
+                                    <th id="th_company_url" md-language>URL</th>
+                                    <th id="th_company_isactive" md-language>IsActive</th>
+                                    <th id="th_company_action" md-language>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="company in showCase.dt_data">
+                                    <td>{{ company.CustomerName }}</td>
+                                    <td>{{company.Info}}</td>
+                                    <td>{{company.Prefix}}</td>
+                                    <td>{{company.UserPrefix}}</td>
+                                    <td>{{company.URL}}</td>
+                                    <td>{{company.IsActive}}</td>
+                                    <td>
+                                        <a href="/#/edit_company?id={{ company.Id }}"><i class="material-icons">mode_edit</i></a>
+                                        <a ng-click="showCase.deleteCompany(company.Id);"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent" ui-sref="restricted.createcompany">
+        <i class="material-icons">&#xE145;</i>
+    </a>
+</div>
