@@ -150,7 +150,8 @@ culamaApp
                 .state("restricted.dashboard",
                 {
                     url: "/",
-                    templateUrl: 'app/views/dashboard/adminDashboardView.html',
+                    //templateUrl: 'app/views/dashboard/adminDashboardView.html',
+                    templateUrl: 'app/areas/dashboard/views/adminDashboardView.html',
                     controller: 'administratorDashboardController',
                     controllerAs: 'vm',
                     resolve: {
@@ -166,7 +167,8 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
-                                        'app/controllers/administratorDashboardController.js'
+                                        //'app/controllers/administratorDashboardController.js'
+                                        'app/areas/dashboard/controllers/administratorDashboardController.js'
                                 ],
                                     { serie: true });
                             }
@@ -183,7 +185,8 @@ culamaApp
                 .state("restricted.companydashboard",
                 {
                     url: "/company_dashboard",
-                    templateUrl: 'app/views/dashboard/CompanyDashboardView.html',
+                    //templateUrl: 'app/views/dashboard/CompanyDashboardView.html',
+                    templateUrl: 'app/areas/dashboard/views/CompanyDashboardView.html',
                     controller: 'companyDashBoardCtrl',
                     resolve: {
                         deps: [
@@ -198,7 +201,8 @@ culamaApp
                                         'lazy_weathericons',
                                         'lazy_clndr',
                                         'lazy_google_maps',
-                                        'app/controllers/companyDashboardController.js'
+                                        //'app/controllers/companyDashboardController.js'
+                                        'app/areas/dashboard/controllers/companyDashboardController.js'
                                 ],
                                     { serie: true });
                             }
@@ -212,7 +216,8 @@ culamaApp
                 .state("restricted.customeradmindashboard",
                 {
                     url: "/customer_admin_dashboard",
-                    templateUrl: 'app/views/dashboard/customerAdminDashboardView.html',
+                    //templateUrl: 'app/views/dashboard/customerAdminDashboardView.html',
+                    templateUrl: 'app/areas/dashboard/views/customerAdminDashboardView.html',
                     controller: 'customerAdminDashboardController',
                     resolve: {
                         deps: [
@@ -228,8 +233,9 @@ culamaApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/services/messageService.js',
-                                         'app/services/loginservice.js',
-                                        'app/controllers/customerAdminDashboardController.js'
+                                        'app/services/loginservice.js',
+                                        //'app/controllers/customerAdminDashboardController.js'
+                                        'app/areas/dashboard/controllers/customerAdminDashboardController.js'
                                 ],
                                     { serie: true });
                             }
@@ -243,7 +249,8 @@ culamaApp
                 .state("restricted.userdashboard",
                 {
                     url: "/user_dashboard",
-                    templateUrl: 'app/views/dashboard/userDashboardView.html',
+                    //templateUrl: 'app/views/dashboard/userDashboardView.html',
+                    templateUrl: 'app/areas/dashboard/views/userDashboardView.html',
                     controller: 'userDashboardController',
                     resolve: {
                         deps: [
@@ -259,9 +266,10 @@ culamaApp
                                         'lazy_clndr',
                                         'lazy_google_maps',
                                         'app/services/companyService.js',
-                                         'app/services/messageService.js',
-                                         'app/services/loginservice.js',
-                                        'app/controllers/userDashboardController.js'
+                                        'app/services/messageService.js',
+                                        'app/services/loginservice.js',
+                                        //'app/controllers/userDashboardController.js'
+                                        'app/areas/dashboard/controllers/userDashboardController.js' 
                                 ],
                                     { serie: true });
                             }
@@ -323,7 +331,7 @@ culamaApp
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
                                         'lazy_parsleyjs',
-                                          'app/models/Customer.js',
+                                        'app/models/Customer.js',
                                     'app/models/UserDetails.js',
                                     'app/services/loginservice.js',
                                          'app/services/companyService.js',
@@ -343,7 +351,8 @@ culamaApp
                 .state("restricted.managecompanies",
                 {
                     url: "/managecompanies",
-                    templateUrl: 'app/views/company/manageCompaniesView.html',
+                    //templateUrl: 'app/views/company/manageCompaniesView.html',
+                    templateUrl: 'app/areas/manageCompanies/views/manageCompaniesView.html',
                     controller: 'manageCustomersController',
                     resolve: {
                         deps: [
@@ -352,11 +361,12 @@ culamaApp
                                         'bower_components/angular-resource/angular-resource.min.js',
                                         'lazy_datatables',
                                         'lazy_parsleyjs',
-                                          'app/models/Customer.js',
-                                    'app/models/UserDetails.js',
-                                    'app/services/loginservice.js',
-                                         'app/services/companyService.js',
-                                        'app/controllers/manageCustomersController.js'
+                                        'app/models/Customer.js',
+                                        'app/models/UserDetails.js',
+                                        'app/services/loginservice.js',
+                                        'app/services/companyService.js',
+                                        // 'app/controllers/manageCustomersController.js'
+                                        'app/areas/manageCompanies/controllers/manageCustomersController.js'
                                 ],
                                     { serie: true });
                             }
@@ -371,7 +381,8 @@ culamaApp
                 .state("restricted.createcompany",
                 {
                     url: "/create_company",
-                    templateUrl: 'app/views/company/createCompanyView.html',
+                    //templateUrl: 'app/views/company/createCompanyView.html',
+                    templateUrl: 'app/areas/manageCompanies/views/createCompanyView.html',
                     controller: 'manageCustomersController',
                     resolve: {
                         deps: [
@@ -387,7 +398,9 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/manageCustomersController.js'
+                                        //'app/controllers/manageCustomersController.js'
+                                        'app/areas/manageCompanies/controllers/manageCustomersController.js'
+                                        
                                 ],
                                     { serie: true });
                             }
@@ -402,7 +415,8 @@ culamaApp
                 .state("restricted.editcompany",
                 {
                     url: "/edit_company",
-                    templateUrl: 'app/views/company/editCompanyView.html',
+                    //templateUrl: 'app/views/company/editCompanyView.html',
+                    templateUrl: 'app/areas/manageCompanies/views/editCompanyView.html',
                     controller: 'manageCustomersController',
                     resolve: {
                         deps: [
@@ -418,7 +432,8 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/manageCustomersController.js'
+                                        //'app/controllers/manageCustomersController.js'
+                                        'app/areas/manageCompanies/controllers/manageCustomersController.js'
                                 ],
                                     { serie: true });
                             }
