@@ -1,0 +1,90 @@
+﻿<div class="login_page_wrapper ">
+    <div class="select-language-login mb-20 md-card ">
+        <input type="text" config="vm.selectize_a_config" options="vm.selectize_a_options" ng-model="vm.selectize_a" name="selectize_a" ng-change="vm.changeLanguage()" selectize />
+    </div>
+</div>
+<div id="loginpage" class="login_page_wrapper main_page">
+        <div class="md-card" id="login_card">
+            <div class="md-card-content large-padding" id="login_form">
+                <div class="uk-grid">
+                        <div class="uk-width-medium-1-2 uk-row-first">
+                            <h3 id="lbl_lefthead" class="heading_c uk-margin-small-top mb-20" md-language>Login using your username or phone number and the given password</h3>                           
+                            <form name="myLoginForm" ng-submit="vm.login()" id="myLoginForm">
+                                <div class="uk-form-row">
+                                    <label id="lbl_username" for="login_username" md-language >Username or Phone Number</label>
+                                    <input class="md-input" type="text" id="login_input_username" ng-model="vm.loginuser.username" required  md-input md-language />
+                                </div>
+                                 <div class="uk-form-row">
+                                    <label id="lbl_password" for="login_password" md-language>Password</label>
+                                    <input class="md-input" type="password" id="login_input_password" ng-model="vm.loginuser.password" required   md-input md-language />
+                                </div>
+                                <div class="uk-margin-medium-top">
+                                    <button type="submit" class="md-btn md-btn-primary md-btn-block md-btn-large" id="loginButton" md-language ng-disabled="!myLoginForm.$valid">
+                                        Login
+                                    </button>
+
+                                </div>   
+                                <div class="uk-margin-top uk-text-center">
+                                    <a id="login_help_show" md-language>I Forgot</a> 
+                                </div>
+                                <div class="uk-margin-top uk-text-center" ng-show="vm.isloginfail">
+                                    <p style="color: red" id="lbl-error" md-language>Your username or password is incorrect.</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="uk-width-medium-1-2 sepratore">                           
+                                <h3 id="lbl_righthead" class="heading_c uk-margin-small-top mb-20" md-language>Login by scanning this code in our mobile app</h3>
+                                <img src="../../assets/img/others/qr-code.jpg" />
+                        </div>
+                    </div>
+            </div>
+            <!--<div class="md-card-content large-padding uk-position-relative" id="login_help" style="display: none">
+                <button type="button" class="uk-position-top-right uk-close uk-margin-right uk-margin-top back_to_login" ng-click="backToLogin($event)"></button>
+                <h2 class="heading_b uk-text-success">Can't log in?</h2>
+                <p>Here's the info to get you back in to your account as quickly as possible.</p>
+                <p>First, try the easiest thing: if you remember your password but it isn't working, make sure that Caps Lock is turned off, and that your username is spelled correctly, and then try again.</p>
+                <p>If your password still isn't working, it's time to <a href="#" id="password_reset_show" ng-click="passwordReset($event)">reset your password</a>.</p>
+            </div>
+            <div class="md-card-content large-padding" id="login_password_reset" style="display: none">
+                <button type="button" class="uk-position-top-right uk-close uk-margin-right uk-margin-top back_to_login" ng-click="backToLogin($event)"></button>
+                <h2 class="heading_a uk-margin-large-bottom">Reset password</h2>
+                <form>
+                    <div class="uk-form-row">
+                        <label for="login_email_reset">Your email address</label>
+                        <input class="md-input" type="text" id="login_email_reset" ng-model="login_email_reset" md-input />
+                    </div>
+                    <div class="uk-margin-medium-top">
+                        <a ui-sref="restricted.dashboard" class="md-btn md-btn-primary md-btn-block">Reset password</a>
+                    </div>
+                </form>
+            </div>
+            <div class="md-card-content large-padding" id="register_form" style="display: none">
+                <button type="button" class="uk-position-top-right uk-close uk-margin-right uk-margin-top back_to_login" ng-click="backToLogin($event)"></button>
+                <h2 class="heading_a uk-margin-medium-bottom">Create an account</h2>
+                <form>
+                    <div class="uk-form-row">
+                        <label for="register_username">Username</label>
+                        <input class="md-input" type="text" id="register_username" ng-model="register_username" md-input />
+                    </div>
+                    <div class="uk-form-row">
+                        <label for="register_password">Password</label>
+                        <input class="md-input" type="password" id="register_password" ng-model="register_password" md-input />
+                    </div>
+                    <div class="uk-form-row">
+                        <label for="register_password_repeat">Repeat Password</label>
+                        <input class="md-input" type="password" id="register_password_repeat" ng-model="register_password_repeat" md-input />
+                    </div>
+                    <div class="uk-form-row">
+                        <label for="register_email">E-mail</label>
+                        <input class="md-input" type="text" id="register_email" ng-model="register_email" md-input />
+                    </div>
+                    <div class="uk-margin-medium-top">
+                        <a ui-sref="restricted.dashboard" class="md-btn md-btn-primary md-btn-block md-btn-large">Sign Up</a>
+                    </div>
+                </form>
+            </div>-->
+        </div>
+        <!--<div class="uk-margin-top uk-text-center">
+            <a href="#" id="signup_form_show" ng-hide="registerFormActive" ng-click="registerForm($event)">Create an Account</a>
+        </div>-->
+    </div>

@@ -41,7 +41,8 @@ culamaApp
                 .state("login",
                 {
                     url: "/login",
-                    templateUrl: 'app/views/loginView.html',
+                    //templateUrl: 'app/views/loginView.html',
+                    templateUrl: 'app/areas/login/views/loginView.html',
                     controller: 'loginController',
                     controllerAs: 'vm',
                     resolve: {
@@ -55,7 +56,8 @@ culamaApp
                                     'app/services/loginservice.js',
                                     'app/models/LoginUser.js',
                                     'app/models/User.js',
-                                    'app/controllers/loginController.js'
+                                    //'app/controllers/loginController.js'
+                                    'app/areas/login/controllers/loginController.js'
                                 ]);
                             }
                         ]
@@ -582,7 +584,8 @@ culamaApp
                 .state("restricted.companymessagesetting",
                 {
                     url: "/company_manage_setting",
-                    templateUrl: 'app/views/setting/messageSettingView.html',
+                    //templateUrl: 'app/views/setting/messageSettingView.html',
+                    templateUrl: 'app/areas/setting/views/messageSettingView.html',
                     controller: 'companyMessageSettingController',
                     resolve: {
                         deps: [
@@ -597,7 +600,8 @@ culamaApp
                                         'app/models/UserDetails.js',
                                         'app/services/loginservice.js',
                                         'app/services/companyService.js',
-                                        'app/controllers/companyMessageSettingController.js'
+                                        //'app/controllers/companyMessageSettingController.js'
+                                        'app/areas/setting/controllers/companyMessageSettingController.js'
                                 ],
                                     { serie: true });
                             }
