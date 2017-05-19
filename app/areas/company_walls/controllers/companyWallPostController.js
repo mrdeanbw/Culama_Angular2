@@ -234,9 +234,9 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
-                    CompanyWallPostController.$inject = ["$scope", "$rootScope", "$sce", "$compile", "$filter", "companyWallPostService"];
                     return CompanyWallPostController;
                 }());
+                CompanyWallPostController.$inject = ["$scope", "$rootScope", "$sce", "$compile", "$filter", "companyWallPostService"];
                 angular.module("culamaApp")
                     .controller("companyWallPostController", CompanyWallPostController);
             })(controllers = companyWall.controllers || (companyWall.controllers = {}));

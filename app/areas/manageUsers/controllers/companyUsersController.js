@@ -57,6 +57,7 @@ var culamaApp;
                 placeholder: 'Select...',
                 valueField: 'Id',
                 labelField: 'Name'
+                //labelField: 'UserGroupName'
             };
             this.scope.selectize_a_options = [];
             this.scope.selectize_a_config = {
@@ -227,6 +228,7 @@ var culamaApp;
                         for (var i = 0; i < realData.length; i++) {
                             base64Arr.push(realData[i]);
                         }
+                        //this.newuser.Base64StringofUserPhoto = realData;
                     }
                 }
                 this.newuser.UserPhoto = base64Arr;
@@ -262,6 +264,7 @@ var culamaApp;
                         // get the real base64 content of the file
                         var editrealData = editblock[1].split(",")[1]; // In this case "iVBORw0KGg....           
                         ConvertedBase64String = editrealData;
+                        //this.edituser.Base64StringofUserPhoto = editrealData.toString();
                     }
                 }
                 else {
@@ -392,9 +395,9 @@ var culamaApp;
                 return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         };
-        CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
         return CompanyUsersController;
     }());
+    CompanyUsersController.$inject = ["$scope", "$rootScope", "companyService", "$compile", "$filter", "$timeout", "$resource", "DTOptionsBuilder", "DTColumnDefBuilder", "commonService", "loginService"];
     angular.module("culamaApp")
         .controller("companyUsersController", CompanyUsersController);
 })(culamaApp || (culamaApp = {}));
