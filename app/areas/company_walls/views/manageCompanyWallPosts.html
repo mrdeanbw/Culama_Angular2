@@ -43,6 +43,7 @@
     {
         height: 60px;
     }
+    
 </style>
 <script>
     $(document).ready(function () {
@@ -98,8 +99,6 @@
                                 <div ng-repeat="wallpostinfo in wallPosts" class="ng-scope" data-grid-prepared="true" style="position: absolute; box-sizing: border-box; padding-left: 24px; padding-bottom: 24px; top: 0px; opacity: 1; left: 0px;">
                                     <div class="md-card">
                                         <div class="md-card-content small-padding">
-
-
                                             <img ng-src="{{ 'data:image/jpeg;base64,'+ wallpostinfo.WallPostMediaInfo[0].PostImageBase64String }}" alt="" class="blog_list_teaser_image ng-scope post-img" />
 
                                             <div class="blog_list_teaser">
@@ -123,10 +122,9 @@
                                                 <div class="">
                                                     <span class="gallery_image_title uk-text-truncate ng-binding">
                                                         <span class="blog_list_footer_info">
-                                                            <span class="uk-margin-right"><i class="material-icons"></i> <small class="ng-binding">{{ wallpostinfo.WallPostLikeInfo.length }}</small></span>
+                                                            <span class="uk-margin-right"><i style="cursor: pointer" ng-click="editWallPost(wallpostinfo.Id)" class="material-icons"></i> <small class="ng-binding">{{ wallpostinfo.WallPostLikeInfo.length }}</small></span>
                                                         </span>
                                                     </span>
-
                                                 </div>
 
                                             </div>
