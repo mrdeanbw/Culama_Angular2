@@ -171,7 +171,61 @@ module culamaApp.areas.companyWall.controllers {
             });
         }
 
-        
+        editWallPost() {
+            this.$rootScope.$emit("toggleLoader", true);
+            var isImgs = $('#preview_images').html();
+            var imgArray = [];
+            if (isImgs != "") {
+                var addedImgs = $('#preview_images').find('.add-new-img').find('img');
+
+                $.each(addedImgs, function () {
+                    var base64Arr = [];
+                    var imgsrc = this.src;
+
+                    // Split the base64 string in data and contentType
+                    var block = imgsrc.split(";");
+
+                    // Get the content type
+                    var dataType = block[0].split(":")[1];// In this case "image/png"
+
+                    // get the real base64 content of the file
+                    var realData = block[1].split(",")[1];// In this case "iVBORw0KGg...."
+
+                    for (var i = 0; i < realData.length; i++) {
+                        base64Arr.push(realData[i]);
+                    }
+                    imgArray.push(base64Arr);
+                });
+                this.newwallpost.WallPostImages = imgArray;
+            }
+            this.newwallpost.WallPostMediaInfo = null;
+            this.companyWallPostService.saveWallPostDetails(this.newwallpost).then((result: ng.IHttpPromiseCallbackArg<culamaApp.areas.companyWall.models.WallPost>) => {
+                if (result.data != "") {
+                    var ft = this.$filter;
+                    var createdon = new Date(parseInt(result.data.CreatedOn.substr(6)));
+                    result.data.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                    var wallPostList = this.scope.wallPosts;
+                    $.each(wallPostList, function (index) {
+                        var u = this;
+                        if (u.Id == result.data.Id) {
+                            wallPostList[index] = result.data;
+                        }
+                    });
+                    this.scope.wallPosts = wallPostList;
+                    this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                    var modal = UIkit.modal("#WallPost_Dailog");
+                    modal.hide();
+                    $("#preview_images").empty();
+
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Your information is updated successfully", status: "success" });
+                } else {
+                    this.$rootScope.$emit("successnotify",
+                        { msg: "Something went wrong. Please try again.", status: "danger" });
+                }
+                this.$rootScope.$emit("toggleLoader", false);
+            });
+        }
 
         deleteWallPost(wallpostId) {
             this.$rootScope.$emit("toggleLoader", true);

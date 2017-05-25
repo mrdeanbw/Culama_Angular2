@@ -106,8 +106,15 @@
                                                 <span class="uk-text-muted uk-text-small ng-binding">{{ wallpostinfo.CreatedOn }}</span>
                                             </div>
                                             <div class="blog_list_footer list_footer">
-
-                    
+                                                <div class="gallery_grid_image_menu" data-uk-dropdown="{pos:'top-right'}" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="md-icon material-icons"></i>
+                                                    <div class="uk-dropdown uk-dropdown-small uk-dropdown-top" aria-hidden="true" tabindex="" style="min-width: 160px; top: -68px; left: -128px;">
+                                                        <ul class="uk-nav">
+                                                            <li><a ng-click="editWallPost(wallpostinfo.Id)" data-uk-modal="{target:'#WallPost_Dailog'}"><i class="material-icons uk-margin-small-right"></i> <span id="span_wallpost_edit" md-language> Edit</span></a></li>
+                                                            <li><a ng-click="deleteWallPost(wallpostinfo.Id)"><i class="material-icons uk-margin-small-right"></i><span id="span_wallpost_remove" md-language> Delete</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
 
                                                 <a id="lbl_read_more" ng-click="editWallPost(wallpostinfo.Id)" data-uk-modal="{target:'#WallPost_Dailog'}" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right read-more" md-language>Read more</a>
 

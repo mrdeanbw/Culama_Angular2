@@ -164,6 +164,55 @@ var culamaApp;
                             _this.$rootScope.$emit("toggleLoader", false);
                         });
                     };
+                    CompanyWallPostController.prototype.editWallPost = function () {
+                        var _this = this;
+                        this.$rootScope.$emit("toggleLoader", true);
+                        var isImgs = $('#preview_images').html();
+                        var imgArray = [];
+                        if (isImgs != "") {
+                            var addedImgs = $('#preview_images').find('.add-new-img').find('img');
+                            $.each(addedImgs, function () {
+                                var base64Arr = [];
+                                var imgsrc = this.src;
+                                // Split the base64 string in data and contentType
+                                var block = imgsrc.split(";");
+                                // Get the content type
+                                var dataType = block[0].split(":")[1]; // In this case "image/png"
+                                // get the real base64 content of the file
+                                var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+                                for (var i = 0; i < realData.length; i++) {
+                                    base64Arr.push(realData[i]);
+                                }
+                                imgArray.push(base64Arr);
+                            });
+                            this.newwallpost.WallPostImages = imgArray;
+                        }
+                        this.newwallpost.WallPostMediaInfo = null;
+                        this.companyWallPostService.saveWallPostDetails(this.newwallpost).then(function (result) {
+                            if (result.data != "") {
+                                var ft = _this.$filter;
+                                var createdon = new Date(parseInt(result.data.CreatedOn.substr(6)));
+                                result.data.CreatedOn = ft('date')(createdon, "dd MMM yyyy");
+                                var wallPostList = _this.scope.wallPosts;
+                                $.each(wallPostList, function (index) {
+                                    var u = this;
+                                    if (u.Id == result.data.Id) {
+                                        wallPostList[index] = result.data;
+                                    }
+                                });
+                                _this.scope.wallPosts = wallPostList;
+                                _this.newwallpost = new culamaApp.areas.companyWall.models.WallPost();
+                                var modal = UIkit.modal("#WallPost_Dailog");
+                                modal.hide();
+                                $("#preview_images").empty();
+                                _this.$rootScope.$emit("successnotify", { msg: "Your information is updated successfully", status: "success" });
+                            }
+                            else {
+                                _this.$rootScope.$emit("successnotify", { msg: "Something went wrong. Please try again.", status: "danger" });
+                            }
+                            _this.$rootScope.$emit("toggleLoader", false);
+                        });
+                    };
                     CompanyWallPostController.prototype.deleteWallPost = function (wallpostId) {
                         var _this = this;
                         this.$rootScope.$emit("toggleLoader", true);
